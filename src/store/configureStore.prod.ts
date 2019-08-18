@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 import createSagaMiddleware, { END } from 'redux-saga'
 import { createLogger } from 'redux-logger'
 import { rootReducer } from 'store/reducers'
+
 import { fromJS, Map } from 'immutable'
 import { routerMiddleware, connectRouter } from 'connected-react-router/immutable'
 // Create a history of your choosing (we're using a browser history in this case)

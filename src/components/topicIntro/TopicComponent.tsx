@@ -4,13 +4,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // - Import app components
 import Img from 'components/img'
-
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 // - Import API
 
 import { ItopicIntroComponentProps } from './ItopicIntroComponentProps'
 import { ItopicIntroComponentState } from './ItopicIntroComponentState'
 
-import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.jsx'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 const topicStyle = (theme: any) => ({
@@ -139,8 +138,8 @@ export class TopicIntro extends Component<ItopicIntroComponentProps, ItopicIntro
                   </div>
                 </div>
             </div>
-            <div>
-                <Img style={{width: '200px', height: '200px', maxWidth: 'none', minWidth: 'auto'}} fileName={url ? url : ''} />     
+            <div style={{height: '200px'}}>
+              <Img style={{width: '200px', height: '200px', maxWidth: 'none', minWidth: 'auto', position: 'relative'}} fileName={url ? url : ''} />     
              </div>
          
            </div>

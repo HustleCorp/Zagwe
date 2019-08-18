@@ -97,7 +97,7 @@ export class ShareDialogComponent extends Component<IShareDialogComponentProps, 
               <div>
                 <FacebookShareButton
                   onShareWindowClose={onClose}
-                  url={`${location.origin}/${post.get('ownerUserId')}/posts/${post.get('id')}`}
+                  url={`${location.origin}/posts/${post.get('ownerUserId')}/${post.get('id')}`}
                   quote={post.get('body')}
                   hashtag={post.get('tags', List<string>([])).count() > 0 ?  `#${post.getIn(['tags', 0], 'hashtag') }` : null}
                   >
@@ -116,7 +116,7 @@ export class ShareDialogComponent extends Component<IShareDialogComponentProps, 
               <div>
                 <TwitterShareButton
                   onShareWindowClose={onClose}
-                  url={`${location.origin}/${post.get('ownerUserId')}/posts/${post.get('id')}`}
+                  url={`${location.origin}/posts/${post.get('ownerUserId')}/${post.get('id')}`}
                   quote={post.get('body')}
                   hashtag={`#${post.getIn(['tags', 0], '')}`}>
                   <MenuItem >
@@ -132,7 +132,7 @@ export class ShareDialogComponent extends Component<IShareDialogComponentProps, 
               <div>
                 <LinkedinShareButton
                   onShareWindowClose={onClose}
-                  url={`${location.origin}/${post.get('ownerUserId')}/posts/${post.get('id')}`}
+                  url={`${location.origin}/posts/${post.get('ownerUserId')}/${post.get('id')}`}
                   quote={post.get('body')}
                   hashtag={`#${post.getIn(['tags', 0], '')}`}>
                   <MenuItem >

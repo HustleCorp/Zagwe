@@ -11,12 +11,28 @@ export interface IPostPageComponentProps {
    */
   loadPost?: () => any
 
+  loadBodyPost?: () => any
+
   /**
    * Load user profile
    *
    * @memberof IPostPageComponentProps
    */
   loadUserInfo?: () => any
+
+  /**
+   * Delete a post
+   *
+   * @memberof IPostComponentProps
+   */
+  delete?: (id: string) => any
+
+  /**
+   * Toggle comment disable/enable
+   *
+   * @memberof IPostComponentProps
+   */
+  toggleDisableComments?: (status: boolean, post: Map<string, any>) => any
 
   /**
    * Route match
@@ -26,7 +42,7 @@ export interface IPostPageComponentProps {
    */
   match?: any
 
-  posts: {[postId: string]: Post}
+  translate?: any
   
   /**
    * Class object
@@ -67,6 +83,8 @@ export interface IPostPageComponentProps {
    * @memberof IPostComponentProps
    */
   getPostComments?: () => any
+
+  goTo?: (url: string) => any
 
   /**
    * Vote of a post

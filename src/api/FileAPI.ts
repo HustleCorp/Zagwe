@@ -65,8 +65,8 @@ const constraintImage = async (file: File,fileName: string, maxWidth?: number, m
         }
         canvas.width = width
         canvas.height = height
-        canvas.getContext('2d')!.drawImage(image, 0, 0, width, width)
-        let dataUrl =  canvas.toDataURL()
+        canvas.getContext('2d')!.drawImage(image, 0, 0, width, height)
+        let dataUrl =  canvas.toDataURL('image/jpeg', 0.8)
         let resizedImage = dataURLToBlob(dataUrl)
         resolve({_resizedImage: resizedImage, _fileName: fileName})
         let evt = new CustomEvent('onSendResizedImage', { detail: {resizedImage,fileName} })

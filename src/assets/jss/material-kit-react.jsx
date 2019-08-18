@@ -159,18 +159,6 @@ const defaultBoxShadow = {
   transition: "all 150ms ease 0s"
 };
 
-const title = {
-  color: "#3C4858",
-  margin: "1.75rem 0 0.875rem",
-  textDecoration: "none",
-  fontWeight: "700",
-  fontFamily: `"Roboto Slab", "Times New Roman", serif`
-};
-
-const cardTitle = {
-  ...title,
-  marginTop: ".625rem"
-};
 
 const cardLink = {
   "& + $cardLink": {
@@ -214,8 +202,6 @@ export {
   cardActions,
   cardHeader,
   defaultBoxShadow,
-  title,
-  cardTitle,
   cardLink,
   cardSubtitle
 };

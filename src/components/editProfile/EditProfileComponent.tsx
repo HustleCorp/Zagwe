@@ -298,8 +298,6 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
   handleInputChange = (event: any) => {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
-    console.log(value)
-    console.log(target.name)
     const name = target.name
     this.setState({
       [name]: value
@@ -403,7 +401,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                   <Input id='cityInput'
                     onChange={this.handleInputChange}
                     name='cityInput'
-                    value={this.state.city}
+                    value={this.state.cityInput}
                   />
                   {/* <FormHelperText id='cityInputError'>{this.state.cu}</FormHelperText> */}
                 </FormControl>
@@ -414,7 +412,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                   <Input id='countryInput'
                     onChange={this.handleInputChange}
                     name='countryInput'
-                    value={this.state.country}
+                    value={this.state.countryInput}
                   />
                   {/* <FormHelperText id='countryInputError'>{this.state.fullNameInput}</FormHelperText> */}
                 </FormControl>
@@ -460,7 +458,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                   fullWidth
                 />
               </div>
-              <div style={{paddingTop: '10px'}} className={classes.Boxborder}>
+              {/* <div style={{paddingTop: '10px'}} className={classes.Boxborder}>
                   <DayPickerInput
                     classNames={{ container: classes.dayPicker, overlay: '' }}
                       value={defaultBirthday}
@@ -475,7 +473,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
                         localeUtils: MomentLocaleUtils,
                     }}
                   />
-              </div>
+              </div> */}
               <br />
 
             </Paper>

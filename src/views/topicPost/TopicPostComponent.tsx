@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Map, merge } from 'immutable'
 // - Import app components
 import { withStyles } from '@material-ui/core/styles'
-import StreamComponent from 'views/stream'
 import TopicIntro from 'src/components/topicIntro'
 
 import { Tags, TopicsFUll } from 'constants/postType'
@@ -128,7 +127,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
             return (
                   <TopicIntro title={`${TopicsFUll.topic6}`}
                     bio={'Amharic and English poems for your soul'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem.jpg?alt=media&token=44db241d-25fa-41e1-887c-60be442580d3'}
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'}
                     />
                     )
             break

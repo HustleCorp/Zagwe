@@ -16,6 +16,8 @@ export interface IImgComponentProps {
    */
   style?: {}
 
+  outerStyle?: {}
+
   /**
    * Styles
    */
@@ -25,5 +27,12 @@ export interface IImgComponentProps {
    * Translate to locale string
    */
   translate?: (state: any) => any
+  
+  height?: any
 
+  className?: any
+   
+  loadedClassName?: any
+
+  loadingClassName?: any
 }

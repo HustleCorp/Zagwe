@@ -1,6 +1,4 @@
-import { container, title } from "assets/jss/material-kit-react.jsx"
-
-import imagesStyle from "assets/jss/material-kit-react/imagesStyles.jsx"
+import { container } from "assets/jss/material-kit-react.jsx"
 
 const postPage = (theme: any) =>  ({
   container,
@@ -95,7 +93,6 @@ const postPage = (theme: any) =>  ({
     marginTop: "-71px",
     marginBottom: "-21px"
   },
-  ...imagesStyle,
   main: {
     background: "#FFFFFF",
     position: "relative",
@@ -108,9 +105,9 @@ const postPage = (theme: any) =>  ({
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
   },
   title: {
-    ...title,
     width: '100%',
     textAlign: 'center',
+    paddingLeft: '10px',
     display: "inline-block",
     position: "relative",
     marginTop: "30px",

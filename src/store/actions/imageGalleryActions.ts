@@ -105,35 +105,35 @@ export const dbDeleteImage = (id: string) => {
  * Upload image on the server
  */
 export const dbUploadImage = (image: any, imageName: string) => {
-  
-   return (dispatch: any, getState: Function) => {
 
-    return imageGalleryService
-    .uploadImage(image, 'avatar', imageName, (percentage: number) => {
-      dispatch(globalActions.progressChange(percentage, true))
-    })
-    .then( async (result: FileResult) => {
-      dispatch(globalActions.progressChange(100, false))
-     
-     let  res = await FileAPI.getThumbUrl(result.fileFullPath) 
-     let count = 0
-      while (!res && count < 8) {
-          count ++
-          res = await FileAPI.getThumbUrl(result.fileFullPath) 
-        }
-
-      console.log('outside', res)
-  
-      dispatch(dbSaveImage(res!, result.fileFullPath))
-      dispatch(globalActions.hideTopLoading())
-     
-    })
-    .catch((error: SocialError) => {
-      dispatch(globalActions.showMessage(error.code))
-      dispatch(globalActions.hideTopLoading())
-    })
-  }
+      return (dispatch: any, getState: Function) => {
+        return new Promise<any> ((resolve, reject) => {
+          imageGalleryService
+          .uploadImage(image, 'avatar', imageName, (percentage: number) => {
+            dispatch(globalActions.progressChange(percentage, true))
+          })
+          .then( async (result: FileResult) => {
+            dispatch(globalActions.progressChange(100, false))
+           
+           let  res = await FileAPI.getThumbUrl(result.fileFullPath) 
+           let count = 0
+            while (!res && count < 8) {
+                count ++
+                res = await FileAPI.getThumbUrl(result.fileFullPath) 
+              }
+            dispatch(dbSaveImage(res!, result.fileFullPath))
+            dispatch(globalActions.hideTopLoading())
+            return res!
+            
+          })
+          .catch((error: SocialError) => {
+            dispatch(globalActions.showMessage(error.code))
+            dispatch(globalActions.hideTopLoading())
+            return error
+          })
+        })
  
+     }
 }
 
 /**

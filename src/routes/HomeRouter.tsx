@@ -1,7 +1,7 @@
 // - Import react components
 import PrivateRoute from './PrivateRoute'
 import  { db } from 'data/firestoreClient'
-import React, {lazy, Suspense, Component } from 'react'
+import React, {Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
@@ -48,6 +48,11 @@ const AsyncTopic =  Loadable({
   loading: MasterLoadingComponent,
   delay: 300
 })
+const AsyncFeatued = Loadable({
+   loader: () => import('components/featured'),
+   loading: MasterLoadingComponent,
+   delay: 300
+})
 
 const profileModify: any =  ( ) => {
   return new Promise<void>((resolve, reject) => {
@@ -70,26 +75,39 @@ const profileModify: any =  ( ) => {
   })
 } 
 
-const addCollection: any =  ( ) => {
-    const ref = db.collection('posts')
-    ref.get().then(async (snapshot) => {
-          snapshot.forEach((doc) => {
-               ref.doc(doc.id).set({postTopic: ''}, {merge: true})
-            
-          })
-    })     
-}
+// const addCollection: any =  ( ) => {
+//     const ref = db.collection('posts')
+//     ref.get().then(async (snapshot) => {
+//           snapshot.forEach(async (doc) => {
+//                ref.doc(doc.id).update({body: ''})
+//           })
+//     })     
+// }
+
+// const addFeatuedPosts: any = () => {
+//     const ref = db.collection('posts')
+//     ref.get().then(async (snapshot) => {
+//       snapshot.forEach((doc) => {
+//            if (doc.get('image') !== '') {
+//               db.collection('featuredPosts').doc(doc.id).set(doc.data()).catch((error) => 
+//                 console.log(error))
+//            }
+//       })
+//     })
+// }
 
 /**
  * Home Router
  */
 
 export class HomeRouter extends Component<IRouterProps, any> {
-
+   
    render () {
      const { enabled, match, data, translate } = this.props
      const Sub = SubmitPost 
      const St = AsyncStream
+     console.log(data.mergedPosts.toJS())
+
     return (
           enabled ? (
           <Switch>
@@ -106,11 +124,16 @@ export class HomeRouter extends Component<IRouterProps, any> {
               </div>
             )} />
            
-            <Route path='/:userId/posts/:postId/:tag?' component={AsyncPostPage} />
-            <Route path='/:userId/:tab?' component={AsyncProfile} />
+            <Route path='/posts/:userId/:postId/:tag?' component={AsyncPostPage} />
+            <Route path='/postseo/:userId/:postId/:tag?' component={AsyncPostPage} />
+            <Route path='/users/:userId/:tab?' component={AsyncProfile} />
          
           <PublicRoute  path='/' component={(
             <div>
+                <div>
+                  <AsyncFeatued 
+                    posts={data.mergedPosts}/>
+                </div>
                 <St
                   posts={data.mergedPosts}
                   loadStream={data.loadDataStream}

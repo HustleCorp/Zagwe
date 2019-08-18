@@ -132,7 +132,7 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
     const {tabIndex} = this.state
     return (
       <div style={styles.people}>
-      <AppBar position='static' color='default'>
+      <AppBar style={{boxShadow: 'none', backgroundColor: 'inherit'}} position='static' color='default'>
       <Tabs 
       onChange={this.handleChangeTab}
       value={tabIndex} centered
@@ -146,7 +146,6 @@ export class PeopleComponent extends Component<IPeopleComponentProps,IPeopleComp
       {tabIndex === 0 && <TabContainer>{circlesLoaded ? <FindPeople /> : ''}</TabContainer>}
       {tabIndex === 1 && <TabContainer>
         {circlesLoaded ? <Following/> : ''}
-        {circlesLoaded ? <YourCircles/> : ''}
       </TabContainer>}
       {tabIndex === 2 && <TabContainer>{circlesLoaded ? <Followers /> : ''}</TabContainer>}
       </div>

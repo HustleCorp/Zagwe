@@ -5,10 +5,6 @@ import {Map, List as ImuList} from 'immutable'
 import FollowBox from 'components/FollowButton'
 
 // - Material UI
-import { grey } from '@material-ui/core/colors'
-import IconButton from '@material-ui/core/IconButton'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import PersonAdd from '@material-ui/icons/PersonAdd'
 
@@ -23,7 +19,6 @@ import UserAvatar from 'components/userAvatar'
 // - Import API
 
 // - Import actions
-import * as globalActions from 'store/actions/globalActions'
 import * as userActions from 'store/actions/userActions'
 import { IProfileHeaderComponentProps } from './IProfileHeaderComponentProps'
 import { IProfileHeaderComponentState } from './IProfileHeaderComponentState'
@@ -50,6 +45,12 @@ const styles = (theme: any) => ({
          },
         paddingBottom: '16px',
         paddingLeft: '24px',
+   },
+   tagLine: {
+     width: '450px',
+    [theme.breakpoints.down('sm')]: {
+       width: '290px'
+    }
    },
 
    name: {
@@ -250,7 +251,6 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
     return (
             <div>
                 <div >
-                  {console.log('insde profile header')}
                     <div className={classes.top}>
                         {/* User avatar*/}
                         <div className={classes.avatar}>
@@ -286,19 +286,20 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
                                   <div className={classes.wgv}>
                                      <div className={classes.sqsx}>
                                        <div className={classes.dnt}>
-                                         <div className={classes.bqqk}>
+                                      {this.props.country ? 
+                                      <div className={classes.bqqk}>
                                                 <a className={classes.hpcomp}>
                                                     <svg className={classes.pqqv} version="1.1" viewBox="0 0 32 32" width="32" height="32" aria-hidden="false"><path d="M16 0c-6.7 0-12 5.3-12 12 0 8.6 8.6 17.3 11.2 19.7.4.4 1.1.4 1.5 0 2.7-2.4 11.3-11.1 11.3-19.7 0-6.7-5.3-12-12-12zm0 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path></svg>
-                                                       addis ababa, Ethiopia
+                                                       {`${this.props.city}, ${this.props.country}`} 
                                                 </a>
-                                         </div>
+                                         </div> : ''}
+                                        {this.props.website ?                                         
                                          <div className={classes.bqqk}>
                                             <a className={classes.hpcomp}>
                                               <svg className={classes.pqqv} version="1.1" viewBox="0 0 32 32" width="32" height="32" aria-hidden="false"><path d="M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm-12 16c0-3.3 1.3-6.3 3.5-8.5 0 4 .5 5.5 2.5 7.5s5 5.5 5 9.5c0 1.8.5 3 1 3.5-6.6 0-12-5.4-12-12zm16.3 11.2c1.6-1.8 3.5-4.7 2.2-7.2-2-4-9-1-9-5s6.5 1 6.5-7c0-2.9-2.3-3.8-4.7-4h.7c6.6 0 12 5.4 12 12 0 5.1-3.2 9.5-7.7 11.2z"></path></svg>
-                                                   {this.props.email}
-                                            </a>
-                                                 
-                                         </div>
+                                                   {this.props.website}
+                                            </a>  
+                                         </div> : ''}
 
                                        </div>
                                      </div>

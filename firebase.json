@@ -25,20 +25,14 @@
                 "headers": [
                     {
                         "key": "Cache-Control",
-                        "value": "m"
+                        "value": "no-cache"
                     }
                 ]
             }
         ],
         "rewrites": [
-            {
-                "source": "/favicon.ico",
-                "destination": "/favicon.ico"
-            },
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
+            { "source": "/posts/**", "function": "eventsReqHandler" },
+            { "source": "**", "destination": "/app.html"}
         ]
     }
 }

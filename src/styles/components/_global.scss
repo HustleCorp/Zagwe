@@ -69,9 +69,8 @@ html * {
   p {
     font-size: 1.0126rem;
     margin: 0 0 10px;
-    line-height: 1.5rem;
-    font-family: "Roboto", "Helvetica", "Arial", 'Droid Sans Ethiopic';
-    
+    line-height: 1.85rem;
+    font-family: 'Montserrat', sans-serif, 'Droid Sans Ethiopic';
   }
   
   html {
@@ -103,6 +102,21 @@ html * {
     font-size: 75%;
     color: #777;
     font-weight: 400; }
+
+  .img-container{
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+    background: inherit;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+    }
+      
+  }
   
   img {
     vertical-align: middle;
@@ -314,14 +328,13 @@ g__input-underline {
     }
 }
 
-.g__app-name {
+.web_app {
     text-align: center;
     padding: 20px;
     font-size: 30px;
     font-weight: 500;
     line-height: 32px;
     margin: auto;
-    color: rgba(138, 148, 138, 0.2);
 }
 
 .g__paper-title {
@@ -370,3 +383,32 @@ g__input-underline {
 .ql-align-justify {
   text-align: justify
 }
+
+.custom-scroll::-webkit-scrollbar {
+   display: none
+ 
+}
+
+@keyframes fadeInImg {
+  from {
+   opacity: 0;
+  }
+  to {
+   opacity: 1;
+  }
+  }
+  .img-loading{
+    opacity: 0;
+    width: 100%;
+    height: auto;
+  }
+  .img-loaded{
+    animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
+    position: relative;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+    animation-delay: 0.1s;
+  }
+
+

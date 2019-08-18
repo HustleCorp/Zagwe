@@ -1,4 +1,3 @@
-import { container, title } from "assets/jss/material-kit-react.jsx";
 
 const PostPreview = (theme) => ({
     iconButton: {
@@ -42,7 +41,6 @@ const PostPreview = (theme) => ({
       paddingLeft: '15px'
     },
     title: {
-        ...title,
         textAlign: 'center',
         width: '100%',
         display: "inline-block",

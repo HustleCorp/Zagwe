@@ -8,6 +8,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {Helmet} from 'react-helmet'
 import {Map} from 'immutable'
+import CustomSnackBarContent from 'StyledComponents/CustomSnackBar/CustomSnackBar.jsx'
 
 // - Import components
 
@@ -104,7 +105,6 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
           defaultDataDisable()
           clearData()
         }
-        console.log('i am inside load data guest')
         loadDataGuest()
       }
     })
@@ -121,12 +121,12 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
 
     const { progress, global, uid, sendFeedbackStatus, hideMessage } = this.props
     const { loading} = this.state
-   
+    
     return (
       <div id='master'>
       <Helmet>
                 <meta charSet='utf-8' />
-                <title>Black Hole</title>
+                <title>Zagwe</title>
                 
         </Helmet>
        {sendFeedbackStatus ? <SendFeedback /> : ''}
@@ -141,12 +141,20 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
       <MasterRouter enabled={!loading} data={{uid}} />
       
         <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
           open={this.props.global.messageOpen}
-          message={this.props.global.message}
           onClose={hideMessage}
-          autoHideDuration={4000}
-          style={{ left: '1%', transform: 'none' }}
-        />
+          autoHideDuration={6000}  
+        >
+          <CustomSnackBarContent
+            onClose={hideMessage}
+            variant="info"
+            message={this.props.global.message}
+          />
+        </Snackbar>
       </div>
 
     )

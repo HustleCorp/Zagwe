@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react'
-import cogoToast from 'cogo-toast'
 import { withStyles, Theme, Card, CardContent, Typography, Switch, FormControlLabel } from '@material-ui/core'
 import { messaging } from 'data/firestoreClient'
 
@@ -50,7 +49,7 @@ class Notifications extends Component<IfcmNotificationProps, IfcmNotificationSta
 
     renderSubscriptionOptions ( ) {
         if (!('serviceWorker' in navigator) && !('PushManager' in window)) {
-            return( cogoToast.info('Notification feature is supported only in chrom Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile')
+            return(<div> {'Notification feature is supported only in chrom Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile'}</div>
             )
        } 
     }

@@ -1,8 +1,9 @@
 // - Import react components
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import LazyLoad from 'react-lazy-load'
 import { connect } from 'react-redux'
-import SvgImage from '@material-ui/icons/Image'
+import 'react-lazy-load-image-component/src/effects/black-and-white.css'
 import { withStyles } from '@material-ui/core/styles'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map } from 'immutable'
@@ -12,7 +13,6 @@ import { Map } from 'immutable'
 // - Import API
 
 // - Import actions
-import * as imageGalleryActions from 'store/actions/imageGalleryActions'
 import { IImgComponentProps } from './IImgComponentProps'
 import { IImgComponentState } from './IImgComponentState'
 
@@ -52,7 +52,7 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
       height: '50px'
     }
   }
-
+  
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
@@ -87,17 +87,27 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
    */
   render () {
 
-    let { fileName, style, translate } = this.props
+    let { fileName, style} = this.props
     let { isImageLoaded } = this.state
     const {classes} = this.props
+
     return (
       <div>
-        <img className={classes.image} onLoad={this.handleLoadImage} src={fileName || ''} style={isImageLoaded ? style : { display: 'none' }} />
+        <LazyLoad
+            debounce={false}
+            offsetVertical={500}>
+          <div className='img-container'>
+           <img className={isImageLoaded ? 'img-loaded' : 'img-loading'}  onLoad={this.handleLoadImage} src={fileName || ''} style={isImageLoaded ? style : { display: 'none' }} />
+         </div>
+        </LazyLoad>
+        
+{/*   
         <div style={Object.assign({},{ backgroundColor: 'white' }, isImageLoaded ? { display: 'none' } : this.styles.loding)}>
           <div style={this.styles.loadingContent as any}>
             <SvgImage style={{...style, color: '#444'}} />
           </div>
-        </div>
+        </div>  */}
+ 
       </div>
     )
   }

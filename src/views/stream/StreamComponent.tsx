@@ -1,5 +1,5 @@
 // - Import react components
-import React, { Component } from 'react'
+import React, { Suspense, Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes, { number } from 'prop-types'
@@ -9,7 +9,7 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map, List as ImuList } from 'immutable'
 
 // - Import app components
-import PostComponent from 'src/components/post'
+const PostComponent = React.lazy(() => import('components/post'))
 
 import LoadMoreProgressComponent from 'src/layouts/loadMoreProgress'
 
@@ -90,7 +90,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
   postLoad = () => {
     let { match } = this.props
     let posts: Map<string, Map<string, any>> = this.props.posts
-
+    
     let { tag } = match.params
     if (posts === undefined || !(posts.keySeq().count() > 0)) {
 
@@ -111,7 +111,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
       
       })
       
-      // const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
+      const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
       // if (sortedPosts.count() > 6) {
       //   postBack.divided = true
 
@@ -119,14 +119,17 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
       //   postBack.divided = false
       // }
       let index = 0
-      parsedPosts.forEach((post) => {
+      sortedPosts.forEach((post) => {
+        index++
       
         let newPost: any = (
-          <div key={`${post!.get('id')!}-stream-div`}>
+          <div key={`${post.get('id')}-stream-div`}>
 
             {index > 1 || (!postBack.divided && index > 0) ? <div style={{ height: '2px' }}></div> : ''}
-            <PostComponent  tag={tag} key={`${post!.get('id')}-stream-div-post`} post={post! as any} />
-
+               <Suspense fallback={''}>
+                  <PostComponent  tag={tag} key={`${post.get('id')}-stream-div-post`} post={post! as any} />
+               </Suspense>
+           
           </div>
         )
 

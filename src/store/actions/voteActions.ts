@@ -46,16 +46,7 @@ export const addVoteComment = (ownerPostId: any, commentId: any, reverse: boolea
     
       dispatch(commentActions.updateComment(votedComment))
 
-      return commentService.updateComment(votedComment).then(( result) => {
-          dispatch(notifyActions.dbAddNotification(
-            {
-              description: 'voted on your comment.',
-              url: `/`,
-              notifyRecieverUserId: uid,notifierUserId: uid,
-              isSeen: false
-            }))
-       
-      })
+      return commentService.updateComment(votedComment)
     }
 }
 

@@ -11,27 +11,17 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import {Map} from 'immutable'
 
 import { Comment } from 'core/domain/comments'
-import { container, title } from "assets/jss/material-kit-react.jsx"
 
 // - Import material UI libraries
-import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-import { grey } from '@material-ui/core/colors'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItem from '@material-ui/core/ListItem'
-import List from '@material-ui/core/List'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 import { Card, CardActions, CardHeader, CardMedia, CardContent } from '@material-ui/core'
-import Grow from '@material-ui/core/Grow'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import ThumpUp from '@material-ui/icons/ThumbUp'
 import ThumpDown from '@material-ui/icons/ThumbDown'
 import classNames from 'classnames'
@@ -86,7 +76,15 @@ const styles = (theme: any) => ({
 
   },
   authorName: {
-    ...title,
+    title: {
+      width: '100%',
+      textAlign: 'center',
+      display: "inline-block",
+      position: "relative",
+      marginTop: "30px",
+      minHeight: "32px",
+      textDecoration: "none",
+    },
     display: "inline-block",
     position: "relative",
     marginTop: "30px",
@@ -162,7 +160,15 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     },
    
     authorName: {
-      ...title,
+      title: {
+        width: '100%',
+        textAlign: 'center',
+        display: "inline-block",
+        position: "relative",
+        marginTop: "30px",
+        minHeight: "32px",
+        textDecoration: "none",
+      },
       display: "inline-block",
       position: "relative",
       margin: '0px',

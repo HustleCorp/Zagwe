@@ -1,10 +1,15 @@
 
 .grid {
   display: flex;
-  flex-flow: row; 
+  flex-flow: wrap; 
   flex-wrap: wrap;
 }
 
+.grid_overflow {
+  display: flex;
+  flex-flow: row; 
+  overflow: auto;
+}
 
 $gutter: 1em;
 .grid__gutters {
@@ -13,6 +18,13 @@ $gutter: 1em;
     padding-left: $gutter;
   }
     
+}
+
+.grid_margin {
+  margin: 15px 0px 15px 0px;
+  @media (min-width:600px) {
+    padding-left: 40px
+   }
 }
 
 /* Justify per row*/
@@ -26,22 +38,19 @@ $gutter: 1em;
   justify-content: center;
 }
 .grid__space-around{
-  justify-content: baseline;
-  @media (max-width:400px) {
-     justify-content: space-around
-    }
+  justify-content: space-around;
 }
 
- 
+.grid__space-between{
+  justify-content: space-between;
+  width: 100%
+} 
 /* Alignment per row */
 .grid__top {
   align-items: flex-start;
 }
 .grid__bottom {
   align-items: flex-end;
-}
-.grid__center {
-  align-items: center;
 }
 
 /* Alignment per cell */

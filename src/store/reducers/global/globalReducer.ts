@@ -32,6 +32,7 @@ export const globalReducer = (state = Map(new GlobalState()), action: IGlobalAct
         .set('messageOpen', true)
 
     case GlobalActionType.SHOW_NORMAL_MESSAGE_GLOBAL:
+
       return state
         .set('message', action.payload)
         .set('messageOpen', true)

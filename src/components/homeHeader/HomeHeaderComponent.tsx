@@ -16,9 +16,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 
-import Popover from '@material-ui/core/Popover'
 import AppBar from '@material-ui/core/AppBar'
-import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import Badge from '@material-ui/core/Badge'
@@ -29,17 +27,25 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import {  Theme } from '@material-ui/core/styles'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
+import MasterLoadingComponent from 'components/masterLoading/MasterLoadingComponent'
 import config from 'src/config'
+import Loadable from 'react-loadable'
 
 // - Import components
 import UserAvatarComponent from 'components/userAvatar'
 import Notify from 'components/notify'
 
 // - Import actions
-import * as globalActions from 'store/actions/globalActions'
 import { authorizeActions } from 'store/actions'
 import { IHomeHeaderComponentProps } from './IHomeHeaderComponentProps'
 import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
+
+// - Async Components
+const AsyncNotify = Loadable({
+  loader: () => import('components/notify'),
+  loading: MasterLoadingComponent,
+  delay: 300
+})
 
 const styles = (theme: Theme) => ({
   root: {
@@ -76,7 +82,6 @@ const styles = (theme: Theme) => ({
   },
 
   submitButtonSmall: {
-     color: '#837170',
      [theme.breakpoints.up('md')]: {
       display: 'none'
      }
@@ -100,6 +105,7 @@ const styles = (theme: Theme) => ({
   },
   HomeButton: {
     display: 'inline-block',
+    paddingTop: '12px',
     [theme.breakpoints.up('sm')]: {
       display: 'none'
      }
@@ -112,7 +118,6 @@ const styles = (theme: Theme) => ({
   },
   searchSmall: {
     paddingTop: '10px',
-    color: '#837170',
     [theme.breakpoints.up('sm')]: {
       display: 'none'
      }
@@ -144,7 +149,6 @@ const styles = (theme: Theme) => ({
     },
     DiscoverSmall: {
       paddingTop: '10px',
-      color: '#837170',
       [theme.breakpoints.up('md')]: {
         display: 'none'
        }
@@ -274,7 +278,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
 
   handleProfileClick = () => {
       const {uid} = this.props
-      this.props.goTo!(`/${uid}/posts`)
+      this.props.goTo!(`/users/${uid}/posts`)
   }
 
   handleDiscoverClick = () => {
@@ -312,9 +316,10 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
           {/* Left side */}
           <div className='homeHeader__left'>
             <div className={classes.HomeButton} >
-              <IconButton onClick={this.handleHomeClick} >
+              {/* <IconButton onClick={this.handleHomeClick} >
                   <Home style={{ cursor: 'pointer' }} />
-              </IconButton>
+              </IconButton> */}
+              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/logo.jpeg' alt="Smiley face" height="35" width="35"></img>
           </div>
               <div className={classes.HomeIcon} onClick={this.handleHomeClick}>
                   <Typography variant='h6' style={{ marginLeft: '15px' }} >
@@ -338,7 +343,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                 />
               </div>
               <div className={classes.searchSmall}>
-                   <SearchIcon />
+                   <SearchIcon color='secondary' />
               </div>
 
           </div>
@@ -350,12 +355,12 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                     </Button> 
                 </div>
                 <div className={classes.DiscoverSmall}>
-                     <People onClick={this.handleDiscoverClick}/>
+                     <People color='secondary' onClick={this.handleDiscoverClick}/>
                 </div>
           </div>
         <div className={classes.submitButtonDiv}>
           <div className={classes.submitButtonSmall}>
-                <Add onClick={this.handleSubmit}/>
+                <Add color='secondary' onClick={this.handleSubmit}/>
           </div>
         </div>  
 
@@ -376,18 +381,18 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
   
                               <IconButton arial-label="Notification">
                                 <Badge badgeContent={this.props.notifyCount} color="primary">
-                                  <NotificationsIcon onClick={this.handleNotifyTouchTap}/>
+                                  <NotificationsIcon onClick={this.handleNotifyTouchTap} color='secondary'/>
                                 </Badge>
                               </IconButton>
                               )
                               : (<Tooltip title={translate!('header.notificationTooltip')}>
                               <IconButton onClick={this.handleNotifyTouchTap}>
-                                <NotificationsIcon style={{color: theme.palette.common.white}} />
+                                <NotificationsIcon color='secondary' />
                               </IconButton>
                               </Tooltip>)
                         } 
 
-                    <Notify open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
+                    <AsyncNotify open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
                      
                     {/* User avatar*/}
                     <UserAvatarComponent
