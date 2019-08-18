@@ -9,7 +9,7 @@ export enum Tags {
     topic5 = 'technology',
     topic6 = 'poetry',
     topic7 = 'teret',
-    topic8 = 'random'
+    topic8 = 'other'
 
 }
 
@@ -22,7 +22,7 @@ export enum TagLabel {
     topic5 = 'Technology',
     topic6 = 'Poetry',
     topic7 = 'teret',
-    topic8 = 'Random'
+    topic8 = 'Others'
 
 }
 
@@ -34,7 +34,7 @@ export enum TopicsFUll {
     topic5 = 'Technology',
     topic6 = 'Poetry',
     topic7 = 'ተረት ተረት',
-    topic8 = 'Random'
+    topic8 = 'Other'
 }
 
 export const TopicsMap: Map<string, any> = Map({
@@ -46,14 +46,6 @@ export const TopicsMap: Map<string, any> = Map({
      'Technology': 'topic5',
      'Poetry': 'topic6',
      'ተረት ተረት': 'topic7',
-     'Random': 'topic8'
+     'Other': 'topic8'
 
 })
-
-export const postTypes: Map<string, string> =
-     Map({
-         'Politics & History': 'politics',
-         'Science & Technology': 'tech',
-         'ቡጨቃ': 'ቡጨቃ',
-         'Religion': 'religion'
-      })

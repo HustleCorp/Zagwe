@@ -41,7 +41,7 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
           </Grid>
           <Grid item style={{ zIndex: 1 }}>
             <Typography variant='h6' color='primary' style={{ marginLeft: '-9px' }} >
-              It takes long time ...
+              Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
           </Typography>
           </Grid>
         </Grid>

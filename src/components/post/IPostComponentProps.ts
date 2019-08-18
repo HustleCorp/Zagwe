@@ -119,4 +119,6 @@ export interface IPostComponentProps {
   thumbPath?: any
 
   authed?: boolean
+
+  isAdmin?: boolean
 }

@@ -5,15 +5,11 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { push } from 'connected-react-router'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import RaisedButton from '@material-ui/core/Button'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Password from '@material-ui/icons/Security'
 import Button from '@material-ui/core/Button'
-import CustomButton from 'StyledComponents/CustomButtons/Button'
-import IconButton from '@material-ui/core/IconButton'
 import Divider from '@material-ui/core/Divider'
-import ActionAndroid from '@material-ui/icons/Android'
 import { withStyles } from '@material-ui/core/styles'
 import config from 'src/config'
 import { localize } from 'react-localize-redux'
@@ -41,7 +37,6 @@ const styles = (theme: any) => ({
     textAlign: 'center',
     display: 'block',
     margin: 'auto',
-    boxShadow: 'none',
     backgroundColor: 'inherit'
   },
   margin: {
@@ -181,7 +176,7 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
            <div className='icon-fb icon'></div> <div className={classes.textSocial}>Login With Facebook</div>
         </Button>
         <Button variant="outlined" size="small" color="primary" className={classes.margin}  onClick={() => loginWithOAuth!(OAuthType.GOOGLE)} >
-             <div className='icon-google icon'></div> <div className={classes.textGoogle}>Login With Facebook</div>
+             <div className='icon-google icon'></div> <div className={classes.textGoogle}>Login With Google</div>
         </Button>
       </div>
     )
@@ -189,6 +184,7 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
     return (
       <Grid  spacing={24}>
         <Grid item xs={12} className={classes.contain}>
+        <h1 className='web_app'>{config.settings.appName}</h1>
 
           <div className='animate-bottom'>
             <Paper className={classes.paper} elevation={1} >
@@ -224,6 +220,7 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
                   /><br />
                   <TextField
                     className={classes.textField}
+                    autoComplete="current_password"
                     onChange={this.handleInputChange}
                     helperText={this.state.passwordInputError}
                     error={this.state.passwordInputError.trim() !== ''}

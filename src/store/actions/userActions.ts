@@ -45,6 +45,8 @@ export const dbGetUserInfo = () => {
           companyName: userProfile.companyName,
           webUrl: userProfile.webUrl,
           twitterId: userProfile.twitterId,
+          followingCount: userProfile.followingCount,
+          followersCount: userProfile.followersCount,
         }))
       })
       .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
@@ -102,16 +104,19 @@ export const dbGetUserInfoByUserId = (uid: string, callerKey: string) => {
 
         dispatch(addUserInfo(uid, {
           avatar: userProfile.avatar,
+          avatarPath: userProfile.avatarPath,
           email: userProfile.email,
           fullName: userProfile.fullName,
           tagLine: userProfile.tagLine,
+          country: userProfile.country,
+          city: userProfile.city,
           creationDate: userProfile.creationDate,
           birthday: userProfile.birthday,
           companyName: userProfile.companyName,
           webUrl: userProfile.webUrl,
           twitterId: userProfile.twitterId,
-          followersCount: userProfile.followersCount,
           followingCount: userProfile.followingCount,
+          followersCount: userProfile.followersCount,
         }))
 
         switch (callerKey) {
@@ -162,15 +167,15 @@ export const dbUpdateUserInfo = (newProfile: Profile) => {
       email: newProfile.email || profile.email || '',
       fullName: newProfile.fullName || profile.fullName || '',
       tagLine: newProfile.tagLine || profile.tagLine || '',
-      birthday: newProfile.birthday,
-      companyName: newProfile.companyName || '',
-      webUrl: newProfile.webUrl || '',
-      city: newProfile.city || '',
-      country: newProfile.country || '',
-      twitterId: newProfile.twitterId || '',
-      creationDate: newProfile.creationDate,
-      followersCount:  profile.followersCount,
-      followingCount: profile.followingCount,
+      birthday: newProfile.birthday || profile.birthday || 0,
+      companyName: newProfile.companyName || profile.companyName || '',
+      webUrl: newProfile.webUrl || profile.webUrl || '',
+      city: newProfile.city || profile.city || '',
+      country: newProfile.country || profile.country ||  '',
+      twitterId: newProfile.twitterId || profile.twitterId ||  '',
+      creationDate: profile.creationDate,
+      followersCount: profile.followersCount || 0,
+      followingCount: profile.followingCount || 0,
     }
     return userService.updateUserProfile(uid,updatedProfile).then(() => {
 

@@ -36,7 +36,7 @@ export let userReducer = (state = Map(new UserState()), action: IUserAction) => 
 
     case UserActionType.UPDATE_USER_INFO:
       return state
-        .mergeIn(['otherInfo', payload.uid], payload.info)
+        .mergeIn(['info', payload.uid], payload.info)
         
     case UserActionType.UPDATE_USER_OTHER:
         return state

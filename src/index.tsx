@@ -20,6 +20,7 @@ import Master from 'views/master'
 
 // App css
 import './styles/app.css'
+
 // import './assets/scss/material-kit-react.scss?v=1.4.0'
 // import './assets/scss/material-kit-react.css'
 

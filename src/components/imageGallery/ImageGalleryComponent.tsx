@@ -5,13 +5,9 @@ import { connect } from 'react-redux'
 import GridList from '@material-ui/core/GridList'
 import GridListTileBar  from '@material-ui/core/GridListTileBar'
 import GridListTile from '@material-ui/core/GridListTile'
-import IconButton from '@material-ui/core/IconButton'
-import StarBorder from '@material-ui/icons/StarBorder'
 import Button from '@material-ui/core/Button'
-import SvgUpload from '@material-ui/icons/CloudUpload'
 import SvgAddImage from '@material-ui/icons/AddAPhoto'
 import SvgDelete from '@material-ui/icons/Delete'
-import { grey } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
 import uuid from 'uuid'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
@@ -155,8 +151,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
   
     const extension = FileAPI.getExtension(event.target.files[0].name)
     let fileName = (`${uuid()}.${extension}`)
-    let image = FileAPI.constraintImage(event.target.files[0], fileName)
-
+    FileAPI.constraintImage(event.target.files[0], fileName)
   }
 
   /**

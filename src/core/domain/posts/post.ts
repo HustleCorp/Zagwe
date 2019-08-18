@@ -162,6 +162,8 @@ export class Post extends BaseDomain {
      */
   public imageFullPath?: string
 
+  public thumbImage?: string
+
     /**
      * The adress of video on the post
      *
@@ -193,5 +195,7 @@ export class Post extends BaseDomain {
      * @memberof Post
      */
   public deleted?: boolean
+
+  public filter?: any
 
 }

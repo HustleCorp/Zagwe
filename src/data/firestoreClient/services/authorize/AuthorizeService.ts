@@ -211,7 +211,7 @@ export class AuthorizeService implements IAuthorizeService {
         }
 
         this.storeUserProviderData(uid, email!, displayName!, photoURL!, providerId, 'No Access token provided!')
-        // this.storeUserInformation(uid,email,displayName,photoURL).then(resolve)
+        this.storeUserInformation(uid, email!, displayName!, photoURL!)
         resolve(new LoginUser(user.uid, true, userInfo ? userInfo.isAdmin : false,  providerId, displayName!, email!, photoURL!))
 
       }).catch(function (error: any) {
@@ -241,6 +241,11 @@ export class AuthorizeService implements IAuthorizeService {
           id: userId,
           state: 'active',
           isadmin: false,
+          email: email,
+          followersCount: 0,
+          followingCOunt: 0,
+          city: '',
+          country: '',
           avatar,
           fullName,
           creationDate: moment().unix(),

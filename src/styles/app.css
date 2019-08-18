@@ -2,13 +2,24 @@
 @import url(~react-day-picker/lib/style.css);
 .grid {
   display: flex;
-  flex-flow: row;
+  flex-flow: wrap;
   flex-wrap: wrap; }
+
+.grid_overflow {
+  display: flex;
+  flex-flow: row;
+  overflow: auto; }
 
 .grid__gutters {
   margin-left: -1em; }
   .grid__gutters .grid-cell {
     padding-left: 1em; }
+
+.grid_margin {
+  margin: 15px 0px 15px 0px; }
+  @media (min-width: 600px) {
+    .grid_margin {
+      padding-left: 40px; } }
 
 /* Justify per row*/
 .grid__right {
@@ -21,10 +32,11 @@
   justify-content: center; }
 
 .grid__space-around {
-  justify-content: baseline; }
-  @media (max-width: 400px) {
-    .grid__space-around {
-      justify-content: space-around; } }
+  justify-content: space-around; }
+
+.grid__space-between {
+  justify-content: space-between;
+  width: 100%; }
 
 /* Alignment per row */
 .grid__top {
@@ -32,9 +44,6 @@
 
 .grid__bottom {
   align-items: flex-end; }
-
-.grid__center {
-  align-items: center; }
 
 /* Alignment per cell */
 .grid-cell__top {
@@ -405,8 +414,8 @@ h6 {
 p {
   font-size: 1.0126rem;
   margin: 0 0 10px;
-  line-height: 1.5rem;
-  font-family: "Roboto", "Helvetica", "Arial", 'Droid Sans Ethiopic'; }
+  line-height: 1.85rem;
+  font-family: 'Montserrat', sans-serif, 'Droid Sans Ethiopic'; }
 
 html {
   font-family: sans-serif, 'Droid Sans Ethiopic';
@@ -437,6 +446,18 @@ small {
   font-size: 75%;
   color: #777;
   font-weight: 400; }
+
+.img-container {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+  background: inherit; }
+  .img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; }
 
 img {
   vertical-align: middle;
@@ -611,14 +632,13 @@ g__input-underline::before {
 g__input-underline::after {
   display: none; }
 
-.g__app-name {
+.web_app {
   text-align: center;
   padding: 20px;
   font-size: 30px;
   font-weight: 500;
   line-height: 32px;
-  margin: auto;
-  color: rgba(138, 148, 138, 0.2); }
+  margin: auto; }
 
 .g__paper-title {
   text-align: left;
@@ -658,6 +678,28 @@ g__input-underline::after {
 
 .ql-align-justify {
   text-align: justify; }
+
+.custom-scroll::-webkit-scrollbar {
+  display: none; }
+
+@keyframes fadeInImg {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.img-loading {
+  opacity: 0;
+  width: 100%;
+  height: auto; }
+
+.img-loaded {
+  animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
+  position: relative;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 0.7s;
+  animation-delay: 0.1s; }
 
 .master__progress {
   position: fixed;

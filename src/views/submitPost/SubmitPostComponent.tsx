@@ -14,11 +14,15 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+
 // StyledComponents list
 import Input from '@material-ui/core/Input'
-import CustomButton from 'StyledComponents/CustomButtons/Button.jsx'
-
-import { container, title, defaultFont, boxShadow } from 'assets/jss/material-kit-react.jsx'
+import Button from '@material-ui/core/Button'
+import { container, defaultFont } from 'assets/jss/material-kit-react.jsx'
 
 // Import actions
 import * as postActions from 'store/actions/postActions'
@@ -75,7 +79,8 @@ const styles = (theme: Theme) => ({
     
   },
   button: {
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingTop: '10px'
   },
   formControl: {
     minWidth: 120,
@@ -93,13 +98,31 @@ const styles = (theme: Theme) => ({
   },
 
   title: {
-    ...title,
+    title: {
+      width: '100%',
+      textAlign: 'center',
+      display: "inline-block",
+      position: "relative",
+      marginTop: "30px",
+      minHeight: "32px",
+      textDecoration: "none",
+    },
     display: 'inline-block',
     position: 'relative',
     marginTop: '30px',
     minHeight: '32px',
     textDecoration: 'none'
   },
+  guideLines: {
+     width: '100%',
+     display: 'flex',
+     justifyContent: 'space-between'
+  },
+  guide: {
+    color: '#999',
+    textDecoration: 'underline',
+    paddingLeft: '10px'
+  }
 })
 
 export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPostComponentState> {
@@ -157,12 +180,23 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
 
         imagefullPath: this.props.edit && EditPost ? EditPost.get('imageFullPath', '') : '',
 
+        openDialog: false,
+         
+        guideOpen: false,
+
+        currentImage: {}
+
      }
      
       this.handleOnBodyChange = this.handleOnBodyChange.bind(this)
       this.handleOnTitleChange = this.handleOnTitleChange.bind(this)
       this.imageHandler = this.imageHandler.bind(this)
       this.handleOnTopicChange = this.handleOnTopicChange.bind(this)
+      this.handleOpenDialog = this.handleOpenDialog.bind(this)
+      this.handleCloseDialog = this.handleCloseDialog.bind(this)
+      this.handleMakeThumb = this.handleMakeThumb.bind(this)
+      this.handleOpenGuide = this.handleOpenGuide.bind(this)
+      this.handleCloseGuide = this.handleCloseGuide.bind(this)
       
    // Modifired Quilljs Modules
      this.modules = {
@@ -218,8 +252,29 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     
   }
 
- imageHandler = () => {
-   
+  handleOpenDialog () {
+    this.setState({openDialog: true})
+  }
+
+  handleOpenGuide () {
+    this.setState({guideOpen: true})
+  }
+
+  handleCloseGuide () {
+    this.setState({guideOpen: false})
+  }
+  
+  handleCloseDialog () {
+    this.setState({openDialog: false})
+  }
+
+  handleMakeThumb () {
+      const res = this.state.currentImage
+      this.setState({image: res.fileURL, imagefullPath: res.fileFullPath})
+      this.handleCloseDialog()
+  }
+
+ imageHandler = (value: boolean) => {
     const {uploadImage} = this.props
     const input: any = document.createElement('input')
 
@@ -227,8 +282,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     input.setAttribute('accept', 'image/*')
     input.click()
 
-    input.onchange = async () => {
-
+    input.onchange = async ( ) => {
+    
       const extension: any = FileAPI.getExtension(input.files[0].name)
       let fileName = (`${uuid()}.${extension}`)
       FileAPI.constraintImage(input.files[0], fileName).then(async (result) => {   
@@ -244,14 +299,17 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       
       // upload image
       const res = await uploadImage!(result._resizedImage, result._fileName)
-  
-      this.setState({image: res.fileURL, imagefullPath: res.fileFullPath})
-      
-      this.quillRef.deleteText(range.index, 1)
 
+      this.setState({ currentImage: res })
+      this.handleOpenDialog()
+      this.quillRef.deleteText(range.index, 1)
       this.quillRef.insertEmbed(range.index, 'image', res.fileURL )
+      this.quillRef.setSelection(range.index + 1)
 
     })
+    }
+    input.onblur = () => {
+      this.handleCloseDialog()
     }
   }
 
@@ -292,30 +350,57 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     } else if (!this.catagories.includes(postTopic)) {
        this.setState({postCatagoryError: 'Invalid Catagory'})
        error = true
-
+    } else if (postBodyText.length < 300) {
+      this.setState({postTitleError: 'Post is too short, please add more content'})
+      error = true
     }
     if (!error) {
       if (!edit) {
           if (image !== '') {
-            post!({
-              ownerDisplayName: ownerDisplayName,
-              ownerAvatar: ownerAvatar,
-               image: image,
-               imageFullPath: imagefullPath,
-               body: postBodyHTML,
-               postTopic: Tags[TopicsMap.get(postTopic)],
-               bodyText: postBodyText,
-               title: postTitle,
-               postTypeId: 1,
-               score: 0,
-               viewCount: 0
-             }, ( ) => {goTo!(`/${uid}/posts/`)})
+             
+            FileAPI.getThumbUrl(imagefullPath!).then((url) => {
+              if (url) {
+                post!({
+                  ownerDisplayName: ownerDisplayName,
+                  ownerAvatar: ownerAvatar,
+                   image: image,
+                   thumbImage: url,
+                   imageFullPath: imagefullPath,
+                   body: postBodyHTML,
+                   postTopic: Tags[TopicsMap.get(postTopic)],
+                   bodyText: postBodyText.substring(0, 300),
+                   title: postTitle,
+                   postTypeId: 1,
+                   score: 0,
+                   viewCount: 0
+                 }, ( ) => {goTo!(`/${uid}/posts/`)})
+
+               } else {
+                post!({
+                    ownerDisplayName: ownerDisplayName,
+                    ownerAvatar: ownerAvatar,
+                    image: image,
+                    thumbImage: '',
+                    imageFullPath: imagefullPath,
+                    body: postBodyHTML,
+                    postTopic: Tags[TopicsMap.get(postTopic)],
+                    bodyText: postBodyText.substring(0, 300),
+                    title: postTitle,
+                    postTypeId: 1,
+                    score: 0,
+                    viewCount: 0
+                  }, ( ) => {goTo!(`/${uid}/posts/`)})  
+               }
+            })
             } else {
                post!({
                 ownerDisplayName: ownerDisplayName,
                 ownerAvatar: ownerAvatar,
                 body: postBodyHTML,
-                bodyText: postBodyText,
+                bodyText: postBodyText.substring(0, 300),
+                image: '',
+                thumbImage: '',
+                imageFullPath: '',
                 postTopic: Tags[TopicsMap.get(postTopic)],
                 title: postTitle,
                 postTypeId: 0,
@@ -326,14 +411,29 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
 
       } else {
 
-        const updatedPost = EditPost!.set('body', postBodyHTML)
-        .set('bodyText', postBodyText)
-        .set('title', postTitle)
-        .set('image', image)
-        .set('imageFullPath', imagefullPath)
+        FileAPI.getThumbUrl(imagefullPath!).then((url) => {
+         if (url) {
+          const updatedPost = EditPost!.set('body', postBodyHTML)
+          .set('bodyText', postBodyText)
+          .set('title', postTitle)
+          .set('image', image)
+          .set('thumbImage', url)
+          .set('imageFullPath', imagefullPath)
+  
+          update!(updatedPost, () => {goTo!(`/${uid}/posts/`)})
 
-        update!(updatedPost, () => {goTo!(`/${uid}/posts/`)})
+         } else {
+            const updatedPost = EditPost!.set('body', postBodyHTML)
+            .set('bodyText', postBodyText)
+            .set('title', postTitle)
+            .set('image', '')
+            .set('imageFullPath', imagefullPath)
+    
+            update!(updatedPost, () => {goTo!(`/${uid}/posts/`)})
 
+         }
+        })
+       
       }
     }
     
@@ -352,6 +452,10 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
    */
   componentDidMount() {
     this.attachQuillRefs()
+    window.addEventListener('beforeunload', (event) => {
+        event.preventDefault()
+        alert('it seems you have unsaved items, all unsaved items will be lost')
+    })
     
   }
 
@@ -359,7 +463,13 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
      this.attachQuillRefs()
     
   }
-
+  componentWillUnmount () {
+    window.removeEventListener('beforeunload', (event) => {
+      event.preventDefault()
+      alert('it seems you have unsaved items, all unsaved items will be lost')
+  })
+  }
+  
   render() {
 
     /**Import the stylesheet
@@ -429,17 +539,99 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                        onChange={this.handleOnBodyChange}/>
                   </div>
 
-                  <div>
+                  <div className={classes.guideLines}>
+                  <a>
+                   <div className={classes.guide} onClick={this.handleOpenGuide}>
+                       {'Post submission guideline'}
+                   </div>
+                   </a>
+                   
                     <div className={classes.button} >
-                    <CustomButton 
-                      color="primary" 
-                      round
-                      onClick={this.submitPost}
-                      >
-                      Submit</CustomButton>
+                      <Button
+                       variant="outlined"
+                         color="primary"
+                         onClick={this.submitPost} >
+                           Submit
+                      </Button>
                     </div>
-                
+
                  </div>
+
+                 <Dialog
+                  open={this.state.guideOpen}
+                  // onClose={handleClose}
+                  // PaperComponent={PaperComponent}
+                  aria-labelledby="draggable-dialog-title"
+                >
+                  <DialogContent>
+                    <DialogContentText>
+                      <p>
+                         Zagwe’s main purpose is to promote both informative and creative Ethiopian writing. Violence, harassment, online trolling, 
+                         and other similar types of behavior ultimately diminish the value that the platform brings, and as such, all users are obliged
+                         to follow the submission guidelines outlined below. Accounts or posts who fail to do so will be suspended and their posts taken down.
+                       </p>
+                       <h3> Hate speech: </h3>
+                       <p>
+                        You may not use Zagwe’s services to express prejudice against a particular group on the basis of ethnicity, religion, or sexual orientation.
+                        </p>
+
+                        <h3> Misinformation/ disinformation: </h3>
+                        <p>
+                          You may not spread false or biased information - with or without the intent to mislead.
+                        </p>
+                          
+                        <h3>Copyright: </h3>
+                        
+                        <p>
+                        You may not violate others’ intellectual property rights. Impersonation and 'fan pages' who post the work of a contributor without their knowledge and consent are also prohibited.
+                        </p>
+                        <h3>
+                        Ethnic violence and extremism:
+                        </h3>
+                        <p>
+                        You may not use Zagwe’s services for the purpose of spreading ethnic violence or ideologies of ethnic extremism. Zagwe is committed to maintaining a safe space and takes this matter seriously.
+                        </p>
+                        <h3>
+                        Sensitive media: 
+                        </h3>
+                        <p>
+                        You may not submit posts that include graphic or adult content excessively. Posts depicting sexual violence and/or assault are also not permitted.
+                        </p>
+                        <h3>
+                        Abuse/ Harassment:
+                        </h3>
+                        <p>
+                        You may not engage in the targeted harassment of someone due to their gender, profession, or their posts on Zagwe including any prior written work.
+                        </p>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleCloseGuide} color="primary">
+                      Agree
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+
+                 <Dialog
+                  open={this.state.openDialog}
+                  // onClose={handleClose}
+                  // PaperComponent={PaperComponent}
+                  aria-labelledby="draggable-dialog-title"
+                >
+                  <DialogContent>
+                    <DialogContentText>
+                       Would you like to have this image as your front cover?
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button  onClick={this.handleMakeThumb} color="primary">
+                      Yes
+                    </Button>
+                    <Button onClick={this.handleCloseDialog} color="primary">
+                      No
+                    </Button>
+                  </DialogActions>
+                </Dialog>
             </div>
     )
   }

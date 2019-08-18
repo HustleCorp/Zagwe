@@ -99,6 +99,7 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
     const St = StreamComponent as any
     
     const { likedPosts, loadUserLikePosts  } = this.props
+    console.log(likedPosts)
     console.log('inside loadLikePost')
     return (
           <St
@@ -125,6 +126,10 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
     this.props.loadPosts()
     this.props.loadUserInfo()
     this.props.loadUserOther()
+  }
+  
+  componentDidMount () {
+    window.scrollTo(0,0)
   }
 
   /**
@@ -159,10 +164,12 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
       <div style={styles.profile}>
         <div style={styles.header}>
           <AsyncHeader tagLine={this.props.tagLine} avatar={this.props.avatar} isAuthedUser={this.props.isAuthedEdit!}
+              city={this.props.city}     country={this.props.country}
               banner={this.props.banner} fullName={this.props.name} 
-              userId={this.props.userId}  email={this.props.email}
+              
+              userId={this.props.userId}  website={this.props.website}
               authed={this.props.authed} followersCount={followersCount}
-               followingCount={followingCount} userInfo={userProfile!}/>
+              followingCount={followingCount} userInfo={userProfile!}/>
         </div>
         <div style={styles.content}>
           <div className='profile__title'>
@@ -249,8 +256,10 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IProfileComponentPro
     authed,
     avatar: userProfile.avatar,
     name: userProfile.fullName, 
-    email: userProfile.email,
     tagLine: userProfile.tagLine,
+    website: userProfile.webUrl,
+    city: userProfile.city,
+    country: userProfile.country,
     isAuthedEdit: userId === uid,
     likedPosts:  likedPosts, 
     followingCount: userProfile.followingCount,

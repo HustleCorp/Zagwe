@@ -13,6 +13,8 @@ export interface ISubmitPostComponentState {
 
     postTopic: string
 
+    currentImage: any
+
     /**
      * Post Title
      */
@@ -38,4 +40,8 @@ export interface ISubmitPostComponentState {
     postTitleError: string
 
     postCatagoryError: string
+
+    openDialog: boolean
+
+    guideOpen: boolean
 }

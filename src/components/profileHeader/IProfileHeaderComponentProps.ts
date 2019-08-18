@@ -12,6 +12,10 @@ export interface IProfileHeaderComponentProps {
 
   authed: boolean
 
+  city: boolean
+
+  country: boolean
+
   /**
    * Image cover address
    *
@@ -67,7 +71,7 @@ export interface IProfileHeaderComponentProps {
    */
   followingCount?: number
 
-  email?: string | null
+  website?: string | null | undefined
 
   /**
    * User identifier

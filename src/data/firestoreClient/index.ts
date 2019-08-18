@@ -28,36 +28,36 @@ let messaging: any
 if (firebase.messaging.isSupported()) {
    messaging = firebase.messaging()
 
-}
-
-messaging.usePublicVapidKey(
-	// Project Settings => Cloud Messaging => Web Push certificates
-   "BPADxHpbOsZ1DeLBOftkIuWQR0wS_j-oaMKdBGE1IwBoePtaYm44xcYfEZX-kVyYiuBYECW5fO-ZSVp3Kfg86Z4"
-)
-// register service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-      const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-          updateViaCache: 'none'
+   messaging.usePublicVapidKey(
+    // Project Settings => Cloud Messaging => Web Push certificates
+     "BPADxHpbOsZ1DeLBOftkIuWQR0wS_j-oaMKdBGE1IwBoePtaYm44xcYfEZX-kVyYiuBYECW5fO-ZSVp3Kfg86Z4"
+  )
+      // register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+          const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+              updateViaCache: 'none'
+          })
+          messaging.useServiceWorker(registration)
+          messaging.onMessage((payload: any) => {
+            const title = 'You have a new notification'
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+                actions: [
+                    {
+                        action: '/',
+                        title: 'Book Appointment'
+                    }
+                ]
+                
+            }
+            registration.showNotification(title, options)        
+        })
+          
       })
-      messaging.useServiceWorker(registration)
-      messaging.onMessage((payload: any) => {
-        const title = payload.notification.title
-        const options = {
-            body: payload.notification.body,
-            icon: payload.notification.icon,
-            actions: [
-                {
-                    action: '/',
-                    title: 'Book Appointment'
-                }
-            ]
-            
-        }
-        registration.showNotification(title, options)        
-    })
-      
-  })
+    }
+
 }
 
 export {
@@ -69,8 +69,7 @@ export let storageRef = firebase.storage().ref()
 
 // Initialize Cloud Firestore through Firebase
 const db = firebase.firestore()
-const settings = {timestampsInSnapshots: true}
-db.settings(settings)
+
 export {
   db
 }

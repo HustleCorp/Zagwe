@@ -40,7 +40,7 @@ app.use(express.static('public'));
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve('public', 'index.html'));
+    res.sendFile(path.resolve('public', 'main.html'));
 
 });
 

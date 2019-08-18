@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import classNames from 'classnames'
-
+import * as moment from 'moment/moment'
 import { withStyles } from '@material-ui/core/styles'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
@@ -38,6 +38,7 @@ import {
 import { IHomeComponentProps } from './IHomeComponentProps'
 import { IHomeComponentState } from './IHomeComponentState'
 import {transition, boxShadow, drawerWidth} from 'assets/jss/material-kit-react.jsx'
+import { Post } from 'src/core/domain/posts'
 
 // const drawerWidth = 220
 const styles = (theme: any) => ({
@@ -261,6 +262,25 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
     const displayTop = url ? url.match('/t/') !== null || url === '/' || url.match('/posts/') : false
 
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
+    let post: Post = {
+      postTypeId: 0,
+      creationDate: moment.now(),
+      deleteDate: 0,
+      score: 0,
+      viewCount: 0,
+      title: '',
+      body: '',
+      id: 'fdssdfds',
+      bodyText: '',
+      postTopic: '',
+      ownerUserId: '',
+      ownerDisplayName: '',
+      ownerAvatar: '',
+      image: '',
+      thumbImage: '',
+      imageFullPath: '',
+      disableComments: false,
+    }
 
     return (
       <div className={classes.root}>
@@ -293,8 +313,7 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
 
           >
            {authed ?  <Notifications userId={this.props.uid}/> : ''}
-          
-            <HR enabled={load!} data={{ mergedPosts, loadDataStream, hasMorePosts }} />
+            <HR enabled={true} data={{ mergedPosts: mergedPosts, loadDataStream, hasMorePosts }} />
           </main>
       
         </div>
@@ -364,7 +383,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IHomeComponentProps)
     let newPosts = state.getIn(['post', 'userPosts', userId], {})
     mergedPosts = mergedPosts.merge(newPosts)
   })
-  mergedPosts = mergedPosts.merge(posts)
   return {
     authed: state.getIn(['authorize', 'authed'], false),
     url,

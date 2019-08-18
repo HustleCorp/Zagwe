@@ -234,7 +234,7 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
                 rowsMax='4'
                 InputProps={{
                   disableUnderline: true,
-                  autoFocus: true,
+                  autoFocus: false,
                   fullWidth: true
                 }}
                 value={this.state.commentText}

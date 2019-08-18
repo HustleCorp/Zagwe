@@ -4,9 +4,7 @@ import { firebaseAuth, db } from 'data/firestoreClient'
 import { SocialError } from 'core/domain/common'
 import { Post } from 'core/domain/posts'
 import { IPostService } from 'core/services/posts'
-import { IServiceProvider } from 'core/factories'
-import { ICommentService } from 'core/services/comments'
-import { ServiceProvide } from 'core/factories/serviceProvide'
+
 import { injectable } from 'inversify'
 
 /**
@@ -19,13 +17,16 @@ import { injectable } from 'inversify'
 @injectable()
 export class PostService implements IPostService {
 
-  public addPost: (post: Post)
-    => Promise<string> = (post) => {
+  public addPost: (post: Post, postBody: Post)
+    => Promise<string> = (post, postBody) => {
       return new Promise<string>((resolve, reject) => {
         let postRef = db.collection(`posts`).doc()
         postRef.set({ ...post, id: postRef.id })
           .then(() => {
-            resolve(postRef.id)
+            let postbodyRef = db.collection('postDoc').doc(postRef.id)
+            postbodyRef.set({...postBody, id: postRef.id}).then(( ) => {
+              resolve(postRef.id)
+            })
           })
           .catch((error: any) => {
             reject(new SocialError(error.code, error.message))
@@ -36,17 +37,20 @@ export class PostService implements IPostService {
   /**
    * Updare post
    */
-  public updatePost: (post: Post)
-    => Promise<void> = (post) => {
+  public updatePost: (post: Post, postBody: Post)
+    => Promise<void> = (post, postBody) => {
+      console.log(post)
       return new Promise<void>((resolve, reject) => {
         const batch = db.batch()
         const postRef = db.doc(`posts/${post.id}`)
-
-        batch.update(postRef, { ...post })
+        const postBodyRef = db.doc(`postDoc/${post.id}`)
+        batch.update(postRef, { ...post})
+        batch.update(postBodyRef, {...postBody})
         batch.commit().then(() => {
           resolve()
         })
           .catch((error: any) => {
+            alert('error found here')
             reject(new SocialError(error.code, error.message))
           })
       })
@@ -60,8 +64,9 @@ export class PostService implements IPostService {
       return new Promise<void>((resolve, reject) => {
         const batch = db.batch()
         const postRef = db.doc(`posts/${postId}`)
-
+        const postBodyRef = db.doc(`postDoc/${postId}`)
         batch.delete(postRef)
+        batch.delete(postBodyRef)
         batch.commit().then(() => {
           resolve()
         })
@@ -70,6 +75,33 @@ export class PostService implements IPostService {
           })
       })
     }
+
+public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = () => {
+       console.log('inside featured Services')
+       return new Promise<{posts: { [postId: string]: Post}[]}>((resolve, reject) => {
+            let parsedData: { [postId: string]: Post}[] = []
+            
+            let query = db.collection('featuredPosts')
+
+            query.get().then((posts) => {
+              posts.forEach((postResult) => { 
+                const post = postResult.data() as Post
+                parsedData = [
+                  ...parsedData,
+                  {
+                    [postResult.id]: {
+                      id: postResult.id,
+                      ...post
+                    }
+                  }
+    
+                ]
+              })
+              resolve({ posts: parsedData})
+            })
+
+       })
+}
 
  public getAllPostsByTopic: (header: string, lastPostId: string, page: number, limit: number) =>
  Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}> = (header, lastPostId, page = 0, limit = 5) => {
@@ -120,8 +152,6 @@ export class PostService implements IPostService {
       
                   ]
                 })
-                console.log(limit)
-                console.log(parsedData)
                 resolve({ posts: parsedData, newLastPostId })
               })
          })   
@@ -239,6 +269,22 @@ export class PostService implements IPostService {
 
       })
     }
+
+  public getPostBodyById: (postId: string) 
+       => Promise<Post> = (postId) => {
+         return new Promise<Post>((resolve, reject) => {
+             let postRef = db.doc(`postDoc/${postId}`)
+             postRef.get().then((snapshot) => {
+                 let postDoc = snapshot.data() || {}
+                 let post: Post = {
+                   ...postDoc
+                 }
+                 resolve(post)
+             }).catch((error: any) => {
+                reject(new SocialError(error.code, error.message))
+             })
+         })
+       }
 
   /**
    * Pagination calculation

@@ -4,29 +4,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import Popover from '@material-ui/core/Popover'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import Grow from '@material-ui/core/Grow'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import MasterLoadingComponent from 'components/masterLoading/MasterLoadingComponent'
 import Paper from '@material-ui/core/Paper'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItem from '@material-ui/core/ListItem'
 import List from '@material-ui/core/List'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import { Map } from 'immutable'
+import Loadable from 'react-loadable'
 
-// - Import app components
-import NotifyItem from 'components/notifyItem'
-// - Import API
-
-// - Import actions
-import * as userActions from 'store/actions/userActions'
+const AsyncNotifyItem = Loadable({
+  loader: () => import('components/notifyItem'),
+  loading: MasterLoadingComponent,
+  delay: 300
+})
 
 import { INotifyComponentProps } from './INotifyComponentProps'
 import { INotifyComponentState } from './INotifyComponentState'
-import { Notification } from 'core/domain/notifications'
 
 const styles = (theme: any) => ({
   root: {
@@ -124,7 +116,7 @@ export class NotifyComponent extends Component<INotifyComponentProps, INotifyCom
         const notifierUserId = notification!.get('notifierUserId')
         const userInfo = info!.get(notifierUserId)
         parsedDOM.push(
-          <NotifyItem
+          <AsyncNotifyItem
             key={key}
             description={notification!.get('description', '')}
             fullName={(userInfo ? userInfo.fullName || '' : '')}

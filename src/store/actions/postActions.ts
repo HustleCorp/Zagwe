@@ -23,47 +23,50 @@ const postService: IPostService = provider.get<IPostService>(SocialProviderTypes
 
 /* _____________ CRUD DB _____________ */
 
-/**
- * Add a normal post
- */
-export let dbAddPost = (newPost: Post, callBack: Function) => {
-  return (dispatch: any, getState: Function) => {
-    const state: Map<string, any> = getState()
-    let uid: string = state.getIn(['authorize', 'uid'])
-    let post: Post = {
-      postTypeId: 0,
-      creationDate: moment().unix(),
-      deleteDate: 0,
-      score: 0,
-      viewCount: 0,
-      body: newPost.body,
-      bodyText: newPost.bodyText,
-      ownerUserId: uid,
-      ownerDisplayName: newPost.ownerDisplayName,
-      ownerAvatar: newPost.ownerAvatar,
-      lastEditDate: 0,
-      tags: newPost.tags || [],
-      commentCounter: 0,
-      comments: {},
-      votes: {},
-      image: '',
-      imageFullPath: '',
-      video: '',
-      disableComments: newPost.disableComments,
-      disableSharing: newPost.disableSharing,
-      deleted: false
-    }
+// /**
+//  * Add a normal post
+//  */
+// export let dbAddPost = (newPost: Post, callBack: Function) => {
+//   return (dispatch: any, getState: Function) => {
+//     const state: Map<string, any> = getState()
+//     let uid: string = state.getIn(['authorize', 'uid'])
+//     let post: Post = {
+//       postTypeId: 0,
+//       creationDate: moment().unix(),
+//       deleteDate: 0,
+//       score: 0,
+//       viewCount: 0,
+//       body: '',
+//       bodyText: newPost.bodyText,
+//       ownerUserId: uid,
+//       ownerDisplayName: newPost.ownerDisplayName,
+//       ownerAvatar: newPost.ownerAvatar,
+//       lastEditDate: 0,
+//       tags: newPost.tags || [],
+//       commentCounter: 0,
+//       comments: {},
+//       votes: {},
+//       image: '',
+//       imageFullPath: '',
+//       video: '',
+//       disableComments: newPost.disableComments,
+//       disableSharing: newPost.disableSharing,
+//       deleted: false
+//     }
+//     let postBody: Post = {
+//         body: newPost.body,
+//     }
 
-    return postService.addPost(post).then((postKey: string) => {
-      dispatch(addPost(uid, {
-        ...post,
-        id: postKey
-      }))
-      callBack()
-    })
-      .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
-  }
-}
+//     return postService.addPost(post, postBody).then((postKey: string) => {
+//       dispatch(addPost(uid, {
+//         ...post,
+//         id: postKey
+//       }))
+//       callBack()
+//     })
+//       .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
+//   }
+// }
 
 /**
  * Add a post with image
@@ -81,7 +84,7 @@ export const dbAddImagePost = (newPost: Post, callBack: Function) => {
       score: 0,
       viewCount: 0,
       title: newPost.title,
-      body: newPost.body,
+      body: '',
       bodyText: newPost.bodyText,
       postTopic: newPost.postTopic,
       ownerUserId: uid,
@@ -91,14 +94,18 @@ export const dbAddImagePost = (newPost: Post, callBack: Function) => {
       tags: newPost.tags || [],
       commentCounter: 0,
       image: newPost.image || '',
+      thumbImage: newPost.thumbImage || '',
       imageFullPath: newPost.imageFullPath || '',
       video: '',
       disableComments: newPost.disableComments ? newPost.disableComments : false,
       disableSharing: newPost.disableSharing ? newPost.disableSharing : false,
       deleted: false
     }
+    let postBody: Post = {
+       body: newPost.body,
+    }
 
-    return postService.addPost(post).then((postKey: string) => {
+    return postService.addPost(post, postBody).then((postKey: string) => {
       dispatch(addPost(uid, {
         ...post,
         id: postKey
@@ -120,9 +127,37 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
   return (dispatch: any, getState: Function) => {
 
     dispatch(globalActions.showTopLoading())
-
-    return postService.updatePost(updatedPost.toJS()).then(() => {
-
+    let newPost = updatedPost.toJS() as Post
+    let post: Post = {
+      postTypeId: newPost.postTypeId,
+      creationDate: newPost.creationDate,
+      deleteDate: newPost.deleteDate,
+      score: newPost.score,
+      viewCount: newPost.viewCount,
+      title: newPost.title,
+      body: '',
+      id: newPost.id,
+      bodyText: newPost.bodyText,
+      postTopic: newPost.postTopic,
+      ownerUserId: newPost.ownerUserId,
+      ownerDisplayName: newPost.ownerDisplayName,
+      ownerAvatar: newPost.ownerAvatar,
+      lastEditDate: newPost.lastEditDate,
+      tags: newPost.tags || [],
+      commentCounter: newPost.commentCounter,
+      image: newPost.image,
+      thumbImage: newPost.thumbImage || '',
+      imageFullPath: newPost.imageFullPath || '',
+      video: newPost.video,
+      disableComments: newPost.disableComments ? newPost.disableComments : false,
+      disableSharing: newPost.disableSharing ? newPost.disableSharing : false,
+      deleted: newPost.deleted
+    }
+    let postBody: Post = {
+       body: newPost.body,
+       id: newPost.id,
+    }
+    return postService.updatePost(post, postBody).then(() => {
       dispatch(updatePost(updatedPost))
       callBack()
       dispatch(globalActions.hideTopLoading())
@@ -178,6 +213,24 @@ export const dbGetLikedPosts = (userId: string) => {
           })
      })
   }
+}
+
+export const dbGetFeaturedPosts = ( ) => {
+   return (dispatch: any, getState: Function) => {
+    const state: Map<string, any> = getState() 
+    return postService.getFeaturedPosts().then((result) => {
+        let parsedData: Map<string, any> = Map({})
+        result.posts.forEach((post) => {
+             
+            const postId = Object.keys(post)[0]
+            const postData = post[postId]
+            parsedData = parsedData.setIn([postId], fromJS(postData))
+        })
+        dispatch(addFeaturedPosts(parsedData))
+    }).catch((error: SocialError) => {
+      dispatch(globalActions.showMessage(error.message))
+    })
+   }
 }
 
 export const dbGetPostbyTopic = (header: string, page: number = 0, limit: number = 5) => {
@@ -321,8 +374,20 @@ export const dbGetPostsByUserId = (userId: string, page: number = 0, limit: numb
   }
 }
 
+export const dbGetPostBodyById = (uid: string, postId: string) => {
+    return (dispatch: any, getState: Function) => {
+      if (uid) {
+        return postService.getPostBodyById(postId).then((post: Post) => {
+            dispatch(addBodyPost(uid, post))
+        }).catch((error: SocialError) => {
+             dispatch(globalActions.showMessage(error.message))
+        })
+      }
+    }
+}
+
 /**
- * Get all user posts from data base
+ * Get a single post by id
  */
 export const dbGetPostById = (uid: string, postId: string) => {
   return (dispatch: any, getState: Function) => {
@@ -349,6 +414,13 @@ export const addPost = (uid: string, post: Post) => {
     type: PostActionType.ADD_POST,
     payload: { uid, post }
   }
+}
+
+export const addBodyPost = (uid: string, post: Post) => {
+   return {
+     type: PostActionType.ADD_BODY_POST,
+     payload: {uid, post}
+   }
 }
 
 export const addLikePost = (post: Post) => {
@@ -415,6 +487,13 @@ export const addTopicPosts = (header: string, followingPosts: Map<string, Map<st
   return {
     type: PostActionType.ADD_TOPIC_POST,
     payload: {header,  followingPosts }
+  }
+}
+
+export const addFeaturedPosts = ( featuredPosts: Map<string, any>) => {
+  return {
+     type: PostActionType.ADD_FEATURED_POST,
+     payload: {featuredPosts}
   }
 }
 

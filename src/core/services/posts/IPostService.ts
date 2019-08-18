@@ -8,9 +8,10 @@ import { Post } from 'core/domain/posts'
  * @interface IPostService
  */
 export interface IPostService {
-  addPost: (post: Post) => Promise<string>
-  updatePost: (post: Post) => Promise<void>
+  addPost: (post: Post, postBody: Post) => Promise<string>
+  updatePost: (post: Post, postBody: Post) => Promise<void>
   deletePost: (postId: string) => Promise<void>
+  getFeaturedPosts: ( ) => Promise<{posts: {[postId: string]: Post} []}>
   getAllPosts: (lastPostId: string, page: number, limit: number)
   => Promise<{posts: {[postId: string]: Post} [], newLastPostId: string}>
   getAllPostsByTopic: (header: string, lastPostId: string, page: number, limit: number)
@@ -28,4 +29,7 @@ export interface IPostService {
      * Get post by the post identifier
      */
   getPostById: (postId: string) => Promise<Post>
+
+  getPostBodyById: (postId: string) => Promise<Post>
+
 }

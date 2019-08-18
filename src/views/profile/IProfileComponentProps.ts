@@ -43,7 +43,7 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  email?: string
+  website?: string
   /**
    * User's avatar address
    *
@@ -129,5 +129,9 @@ export interface IProfileComponentProps {
   likeCount?: number
 
   likes: string []
+   
+  city?: string
+
+  country?: string
 
 }

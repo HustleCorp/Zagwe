@@ -15,7 +15,7 @@
             "layouts/*": ["layouts/*"],
             "models/*": ["models/*"]
         },
-        "outDir": "build/dist",
+        "outDir": "prod/dist",
         "module": "esnext",
         "target": "es5",
         "lib": ["es7", "dom", "webworker.importscripts"],
@@ -36,11 +36,11 @@
 
     },
     "include": [
-        "src/**/*", "public/firebase-messaging-sw.js"
+        "src/**/*", "public/firebase-messaging-sw.js", "src/components/featuredBox/.tsx"
     ],
     "exclude": [
         "node_modules",
-        "build",
+        "prod",
         "scripts",
         "acceptance-tests",
         "webpack",
@@ -48,4 +48,4 @@
         "src/setupTests.ts",
         "src/StyledComponents"
     ]
-}
+  }

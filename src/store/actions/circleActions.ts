@@ -94,7 +94,7 @@ export const dbFollowUser = (followingCircleId: string, userFollowing: UserTie) 
         // Send notification
         dispatch(notifyActions.dbAddNotification(
           {
-            description: `${user.fullName} is following you.`,
+            description: `${user.fullName} is now following you.`,
             url: `/${uid}`,
             notifyRecieverUserId: userFollowing.userId as string,
             notifierUserId: uid,
@@ -280,8 +280,8 @@ export const dbGetUserTies = () => {
     let uid: string = state.getIn(['authorize', 'uid'])
     if (uid) {
       userTieService.getUserTies(uid).then((result) => {
-
         dispatch(userActions.addPeopleInfo(result as any))
+        dispatch(userActions.dbGetUserInfo())
         dispatch(addUserTies(fromJS(result)))
 
       })
@@ -301,11 +301,11 @@ export const dbGetFollowers = () => {
     let uid: string = state.getIn(['authorize', 'uid'])
     if (uid) {
       userTieService.getUserTieSender(uid).then((result) => {
-
         dispatch(userActions.addPeopleInfo(result as any))
         dispatch(addUserTieds(result))
-
       })
+      dispatch(userActions.dbGetUserInfo())
+
         .catch((error: SocialError) => {
           dispatch(globalActions.showMessage(error.message))
         })
