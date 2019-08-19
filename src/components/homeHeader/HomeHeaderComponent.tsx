@@ -105,13 +105,14 @@ const styles = (theme: Theme) => ({
   },
   HomeButton: {
     display: 'inline-block',
-    paddingTop: '12px',
+    paddingTop: '4px',
     [theme.breakpoints.up('sm')]: {
       display: 'none'
      }
   },
   HomeIcon: {
     display: 'inline-block',
+    paddingLeft: '33px',
     [theme.breakpoints.down('xs')]: {
       display: 'none'
      }
@@ -123,9 +124,6 @@ const styles = (theme: Theme) => ({
      }
   },
 
-  spacing: {
-
-  },
     search: {
       position: 'relative',
       borderRadius: '25px',
@@ -319,12 +317,13 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
               {/* <IconButton onClick={this.handleHomeClick} >
                   <Home style={{ cursor: 'pointer' }} />
               </IconButton> */}
-              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/logo.jpeg' alt="Smiley face" height="35" width="35"></img>
+              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/logo.jpeg' alt="Smiley face" height="35" width="35Y"></img>
           </div>
               <div className={classes.HomeIcon} onClick={this.handleHomeClick}>
-                  <Typography variant='h6' style={{ marginLeft: '15px' }} >
+              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+                  {/* <Typography variant='h6' style={{ marginLeft: '15px' }} >
                     {config.settings.appName}
-                  </Typography>
+                  </Typography> */}
               </div>
            </div>
 

@@ -44,4 +44,6 @@ export interface ISubmitPostComponentState {
     openDialog: boolean
 
     guideOpen: boolean
+
+    reqOpen: boolean
 }

@@ -26,6 +26,11 @@ $gutter: 1em;
     padding-left: 40px
    }
 }
+.featured-grid {
+  @media (min-width:500px) {
+    padding-left: 20px
+  }
+}
 
 /* Justify per row*/
 .grid__right {
