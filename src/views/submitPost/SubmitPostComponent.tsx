@@ -80,7 +80,6 @@ const styles = (theme: Theme) => ({
   },
   button: {
     textAlign: 'right',
-    paddingTop: '10px'
   },
   formControl: {
     minWidth: 120,
@@ -184,6 +183,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          
         guideOpen: false,
 
+        reqOpen: false,
+
         currentImage: {}
 
      }
@@ -197,6 +198,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       this.handleMakeThumb = this.handleMakeThumb.bind(this)
       this.handleOpenGuide = this.handleOpenGuide.bind(this)
       this.handleCloseGuide = this.handleCloseGuide.bind(this)
+      this.handleOpenReq = this.handleOpenReq.bind(this)
+      this.handleCloseReq = this.handleCloseReq.bind(this)
       
    // Modifired Quilljs Modules
      this.modules = {
@@ -258,6 +261,12 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
 
   handleOpenGuide () {
     this.setState({guideOpen: true})
+  }
+  handleOpenReq () {
+    this.setState({reqOpen: true})
+  }
+  handleCloseReq () {
+    this.setState({reqOpen: false})
   }
 
   handleCloseGuide () {
@@ -542,11 +551,14 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                   <div className={classes.guideLines}>
                   <a>
                    <div className={classes.guide} onClick={this.handleOpenGuide}>
-                       {'Post submission guideline'}
+                       {'Post submission FAQ and tips'}
                    </div>
                    </a>
                    
                     <div className={classes.button} >
+                      <div className={classes.guide} onClick={this.handleOpenReq}>
+                        {'Submission Guidelines'}
+                      </div>
                       <Button
                        variant="outlined"
                          color="primary"
@@ -559,6 +571,52 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
 
                  <Dialog
                   open={this.state.guideOpen}
+                  // onClose={handleClose}
+                  // PaperComponent={PaperComponent}
+                  aria-labelledby="draggable-dialog-title"
+                >
+                  <DialogContent>
+                    <DialogContentText>
+
+                        <h3>  Can I post on Zagwe even if I am not a professional writer?  </h3>
+
+                        <p> YES. Zagwe is a platform for anyone who wants to share their written work, whether you are a professional writer or took up writing as a hobby, you are welcome to contribute. </p>
+
+                        <h3>  How can my posts show on the trending list? </h3>
+
+                        <p> Trending posts are the posts that have the most views and engagement. Check for any grammar and spelling mistakes before you submit your post. Include a featured image with your posts for better appeal and engage with your audience </p>
+
+                        <h3>  How can I increase my followers and expand my reach on Zagwe? </h3>
+
+                        <p> 
+                          Find more Zagwe followers under the 'Discover' page. Share the link to your Zagwe posts on your other social media platforms (facebook, twitter…) to encourage your friends and family to join and follow you! You can invite your contacts to join Zagwe from your profile.
+                        </p>
+
+                        <h3> I can’t find a category that fits my work. What should I do?
+                        </h3>
+
+                        <p> 
+                        For any posts that don't fit the categories listed, you can submit the post under the 'Other' category. The Zagwe team will add new categories if enough posts are made.
+
+                        </p>
+
+                        <h3>How can I reach a member of the Zagwe team? </h3>
+
+                        <p> 
+                        If you have any feedback, we would love to hear from you via our feedback form. For any other questions or concerns, contact us at info@Zagwe.io.
+                        </p>
+
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleCloseGuide} color="primary">
+                      Close
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+
+                <Dialog
+                  open={this.state.reqOpen}
                   // onClose={handleClose}
                   // PaperComponent={PaperComponent}
                   aria-labelledby="draggable-dialog-title"
@@ -603,10 +661,11 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                         <p>
                         You may not engage in the targeted harassment of someone due to their gender, profession, or their posts on Zagwe including any prior written work.
                         </p>
+                       
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                    <Button onClick={this.handleCloseGuide} color="primary">
+                    <Button onClick={this.handleCloseReq} color="primary">
                       Agree
                     </Button>
                   </DialogActions>

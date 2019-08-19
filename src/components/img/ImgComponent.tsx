@@ -93,13 +93,13 @@ export class ImgComponent extends Component<IImgComponentProps,IImgComponentStat
 
     return (
       <div>
+        <div className='img-container' style={style}>
         <LazyLoad
             debounce={false}
             offsetVertical={500}>
-          <div className='img-container'>
            <img className={isImageLoaded ? 'img-loaded' : 'img-loading'}  onLoad={this.handleLoadImage} src={fileName || ''} style={isImageLoaded ? style : { display: 'none' }} />
-         </div>
         </LazyLoad>
+        </div>
         
 {/*   
         <div style={Object.assign({},{ backgroundColor: 'white' }, isImageLoaded ? { display: 'none' } : this.styles.loding)}>

@@ -179,7 +179,7 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
                     <ScrollLeft  onClick={this.scrollLeft}/>
                   </div>
                </div>
-                <div key={'featuredGrid'} id='featuredList' className='grid_overflow grid__1of4 grid__space-between custom-scroll margin-scroll'>
+                <div key={'featuredGrid'} id='featuredList' className='grid_overflow grid__1of4 grid__space-between custom-scroll featured-grid'>
                 {postList}
                </div>
                <div className={classes.scrollContainer}>

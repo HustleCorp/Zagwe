@@ -21,6 +21,10 @@
     .grid_margin {
       padding-left: 40px; } }
 
+@media (min-width: 500px) {
+  .featured-grid {
+    padding-left: 20px; } }
+
 /* Justify per row*/
 .grid__right {
   justify-content: flex-end; }

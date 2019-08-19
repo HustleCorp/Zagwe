@@ -139,7 +139,7 @@ export class TopicIntro extends Component<ItopicIntroComponentProps, ItopicIntro
                 </div>
             </div>
             <div style={{height: '200px'}}>
-              <Img style={{width: '200px', height: '200px', maxWidth: 'none', minWidth: 'auto', position: 'relative'}} fileName={url ? url : ''} />     
+              <Img style={{width: 'auto', height: '200px', maxWidth: 'none', minWidth: 'auto', position: 'relative'}} fileName={url ? url : ''} />     
              </div>
          
            </div>
