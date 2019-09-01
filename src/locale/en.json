@@ -90,7 +90,6 @@
         "doneButton": "DONE",
         "groupNamePlaceholder": "Group Name",
         "createCircleTooltip": "Create Circle"
-
     },
     "changePassword": {
         "title": "Change Password",
@@ -148,18 +147,18 @@
         "backButton": "BACK",
         "resetPasswordButton": "RESET PASSWORD",
         "emailRequiredError": "This field is required.",
-        "description": "Please put your email and click on `RESET PASSWORD`. If not click on `BACK`. We will send you an email contains the link of the reset password."
+        "description": "Please put your email and click on `RESET PASSWORD`. If not click on `BACK`. We will send you an email containing the link to the reset password."
 
     },
     "emailVerification": {
         "title": "Email Verification",
         "homeButton": "HOME",
-        "sendButton": "Send Email Verification",
-        "description": "An verificiation email has been already sent to you. Please check your inbox. If you couldn't see the emai, please resend email verification."
+        "sendButton": " Resend Email Verification",
+        "description": "A verificiation email has been already sent to you. Please check your inbox. If you can't see the email, please resend email verification."
     },
     "common": {
         "sentRequestMessage": "Request has been sent.",
-        "successfulRequestMessage": "Request has been successful."
+        "successfulRequestMessage": "Request was successfully completed."
     }
     
 }

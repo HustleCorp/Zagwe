@@ -23,7 +23,7 @@ export interface IImageGalleryComponentProps {
    *
    * @memberof IImageGalleryComponentProps
    */
-  uploadImage?: (image: any, imageName: string) => any
+  uploadImage?: (image: any, imageName: string, callBack: Function) => any
 
   /**
    * Close image gallery

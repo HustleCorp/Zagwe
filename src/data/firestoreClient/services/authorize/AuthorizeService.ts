@@ -76,12 +76,11 @@ export class AuthorizeService implements IAuthorizeService {
     try {
      const result = await firebaseAuth()
       .createUserWithEmailAndPassword(registerUser.email as string, registerUser.password as string)
-
       const {user} = result
       if (user) {
         const { uid, email } = user
-      const registerResult =  await this.storeUserInformation(uid, email!, registerUser.fullName, '')
-      return registerResult
+        const registerResult =  await this.storeUserInformation(uid, email!, registerUser.fullName, '')
+        return registerResult
         
       } else {
         throw new SocialError('AuthorizeService/login', 'User object is empty!')
@@ -211,7 +210,7 @@ export class AuthorizeService implements IAuthorizeService {
         }
 
         this.storeUserProviderData(uid, email!, displayName!, photoURL!, providerId, 'No Access token provided!')
-        this.storeUserInformation(uid, email!, displayName!, photoURL!)
+        // this.storeUserInformation(uid, email!, displayName!, photoURL!)
         resolve(new LoginUser(user.uid, true, userInfo ? userInfo.isAdmin : false,  providerId, displayName!, email!, photoURL!))
 
       }).catch(function (error: any) {
@@ -240,18 +239,25 @@ export class AuthorizeService implements IAuthorizeService {
         {
           id: userId,
           state: 'active',
-          isadmin: false,
           email: email,
+          webUrl: '',
+          tagLine: '',
           followersCount: 0,
-          followingCOunt: 0,
+          followingCount: 0,
           city: '',
           country: '',
           avatar,
           fullName,
           creationDate: moment().unix(),
         
-        }
-      )
+        })
+        db.doc(`otherUserInfo/${userId}`).set(
+          {
+            likes: [],
+            likesCount: 0
+            
+          }
+       )
         .then(() => {
           resolve(new RegisterUserResult(userId))
         })
@@ -285,6 +291,13 @@ export class AuthorizeService implements IAuthorizeService {
             accessToken
           }
         )
+        db.doc(`otherUserInfo/${userId}`).set(
+          {
+            likes: [],
+            likeCount: 0
+            
+          }
+       )
         .then(() => {
           resolve(new RegisterUserResult(userId))
         })

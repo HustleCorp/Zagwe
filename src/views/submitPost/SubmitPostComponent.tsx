@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getTranslate, getOptions} from 'react-localize-redux'
 import { push } from 'connected-react-router'
+import {Prompt} from 'react-router-dom'
 
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -35,7 +36,7 @@ import {ISubmitPostComponentProps} from './ISubmitPostComponentProps'
 import uuid from 'uuid'
 import FileAPI from 'api/FileAPI'
 import {Post} from 'core/domain/posts'
-import { Tags, TopicsFUll, TopicsMap }  from 'constants/postType'
+import { Tags, TopicsFUll, TopicsMap, TagsMap }  from 'constants/postType'
 
 // Style Component
 import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.jsx'
@@ -131,6 +132,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
   formats: string[]
   modules: any
   catagories: string []
+  _input: HTMLInputElement
 
   /**
    * Component Constructor
@@ -143,7 +145,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       this.quillRef = null // Quill instance
       this.reactQuillRef = null  // ReactQuill component
       const { EditPost } = props
-
+      
       this.catagories = [
         TopicsFUll.topic2,
         TopicsFUll.topic3,
@@ -152,6 +154,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         TopicsFUll.topic6,
         TopicsFUll.topic7,
         TopicsFUll.topic8,
+        TopicsFUll.topic9,
       ]
       // Default state
       this.state = {
@@ -169,13 +172,17 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          */
         postTitle: this.props.edit && EditPost ? EditPost.get('title', '') : '',
 
-        postTopic: this.props.edit && EditPost ? EditPost.get('title', '') : '',
+        postTopic: this.props.edit && EditPost ? TopicsFUll[TagsMap[EditPost.get('postTopic', '')]] : '',
 
         postTitleError: '',
         
         postCatagoryError: '',
 
+        postBodyError: '',
+
         image: this.props.edit && EditPost ? EditPost.get('image', '') : '',
+
+        willSubmit: false,
 
         imagefullPath: this.props.edit && EditPost ? EditPost.get('imageFullPath', '') : '',
 
@@ -188,6 +195,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         currentImage: {}
 
      }
+     console.log(this.state)
      
       this.handleOnBodyChange = this.handleOnBodyChange.bind(this)
       this.handleOnTitleChange = this.handleOnTitleChange.bind(this)
@@ -331,6 +339,10 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       
     //     return item.insert && item.insert.image
     // } )
+    this.setState({postTitleError: ''})
+    this.setState({willSubmit: false})
+    this.setState({postCatagoryError: ''})
+    this.setState({postBodyError: ''})
     
     const {EditPost, edit, update } = this.props
 
@@ -360,18 +372,19 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
        this.setState({postCatagoryError: 'Invalid Catagory'})
        error = true
     } else if (postBodyText.length < 300) {
-      this.setState({postTitleError: 'Post is too short, please add more content'})
+      this.setState({postBodyError: 'Post is too short, please add more content'})
       error = true
     }
     if (!error) {
       if (!edit) {
+         this.setState({willSubmit: true})
           if (image !== '') {
              
             FileAPI.getThumbUrl(imagefullPath!).then((url) => {
               if (url) {
                 post!({
-                  ownerDisplayName: ownerDisplayName,
-                  ownerAvatar: ownerAvatar,
+                   ownerDisplayName: ownerDisplayName,
+                   ownerAvatar: ownerAvatar,
                    image: image,
                    thumbImage: url,
                    imageFullPath: imagefullPath,
@@ -382,7 +395,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                    postTypeId: 1,
                    score: 0,
                    viewCount: 0
-                 }, ( ) => {goTo!(`/${uid}/posts/`)})
+                 },(postId: string) => {goTo!(`/posts/${uid}/${postId}`)})
 
                } else {
                 post!({
@@ -398,7 +411,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                     postTypeId: 1,
                     score: 0,
                     viewCount: 0
-                  }, ( ) => {goTo!(`/${uid}/posts/`)})  
+                  }, (postId: string) => {goTo!(`/posts/${uid}/${postId}`)})  
                }
             })
             } else {
@@ -415,30 +428,35 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                 postTypeId: 0,
                 score: 0,
                 viewCount: 0
-            }, () => {goTo!(`/${uid}/posts/`)})
+            }, (postId: string) => {goTo!(`/posts/${uid}/${postId}`)})
         }
 
       } else {
-
+        this.setState({willSubmit: true})
         FileAPI.getThumbUrl(imagefullPath!).then((url) => {
          if (url) {
+          console.log('inside url')
           const updatedPost = EditPost!.set('body', postBodyHTML)
           .set('bodyText', postBodyText)
           .set('title', postTitle)
           .set('image', image)
           .set('thumbImage', url)
+          .set('postTopic', Tags[TopicsMap.get(postTopic)])
           .set('imageFullPath', imagefullPath)
+          .set('postTypeId', 1)
   
-          update!(updatedPost, () => {goTo!(`/${uid}/posts/`)})
+          update!(updatedPost, (postId: string) => {goTo!(`/posts/${uid}/${postId}`)})
 
          } else {
+    
             const updatedPost = EditPost!.set('body', postBodyHTML)
             .set('bodyText', postBodyText)
             .set('title', postTitle)
             .set('image', '')
             .set('imageFullPath', imagefullPath)
-    
-            update!(updatedPost, () => {goTo!(`/${uid}/posts/`)})
+            .set('postTopic', Tags[TopicsMap.get(postTopic)])
+            
+            update!(updatedPost, (postId: string) => {goTo!(`/posts/${uid}/${postId}`)})
 
          }
         })
@@ -461,24 +479,26 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
    */
   componentDidMount() {
     this.attachQuillRefs()
-    window.addEventListener('beforeunload', (event) => {
-        event.preventDefault()
-        alert('it seems you have unsaved items, all unsaved items will be lost')
-    })
-    
+    window.addEventListener('beforeunload', this.beforeunload.bind(this))
+  
   }
 
   componentDidUpdate() {
      this.attachQuillRefs()
     
   }
+
   componentWillUnmount () {
-    window.removeEventListener('beforeunload', (event) => {
-      event.preventDefault()
-      alert('it seems you have unsaved items, all unsaved items will be lost')
-  })
+    window.removeEventListener('beforeunload', this.beforeunload.bind(this))
   }
-  
+
+  beforeunload(event: any) {
+    if (this.state.postBodyHTML !== '' || this.state.postTitle !== '') {
+      event.preventDefault()
+      event.returnValue = true
+    }
+  }
+
   render() {
 
     /**Import the stylesheet
@@ -498,15 +518,23 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         },
       },
     }
-    
+    const error = this.state.postTitleError.trim() !== '' || this.state.postCatagoryError.trim() !== '' 
+    if (error) {
+      this._input.focus()
+    }
     return (
             <div className={classes.submitPostContent}>
+              <Prompt
+                when={(this.state.postBodyHTML !== '' || this.state.postTitle !== '') &&  this.state.willSubmit === false}
+                message={'Are you sure you want to leave the page? any unsaved items will be lost'}
+              />
                   <div className={classes.editorTitle}>
                       <h3>
                         <TextField
                                 id="post-title"
                                 label="Title"
                                 placeholder='title'
+                                inputProps={{ref: (c: any) => this._input = c}}
                                 helperText={this.state.postTitleError}
                                 error={this.state.postTitleError.trim() !== ''}
                                 className={classes.editorTitle}
@@ -524,6 +552,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                       <Select
                         value={this.state.postTopic}
                         onChange={this.handleOnTopicChange}
+                        autoFocus={this.state.postCatagoryError.trim() !== ''}
                         input={<Input id="select-multiple" />}
                         MenuProps={MenuProps}
                       >
@@ -537,7 +566,9 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                   </div>
 
                   <div>
-                  
+                   <div style={{color: 'red'}}>
+                       {this.state.postBodyError.trim() !== '' ? 'Post is too short, please add more content' : ''}
+                   </div>
                      <ReactQuill
                        ref={(el) => {this.reactQuillRef = el}}
                        theme='snow'
@@ -556,11 +587,13 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                    </a>
                    
                     <div className={classes.button} >
+                    <a>
                       <div className={classes.guide} onClick={this.handleOpenReq}>
                         {'Submission Guidelines'}
                       </div>
+                      </a>
                       <Button
-                       variant="outlined"
+                         variant="outlined"
                          color="primary"
                          onClick={this.submitPost} >
                            Submit
@@ -691,6 +724,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                     </Button>
                   </DialogActions>
                 </Dialog>
+
             </div>
     )
   }

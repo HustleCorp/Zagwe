@@ -76,5 +76,7 @@ export interface IHomeHeaderComponentProps {
    */
   translate?: (state: any) => any
 
+  openFeedBack?: () => any
+
   authed?: boolean
 }

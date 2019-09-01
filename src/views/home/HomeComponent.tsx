@@ -176,6 +176,8 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
         return 7
       case `/t/${Tags.topic8}`:
           return 8
+      case `/t/${Tags.topic9}`:
+            return 9
       default:
         return 0
     }
@@ -215,6 +217,9 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
       case 8:
           goTo!(`/t/${Tags.topic8}`)
           break
+      case 9:
+            goTo!(`/t/${Tags.topic9}`)
+            break
    
       default:
         break
@@ -262,25 +267,6 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
     const displayTop = url ? url.match('/t/') !== null || url === '/' || url.match('/posts/') : false
 
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
-    let post: Post = {
-      postTypeId: 0,
-      creationDate: moment.now(),
-      deleteDate: 0,
-      score: 0,
-      viewCount: 0,
-      title: '',
-      body: '',
-      id: 'fdssdfds',
-      bodyText: '',
-      postTopic: '',
-      ownerUserId: '',
-      ownerDisplayName: '',
-      ownerAvatar: '',
-      image: '',
-      thumbImage: '',
-      imageFullPath: '',
-      disableComments: false,
-    }
 
     return (
       <div className={classes.root}>
@@ -297,13 +283,14 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
                     >
                       <Tab label={`${TagLabel.home}`} />
                       <Tab style={{display: isGuest ? 'none' : ''}} label={`${TagLabel.topic1}`} /> : ''}
-                      <Tab className={classes.amharic} label={`ገጠመኝ`} />
+                      <Tab label={`${TagLabel.topic2}`} />
                       <Tab label={`${TagLabel.topic3}`} />
-                      <Tab label={`${TagLabel.topic4}`} />
+                      <Tab className={classes.amharic} label={`ገጠመኝ`} />
                       <Tab label={`${TagLabel.topic5}`} />
                       <Tab label={`${TagLabel.topic6}`} />
+                      <Tab label={`${TagLabel.topic7}`} />
                       <Tab className={classes.amharic} label={`ተረት ተረት`} />
-                      <Tab label={`${TagLabel.topic8}`} />
+                      <Tab label={`${TagLabel.topic9}`} />
                     </Tabs>
         
           </div>
@@ -313,7 +300,7 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
 
           >
            {authed ?  <Notifications userId={this.props.uid}/> : ''}
-            <HR enabled={true} data={{ mergedPosts: mergedPosts, loadDataStream, hasMorePosts }} />
+            <HR enabled={load!} data={{ mergedPosts: mergedPosts, loadDataStream, hasMorePosts, uid }} />
           </main>
       
         </div>
@@ -339,7 +326,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
       dispatch(circleActions.dbGetCircles())
       dispatch(circleActions.dbGetUserTies())
       dispatch(circleActions.dbGetFollowers())
-
     },
     clearData: () => {
       dispatch(imageGalleryActions.clearAllData())

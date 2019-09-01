@@ -44,14 +44,14 @@ export class UserService implements IUserService {
         let userProfileRef = db.doc(`userInfo/${userId}`)
         userProfileRef.get().then((result) => {
           if (!result.exists) {
-            this.getUserProviderData(userId).then((providerData: UserProvider) => {
+              this.getUserProviderData(userId).then((providerData: UserProvider) => {
               if (!UserProvider || !providerData.email) {
                 reject(reject(new SocialError(`firestore/providerdata`, 'firestore/getUserProfile : Provider data or email of provider data is empty!')))
               }
               const {avatar,fullName, email} = providerData
-              const userProfile = new Profile(avatar,fullName && fullName !== '' ? fullName : email , '', moment().unix(), email, '', '',  -1, '', '', '')
+              const userProfile = new Profile(avatar, fullName && fullName !== '' ? fullName : email, '', moment().unix(), email, '', '',  -1, '', '', '', '', 0, 0)
               resolve(userProfile)
-              this.updateUserProfile(userId,userProfile)
+              this.updateUserProfile(userId, userProfile)
             })
           } else {
             resolve(result.data() as Profile)
@@ -71,7 +71,6 @@ export class UserService implements IUserService {
             return new Promise<void>((resolve, reject) => {
                 const batch = db.batch()
                 const otherProfileRef = db.doc(`otherUserInfo/${userId}`)
-                console.log('underuserservice', otherProfile)
                 batch.set(otherProfileRef, {...otherProfile})
                 batch.commit().then(() => {
                   resolve()

@@ -8,7 +8,6 @@ import copy from 'copy-to-clipboard'
 import { getTranslate } from 'react-localize-redux'
 import { Map } from 'immutable'
 import * as R from 'ramda'
-import notifier from "simple-react-notifications"
 
 // - Material UI
 import SvgIcon from '@material-ui/core/SvgIcon'
@@ -107,7 +106,6 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
     this.handleOpenShare = this.handleOpenShare.bind(this)
     this.handleCloseShare = this.handleCloseShare.bind(this)
     this.handleCopyLink = this.handleCopyLink.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
     this.handleOpenComments = this.handleOpenComments.bind(this)
     this.loadThumbUrl = this.loadThumbUrl.bind(this)
   }
@@ -118,15 +116,6 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
   handleOpenComments = () => {
     const { post, goTo } = this.props
     goTo!(`/posts/${post.get('ownerUserId')}/${post.get('id')}`)
-  }
-
-  /**
-   * Delete a post
-   *
-   */
-  handleDelete = () => {
-    const { post } = this.props
-    this.props.delete!(post.get('id'))
   }
 
   /**
@@ -266,7 +255,6 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
               horizontal: 'right'
             }}
             onClose={this.closePostMenu}>
-            <MenuItem onClick={this.handleDelete} > {translate!('post.delete')} </MenuItem>
             <MenuItem
               onClick={() => this.props.toggleDisableComments!(!post.get('disableComments'))} >
               {post.get('disableComments') ? translate!('post.enableComments') : translate!('post.disableComments')}
@@ -427,7 +415,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostComponentProps) => {
  * Map state to props
  */
 const mapStateToProps = (state: Map<string, any>, ownProps: IPostComponentProps) => {
-  console.log(ownProps)
   const authed = state.getIn(['authorize', 'authed'], false)
   const uid = state.getIn(['authorize', 'uid'])
   const isAdmin = state.getIn(['authorize', 'isAdmin'], false)

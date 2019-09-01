@@ -134,4 +134,8 @@ export interface IProfileComponentProps {
 
   country?: string
 
+  twitterId?: string
+
+  company?: string
+
 }

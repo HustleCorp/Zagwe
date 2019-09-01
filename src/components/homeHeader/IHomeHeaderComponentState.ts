@@ -32,4 +32,10 @@ export interface IHomeHeaderComponentState {
    * @memberof IHomeHeaderComponentState
    */
   anchorEl?: HTMLElement | null
+
+  searchOpen: boolean
+
+  tabIndex: number
+
+  searchText: string
 }

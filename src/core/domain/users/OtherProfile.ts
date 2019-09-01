@@ -5,6 +5,7 @@ import { BaseDomain } from 'core/domain/common'
  */
 export class OtherProfile extends BaseDomain {
     public likes: string[]
+    public likeCount: number
 
     constructor (
 

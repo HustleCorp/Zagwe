@@ -78,7 +78,7 @@ export const  dbLogin = (email: string, password: string) => {
       dispatch(globalActions.showNotificationSuccess())
       dispatch(login(result.uid, result.emailVerified, result.isAdmin))
       dispatch(push('/'))
-    }, (error: SocialError) => dispatch(globalActions.showMessage(error.code)))
+    }, (error: SocialError) => dispatch(globalActions.showMessage(error.message, 'error')))
   }
 }
 
@@ -92,7 +92,7 @@ export const dbLogout = () => {
       dispatch(logout())
       dispatch(push('/'))
 
-    }, (error: SocialError) => dispatch(globalActions.showMessage(error.code)))
+    }, (error: SocialError) => dispatch(globalActions.showMessage(error.message, 'error')))
   }
 
 }
@@ -111,7 +111,7 @@ export const dbSendEmailVerfication = () => {
     })
       .catch((error: SocialError) => {
         // An error happened.
-        dispatch(globalActions.showMessage(error.code))
+        dispatch(globalActions.showMessage(error.message, 'error'))
 
       })
   }
@@ -137,7 +137,7 @@ export const dbSignup = (user: UserRegisterModel) => {
       dispatch(dbSendEmailVerfication())
       dispatch(push('/emailVerification'))
     })
-      .catch((error: SocialError) => dispatch(globalActions.showMessage(error.code)))
+      .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message, 'error')))
   }
 
 }
@@ -161,7 +161,7 @@ export const dbUpdatePassword = (newPassword: string) => {
         // An error happened.
         switch (error.code) {
           case 'auth/requires-recent-login':
-            dispatch(globalActions.showMessage(error.code))
+            dispatch(globalActions.showMessage(error.message, 'error'))
             dispatch(dbLogout())
             break
           default:

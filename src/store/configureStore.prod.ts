@@ -10,6 +10,7 @@ import { rootReducer } from 'store/reducers'
 import { fromJS, Map } from 'immutable'
 import { routerMiddleware, connectRouter } from 'connected-react-router/immutable'
 // Create a history of your choosing (we're using a browser history in this case)
+
 export const history = createHistory()
 
 // Logger option for transforming immutable js
@@ -28,7 +29,7 @@ let initialState = {
 
 // - Config and create store of redux
 let store: Store<any> = createStore(rootReducer(history), fromJS(initialState), compose(
-  applyMiddleware(thunk,  routerMiddleware(history), sagaMiddleware)
+  applyMiddleware(thunk, logger, routerMiddleware(history), sagaMiddleware)
 ))
 
 export default {store, runSaga: sagaMiddleware.run, close: () => store.dispatch(END), history}

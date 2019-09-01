@@ -1,45 +1,57 @@
 // - Import react components
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 import { Map } from 'immutable'
 
 import { push } from 'connected-react-router'
 // - Material UI
 import SearchIcon from '@material-ui/icons/Search'
-import Home from '@material-ui/icons/Home'
 import Add from '@material-ui/icons/AddCircle'
 import People from '@material-ui/icons/People'
 
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-
 import AppBar from '@material-ui/core/AppBar'
 import MenuItem from '@material-ui/core/MenuItem'
+import Dialog from '@material-ui/core/Dialog'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+
+// Search funtionalities
+import algoliasearch from 'algoliasearch/lite'
+import {
+  InstantSearch,
+  Hits,
+  SearchBox,
+  Pagination,
+  Highlight,
+
+} from 'react-instantsearch-dom'
+
 import Menu from '@material-ui/core/Menu'
 import Badge from '@material-ui/core/Badge'
+import CloseIcon from '@material-ui/icons/Close'
 import InputBase from '@material-ui/core/InputBase'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import Tooltip from '@material-ui/core/Tooltip'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import {  Theme } from '@material-ui/core/styles'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import MasterLoadingComponent from 'components/masterLoading/MasterLoadingComponent'
-import config from 'src/config'
 import Loadable from 'react-loadable'
 
 // - Import components
 import UserAvatarComponent from 'components/userAvatar'
-import Notify from 'components/notify'
 
 // - Import actions
 import { authorizeActions } from 'store/actions'
+import { globalActions } from 'store/actions'
 import { IHomeHeaderComponentProps } from './IHomeHeaderComponentProps'
 import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
+import { NavLink } from 'react-router-dom'
 
+const searchClient = algoliasearch('GDLJD9WT4N', '1a976afc8891eef33f27a09de414146c')
 // - Async Components
 const AsyncNotify = Loadable({
   loader: () => import('components/notify'),
@@ -177,6 +189,19 @@ const styles = (theme: Theme) => ({
         width: 200,
       },
     },
+    spaceSearch: {
+      height: '80px'
+    },
+    spanValue: {
+      [theme.breakpoints.up('md')]: {
+         fontSize: '18px',
+      },
+      [theme.breakpoints.down('md')]: {
+       fontSize: '15px',
+       top: '-4px',
+       position: 'relative'
+      }
+   },
 })
 
 // - Create HomeHeader component class
@@ -209,7 +234,13 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
       /**
        * If true notification menu will be open
        */
-      openNotifyMenu: false
+      openNotifyMenu: false,
+
+      searchOpen: false,
+
+      searchText: '',
+
+      tabIndex: 0,
     }
 
     // Binding functions to `this`
@@ -218,6 +249,58 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDiscoverClick = this.handleDiscoverClick.bind(this)
     this.handleHomeClick = this.handleHomeClick.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.HitPost = this.HitPost.bind(this)
+    this.HitUser = this.HitUser.bind(this)
+    this.handleChangeTab = this.handleChangeTab.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+  }
+
+  handleChangeTab = (event: any, value: any) => {
+    this.setState({ tabIndex: value })
+
+  }
+  
+  HitPost = (props: any) => {
+    return (
+      <div onClick={this.handleClose}>
+       <NavLink to={`/posts/${props.hit.ownerUserId}/${props.hit.objectID}`}>
+        <img style={{width: 'auto'}} src={props.hit.thumbImage}  alt={props.hit.thumbImage} />
+        <div className="hit-name">
+          <Highlight attribute="title" hit={props.hit} />
+        </div>
+        <div className="hit-description">
+          <Highlight attribute="bodyText" hit={props.hit} />
+        </div>
+        <div className="hit-username">{props.hit.ownerDisplayName}</div>
+        </NavLink>
+      </div>
+    )
+  }
+
+  HitUser = (props: any) => {
+    return (
+      <NavLink to={`/users/${props.hit.objectID}/posts`}>
+       <div className='user-hit' onClick={this.handleClose}>
+        <div className='hit-image'>
+          <img style={{width: '100px'}} src={props.hit.avatar}  alt={props.hit.avatar} />
+        </div>
+        <div className='hit-text'> 
+          <div className="hit-name">
+            <Highlight attribute="fullName" hit={props.hit} />
+          </div>
+          <div className="hit-description">
+            <Highlight attribute="tagLine" hit={props.hit} />
+          </div>
+        </div>
+       </div>
+      </NavLink>
+    )
+  }
+
+  handleSearchChange = (event: any) => {
+    this.setState({searchText: event.target.value})
   }
 
   /**
@@ -262,6 +345,16 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
    */
   handleLogout = () => {
     this.props.logout!()
+    this.handleRequestClose()
+  }
+
+  handleClose = () => {
+    this.setState({searchOpen: false})
+  }
+
+  handleOpen = () => {
+    const searchText = this.state.searchText
+    this.setState({searchOpen: true})
   }
   
   handleLogin = () => {
@@ -291,7 +384,11 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
   handleHomeClick = () => {
     this.props.goTo!('/')
   }
-
+  
+  handleSendFeedBack = () => {
+    this.props.openFeedBack!()
+    this.handleRequestClose()
+  }
   /**
    * Handle close popover
    *
@@ -302,7 +399,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
       anchorEl: null
     })
   }
-
+  
   // Render app DOM component
   render () {
     const { classes , translate, theme, authed} = this.props
@@ -314,17 +411,15 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
           {/* Left side */}
           <div className='homeHeader__left'>
             <div className={classes.HomeButton} >
-              {/* <IconButton onClick={this.handleHomeClick} >
-                  <Home style={{ cursor: 'pointer' }} />
-              </IconButton> */}
-              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/logo.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+                <a>
+                  <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/logo.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+                </a>
           </div>
+             <a>
               <div className={classes.HomeIcon} onClick={this.handleHomeClick}>
-              <img onClick={this.handleHomeClick} style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>
-                  {/* <Typography variant='h6' style={{ marginLeft: '15px' }} >
-                    {config.settings.appName}
-                  </Typography> */}
+                  <img  style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img> 
               </div>
+              </a>
            </div>
 
           <div className='homeHeader_center'>
@@ -333,6 +428,8 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                   <SearchIcon />
                 </div>
                 <InputBase
+                  onClick={this.handleOpen}
+                  onChange={this.handleSearchChange}
                   placeholder="Search…"
                   classes={{
                     root: classes.inputRoot,
@@ -341,9 +438,11 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                   inputProps={{ 'aria-label': 'search' }}
                 />
               </div>
-              <div className={classes.searchSmall}>
-                   <SearchIcon color='secondary' />
-              </div>
+              <a onClick={this.handleOpen}>
+                <div className={classes.searchSmall}>
+                    <SearchIcon color='secondary' />
+                </div>
+              </a>
 
           </div>
 
@@ -424,11 +523,40 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
               onClose={this.handleRequestClose}>
               <MenuItem style={{ fontSize: '14px' }}
                onClick={this.handleProfileClick.bind(this)} > {translate!('header.myAccount')} </MenuItem>
-              <MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout.bind(this)} > {translate!('header.logout')} </MenuItem>
-
+              <MenuItem style={{ fontSize: '14px' }} onClick={this.handleSendFeedBack}> Send FeedBack </MenuItem>
+              <MenuItem style={{ fontSize: '14px' }} onClick={this.handleLogout} > {translate!('header.logout')} </MenuItem>
+              
             </Menu>
 
         </Toolbar>
+
+        <Dialog fullScreen open={this.state.searchOpen} onClose={this.handleClose} >
+        <InstantSearch indexName={this.state.tabIndex === 0 ? 'posts' : 'users'} searchClient={searchClient}>
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+           <IconButton  color="inherit" onClick={this.handleClose} aria-label="close">
+            <CloseIcon />
+          </IconButton>
+               <SearchBox /> 
+          </Toolbar>
+        </AppBar>
+        <div className={classes.spaceSearch}>
+
+        </div>
+        <Tabs 
+        onChange={this.handleChangeTab}
+        value={this.state.tabIndex}
+         centered
+        textColor='primary'
+        >
+          <Tab label={'Posts'} />
+          <Tab label={'Users'} />
+        </Tabs>
+        <Hits hitComponent={this.state.tabIndex === 0 ? this.HitPost : this.HitUser} />
+        <Pagination />
+      </InstantSearch>
+
+     </Dialog>
       </AppBar >
       
     )
@@ -438,8 +566,9 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
 // - Map dispatch to props
 const mapDispatchToProps = (dispatch: Function, ownProps: IHomeHeaderComponentProps) => {
   return {
-    logout: () => dispatch(authorizeActions.dbLogout()),
+     logout: () => dispatch(authorizeActions.dbLogout()),
      goTo: (url: string) => dispatch(push(url)),
+     openFeedBack: () => dispatch(globalActions.showSendFeedback())
   }
 }
 

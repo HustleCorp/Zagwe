@@ -102,6 +102,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
     this.handleSetImage = this.handleSetImage.bind(this)
     this.handleDeleteImage = this.handleDeleteImage.bind(this)
     this.imageList = this.imageList.bind(this)
+    this.handleSendResizedImage = this.handleSendResizedImage.bind(this)
   }
 
   /**
@@ -109,7 +110,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
    * @param  {event} evt  passed by on click event on add image
    * @param  {string} name is the name of the image
    */
-  handleSetImage = async (event: any, URL: string,fullPath: string) => {
+  handleSetImage = async ( URL: string, fullPath: string) => {
 
     this.props.set!(URL,fullPath)
     this.close()
@@ -141,7 +142,8 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
 
     const { resizedImage, fileName } = event.detail
     const {uploadImage} = this.props
-    uploadImage!(resizedImage,fileName)
+    uploadImage!(resizedImage, fileName, this.handleSetImage)
+     
   }
 
   /**
@@ -152,6 +154,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
     const extension = FileAPI.getExtension(event.target.files[0].name)
     let fileName = (`${uuid()}.${extension}`)
     FileAPI.constraintImage(event.target.files[0], fileName)
+    
   }
 
   /**
@@ -174,7 +177,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
               <div style={{ display: 'block' }}>
                 <div style={{ display: 'block', marginRight: '8px', transition: 'transform .25s' }}>
                   <li style={{ width: '100%', margin: 0, verticalAlign: 'bottom', position: 'static', display: 'inline-block' }}>
-                    <Img fileName={image.URL} style={{ width: '30%', height: '30' }} />
+                    <img src={image.URL} style={{ width: '30%', height: '30' }} />
 
                   </li>
                 </div>
@@ -187,7 +190,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
               title={<SvgDelete style={this.styles.deleteImage as any} onClick={evt => this.handleDeleteImage(evt, image.id!)} />}
               titlePosition='top'
               actionIcon={
-                <SvgAddImage style={this.styles.addImage as any} onClick={evt => this.handleSetImage(evt, image.URL,image.fullPath)} />}
+                <SvgAddImage style={this.styles.addImage as any} onClick={evt => this.handleSetImage( image.URL,image.fullPath)} />}
               actionPosition='left'
             />
       </GridListTile>)
@@ -204,31 +207,25 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
 
     return (
       <div style={this.styles.root as any}>
-        <GridList
-          cellHeight={180}
-          style={this.styles.gridList as any}
-        >
-          <GridListTile key='upload-image-gallery' >
-
+       
             <div style={{ display: 'flex', backgroundColor: 'rgba(222, 222, 222, 0.52)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
 
-               <input
-                accept='image/*'
-                style={this.styles.uploadInput as any}
-                id='raised-button-file'
-                onChange={this.onFileChange}
-                type='file'
+              <input
+              accept='image/*'
+              style={this.styles.uploadInput as any}
+              id='raised-button-file'
+              onChange={this.onFileChange}
+              type='file'
               /> 
               <label htmlFor='raised-button-file'>
-                <Button variant='contained' component='span' style={this.styles.uploadButton as any}>
-                  {translate!('imageGallery.uploadButton')}
-               </Button>
+              <Button variant='contained' component='span' style={this.styles.uploadButton as any}>
+                {translate!('imageGallery.uploadButton')}
+              </Button>
               </label>
-            </div>
-          </GridListTile>
+              </div>
 
-          {this.imageList()}
-        </GridList>
+          {/* {this.imageList()} */}
+        
       </div>
     )
   }
@@ -242,7 +239,7 @@ export class ImageGalleryComponent extends Component<IImageGalleryComponentProps
  */
 const mapDispatchToProps = (dispatch: any, ownProps: IImageGalleryComponentProps) => {
   return {
-    uploadImage: (image: any, imageName: string) => dispatch(imageGalleryActions.dbUploadImage(image,imageName)),
+    uploadImage: (image: any, imageName: string, callBack: Function) => dispatch(imageGalleryActions.dbUploadImage(image,imageName, callBack)),
     deleteImage: (id: string) => dispatch(imageGalleryActions.dbDeleteImage(id)),
     progressChange : (percent: number,status: boolean) => dispatch(globalActions.progressChange(percent, status))
 

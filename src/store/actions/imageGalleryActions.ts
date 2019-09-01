@@ -104,7 +104,7 @@ export const dbDeleteImage = (id: string) => {
 /**
  * Upload image on the server
  */
-export const dbUploadImage = (image: any, imageName: string) => {
+export const dbUploadImage = (image: any, imageName: string, callBack: Function) => {
 
       return (dispatch: any, getState: Function) => {
         return new Promise<any> ((resolve, reject) => {
@@ -123,13 +123,13 @@ export const dbUploadImage = (image: any, imageName: string) => {
               }
             dispatch(dbSaveImage(res!, result.fileFullPath))
             dispatch(globalActions.hideTopLoading())
-            return res!
+            const data = {url: res!, fullPath: result.fileFullPath}
             
+            callBack(data.url, data.fullPath)    
           })
           .catch((error: SocialError) => {
             dispatch(globalActions.showMessage(error.code))
             dispatch(globalActions.hideTopLoading())
-            return error
           })
         })
  
@@ -156,8 +156,7 @@ export const dbUploadImagePost = (image: any, imageName: string) => {
      
    })
    .catch((error: SocialError) => {
-     return error
-     dispatch(globalActions.showMessage(error.code))
+     dispatch(globalActions.showMessage(error.code, 'error'))
      dispatch(globalActions.hideTopLoading())
    })
  }

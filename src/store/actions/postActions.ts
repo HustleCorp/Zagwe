@@ -110,7 +110,7 @@ export const dbAddImagePost = (newPost: Post, callBack: Function) => {
         ...post,
         id: postKey
       }))
-      callBack()
+      callBack(postKey)
       dispatch(globalActions.hideTopLoading())
 
     })
@@ -148,7 +148,7 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
       image: newPost.image,
       thumbImage: newPost.thumbImage || '',
       imageFullPath: newPost.imageFullPath || '',
-      video: newPost.video,
+      video: newPost.video || '',
       disableComments: newPost.disableComments ? newPost.disableComments : false,
       disableSharing: newPost.disableSharing ? newPost.disableSharing : false,
       deleted: newPost.deleted
@@ -159,7 +159,7 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
     }
     return postService.updatePost(post, postBody).then(() => {
       dispatch(updatePost(updatedPost))
-      callBack()
+      callBack(newPost.id)
       dispatch(globalActions.hideTopLoading())
 
     })
@@ -204,11 +204,10 @@ export const dbGetLikedPosts = (userId: string) => {
   return (dispatch: any, getState: Function) => {
      const state: Map<string, any> = getState()
      const likes = state.getIn(['user', 'otherInfo', userId, 'likes'])
-  
      likes.forEach((item: string) => {
           postService.getPostById(item).then((result: Post) => {
-              if (result.body) {
-               dispatch(addLikePost(result))
+              if (result.bodyText) {
+                dispatch(addLikePost(result))
               }
           })
      })

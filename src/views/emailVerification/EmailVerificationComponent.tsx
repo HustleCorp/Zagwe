@@ -90,7 +90,9 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.contain}>
 
-          <h1 className='g__app-name'>{config.settings.appName}</h1>
+          <div className='web_app'>
+           <img  style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+          </div>
 
           <div className='animate-bottom'>
             <Paper className={classes.paper} elevation={1} >

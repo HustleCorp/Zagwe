@@ -5,7 +5,6 @@ import {Map} from 'immutable'
 
 // - Import domain
 import { Comment } from 'src/core/domain/comments'
-import { Post } from 'src/core/domain/posts'
 import { SocialError } from 'src/core/domain/common'
 
 // - Import action types
@@ -20,11 +19,6 @@ import * as serverActions from 'store/actions/serverActions'
 import { ICommentService } from 'src/core/services/comments'
 import { SocialProviderTypes } from 'src/core/socialProviderTypes'
 import { provider } from 'src/socialEngine'
-import StringAPI from 'src/api/StringAPI'
-import { ServerRequestType } from 'constants/serverRequestType'
-import { ServerRequestModel } from 'src/models/server'
-import { ServerRequestStatusType } from 'store/actions/serverRequestStatusType'
-import CommentAPI from 'src/api/CommentAPI'
 
 /**
  * Get service providers
@@ -64,9 +58,10 @@ export const dbAddComment = (ownerPostUserId: string, newComment: Comment, callB
         if (ownerPostUserId && ownerPostUserId !== uid) {
           dispatch(notifyActions.dbAddNotification(
             {
-              description: 'Add comment on your post.',
-              url: `/${ownerPostUserId}/posts/${comment.postId}`,
-              notifyRecieverUserId: ownerPostUserId, notifierUserId: uid,
+              description: 'Commented on your post.',
+              url: `/posts/${ownerPostUserId}/${comment.postId}`,
+              notifyRecieverUserId: ownerPostUserId,
+              notifierUserId: uid,
               isSeen: false
             }))
         }

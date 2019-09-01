@@ -9,8 +9,8 @@ import {Map} from 'immutable'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
-import SvgHappy from '@material-ui/icons/TagFaces'
-import SvgSad from '@material-ui/icons/Face'
+import Button from '@material-ui/core/Button'
+
 import SvgClose from '@material-ui/icons/Clear'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -67,7 +67,6 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
     this.handleFeedText = this.handleFeedText.bind(this)
     this.getFeedbackForm = this.getFeedbackForm.bind(this)
     this.mainForm = this.mainForm.bind(this)
-    this.loadingForm = this.loadingForm.bind(this)
     this.successForm = this.successForm.bind(this)
     this.errorForm = this.errorForm.bind(this)
   }
@@ -85,6 +84,7 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
 
   handleSendFeed = (feedType: FeedType) => {
     const { sendFeed, currentUser } = this.props
+    console.log(currentUser)
     const { feedText } = this.state
     sendFeed!(new Feed('', feedText, feedType, currentUser))
   }
@@ -95,7 +95,7 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
     return (
       <div className='main-box'>
         <TextField
-          placeholder={translate!('feedback.textareaPlaceholder')}
+          placeholder={'Send us Feedback'}
           multiline
           onChange={this.handleFeedText}
           rows={2}
@@ -104,7 +104,11 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
           fullWidth
         />
         <br />
-        <div className='buttons'>
+        <Button  onClick={() => this.handleSendFeed(FeedType.Acceptable)} color="primary">
+              Send
+        </Button>
+        {/* <div className='buttons'>
+
         <Tooltip title={translate!('feedback.sadTooltip')} placement='bottom-start'>
           <IconButton
             className='flaticon-sad-2 icon__svg'
@@ -134,26 +138,8 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
           >
           </IconButton>
           </Tooltip>
-        </div>
+        </div> */}
       </div >)
-  }
-
-  loadingForm = () => {
-    const {translate} = this.props
-    return (
-    <div className='loading'>
-    <p>
-    {translate!('feedback.sendingMessage')}
-      </p>
-      <div className='icon'>
-      <CircularProgress
-        color='secondary'
-        size={50}
-        variant='determinate'
-        value={(25 - 0) / (50 - 0) * 100}
-      />
-      </div>
-    </div>)
   }
 
   successForm = () => {
@@ -173,7 +159,7 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
     if (sendFeedbackRequestType) {
       switch (sendFeedbackRequestType) {
         case ServerRequestStatusType.Sent:
-          return this.loadingForm()
+          return ''
 
         case ServerRequestStatusType.OK:
           return this.successForm()

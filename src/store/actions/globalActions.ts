@@ -61,7 +61,7 @@ export const showNotificationSuccess = () => {
   return (dispatch: Function, getState: Function) => {
     const state: Map<string, any>  = getState()
     const translate =  getTranslate(state.get('locale'))
-    return dispatch(showMessage(String(translate('common.successfulRequestMessage'))))
+    return dispatch(showMessage(String(translate('common.successfulRequestMessage')), 'success'))
   }
 }
 
@@ -124,13 +124,13 @@ export const hideMessage = () => {
  * Show message
  * @param {string} message
  */
-export const showMessage = (message: string) => {
+export const showMessage = (message: string, variant: string = 'info') => {
   if (!message || message === '' || (message && message.trim() === '')) {
     message = 'Bad request'
   }
   return {
     type: GlobalActionType.SHOW_MESSAGE_GLOBAL,
-    payload: message
+    payload: {message, variant}
   }
 
 }

@@ -149,6 +149,16 @@ const styles = (theme: any) => ({
    insideAvatar: {
         position: 'relative',
         marginLeft: 'auto',
+   },
+   twitter: {
+       marginRight: '7px',
+       paddingTop: '5px',
+       fill: '#999'
+   },
+   briefcase: {
+     fill: '#999',
+     marginRight: '7px',
+     marginTop: '5px',
    }
 })
 
@@ -173,10 +183,12 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
       isSmall: false
 
     }
+    console.log(this.props)
 
         // Binding functions to `this`
       
   }
+
     /**
      * Handle resize event for window to change sidebar status
      * @param  {event} evt is the event is passed by winodw resize event
@@ -295,11 +307,48 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
                                          </div> : ''}
                                         {this.props.website ?                                         
                                          <div className={classes.bqqk}>
-                                            <a className={classes.hpcomp}>
+                                        
+                                            <a href={`http://${this.props.website}`} className={classes.hpcomp}>
                                               <svg className={classes.pqqv} version="1.1" viewBox="0 0 32 32" width="32" height="32" aria-hidden="false"><path d="M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm-12 16c0-3.3 1.3-6.3 3.5-8.5 0 4 .5 5.5 2.5 7.5s5 5.5 5 9.5c0 1.8.5 3 1 3.5-6.6 0-12-5.4-12-12zm16.3 11.2c1.6-1.8 3.5-4.7 2.2-7.2-2-4-9-1-9-5s6.5 1 6.5-7c0-2.9-2.3-3.8-4.7-4h.7c6.6 0 12 5.4 12 12 0 5.1-3.2 9.5-7.7 11.2z"></path></svg>
-                                                   {this.props.website}
+                                                  {this.props.website}
                                             </a>  
                                          </div> : ''}
+
+                                         {this.props.twitterId ? 
+                                          <div className={classes.bqqk}>
+                                            <a className={classes.hpcomp}>
+                                            <svg viewBox="328 355 335 276"  className={classes.twitter} width="19px" height="19px" aria-hidden="false" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="
+                                                  M 630, 425
+                                                  A 195, 195 0 0 1 331, 600
+                                                  A 142, 142 0 0 0 428, 570
+                                                  A  70,  70 0 0 1 370, 523
+                                                  A  70,  70 0 0 0 401, 521
+                                                  A  70,  70 0 0 1 344, 455
+                                                  A  70,  70 0 0 0 372, 460
+                                                  A  70,  70 0 0 1 354, 370
+                                                  A 195, 195 0 0 0 495, 442
+                                                  A  67,  67 0 0 1 611, 380
+                                                  A 117, 117 0 0 0 654, 363
+                                                  A  65,  65 0 0 1 623, 401
+                                                  A 117, 117 0 0 0 662, 390
+                                                  A  65,  65 0 0 1 630, 425
+                                                  Z"
+                                                  />   
+                                              </svg>
+                                              {this.props.twitterId}
+                                              </a>
+                                            </div>
+                                          :
+                                          ''
+                                          }
+                                         {this.props.company ? 
+                                           <div className={classes.bqqk}> 
+                                              <a className={classes.hpcomp}>
+                                               <svg xmlns="http://www.w3.org/2000/svg" className={classes.briefcase} width="17" height="17" viewBox="0 0 24 24"><path d="M24 22h-24v-15h24v15zm-15-20c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>
+                                                {this.props.company}
+                                              </a>
+                                            </div> : ''}
 
                                        </div>
                                      </div>

@@ -99,8 +99,6 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
     const St = StreamComponent as any
     
     const { likedPosts, loadUserLikePosts  } = this.props
-    console.log(likedPosts)
-    console.log('inside loadLikePost')
     return (
           <St
             posts={likedPosts}
@@ -159,14 +157,14 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
       }
     }
    
-   const { translate, userId, classes, tab, posts, followingCount, followersCount, likes, userProfile, authed} = this.props
+   const { translate, userId, classes, tab, posts, followingCount, followersCount, likes, likeCount, userProfile, authed} = this.props
     return (
       <div style={styles.profile}>
         <div style={styles.header}>
           <AsyncHeader tagLine={this.props.tagLine} avatar={this.props.avatar} isAuthedUser={this.props.isAuthedEdit!}
               city={this.props.city}     country={this.props.country}
               banner={this.props.banner} fullName={this.props.name} 
-              
+              company={this.props.company} twitterId={this.props.twitterId}
               userId={this.props.userId}  website={this.props.website}
               authed={this.props.authed} followersCount={followersCount}
               followingCount={followingCount} userInfo={userProfile!}/>
@@ -176,7 +174,7 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
               <div className={classes.userNav}>
                 <span>
                    <div>
-                      <NavLink to={`/${userId}/posts`} className={classes.indiv} style={{color: tab === 'posts' ? '#111' : '#999'}}> 
+                      <NavLink to={`/users/${userId}/posts`} className={classes.indiv} style={{color: tab === 'posts' ? '#111' : '#999'}}> 
                           <span className={classes.spanNum}>
                               {posts ? posts.size : 0}
                             </span>
@@ -184,9 +182,9 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
                               posts
                             </span>
                       </NavLink>
-                      <NavLink to={`/${userId}/likes`} className={classes.indiv} style={{color: tab === 'likes' ? '#111' : '#999'}}>
+                      <NavLink to={`/users/${userId}/likes`} className={classes.indiv} style={{color: tab === 'likes' ? '#111' : '#999'}}>
                           <span className={classes.spanNum}>
-                              {likes ? likes.length : 0}
+                              {likes ? likeCount : 0}
                             </span>
                             <span className={classes.spanValue}>
                               likes
@@ -258,6 +256,8 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IProfileComponentPro
     name: userProfile.fullName, 
     tagLine: userProfile.tagLine,
     website: userProfile.webUrl,
+    company: userProfile.companyName,
+    twitterId: userProfile.twitterId,
     city: userProfile.city,
     country: userProfile.country,
     isAuthedEdit: userId === uid,
@@ -265,7 +265,8 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IProfileComponentPro
     followingCount: userProfile.followingCount,
     followersCount: userProfile.followersCount,
     userProfile: userProfile,
-    likes: otherProfile.likes || 0,
+    likes: otherProfile.likes || [],
+    likeCount: otherProfile.likeCount || 0,
     userId,
     posts,
     hasMorePosts

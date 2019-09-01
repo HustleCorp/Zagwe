@@ -10,7 +10,6 @@ import { Map } from 'immutable'
 // - Import API
 
 // - Import actions
-import * as imageGalleryActions from 'store/actions/imageGalleryActions'
 
 import { IUserAvatarComponentProps } from './IUserAvatarComponentProps'
 import { IUserAvatarComponentState } from './IUserAvatarComponentState'

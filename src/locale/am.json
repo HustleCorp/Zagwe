@@ -151,7 +151,7 @@
     "emailVerification": {
         "title": "Email Verification",
         "homeButton": "HOME",
-        "sendButton": "Send Email Verification",
+        "sendButton": "Resend Email Verification",
         "description": "An verificiation email has been already sent to you. Please check your inbox. If you couldn't see the emai, please resend email verification."
     },
     "common": {

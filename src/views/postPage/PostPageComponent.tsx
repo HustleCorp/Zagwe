@@ -95,7 +95,6 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
       isPostMenuOpen: false
 
     }
-    console.log(this.props)
 
     // Binding functions to `this`
     this.handleVote = this.handleVote.bind(this)
@@ -218,7 +217,7 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
 
             <div className={classes.container}> 
                <div className={classes.postContent}>
-               <Helmet>
+                <Helmet>
                  <title>{post.get('title')}</title>
                 </Helmet>
                
@@ -351,7 +350,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostPageComponentProps) =>
     loadBodyPost: () => dispatch(postActions.dbGetPostBodyById(userId, postId)),
     loadUserInfo: () => dispatch(userActions.dbGetUserInfoByUserId(userId,'header')),
     getPostComments: () => dispatch(commentActions.dbFetchComments(userId, postId)),
-    delete: (id: string) => dispatch(postActions.dbDeletePost(id, '')),
+    delete: (id: string) => dispatch(postActions.dbDeletePost(id, 'userPosts')),
     toggleDisableComments: (status: boolean, post: Map<string, any>) => {
       dispatch(postActions.dbUpdatePost(post.set('disableComments', status), (x: any) => x))
     },

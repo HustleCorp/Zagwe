@@ -167,7 +167,6 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
   constructor(props: IEditProfileComponentProps) {
     super(props)
     // Default state
-    console.log(this.props) 
     this.state = {
       /**
        * If it's true the winow is in small size
@@ -344,7 +343,7 @@ export class EditProfileComponent extends Component<IEditProfileComponentProps, 
 
     const { classes, translate, currentLanguage } = this.props
     const { defaultBirthday, webUrl, twitterId, companyName } = this.state
-
+   
     return (
 
       <div>

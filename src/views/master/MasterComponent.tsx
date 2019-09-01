@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
+import { push } from 'connected-react-router'
 import Snackbar from '@material-ui/core/Snackbar'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {Helmet} from 'react-helmet'
@@ -84,7 +84,8 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
         login,
         logout,
         showMasterLoading,
-        hideMasterLoading
+        hideMasterLoading,
+        goTo,
       } = this.props
       if (user) {
         login(user.uid, isVerifide, isAdmin)
@@ -106,6 +107,7 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
           clearData()
         }
         loadDataGuest()
+        
       }
     })
   }
@@ -124,7 +126,7 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
     
     return (
       <div id='master'>
-      <Helmet>
+        <Helmet>
                 <meta charSet='utf-8' />
                 <title>Zagwe</title>
                 
@@ -147,11 +149,11 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
           }}
           open={this.props.global.messageOpen}
           onClose={hideMessage}
-          autoHideDuration={6000}  
+          autoHideDuration={3000}  
         >
           <CustomSnackBarContent
             onClose={hideMessage}
-            variant="info"
+            variant={this.props.global.variant}
             message={this.props.global.message}
           />
         </Snackbar>
@@ -195,6 +197,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: IMasterComponentProps) => {
     loadDataGuest: () => {
       dispatch(globalActions.loadDataGuest())
     },
+    goTo: (url: string) => dispatch(push(url)),
     showMasterLoading: () => dispatch(globalActions.showMasterLoading()),
     hideMasterLoading: () => dispatch(globalActions.hideMasterLoading()),
     hideMessage: () => dispatch(globalActions.hideMessage())

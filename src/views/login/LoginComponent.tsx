@@ -184,8 +184,10 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
     return (
       <Grid  spacing={24}>
         <Grid item xs={12} className={classes.contain}>
-        <h1 className='web_app'>{config.settings.appName}</h1>
-
+        {/* <h1 className='web_app'>{config.settings.appName}</h1> */}
+        <div className='web_app'>
+           <img  style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+        </div>
           <div className='animate-bottom'>
             <Paper className={classes.paper} elevation={1} >
               <form>

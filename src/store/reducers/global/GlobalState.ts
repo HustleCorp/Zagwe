@@ -84,6 +84,8 @@ export class GlobalState {
   */
   headerTitle: string = ''
 
+  variant: string = 'info'
+
  /**
   * Top loading is visible {true} or not {false}
   *

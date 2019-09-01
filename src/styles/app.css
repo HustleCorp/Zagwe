@@ -466,7 +466,8 @@ small {
 img {
   vertical-align: middle;
   border-style: none;
-  width: 100%; }
+  width: auto;
+  max-width: 100%; }
 
 form {
   margin-bottom: 1.125rem; }
@@ -493,7 +494,8 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
   text-decoration: none;
-  color: black; }
+  color: black;
+  cursor: pointer; }
 
 a:active,
 a:hover {
@@ -704,6 +706,94 @@ g__input-underline::after {
   animation-fill-mode: forwards;
   animation-duration: 0.7s;
   animation-delay: 0.1s; }
+
+@-webkit-keyframes placeload {
+  0% {
+    background-position: -468px 0; }
+  100% {
+    background-position: 468px 0; } }
+
+@keyframes placeload {
+  0% {
+    background-position: -468px 0; }
+  100% {
+    background-position: 468px 0; } }
+
+.loads {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: placeload;
+  animation-name: placeload;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+  background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  -webkit-background-size: 800px 104px;
+  background-size: 1200px 104px;
+  position: relative; }
+
+.ais-SearchBox {
+  width: 100%; }
+
+.ais-SearchBox-input {
+  border-radius: 25px;
+  width: 100%;
+  border-color: #48101008;
+  background-color: 'inherit';
+  border-style: inset;
+  height: 42px;
+  padding: 14px; }
+
+.ais-SearchBox-form {
+  margin: 0; }
+
+.ais-SearchBox-submit {
+  display: none; }
+
+.ais-SearchBox-reset {
+  display: none; }
+
+.ais-Hits-item {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 1rem;
+  border: 1px solid #d19228;
+  width: 100%; }
+
+.ais-Pagination-link--selected {
+  color: #fff;
+  background-color: #d19228 !important;
+  border-color: #d19228 !important; }
+
+.ais-Pagination-list {
+  margin-top: 35px; }
+
+.hit-name {
+  color: black; }
+
+.hit-description {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 0.5em;
+  height: 44px;
+  overflow: hidden; }
+
+.hit-username {
+  color: black; }
+
+.user-hit {
+  display: flex; }
+
+.hit-text {
+  padding-left: 10px; }
 
 .master__progress {
   position: fixed;
