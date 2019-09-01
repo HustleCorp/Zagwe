@@ -54,27 +54,6 @@ const AsyncFeatued = Loadable({
    delay: 300
 })
 
-const profileModify: any =  ( ) => {
-  return new Promise<void>((resolve, reject) => {
-       const ref = db.collection('users')
-       ref.get().then(async (snapshot) => {
-             snapshot.forEach((doc) => {
-               let followersCount = 0
-               let followingCount = 0
-                userTieService.getUserTieSender(doc.id).then((result) => {
-                    followersCount = Object.keys(result).length
-                     console.log('followersCount', '=', followersCount)
-                     db.collection('userInfo').doc(doc.id).update({followersCount: followersCount})
-                })
-                userTieService.getUserTies(doc.id).then((result) => {
-                    followingCount = Object.keys(result).length
-                    db.collection('userInfo').doc(doc.id).update({followingCount: followingCount})
-                })
-             })
-       })
-  })
-} 
-
 // const addCollection: any =  ( ) => {
 //     const ref = db.collection('posts')
 //     ref.get().then(async (snapshot) => {
@@ -90,7 +69,7 @@ const profileModify: any =  ( ) => {
 //       snapshot.forEach((doc) => {
 //            if (doc.get('image') !== '') {
 //               db.collection('featuredPosts').doc(doc.id).set(doc.data()).catch((error) => 
-//                 console.log(error))
+//               
 //            }
 //       })
 //     })
@@ -106,7 +85,6 @@ export class HomeRouter extends Component<IRouterProps, any> {
      const { enabled, match, data, translate } = this.props
      const Sub = SubmitPost 
      const St = AsyncStream
-     console.log(data.mergedPosts.toJS())
 
     return (
           enabled ? (
@@ -131,10 +109,10 @@ export class HomeRouter extends Component<IRouterProps, any> {
           <PublicRoute  path='/' component={(
             <div>
                 <div>
-                  <AsyncFeatued 
-                    posts={data.mergedPosts}/>
+                  <AsyncFeatued key={`${data.uid}-featured_component`} />
                 </div>
                 <St
+                  key={`${data.uid}-Stream-co`}
                   posts={data.mergedPosts}
                   loadStream={data.loadDataStream}
                   hasMorePosts={data.hasMorePosts}

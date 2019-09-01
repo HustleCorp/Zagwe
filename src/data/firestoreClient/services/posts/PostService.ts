@@ -39,7 +39,6 @@ export class PostService implements IPostService {
    */
   public updatePost: (post: Post, postBody: Post)
     => Promise<void> = (post, postBody) => {
-      console.log(post)
       return new Promise<void>((resolve, reject) => {
         const batch = db.batch()
         const postRef = db.doc(`posts/${post.id}`)
@@ -77,7 +76,6 @@ export class PostService implements IPostService {
     }
 
 public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = () => {
-       console.log('inside featured Services')
        return new Promise<{posts: { [postId: string]: Post}[]}>((resolve, reject) => {
             let parsedData: { [postId: string]: Post}[] = []
             

@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Map, List as ImuList } from 'immutable'
+import moment from 'moment'
 
 import * as postActions from 'store/actions/postActions'
 
@@ -93,9 +94,10 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
           }) 
           let index = 0
           parsedPosts.forEach((post) => {
+              index++
               let newPost: any = (
-                  <div key={`${post!.get('id')!}-featured-div`}>
-                      <FeaturedBox key={`${post!.get('id')!}-featured-div`} post={post! as any}/>
+                  <div key={`${index}-featured-div`}>
+                      <FeaturedBox key={`${index}-featured-div`} post={post! as any}/>
                   </div>
               )
               postBack.push(newPost as never)
@@ -109,7 +111,7 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
     let elem = this.props.elem
     const scrollVal = this.state.scrollPosition
     if (elem) {
-      elem.scrollLeft = scrollVal + 200
+      elem.scrollLeft = scrollVal + 350
       this.setState({scrollPosition: elem.scrollLeft})
     }
    
@@ -119,33 +121,27 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
     let elem = this.props.elem
     const scrollVal = this.state.scrollPosition
     if (elem) {
-      elem.scrollLeft = scrollVal - 200
+      elem.scrollLeft = scrollVal - 350
       this.setState({scrollPosition: elem.scrollLeft})
     }
   }
   
-  componentWillMount () {
-      const { loadFeatured } = this.props
-      loadFeatured!()
-  }
-  
   updateDimensions() {
       this.setState({featuredWidth: window.innerWidth})
-
   }
 
   /**
    * Add event listenerDOMContentLoaded
    */
   componentDidMount() {
+
+    const { loadFeatured } = this.props
+    loadFeatured!()
     const elem = document.getElementById('featuredList')!
     this.updateDimensions()
     window.addEventListener("resize", this.updateDimensions.bind(this))
-    if (elem) {
-      elem.scrollLeft = 150
-    }
+  
     this.setState({scrollPosition: elem.scrollLeft})
-
   }
 
   /**
@@ -168,18 +164,22 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
 
     const scrollVal = this.state.scrollPosition
     let overflow = false
-    if (featuredWidth < 1675 ) {
+    if (featuredWidth < 2010 ) {
        overflow = true
     }
+
     return (
           <div id='topContainer'>
                <div style={{display: 'flex'}}>
-               <div style={{display: scrollVal > 0 ? 'inline-block' : 'none'}} className={classes.scrollContainer}>
-                  <div className={classes.scrollElement}>
+              <div className={classes.scrollContainer}> 
+                <div style={{display: scrollVal > 150 ? 'inline-block' : 'none'}}>
+                   <div className={classes.scrollElement}>
                     <ScrollLeft  onClick={this.scrollLeft}/>
                   </div>
                </div>
-                <div key={'featuredGrid'} id='featuredList' className='grid_overflow grid__1of4 grid__space-between custom-scroll featured-grid'>
+              </div>
+                <div key={'featuredGrid'} id='featuredList' className='grid_overflow grid__1of4 grid__space-between custom-scroll 
+                '>
                 {postList}
                </div>
                <div className={classes.scrollContainer}>
@@ -212,6 +212,7 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IfeaturedComponentProp
  * @return {object}          props of component
  */
 const mapStateToProps = (state: any, ownProps: IfeaturedComponentProps) => {
+
   const uid = state.getIn(['authorize', 'uid'], 0)
   const featuredPosts: Map<string, any> = state.getIn(['post', 'featuredPosts'], {})
   let elem = document.getElementById('featuredList') 

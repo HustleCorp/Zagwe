@@ -31,7 +31,6 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
     var userAgent = req.get('User-Agent');
-    console.log(userAgent);
     next();
 });
 

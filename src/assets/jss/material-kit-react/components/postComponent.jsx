@@ -26,7 +26,7 @@ const PostPreview = (theme) => ({
       display: 'flex',
     },
     image: {
-      height: 'inherit'
+      height: '93px'
     },
     textArea: {
         width: '100%',

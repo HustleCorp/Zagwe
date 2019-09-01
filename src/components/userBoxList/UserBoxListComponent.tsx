@@ -66,10 +66,9 @@ export class UserBoxListComponent extends Component<IUserBoxListComponentProps,I
     const styles = {
 
     }
-
     return (
-
-                <div className='grid grid__1of4 grid__space-around'>
+        
+                <div className='grid grid__1of4 grid__center'>
                   {this.userList()}
                 </div>
 

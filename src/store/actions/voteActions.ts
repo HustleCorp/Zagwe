@@ -1,5 +1,6 @@
 import moment from 'moment/moment'
 import {Map} from 'immutable'
+import _ from 'lodash'
 
 // - Import action types
 import { VoteActionType } from 'constants/voteActionType'
@@ -79,6 +80,7 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
     let uid: string = state.getIn(['authorize', 'uid'])
     const currentUser = state.getIn(['user', 'info', uid])
     const likes =  state.getIn(['user', 'otherInfo', uid, 'likes'])
+    const likeCount =  state.getIn(['user', 'otherInfo', uid, 'likeCount'])
     let vote: Vote = {
       postId: postId,
       creationDate: moment().unix(),
@@ -86,15 +88,18 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
       userAvatar: currentUser.avatar,
       userId: uid
     }
-
+    debugger
     let OtherProfile: OtherProfile 
     if (likes) {
       OtherProfile = {
-          likes: [...likes, postId]
+          likes: [...likes, postId],
+          likeCount: likeCount + 1
       }
+      console.log('inside likes')
     } else {
      OtherProfile = {
-         likes: [postId]
+         likes: [postId],
+         likeCount: likeCount + 1
      }
     }
     
@@ -111,8 +116,8 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
       if (uid !== ownerPostUserId) {
         dispatch(notifyActions.dbAddNotification(
           {
-            description: 'Voted on your post.',
-            url: `/${ownerPostUserId}/posts/${postId}`,
+            description: 'Liked your post.',
+            url: `/posts/${ownerPostUserId}/${postId}`,
             notifyRecieverUserId: ownerPostUserId,notifierUserId: uid,
             isSeen: false
           }))
@@ -167,12 +172,30 @@ export const dbDeleteVote = (postId: string, ownerPostUserId: string) => {
     const state: Map<string, any> = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
     const post: Map<string, any> = state.getIn(['post', 'userPosts', ownerPostUserId, postId])
-  
+    const likes =  state.getIn(['user', 'otherInfo', uid, 'likes'])
+    const likesCount =  state.getIn(['user', 'otherInfo', uid, 'likeCount'])
+
+    let OtherProfile: OtherProfile 
+    if (likes) {
+
+      OtherProfile = {
+          likes: likes.filter((e: string) => {return e !== postId}),
+          likeCount: likesCount - 1
+      }
+      console.log(OtherProfile.likes)
+    } else {
+      OtherProfile = {
+         likes: [],
+         likeCount: 0
+      }
+    }
+
     const score = post.get('score', 0) - 1
     const votedPost = post
      .set('score', score)
      .setIn(['votes',uid], false)
     dispatch(postActions.updatePost(votedPost))
+    dispatch(userAction.dbUpdateUserOther(OtherProfile))
     return voteService.deleteVote(uid, postId).then(x => x)
     .catch((error: any) => {
       const score = post.get('score', 0) + 1

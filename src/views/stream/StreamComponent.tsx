@@ -121,7 +121,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
       let index = 0
       sortedPosts.forEach((post) => {
         index++
-      
+        
         let newPost: any = (
           <div key={`${post.get('id')}-stream-div`}>
 
@@ -136,6 +136,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
         if ((index % 2) === 1 && postBack.divided) {
           postBack.oddPostList.push(newPost as never)
         } else {
+        
           postBack.evenPostList.push(newPost as never)
         }
         ++index
@@ -181,7 +182,7 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
             useWindow={true}
             loader={<LoadMoreProgressComponent key='stream-load-more-progress' />}
           >
-            <div className={`grid grid__gutters grid__1of2 ${tag ? 'grid__space-around' : 'grid__center'} animate-top`}>
+            <div className={`grid grid__gutters grid__1of2 ${tag ? 'grid__left' : 'grid__center'} animate-top`}>
               <div className='grid-cell animate-top' style={{ maxWidth: '700px', minWidth: '400px', paddingLeft: '0px'}}>
             
                 {postList.evenPostList}

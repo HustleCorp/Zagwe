@@ -33,20 +33,20 @@ export const dbGetUserInfo = () => {
     if (uid) {
       return userService.getUserProfile(uid).then((userProfile: Profile) => {
         dispatch(addUserInfo(uid, {
-          avatar: userProfile.avatar,
-          avatarPath: userProfile.avatarPath,
+          avatar: userProfile.avatar || '',
+          avatarPath: userProfile.avatarPath || '',
           email: userProfile.email,
           fullName: userProfile.fullName,
-          tagLine: userProfile.tagLine,
-          country: userProfile.city,
-          city: userProfile.city,
-          creationDate: userProfile.creationDate,
-          birthday: userProfile.birthday,
-          companyName: userProfile.companyName,
-          webUrl: userProfile.webUrl,
-          twitterId: userProfile.twitterId,
-          followingCount: userProfile.followingCount,
-          followersCount: userProfile.followersCount,
+          tagLine: userProfile.tagLine || '',
+          country: userProfile.city || '',
+          city: userProfile.city || '',
+          creationDate: userProfile.creationDate || 0,
+          birthday: userProfile.birthday || 0,
+          companyName: userProfile.companyName || '',
+          webUrl: userProfile.webUrl || '',
+          twitterId: userProfile.twitterId || '',
+          followingCount: userProfile.followingCount || 0,
+          followersCount: userProfile.followersCount || 0,
         }))
       })
       .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
@@ -61,8 +61,9 @@ export const dbGetUserOther = () => {
        let uid: string = state.getIn(['authorize', 'uid'])
        if (uid) {
           return userService.getUserOther(uid).then((otherUserProfile: OtherProfile) => {
-               dispatch(addUserOther(uid, {likes:
-                 otherUserProfile.likes}))
+               dispatch(addUserOther(uid, {
+                 likes: otherUserProfile.likes,
+                 likeCount: otherUserProfile.likeCount }))
           })
           .catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
        }
@@ -73,14 +74,14 @@ export const dbGetUserOther = () => {
  * Get user Secondary information
  */           
 export const dbGetUserOtherInfoByUserId = (uid: string, callerKey: string) => {
-     console.log('I am inside the function')
      return (dispatch: Function, getState: Function) => {
          if (uid) {
             const state: Map<string, any> = getState()
             let caller = state.getIn(['global', 'temp', 'caller'])
             return userService.getUserOther(uid).then((otherUserProfile: OtherProfile) => {
                  dispatch(addUserOther(uid, {
-                      likes: otherUserProfile.likes
+                      likes: otherUserProfile.likes,
+                      likeCount: otherUserProfile.likeCount,
                  }))
             }).catch((error: SocialError) => dispatch(globalActions.showMessage(error.message)))
          }
@@ -103,20 +104,20 @@ export const dbGetUserInfoByUserId = (uid: string, callerKey: string) => {
       return userService.getUserProfile(uid).then((userProfile: Profile) => {
 
         dispatch(addUserInfo(uid, {
-          avatar: userProfile.avatar,
-          avatarPath: userProfile.avatarPath,
+          avatar: userProfile.avatar || '',
+          avatarPath: userProfile.avatarPath || '',
           email: userProfile.email,
-          fullName: userProfile.fullName,
-          tagLine: userProfile.tagLine,
-          country: userProfile.country,
-          city: userProfile.city,
-          creationDate: userProfile.creationDate,
-          birthday: userProfile.birthday,
-          companyName: userProfile.companyName,
-          webUrl: userProfile.webUrl,
-          twitterId: userProfile.twitterId,
-          followingCount: userProfile.followingCount,
-          followersCount: userProfile.followersCount,
+          fullName: userProfile.fullName || '',
+          tagLine: userProfile.tagLine || '',
+          country: userProfile.country || '',
+          city: userProfile.city || '',
+          creationDate: userProfile.creationDate || 0,
+          birthday: userProfile.birthday || 0,
+          companyName: userProfile.companyName || '',
+          webUrl: userProfile.webUrl || '',
+          twitterId: userProfile.twitterId || '',
+          followingCount: userProfile.followingCount || 0,
+          followersCount: userProfile.followersCount || 0,
         }))
 
         switch (callerKey) {
@@ -143,9 +144,9 @@ export const dbUpdateUserOther = (newOther: OtherProfile) => {
 
     let OtherProfile: OtherProfile = state.getIn(['user', 'otherInfo', uid])
     let updatedProfile: OtherProfile = {
-        likes: newOther.likes || OtherProfile.likes || []
+        likes: newOther.likes || OtherProfile.likes || [],
+        likeCount: newOther.likeCount || OtherProfile.likeCount 
     }
-    console.log(updatedProfile)
 
     return userService.updateUserOtherProfile(uid, updatedProfile).then(() => {
          dispatch(updateUserOther(uid, updatedProfile))

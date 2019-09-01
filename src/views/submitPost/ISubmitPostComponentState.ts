@@ -20,6 +20,8 @@ export interface ISubmitPostComponentState {
      */
     postTitle: string
 
+    willSubmit: boolean
+
     /**
      * Url of image location
      */
@@ -40,6 +42,8 @@ export interface ISubmitPostComponentState {
     postTitleError: string
 
     postCatagoryError: string
+
+    postBodyError: string
 
     openDialog: boolean
 

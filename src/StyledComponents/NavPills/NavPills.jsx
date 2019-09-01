@@ -41,7 +41,6 @@ class NavPills extends React.Component {
       horizontal,
       alignCenter
     } = this.props;
-    console.log(this.props.changeTab)
     const flexContainerClasses = classNames({
       [classes.flexContainer]: true,
       [classes.horizontalDisplay]: horizontal !== undefined

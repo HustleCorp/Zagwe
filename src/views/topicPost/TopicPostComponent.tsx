@@ -70,7 +70,6 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
       if (tag === 'following') {
             loadFollowData!()
       } else {
-         console.log('loading topic data')
          loadTopicData!()
       }
     }
@@ -90,58 +89,63 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ffollowmin.jpg?alt=media&token=f5ea1b0b-f9d2-411f-a113-a8d09ce88ae8'}
                               />
                    )
-            break
+          
           case `${Tags.topic2}`: 
             return (
-                  <TopicIntro title={`${TopicsFUll.topic2}`}
-                    bio={'Your daily dose of reality'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fgetemegn.jpg?alt=media&token=bb94927b-ae33-4055-af1b-984a10e82fa2'}
-                    />
-                    )
-            break
+              <TopicIntro title={`${TopicsFUll.topic2}`}
+                bio={'Art, Religion, Traditions and Much More ...'} 
+                url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2F455929966_455636.jpg?alt=media&token=2346f4a3-a60d-4030-b08e-6dc7f9e3d43d'}
+                />
+                )
           case `${Tags.topic3}`:
               return (
                 <TopicIntro title={`${TopicsFUll.topic3}`}
                   bio={'Covering the latest important events and movements from around the world.'} 
-                  url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpolitics.jpg?alt=media&token=3cbe445e-88f3-4910-b1dd-ac87e27145d0'}
+                  url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoliticsnew.jpg?alt=media&token=af895289-f5a8-451b-96bc-23a8e8a9ac22'}
                   />
                   )
-            break
           case `${Tags.topic4}`: 
             return (
-                  <TopicIntro title={`${TopicsFUll.topic4}`}
-                    bio={"Insight into Ethiopia's world of work and Entrepreneurship"} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fbusiness.jpg?alt=media&token=bfaa65bb-aa78-46bd-a3d8-cd6f7dfd1b27'}
-                    />
-                    )
-            break
+              <TopicIntro title={`${TopicsFUll.topic4}`}
+                bio={'Your daily dose of reality'} 
+                url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fgetemegn.jpg?alt=media&token=bb94927b-ae33-4055-af1b-984a10e82fa2'}
+                />
+                )
+
           case `${Tags.topic5}`: 
-            return (
-                  <TopicIntro title={`${TopicsFUll.topic5}`}
-                    bio={'`Newest tech developments in Ethiopia and the rest of the world'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ftech.jpg?alt=media&token=7ddbaf66-f8d6-4161-8778-edddfd7e8399'}
-                    />
-                    )
-            break
+              return (
+                <TopicIntro title={`${TopicsFUll.topic5}`}
+                  bio={"Insight into Ethiopia's world of work and Entrepreneurship"} 
+                  url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fbusiness.jpg?alt=media&token=bfaa65bb-aa78-46bd-a3d8-cd6f7dfd1b27'}
+                  />
+                  )
           case `${Tags.topic6}`: 
             return (
                   <TopicIntro title={`${TopicsFUll.topic6}`}
-                    bio={'Amharic and English poems for your soul'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'}
+                    bio={'Newest tech developments in Ethiopia and the rest of the world'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ftech.jpg?alt=media&token=7ddbaf66-f8d6-4161-8778-edddfd7e8399'}
                     />
                     )
             break
           case `${Tags.topic7}`: 
             return (
                   <TopicIntro title={`${TopicsFUll.topic7}`}
+                    bio={'Amharic and English poems for your soul'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'}
+                    />
+                    )
+            break
+          case `${Tags.topic8}`: 
+            return (
+                  <TopicIntro title={`${TopicsFUll.topic8}`}
                     bio={'Where observation meet imagination'} 
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fteret.jpg?alt=media&token=26bc5e62-14c4-4cb3-8bd6-d1f1077ca110'}
                     />
                     )
             break
-            case `${Tags.topic8}`: 
+            case `${Tags.topic9}`: 
             return (
-                  <TopicIntro title={`${TopicsFUll.topic8}`}
+                  <TopicIntro title={`${TopicsFUll.topic9}`}
                     bio={'Be original'} 
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Frandommin.jpg?alt=media&token=c56ee5c6-ae2a-4e3c-b90d-5fdff730bd9c'}
                     />
@@ -153,8 +157,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
         }
       }                    
     const {classes, mergedPosts, hasMorePosts, tag, loadDataStream } = this.props
-    console.log(mergedPosts)
-   
+
     const St = AsyncStream 
     return (
       <div className={classes.topicStream}>
@@ -163,6 +166,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
          </div>
          <div className={classes.stream}>
               <St
+                key={`${tag}-stream-component`}
                 posts={mergedPosts}
                 loadStream={loadDataStream}
                 hasMorePosts={hasMorePosts}

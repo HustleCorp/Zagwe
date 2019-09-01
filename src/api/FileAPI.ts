@@ -13,7 +13,6 @@ const getThumbUrl = (  imagePath: string) => {
           storageRef.child(`${folder}/thumb@128_${image}`).getDownloadURL().then( (url) => {
                     resolve(url)
               }).catch((error) => {
-                  console.log(error)
                   resolve(null)
                   // reject(new SocialError(error.code, 'FileAPI/getThumbUrl :' + error.message))
                   
@@ -69,7 +68,7 @@ const constraintImage = async (file: File,fileName: string, maxWidth?: number, m
         let dataUrl =  canvas.toDataURL('image/jpeg', 0.8)
         let resizedImage = dataURLToBlob(dataUrl)
         resolve({_resizedImage: resizedImage, _fileName: fileName})
-        let evt = new CustomEvent('onSendResizedImage', { detail: {resizedImage,fileName} })
+        let evt = new CustomEvent('onSendResizedImage', { detail: {resizedImage, fileName} })
         window.dispatchEvent(evt)
         
       }

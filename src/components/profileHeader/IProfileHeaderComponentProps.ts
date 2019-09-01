@@ -16,6 +16,10 @@ export interface IProfileHeaderComponentProps {
 
   country: boolean
 
+  company: string,
+
+  twitterId: string,
+
   /**
    * Image cover address
    *

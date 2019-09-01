@@ -1,5 +1,25 @@
 import { Post } from 'src/core/domain/posts'
 import { Map } from 'immutable'
+import moment from 'moment'
+let post: Post = {
+  postTypeId: 0,
+  creationDate: moment.now(),
+  deleteDate: 0,
+  score: 0,
+  viewCount: 0,
+  title: '',
+  body: '',
+  id: 'fdssdfds',
+  bodyText: '',
+  postTopic: '',
+  ownerUserId: '',
+  ownerDisplayName: '',
+  ownerAvatar: '',
+  image: '',
+  thumbImage: '', 
+  imageFullPath: '',
+  disableComments: false,
+}
 
 /**
  * Post state
@@ -36,6 +56,8 @@ export class PostState {
 
     business = Map({})
 
+    culture = Map({})
+
     teret = Map({ })
 
     technology = Map({ })
@@ -44,7 +66,7 @@ export class PostState {
 
     other = Map({})
 
-    featuredPosts = Map({})
+    featuredPosts = Map({ a : Map({a: post}), b : Map({a: post}), c : Map({a: post}), d : Map({a: post}), e : Map({a: post}), f : Map({a: post}), g : Map({a: post})})
   /**
    * Stream data storage
    */
@@ -54,6 +76,7 @@ export class PostState {
                                     following: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     politics: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     business: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
+                                    culture: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     getemegn: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     teret: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     technology: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),

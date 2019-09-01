@@ -121,7 +121,8 @@ html * {
   img {
     vertical-align: middle;
     border-style: none;
-    width: 100% }
+    width: auto;
+    max-width: 100%}
   
   form {
     margin-bottom: 1.125rem; }
@@ -158,6 +159,7 @@ a {
     -webkit-text-decoration-skip: objects;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 a:active,
@@ -410,5 +412,62 @@ g__input-underline {
     animation-duration: 0.7s;
     animation-delay: 0.1s;
   }
+
+  @-webkit-keyframes placeload{
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  
+  @keyframes placeload {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  
+  $background: #f6f7f8;
+  $grey-nuance-lighter: #eeeeee;
+  $grey-nuance-darker: #dddddd;
+  $fade-grey: #e8e8e8;
+
+  .loads {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeload;
+    animation-name: placeload;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: $background;
+    background: $grey-nuance-lighter;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(8%, $grey-nuance-lighter),
+      color-stop(18%, $grey-nuance-darker),
+      color-stop(33%, $grey-nuance-lighter)
+    );
+    background: -webkit-linear-gradient(
+      left,
+      #eeeeee 8%,
+      #dddddd 18%,
+      #eeeeee 33%
+    );
+    background: linear-gradient(to right, $grey-nuance-lighter 8%, $grey-nuance-darker 18%, $grey-nuance-lighter 33%);
+    -webkit-background-size: 800px 104px;
+    background-size: 1200px 104px;
+    position: relative;
+  }
+
 
 

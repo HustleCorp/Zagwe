@@ -21,6 +21,8 @@ export interface IMasterComponentProps {
      * @memberof IMasterProps
      */
   login: (userId: string, isVerifide: boolean, isAdmin: boolean) => any
+
+  goTo?: (url: string) => any
     /**
      * Global state
      *
