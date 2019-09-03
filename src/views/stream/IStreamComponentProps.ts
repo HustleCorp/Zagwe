@@ -61,7 +61,7 @@ export interface IStreamComponentProps {
   /**
    * Load the data for stream
    */
-  loadStream?: (page: number, limit: number) => any
+  loadStream?: () => any
 
   /**
    * If there is more post {true} or not {false}
@@ -86,9 +86,6 @@ export interface IStreamComponentProps {
    */
   translate?: (state: any) => any
 
-  /**
-   *  Lifecycle loads
-   */
-  loadComponentWillMount?: any
+  loadInitial?: boolean
 
 }

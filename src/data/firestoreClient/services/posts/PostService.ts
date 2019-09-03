@@ -106,7 +106,7 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
      return new Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}>((resolve, reject) => {
           let parsedData: { [postId: string]: Post }[] = []
          
-          let query = db.collection('posts').where('postTopic', '==', header).orderBy('creationDate', 'desc').startAfter(lastPostId)
+          let query = db.collection('posts').where('postTopic', '==', header).orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
           // .orderBy('creationDate', 'desc').startAfter(lastPostId)
           query.get().then((posts) => {
            let newLastPostId = posts.size > 0 ? posts.docs[posts.docs.length - 1] : ''
@@ -134,7 +134,6 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
           return new Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}>((resolve, reject) => {
                let parsedData: { [postId: string]: Post }[] = []
                let query = db.collection('posts').orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
-
                query.get().then((posts) => {
                 let newLastPostId = posts.size > 0 ? posts.docs[posts.docs.length - 1] : ''
                 posts.forEach((postResult) => {

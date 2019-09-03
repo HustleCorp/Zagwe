@@ -78,6 +78,7 @@ export let postReducer = (state = Map(new PostState()), action: IPostAction) => 
     case PostActionType.ADD_FEATURED_POST: 
          return state 
                .setIn(['featuredPosts'], payload.featuredPosts)
+               .set('featureloaded', true)
     case PostActionType.HAS_MORE_DATA_STREAM:
       return state
         .setIn(['stream', 'hasMoreData'], true)

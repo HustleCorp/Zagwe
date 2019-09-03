@@ -157,6 +157,7 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
        body: newPost.body,
        id: newPost.id,
     }
+    debugger
     return postService.updatePost(post, postBody).then(() => {
       dispatch(updatePost(updatedPost))
       callBack(newPost.id)

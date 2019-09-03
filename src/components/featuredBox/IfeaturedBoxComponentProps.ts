@@ -8,6 +8,8 @@ export interface IfeaturedBoxComponentProps {
   
   post: Map<string, any>
 
+  loaded: boolean
+
   tag?: string
 
   /**

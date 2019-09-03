@@ -29,7 +29,7 @@ let initialState = {
 
 // - Config and create store of redux
 let store: Store<any> = createStore(rootReducer(history), fromJS(initialState), compose(
-  applyMiddleware(thunk, logger, routerMiddleware(history), sagaMiddleware)
+  applyMiddleware(thunk, routerMiddleware(history), sagaMiddleware)
 ))
 
 export default {store, runSaga: sagaMiddleware.run, close: () => store.dispatch(END), history}

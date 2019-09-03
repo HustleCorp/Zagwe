@@ -82,7 +82,7 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
      */
   render () {
 
-    const { classes, post}  = this.props
+    const { classes, post, loaded}  = this.props
     // const rightIconMenu = (
     //   <div>
     //     <IconButton
@@ -120,8 +120,9 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
       <div style={{paddingBottom: '2px'}}>
       <Card className={classes.cardStyle} style={{width: "20rem", marginLeft: '0px', marginRight: '15px'}}>
           <NavLink to={`/posts/${post.get('ownerUserId')}/${post.get('id')}`}>
-             
-             <Img fileName={post.get('image')} style={{height: '180px'}} />  
+            <div className='animated-background'>
+               <Img fileName={post.get('image')} style={{height: '180px'}} /> 
+             </div> 
               {/* <img
                 style={{height: "180px", width: "100%", display: "block"}}
                 className={classes.imgCardTop}
@@ -143,7 +144,7 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
                </div>
               </div>
               <NavLink to={`/posts/${post.get('ownerUserId')}/${post.get('id')}`}>
-                  <h4 className={classes.cardTitle}>
+                  <h4 className={loaded ? classes.cardTitle : 'animated-title'}>
                     {post.get('title')}
                   </h4>
               </NavLink>
@@ -157,14 +158,14 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
                   </NavLink>
               </div>
                 <div style={{display: 'grid', paddingLeft: '10px'}}>
-                    <span>
+                    <span className={loaded ? 'featured-name' : 'animated-name'}>
                     {<NavLink to={`/users/${post.get('ownerUserId')}/posts`}>
                       <h6 className={classes.headerName}>
-                      {post.get('ownerDisplayName')}
+                       {post.get('ownerDisplayName')}
                       </h6>
                       </NavLink>}
                      </span>
-                  <div style={{color: '#8b9898'}}>
+                  <div  className={loaded ? 'featured-info' : 'animated-info'} style={{color: '#8b9898'}}>
                   <span>
                     {post.get('creationDate') ? moment.unix(post.get('creationDate')).fromNow() + ' | ' + 'public' : <LinearProgress color='primary' />}
                  </span>

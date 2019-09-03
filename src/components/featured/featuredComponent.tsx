@@ -77,6 +77,7 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
   }
 
   featuredPostList = () => {
+    const {loaded} = this.props
     let posts: Map<string, Map<string, any>> = this.props.featuredPosts!
           if (posts === undefined ) {
             return  (
@@ -97,7 +98,7 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
               index++
               let newPost: any = (
                   <div key={`${index}-featured-div`}>
-                      <FeaturedBox key={`${index}-featured-div`} post={post! as any}/>
+                      <FeaturedBox key={`${index}-featured-div`} post={post! as any} loaded={loaded!}/>
                   </div>
               )
               postBack.push(newPost as never)
@@ -158,7 +159,8 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
      */
   render () {
 
-    const { classes, container }  = this.props
+    const { classes, container, loaded}  = this.props
+    console.log(this.props)
     const featuredWidth = this.state.featuredWidth
     const postList = this.featuredPostList() as Post[] | any
 
@@ -214,11 +216,13 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IfeaturedComponentProp
 const mapStateToProps = (state: any, ownProps: IfeaturedComponentProps) => {
 
   const uid = state.getIn(['authorize', 'uid'], 0)
+  const loaded = state.getIn(['post', 'featureloaded'], false)
   const featuredPosts: Map<string, any> = state.getIn(['post', 'featuredPosts'], {})
   let elem = document.getElementById('featuredList') 
   let container = document.getElementById('topContainer')
   return {
     uid,
+    loaded,
     featuredPosts,
     elem,
     container,

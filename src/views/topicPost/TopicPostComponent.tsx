@@ -6,6 +6,7 @@ import { Map, merge } from 'immutable'
 // - Import app components
 import { withStyles } from '@material-ui/core/styles'
 import TopicIntro from 'src/components/topicIntro'
+import uuid from 'uuid'
 
 import { Tags, TopicsFUll } from 'constants/postType'
 // - Import API
@@ -73,6 +74,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
          loadTopicData!()
       }
     }
+
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
@@ -157,7 +159,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
         }
       }                    
     const {classes, mergedPosts, hasMorePosts, tag, loadDataStream } = this.props
-
+  
     const St = AsyncStream 
     return (
       <div className={classes.topicStream}>
@@ -170,6 +172,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
                 posts={mergedPosts}
                 loadStream={loadDataStream}
                 hasMorePosts={hasMorePosts}
+                loadInitial={true} 
                 />
         </div>
       </div>
@@ -188,7 +191,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: ITopicPostComponentProps) =
   return {
      loadFollowData: () => dispatch(postActions.dbGetFollowingPosts()),
      loadTopicData:  () => dispatch(postActions.dbGetPostbyTopic(tag)),
-     loadDataStream: tag === 'following' ?  () => dispatch(postActions.dbGetFollowingPosts()) : () => dispatch(postActions.dbGetPostbyTopic(tag))
+     loadDataStream: tag === 'following' ?  (page: number) => dispatch(postActions.dbGetFollowingPosts()) : (page: number) => dispatch(postActions.dbGetPostbyTopic(tag, page))
   }
 }
 

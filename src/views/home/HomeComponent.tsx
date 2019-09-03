@@ -314,7 +314,7 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
 const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
 
   return {
-    loadDataStream: (page: number, limit: number) => dispatch(postActions.dbGetTopPosts(page, limit)),
+    loadDataStream: ( ) => dispatch(postActions.dbGetTopPosts()),
     loadData: ( ) => {
       dispatch(userActions.dbGetUserInfo())
       dispatch(postActions.dbGetTopPosts())
