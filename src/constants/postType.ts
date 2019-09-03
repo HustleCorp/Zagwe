@@ -54,10 +54,10 @@ export enum TopicsFUll {
 export const TopicsMap: Map<string, any> = Map({
     
      'Following': 'topic1',
-     'ገጠመኝ': 'topic2',
+     'Culture': 'topic2',
      'Politics & History': 'topic3',
-     'Business': 'topic4',
-     'Culture': 'topic5',
+     'ገጠመኝ': 'topic4',
+     'Business': 'topic5',
      'Technology': 'topic6',
      'Poetry': 'topic7',
      'ተረት ተረት': 'topic8',

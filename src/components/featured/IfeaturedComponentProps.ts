@@ -16,5 +16,8 @@ export interface IfeaturedComponentProps {
   elem: any
 
   container: any
+  
+  // has featued posts loaded
+  loaded?: boolean
 
 }

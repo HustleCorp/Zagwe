@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes, { number } from 'prop-types'
 import { grey,} from '@material-ui/core/colors'
-import InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import { Map, List as ImuList } from 'immutable'
 
@@ -25,7 +25,6 @@ import { Post } from 'src/core/domain/posts'
 
 // - Create StreamComponent component class
 export class StreamComponent extends Component<IStreamComponentProps, IStreamComponentState> {
-
   static propTypes = {
     
     /**
@@ -75,7 +74,10 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
       /**
        * If there is more post to show {true} or not {false}
        */
-      hasMorePosts: true
+      hasMorePosts: true,
+
+      postList: Map({})
+
     }
 
     // Binding functions to `this`
@@ -88,79 +90,80 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
    * @return {DOM} posts
    */
   postLoad = () => {
-    let { match } = this.props
-    let posts: Map<string, Map<string, any>> = this.props.posts
-    
-    let { tag } = match.params
-    if (posts === undefined || !(posts.keySeq().count() > 0)) {
 
-      return (
-
-        <h1>
-          'Nothing has been shared.'
-                </h1>
-
-      )
-    } else {
+      let { match } = this.props
+      let posts: Map<string, Map<string, any>> = this.state.postList
       
-      let postBack: {divided: boolean, oddPostList: Post[], evenPostList: Post[]} = { divided: false, oddPostList: [], evenPostList: [] }
-      let parsedPosts: ImuList<any> = ImuList()
-      posts.forEach((post: Map<string, any>) => {
-        
-      parsedPosts = parsedPosts.push(post)
-      
-      })
-      
-      const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
-      // if (sortedPosts.count() > 6) {
-      //   postBack.divided = true
+      let { tag } = match.params
+      if (posts === undefined || !(posts.keySeq().count() > 0)) {
+  
+        return  []
 
-      // } else {
-      //   postBack.divided = false
-      // }
-      let index = 0
-      sortedPosts.forEach((post) => {
-        index++
+      } else {
         
-        let newPost: any = (
-          <div key={`${post.get('id')}-stream-div`}>
-
-            {index > 1 || (!postBack.divided && index > 0) ? <div style={{ height: '2px' }}></div> : ''}
-               <Suspense fallback={''}>
-                  <PostComponent  tag={tag} key={`${post.get('id')}-stream-div-post`} post={post! as any} />
-               </Suspense>
-           
-          </div>
-        )
-
-        if ((index % 2) === 1 && postBack.divided) {
-          postBack.oddPostList.push(newPost as never)
-        } else {
+        let postBack: {divided: boolean, oddPostList: Post[], evenPostList: Post[]} = { divided: false, oddPostList: [], evenPostList: [] }
+        let parsedPosts: ImuList<any> = ImuList()
+        posts.forEach((post: Map<string, any>) => {
+          
+        parsedPosts = parsedPosts.push(post)
         
-          postBack.evenPostList.push(newPost as never)
-        }
-        ++index
-      })
-      return postBack
+        })
+        
+        const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
+        // if (sortedPosts.count() > 6) {
+        //   postBack.divided = true
+  
+        // } else {
+        //   postBack.divided = false
+        // }
+        let index = 0
+        sortedPosts.forEach((post) => {
+          index++
+          
+          let newPost: any = (
+            <div key={`${post.get('id')}-stream-div`}>
+  
+              {index > 1 || (!postBack.divided && index > 0) ? <div style={{ height: '2px' }}></div> : ''}
+                 <Suspense fallback={''}>
+                    <PostComponent  tag={tag} key={`${post.get('id')}-stream-div-post`} post={post! as any} />
+                 </Suspense>
+             
+            </div>
+          )
+  
+          if ((index % 2) === 1 && postBack.divided) {
+            postBack.oddPostList.push(newPost as never)
+          } else {
+          
+            postBack.evenPostList.push(newPost as never)
+          }
+          ++index
+        })
+         return(postBack)
+      }
     }
-
-  }
-
+   
   /**
    * Scroll loader
    */
-  scrollLoad = (page: number) => {
-   
-    const { loadStream } = this.props
-     loadStream!(page, 5)
-  
+  scrollLoad = () => {
+     const { loadStream } = this.props
+     loadStream!()
   }
 
   componentWillMount() {
-    const { loadComponentWillMount } = this.props
-    if (loadComponentWillMount) {
-      loadComponentWillMount!()
+    const { loadInitial } = this.props
+    if (loadInitial) {
+        this.props.loadStream!()
      }
+   }
+   componentDidMount() {
+      this.setState({postList: this.props.posts})
+   }
+   componentWillReceiveProps(nextProps: IStreamComponentProps) {
+    if (this.props.posts !== nextProps.posts) {
+      this.setState({postList: nextProps.posts})
+    }
    }
 
   /**
@@ -172,14 +175,13 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
     const {  hasMorePosts } = this.props
     
     const tag = this.props.match.params.tag
-    const postList = this.postLoad() as { evenPostList: Post[], oddPostList: Post[], divided: false } | any
-    
+    const postList = this.postLoad() as any
+    console.log(this.state.postList.size)
     return (
           <InfiniteScroll
-            pageStart={0}
-            loadMore={this.scrollLoad}
-            hasMore={hasMorePosts}
-            useWindow={true}
+            dataLength={this.state.postList.size}
+            next={this.scrollLoad}
+            hasMore={hasMorePosts!}
             loader={<LoadMoreProgressComponent key='stream-load-more-progress' />}
           >
             <div className={`grid grid__gutters grid__1of2 ${tag ? 'grid__left' : 'grid__center'} animate-top`}>

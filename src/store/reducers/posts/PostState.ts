@@ -44,7 +44,9 @@ export class PostState {
      * @type {Boolean}
      * @memberof PostState
      */
-    loaded: Boolean = false  
+    loaded: Boolean = false 
+
+    featureloaded: boolean = false
 
     likedPosts = Map({ })
     

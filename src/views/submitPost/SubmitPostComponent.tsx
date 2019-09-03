@@ -343,6 +343,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     this.setState({willSubmit: false})
     this.setState({postCatagoryError: ''})
     this.setState({postBodyError: ''})
+    console.log(this.state)
     
     const {EditPost, edit, update } = this.props
 
@@ -435,7 +436,6 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         this.setState({willSubmit: true})
         FileAPI.getThumbUrl(imagefullPath!).then((url) => {
          if (url) {
-          console.log('inside url')
           const updatedPost = EditPost!.set('body', postBodyHTML)
           .set('bodyText', postBodyText)
           .set('title', postTitle)

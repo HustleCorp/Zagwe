@@ -36,4 +36,6 @@ export interface IStreamComponentState {
 
   count: number
 
+  postList: any
+
 }
