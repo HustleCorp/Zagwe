@@ -158,7 +158,6 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
   }
 
   componentDidMount () {
-    console.log('inside componentDId mount')
     this.props.loadBodyPost!()
     window.scrollTo(0,0)
   }
@@ -367,7 +366,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostPageComponentProps) =>
 const mapStateToProps = (state: Map<string, any>, ownProps: IPostPageComponentProps) => {
   const uid = state.getIn(['authorize', 'uid'])
   const isAdmin = state.getIn(['authorize', 'isAdmin'])
-  console.log(ownProps.match.params)
   const {userId, postId} = ownProps.match.params
   const userInfo = state.getIn(['user', 'info', userId])
   let posts: Map<string, any> = Map({})

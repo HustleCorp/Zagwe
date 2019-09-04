@@ -75,6 +75,11 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
       }
     }
 
+   componentWillUnmount () {
+     const {resetPostTopic} = this.props
+     resetPostTopic!()
+   }
+
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
@@ -191,7 +196,8 @@ const mapDispatchToProps = (dispatch: any, ownProps: ITopicPostComponentProps) =
   return {
      loadFollowData: () => dispatch(postActions.dbGetFollowingPosts()),
      loadTopicData:  () => dispatch(postActions.dbGetPostbyTopic(tag)),
-     loadDataStream: tag === 'following' ?  (page: number) => dispatch(postActions.dbGetFollowingPosts()) : (page: number) => dispatch(postActions.dbGetPostbyTopic(tag, page))
+     loadDataStream: tag === 'following' ?  (page: number) => dispatch(postActions.dbGetFollowingPosts()) : (page: number) => dispatch(postActions.dbGetPostbyTopic(tag, page)),
+     resetPostTopic: () => dispatch(postActions.resetlastPostId(tag))
   }
 }
 

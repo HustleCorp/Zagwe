@@ -32,6 +32,8 @@ export interface ITopicPostComponentProps {
   loadTopicData: any
 
   loadDataStream?: () => void
+  
+  resetPostTopic?: () => void
 
   hasMorePosts: boolean
 

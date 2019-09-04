@@ -84,7 +84,6 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
 
   handleSendFeed = (feedType: FeedType) => {
     const { sendFeed, currentUser } = this.props
-    console.log(currentUser)
     const { feedText } = this.state
     sendFeed!(new Feed('', feedText, feedType, currentUser))
   }

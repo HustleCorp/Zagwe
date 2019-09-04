@@ -6,6 +6,10 @@ import moment from 'moment/moment'
 // material-ui components
 import withStyles from "@material-ui/core/styles/withStyles"
 import LinearProgress from '@material-ui/core/LinearProgress'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 // core components
 import Card from 'StyledComponents/Card/Card.jsx'
 import CardBody from 'StyledComponents/Card/CardBody.jsx'
@@ -13,6 +17,7 @@ import Img from 'components/img'
 
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.jsx"
 import { NavLink } from 'react-router-dom'
+import * as AdminAPi from 'api/adminAPi'
 
 import UserAvatar from 'components/userAvatar'
 
@@ -67,13 +72,40 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
   constructor (props: IfeaturedBoxComponentProps) {
     super(props)
 
-        // Defaul state
+        // Default state
     this.state = {
+      /**
+       * Post menu anchor element
+       */
+      postMenuAnchorEl: null,
+      /**
+       * Whether post menu open
+       */
+      isPostMenuOpen: false
 
     }
 
         // Binding functions to `this`
+        this.openPostMenu = this.openPostMenu.bind(this)
+        this.closePostMenu = this.closePostMenu.bind(this)
 
+  }
+
+  openPostMenu = (event: any) => {
+    this.setState({
+      postMenuAnchorEl: event.currentTarget,
+      isPostMenuOpen: true
+    })
+  }
+
+  /**
+   * Close post menu
+   */
+  closePostMenu = (event: any) => {
+    this.setState({
+      postMenuAnchorEl: event.currentTarget,
+      isPostMenuOpen: false
+    })
   }
 
     /**
@@ -82,40 +114,38 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
      */
   render () {
 
-    const { classes, post, loaded}  = this.props
-    // const rightIconMenu = (
-    //   <div>
-    //     <IconButton
-    //       onClick={this.openPostMenu.bind(this)}
-    //     >
-    //       <MoreVertIcon />
-    //     </IconButton>
+    const { classes, post, isAdmin, loaded}  = this.props
+    const { postMenuAnchorEl, isPostMenuOpen} = this.state
+    const rightIconMenu = (
+      <div>
+        <IconButton
+          onClick={this.openPostMenu.bind(this)}
+        >
+          <MoreVertIcon />
+        </IconButton>
 
-    //       <Menu
-    //         open={isPostMenuOpen!}
-    //         anchorEl={postMenuAnchorEl}
-    //         anchorOrigin={{
-    //           vertical: 'top',
-    //           horizontal: 'right'
-    //         }}
-    //         transformOrigin={{
-    //           vertical: 'top',
-    //           horizontal: 'right'
-    //         }}
-    //         onClose={this.closePostMenu}>
-    //         <MenuItem
-    //           onClick={() => this.props.toggleDisableComments!(!post.get('disableComments'))} >
-    //           {post.get('disableComments') ? translate!('post.enableComments') : translate!('post.disableComments')}
-    //         </MenuItem>
-    //         {isAdmin ? 
-    //           <MenuItem
-    //           onClick={() => AdminAPi.addToFeatured(post.get('id'))} >
-    //           {'Add to featured'}
-    //          </MenuItem>         
-    //            : '' }
-    //       </Menu>
-    //   </div>
-    // )
+          <Menu
+            open={isPostMenuOpen!}
+            anchorEl={postMenuAnchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            onClose={this.closePostMenu}>
+          >
+                          <div>
+                           <MenuItem
+                              onClick={() => AdminAPi.removeFromFeatured(post.get('id'))} >
+                              {'Delete from featured'}
+                           </MenuItem>  
+                         </div>
+          </Menu>
+      </div>
+    )
     return (
       <div style={{paddingBottom: '2px'}}>
       <Card className={classes.cardStyle} style={{width: "20rem", marginLeft: '0px', marginRight: '15px'}}>
@@ -158,6 +188,7 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
                   </NavLink>
               </div>
                 <div style={{display: 'grid', paddingLeft: '10px'}}>
+                  <div style={{display: 'flex'}}>
                     <span className={loaded ? 'featured-name' : 'animated-name'}>
                     {<NavLink to={`/users/${post.get('ownerUserId')}/posts`}>
                       <h6 className={classes.headerName}>
@@ -165,11 +196,19 @@ export class FeaturedBoxComponent extends Component<IfeaturedBoxComponentProps,I
                       </h6>
                       </NavLink>}
                      </span>
+                     {isAdmin === true ? 
+                     <span style={{marginTop: '-22px'}}>  
+                     {rightIconMenu}
+                     </span> : ''}
+                   
+                  </div>
+                    
                   <div  className={loaded ? 'featured-info' : 'animated-info'} style={{color: '#8b9898'}}>
                   <span>
                     {post.get('creationDate') ? moment.unix(post.get('creationDate')).fromNow() + ' | ' + 'public' : <LinearProgress color='primary' />}
+                    
                  </span>
-    
+                 
                  </div>
 
                  </div>

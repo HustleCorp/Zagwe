@@ -93,7 +93,8 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
 
       let { match } = this.props
       let posts: Map<string, Map<string, any>> = this.state.postList
-      
+      const {loaded} = this.props
+  
       let { tag } = match.params
       if (posts === undefined || !(posts.keySeq().count() > 0)) {
   
@@ -121,11 +122,11 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
           index++
           
           let newPost: any = (
-            <div key={`${post.get('id')}-stream-div`}>
+            <div key={`${index}-stream-div`}>
   
               {index > 1 || (!postBack.divided && index > 0) ? <div style={{ height: '2px' }}></div> : ''}
                  <Suspense fallback={''}>
-                    <PostComponent  tag={tag} key={`${post.get('id')}-stream-div-post`} post={post! as any} />
+                    <PostComponent loaded={loaded} tag={tag} key={`${index}-stream-div-post`} post={post! as any} />
                  </Suspense>
              
             </div>
@@ -153,12 +154,10 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
 
   componentWillMount() {
     const { loadInitial } = this.props
+    this.setState({postList: this.props.posts})
     if (loadInitial) {
         this.props.loadStream!()
      }
-   }
-   componentDidMount() {
-      this.setState({postList: this.props.posts})
    }
    componentWillReceiveProps(nextProps: IStreamComponentProps) {
     if (this.props.posts !== nextProps.posts) {
@@ -171,12 +170,11 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     const {  hasMorePosts } = this.props
     
     const tag = this.props.match.params.tag
     const postList = this.postLoad() as any
-    console.log(this.state.postList.size)
+    
     return (
           <InfiniteScroll
             dataLength={this.state.postList.size}
@@ -230,9 +228,11 @@ const mapDispatchToProps = (dispatch: any, ownProps: IStreamComponentProps) => {
 const mapStateToProps = (state: Map<string, any>, ownProps: IStreamComponentProps) => {
   const uid = state.getIn(['authorize', 'uid'])
   const user = state.getIn(['user', 'info', uid])
+  const loaded = state.getIn(['post', 'loaded'], false)
   return {
     translate: getTranslate(state.get('locale')),
     avatar: user ? user.avatar : '',
+    loaded: loaded,
     fullName: user ? user.fullName : ''
   }
 }

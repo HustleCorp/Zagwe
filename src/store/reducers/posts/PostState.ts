@@ -44,6 +44,9 @@ export class PostState {
      * @type {Boolean}
      * @memberof PostState
      */
+
+    topicloaded: Boolean = false
+
     loaded: Boolean = false 
 
     featureloaded: boolean = false

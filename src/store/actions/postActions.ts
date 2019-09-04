@@ -157,7 +157,6 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
        body: newPost.body,
        id: newPost.id,
     }
-    debugger
     return postService.updatePost(post, postBody).then(() => {
       dispatch(updatePost(updatedPost))
       callBack(newPost.id)
@@ -233,12 +232,19 @@ export const dbGetFeaturedPosts = ( ) => {
    }
 }
 
+export const resetlastPostId = (header: string) => {
+   return (dispatch: any, getState: Function) => {
+        dispatch (resetLastPostId(header))
+   }
+}
+
 export const dbGetPostbyTopic = (header: string, page: number = 0, limit: number = 5) => {
   return (dispatch: any, getState: Function) => {
     const state: Map<string, any> = getState()
     const stream: Map<string, any> = state.getIn(['post', 'stream', header])
     const lastPageRequest = stream.get('lastPageRequest')
-    const lastPostId = stream.get('lastPostId')
+    let lastPostId = stream.get('lastPostId')
+    
     if (lastPageRequest !== page) {
       return postService.getAllPostsByTopic(header, lastPostId, page, limit).then((result) => {
         if (!result.posts || !(result.posts.length > 0)) {
@@ -536,6 +542,13 @@ export const notMoreDataStream = (type: string) => {
     payload: {type}
   }
 
+}
+
+export const resetLastPostId = (type: string) => {
+  return {
+    type: PostActionType.REST_LAST_POST_ID,
+    payload: {type}
+  }
 }
 
 /**

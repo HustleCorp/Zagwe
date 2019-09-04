@@ -232,9 +232,8 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    */
   render () {
     
-    const { post, isAdmin, tag, isPostOwner, classes , translate} = this.props
+    const { post, isAdmin, tag, isPostOwner, classes , translate, loaded} = this.props
     const { postMenuAnchorEl, isPostMenuOpen, thumbUrl} = this.state
-    
     const rightIconMenu = (
       <div>
         <IconButton
@@ -259,12 +258,20 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
               onClick={() => this.props.toggleDisableComments!(!post.get('disableComments'))} >
               {post.get('disableComments') ? translate!('post.enableComments') : translate!('post.disableComments')}
             </MenuItem>
-            {isAdmin ? 
-              <MenuItem
-              onClick={() => AdminAPi.addToFeatured(post.get('id'))} >
-              {'Add to featured'}
-             </MenuItem>         
-               : '' }
+            
+            {isAdmin === true ? 
+                          <div>
+                             <MenuItem
+                             onClick={() => AdminAPi.addToFeatured(post.get('id'))} >
+                             {'Add to featured'}
+                            </MenuItem> 
+                           <MenuItem
+                              onClick={() => AdminAPi.removeFromFeatured(post.get('id'))} >
+                              {'Delete from featured'}
+                           </MenuItem>  
+                         </div>
+             
+             : '' }
           </Menu>
       </div>
     )
@@ -285,7 +292,6 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
           </div>
        </div>
     )
-
     // Define variables
     return (
       <Card key={`post-component-${post.get('id')}`} className={classes.Card}>

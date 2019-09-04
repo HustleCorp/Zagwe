@@ -49,7 +49,6 @@ export class PostService implements IPostService {
           resolve()
         })
           .catch((error: any) => {
-            alert('error found here')
             reject(new SocialError(error.code, error.message))
           })
       })
@@ -81,26 +80,29 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
             
             let query = db.collection('featuredPosts')
 
-            query.get().then((posts) => {
-              posts.forEach((postResult) => { 
-                const post = postResult.data() as Post
-                parsedData = [
-                  ...parsedData,
-                  {
-                    [postResult.id]: {
-                      id: postResult.id,
-                      ...post
-                    }
-                  }
-    
-                ]
-              })
-              resolve({ posts: parsedData})
-            })
+            query.get().then( async (posts) => {
+               for (let index = 0; index < posts.size; index++) {
+                         const postId = posts.docs[index].id
+                         await this.getPostById(postId).then((result) => {
+                          parsedData = [
+                            ...parsedData,
+                            {
+                              [postId]: {
+                                id: postId,
+                                ...result
+                              }
+                            }
+                          ]
+        
+                        })
+               }
+               resolve({ posts: parsedData})
 
+            })
+           
        })
 }
-
+ 
  public getAllPostsByTopic: (header: string, lastPostId: string, page: number, limit: number) =>
  Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}> = (header, lastPostId, page = 0, limit = 5) => {
      return new Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}>((resolve, reject) => {

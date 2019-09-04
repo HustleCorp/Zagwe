@@ -88,14 +88,12 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
       userAvatar: currentUser.avatar,
       userId: uid
     }
-    debugger
     let OtherProfile: OtherProfile 
     if (likes) {
       OtherProfile = {
           likes: [...likes, postId],
           likeCount: likeCount + 1
       }
-      console.log('inside likes')
     } else {
      OtherProfile = {
          likes: [postId],
@@ -182,7 +180,6 @@ export const dbDeleteVote = (postId: string, ownerPostUserId: string) => {
           likes: likes.filter((e: string) => {return e !== postId}),
           likeCount: likesCount - 1
       }
-      console.log(OtherProfile.likes)
     } else {
       OtherProfile = {
          likes: [],

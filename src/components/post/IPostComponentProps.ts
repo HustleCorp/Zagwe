@@ -121,4 +121,6 @@ export interface IPostComponentProps {
   authed?: boolean
 
   isAdmin?: boolean
+
+  loaded?: boolean
 }

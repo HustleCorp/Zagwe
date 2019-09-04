@@ -20,4 +20,6 @@ export interface IfeaturedComponentProps {
   // has featued posts loaded
   loaded?: boolean
 
+  isAdmin?: boolean
+
 }

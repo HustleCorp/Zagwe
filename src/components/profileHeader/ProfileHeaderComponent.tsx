@@ -99,6 +99,7 @@ const styles = (theme: any) => ({
         flexWrap: 'wrap',
         marginBottom: '-8px',
         marginLeft: '-24px',
+        maxWidth: '450px'
    },
    button: {
      display: 'inline-block',
@@ -118,6 +119,13 @@ const styles = (theme: any) => ({
          paddingLeft: '24px',
          minWidth: 0
    },
+   bqqk2: {
+    paddingBottom: '8px',
+    paddingLeft: '24px',
+    minWidth: 0,
+    marginTop: '-5px'
+   },
+ 
    bttk: {
     paddingBottom: '8px',
     paddingLeft: '24px',
@@ -156,6 +164,7 @@ const styles = (theme: any) => ({
        fill: '#999'
    },
    briefcase: {
+     paddingTop: '2px',
      fill: '#999',
      marginRight: '7px',
      marginTop: '5px',
@@ -183,8 +192,7 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
       isSmall: false
 
     }
-    console.log(this.props)
-
+  
         // Binding functions to `this`
       
   }
@@ -316,7 +324,7 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
 
                                          {this.props.twitterId ? 
                                           <div className={classes.bqqk}>
-                                            <a className={classes.hpcomp}>
+                                            <a style={{display: 'flex'}} className={classes.hpcomp}>
                                             <svg viewBox="328 355 335 276"  className={classes.twitter} width="19px" height="19px" aria-hidden="false" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="
                                                   M 630, 425
@@ -343,10 +351,14 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
                                           ''
                                           }
                                          {this.props.company ? 
-                                           <div className={classes.bqqk}> 
+                                           <div className={classes.bqqk2}> 
                                               <a className={classes.hpcomp}>
-                                               <svg xmlns="http://www.w3.org/2000/svg" className={classes.briefcase} width="17" height="17" viewBox="0 0 24 24"><path d="M24 22h-24v-15h24v15zm-15-20c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>
-                                                {this.props.company}
+                                                <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className={classes.briefcase} width="17" height="17" viewBox="0 0 24 24"><path d="M24 22h-24v-15h24v15zm-15-20c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>
+                                                </span>
+                                                 <span>
+                                                  {this.props.company}
+                                                </span>
                                               </a>
                                             </div> : ''}
 

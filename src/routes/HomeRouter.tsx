@@ -90,7 +90,7 @@ export class HomeRouter extends Component<IRouterProps, any> {
           enabled ? (
           <Switch>
             <Route path='/people/:tab?' component={AsyncPeople} />
-            <Route path='/t/:tag'  component={AsyncTopic}/>
+            <Route path='/t/:tag' key={this.props.location.pathname}  component={AsyncTopic}/>
             <PrivateRoute path='/submit/:userId?/:postId?'  component={
               (<div>
                        <Sub edit={false}/>

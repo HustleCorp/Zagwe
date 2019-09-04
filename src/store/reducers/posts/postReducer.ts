@@ -55,7 +55,6 @@ export let postReducer = (state = Map(new PostState()), action: IPostAction) => 
            .mergeDeepIn(['userPosts', payload.uid, payload.post.id], fromJS({...payload.post}))
              
     case PostActionType.ADD_LIKE_POST:
-      console.log('case')
       return state
         .setIn(['likedPosts', payload.post.id], fromJS({...payload.post}))
 
@@ -71,10 +70,11 @@ export let postReducer = (state = Map(new PostState()), action: IPostAction) => 
       return state
         .mergeDeepIn(['userPosts'], payload.userPosts)
         .set('loaded', true)
+        // .deleteIn(['userPosts', 'hello'])
     case PostActionType.ADD_TOPIC_POST:
           return state
             .mergeDeepIn([payload.header], payload.followingPosts)
-            .set('loaded', true)
+            .set('topicloaded', true)
     case PostActionType.ADD_FEATURED_POST: 
          return state 
                .setIn(['featuredPosts'], payload.featuredPosts)
@@ -86,6 +86,9 @@ export let postReducer = (state = Map(new PostState()), action: IPostAction) => 
     case PostActionType.NOT_MORE_DATA_STREAM:
       return state
         .setIn(['stream', payload.type,  'hasMoreData'], false)
+    case PostActionType.REST_LAST_POST_ID:
+      return state
+        .setIn(['stream', payload.type, 'lastPostId' ], '')
 
     case PostActionType.REQUEST_PAGE_STREAM:
       return state

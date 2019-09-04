@@ -10,9 +10,6 @@ import { withStyles } from '@material-ui/core/styles'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItem from '@material-ui/core/ListItem'
-import List from '@material-ui/core/List'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 
 // - Import app components
 import UserAvatar from 'components/userAvatar'
@@ -115,7 +112,7 @@ export class NotifyItemComponent extends Component<INotifyItemComponentProps,INo
 
     return (
 
-        <ListItem key={notifierUserId} dense button className={classes.listItem} style={isSeen ? { opacity: 0.6 } : {}}>
+        <ListItem  key={notifierUserId} button dense className={classes.listItem} style={isSeen ? { opacity: 0.6 } : {}}>
               <NavLink
                         to={`/${notifierUserId}`}
                         onClick={(evt) => {

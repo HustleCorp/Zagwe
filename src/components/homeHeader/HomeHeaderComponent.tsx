@@ -40,6 +40,7 @@ import {  Theme } from '@material-ui/core/styles'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import MasterLoadingComponent from 'components/masterLoading/MasterLoadingComponent'
 import Loadable from 'react-loadable'
+import Notificaton from 'components/notify'
 
 // - Import components
 import UserAvatarComponent from 'components/userAvatar'
@@ -52,12 +53,6 @@ import { IHomeHeaderComponentState } from './IHomeHeaderComponentState'
 import { NavLink } from 'react-router-dom'
 
 const searchClient = algoliasearch('GDLJD9WT4N', '1a976afc8891eef33f27a09de414146c')
-// - Async Components
-const AsyncNotify = Loadable({
-  loader: () => import('components/notify'),
-  loading: MasterLoadingComponent,
-  delay: 300
-})
 
 const styles = (theme: Theme) => ({
   root: {
@@ -490,7 +485,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
                               </Tooltip>)
                         } 
 
-                    <AsyncNotify open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
+                    <Notificaton open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
                      
                     {/* User avatar*/}
                     <UserAvatarComponent

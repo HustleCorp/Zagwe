@@ -28,7 +28,7 @@ export class NotificationService implements INotificationService {
 
   public getNotifications: (userId: string, callback: (resultNotifications: {[notifyId: string]: Notification}) => void)
     => void = (userId,callback) => {
-      let notificationsRef = db.doc(`users/${userId}`).collection('notifications').limit(7)
+      let notificationsRef = db.doc(`users/${userId}`).collection('notifications').limit(20)
       notificationsRef.onSnapshot((snapshot) => {
         let parsedData: { [notifyId: string]: Notification } = {}
         snapshot.forEach((result) => {
