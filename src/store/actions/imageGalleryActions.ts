@@ -108,6 +108,7 @@ export const dbUploadImage = (image: any, imageName: string, callBack: Function)
 
       return (dispatch: any, getState: Function) => {
         return new Promise<any> ((resolve, reject) => {
+          dispatch(globalActions.showTopLoading())
           imageGalleryService
           .uploadImage(image, 'avatar', imageName, (percentage: number) => {
             dispatch(globalActions.progressChange(percentage, true))
@@ -117,7 +118,7 @@ export const dbUploadImage = (image: any, imageName: string, callBack: Function)
            
            let  res = await FileAPI.getThumbUrl(result.fileFullPath) 
            let count = 0
-            while (!res && count < 8) {
+            while (!res && count < 30) {
                 count ++
                 res = await FileAPI.getThumbUrl(result.fileFullPath) 
               }

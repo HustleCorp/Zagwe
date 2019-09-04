@@ -1,10 +1,8 @@
 // - Import external components
 import {createStore, compose, applyMiddleware, Store} from 'redux'
 import thunk from 'redux-thunk'
-import DevTools from './devTools'
 import createHistory from 'history/createBrowserHistory'
 import createSagaMiddleware, { END } from 'redux-saga'
-import { createLogger } from 'redux-logger'
 import { rootReducer } from 'store/reducers'
 
 import { fromJS, Map } from 'immutable'
@@ -13,13 +11,6 @@ import { routerMiddleware, connectRouter } from 'connected-react-router/immutabl
 
 export const history = createHistory()
 
-// Logger option for transforming immutable js
-const logger = createLogger({
-  stateTransformer: (state: Map<string, any>) => {
-
-    return state.toJS()
-  }
-})
 // - Build the middleware for intercepting and dispatching navigation actions
 const sagaMiddleware = createSagaMiddleware()
 // - initial state

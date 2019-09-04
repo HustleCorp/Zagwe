@@ -47,7 +47,7 @@ if (firebase.messaging.isSupported()) {
                 actions: [
                     {
                         action: '/',
-                        title: 'Book Appointment'
+                        title: 'You have a new Notification'
                     }
                 ]
                 
@@ -69,13 +69,21 @@ export let storageRef = firebase.storage().ref()
 
 // Initialize Cloud Firestore through Firebase
 const db = firebase.firestore()
+db.enablePersistence()
+  .catch((err: any) => {
+      if (err.code === 'failed-precondition') {
+          console.log('could not enable persistence')
+      } else if (err.code === 'unimplemented') {
+           console.log('browser does not support offline persistence')
+      }
+  })
 
 export {
   db
 }
 // - Database authorize
 export let firebaseAuth = firebase.auth
-export let functions = firebase.functions()
+
 // export let firebaseRef = firebase.database().ref()
 
 // - Firebase default

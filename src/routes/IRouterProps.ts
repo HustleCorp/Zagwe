@@ -24,6 +24,8 @@ export interface IRouterProps {
   match?: any
 
   edit?: boolean
+  
+  location?: any
 
   /**
    * Translate to locale strting

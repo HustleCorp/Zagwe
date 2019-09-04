@@ -88,4 +88,6 @@ export interface IStreamComponentProps {
 
   loadInitial?: boolean
 
+  loaded?: boolean
+
 }

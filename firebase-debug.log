@@ -1,0 +1,46 @@
+[debug] [2019-09-04T22:04:12.043Z] ----------------------------------------------------------------------
+[debug] [2019-09-04T22:04:12.045Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-09-04T22:04:12.045Z] CLI Version:   7.0.2
+[debug] [2019-09-04T22:04:12.045Z] Platform:      linux
+[debug] [2019-09-04T22:04:12.045Z] Node Version:  v11.13.0
+[debug] [2019-09-04T22:04:12.048Z] Time:          Thu Sep 05 2019 00:04:12 GMT+0200 (Central European Summer Time)
+[debug] [2019-09-04T22:04:12.048Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-04T22:04:12.055Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-04T22:04:12.056Z] > authorizing via signed-in user
+[debug] [2019-09-04T22:04:12.056Z] [iam] checking project publishing-3965e for permissions ["firebase.projects.get"]
+[debug] [2019-09-04T22:04:12.057Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-04T22:04:12.057Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-04T22:04:12.253Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-04T22:04:12.261Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/publishing-3965e:testIamPermissions  
+
+[debug] [2019-09-04T22:04:12.437Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-04T22:04:12.441Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/publishing-3965e  
+ 
+[debug] [2019-09-04T22:04:12.558Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/shegerking/Desktop/social/meraf.io'...
+[info] 
+[debug] [2019-09-04T22:04:12.564Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/99571061006/clients/_:getWebAppConfig  
+ 
+[debug] [2019-09-04T22:04:12.928Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] [hosting] Rewriting /posts/ebHhz6IFv8VAODRBT4LQI6e1qC72/images/favicon-32x32.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/5ZsSU2KoFwh8G5gaCVWulu81HGz1/images/favicon-32x32.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/5ZsSU2KoFwh8G5gaCVWulu81HGz1/images/favicon-16x16.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/5ZsSU2KoFwh8G5gaCVWulu81HGz1/images/favicon-96x96.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/5ZsSU2KoFwh8G5gaCVWulu81HGz1/images/android-icon-192x192.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/ebHhz6IFv8VAODRBT4LQI6e1qC72/images/favicon-32x32.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/ebHhz6IFv8VAODRBT4LQI6e1qC72/images/favicon-16x16.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/ebHhz6IFv8VAODRBT4LQI6e1qC72/images/favicon-96x96.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/ebHhz6IFv8VAODRBT4LQI6e1qC72/images/android-icon-192x192.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/LHnnvTZ389VIhHPkOk84vPDmyZP2/images/favicon-32x32.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/LHnnvTZ389VIhHPkOk84vPDmyZP2/images/favicon-16x16.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/LHnnvTZ389VIhHPkOk84vPDmyZP2/images/favicon-96x96.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/LHnnvTZ389VIhHPkOk84vPDmyZP2/images/android-icon-192x192.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/Vg75bALszVcc80IuslG9oKgnq863/images/favicon-32x32.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/Vg75bALszVcc80IuslG9oKgnq863/images/favicon-16x16.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/Vg75bALszVcc80IuslG9oKgnq863/images/favicon-96x96.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler
+[info] [hosting] Rewriting /posts/Vg75bALszVcc80IuslG9oKgnq863/images/android-icon-192x192.png to https://us-central1-publishing-3965e.cloudfunctions.net/eventsReqHandler for live Function eventsReqHandler

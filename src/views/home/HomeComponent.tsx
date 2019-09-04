@@ -238,18 +238,19 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
 
     } else if (!global.get('defaultLoadDataStatus' || isGuest)) {
       clearData!()
-      loadData!()
+      
       defaultDataEnable!()
     }
   }
 
   componentDidMount () {
-   const {loadOtherData, authed} = this.props
 
+   const {loadOtherData, loadData, authed} = this.props
+        loadData!()
        if ( authed ) {
           loadOtherData!()
         }
-
+        console.log('************\n          *\n         * \n        *  \n       *   \n      *    \n     *     \n    *      \n   *      \n  *     \n *     \n*********** \n Well Hello There! Before you continue with your hacking away, I would like to tell you I am looking for developers to join Zagwe in developing cool projects. If you are interested, contact me at bktotient@gmail.com')
   }
 
   /**
@@ -326,9 +327,10 @@ const mapDispatchToProps = (dispatch: any, ownProps: IHomeComponentProps) => {
       dispatch(circleActions.dbGetCircles())
       dispatch(circleActions.dbGetUserTies())
       dispatch(circleActions.dbGetFollowers())
+      
     },
     clearData: () => {
-      dispatch(imageGalleryActions.clearAllData())
+    dispatch(imageGalleryActions.clearAllData())
       dispatch(postActions.clearAllData())
       dispatch(userActions.clearAllData())
       dispatch(notifyActions.clearAllNotifications())
@@ -363,7 +365,6 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IHomeComponentProps)
   const global = state.get('global', {})
   let mergedPosts = Map({})
   const Posters: Map<string, any> = state.getIn(['post', 'userPosts'], {})
-  const posts = state.getIn(['post', 'userPosts', uid ], {})
   const hasMorePosts = state.getIn(['post', 'stream', 'userPosts', 'hasMoreData' ], true)
   Posters.forEach((user, userId) => {
     let newPosts = state.getIn(['post', 'userPosts', userId], {})

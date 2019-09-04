@@ -190,7 +190,7 @@ export class SignupComponent extends Component<ISignupComponentProps, ISignupCom
 
     return (
 
-      <Grid spacing={24}>
+      <Grid>
         <Grid item xs={12} className={classes.contain}>
         <div className='web_app'>
            <img  style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>

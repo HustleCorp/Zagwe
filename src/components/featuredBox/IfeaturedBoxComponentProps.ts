@@ -95,4 +95,6 @@ export interface IfeaturedBoxComponentProps {
 
   authed?: boolean
 
+  isAdmin?: boolean
+
 }

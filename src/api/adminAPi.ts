@@ -9,7 +9,7 @@ const postService: IPostService = provider.get<IPostService>(SocialProviderTypes
 export const addToFeatured: (postId: string) => Promise<void> = (postId: string) => {
     return new Promise<void>((resolve, reject) => {
            postService.getPostById(postId).then((post) => {
-                 db.collection('featuredPosts').doc(postId).set({...post})
+                 db.collection('featuredPosts').doc(postId).set({id: postId})
            })
     })
 }

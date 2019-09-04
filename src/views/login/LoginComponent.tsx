@@ -182,7 +182,7 @@ export class LoginComponent extends Component<ILoginComponentProps, ILoginCompon
     )
 
     return (
-      <Grid  spacing={24}>
+      <Grid >
         <Grid item xs={12} className={classes.contain}>
         {/* <h1 className='web_app'>{config.settings.appName}</h1> */}
         <div className='web_app'>

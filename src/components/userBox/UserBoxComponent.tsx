@@ -177,7 +177,6 @@ export class UserBoxComponent extends Component<IUserBoxComponentProps, IUserBox
       return
     }
     if (!isFollowed) {
-      debugger
       followUser!(followingCircle![0], { avatar, userId, fullName })
     } else {
       deleteFollowingUser!(userId)

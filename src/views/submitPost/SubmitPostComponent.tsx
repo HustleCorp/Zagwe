@@ -195,8 +195,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         currentImage: {}
 
      }
-     console.log(this.state)
-     
+  
       this.handleOnBodyChange = this.handleOnBodyChange.bind(this)
       this.handleOnTitleChange = this.handleOnTitleChange.bind(this)
       this.imageHandler = this.imageHandler.bind(this)
@@ -208,7 +207,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       this.handleCloseGuide = this.handleCloseGuide.bind(this)
       this.handleOpenReq = this.handleOpenReq.bind(this)
       this.handleCloseReq = this.handleCloseReq.bind(this)
-      
+      this.beforeunload = this.beforeunload.bind(this)
    // Modifired Quilljs Modules
      this.modules = {
           toolbar: {
@@ -343,8 +342,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     this.setState({willSubmit: false})
     this.setState({postCatagoryError: ''})
     this.setState({postBodyError: ''})
-    console.log(this.state)
-    
+ 
     const {EditPost, edit, update } = this.props
 
     let error = false 
@@ -479,7 +477,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
    */
   componentDidMount() {
     this.attachQuillRefs()
-    window.addEventListener('beforeunload', this.beforeunload.bind(this))
+    window.addEventListener('beforeunload', this.beforeunload, true)
   
   }
 
@@ -489,7 +487,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
   }
 
   componentWillUnmount () {
-    window.removeEventListener('beforeunload', this.beforeunload.bind(this))
+    window.removeEventListener('beforeunload', this.beforeunload, true)
   }
 
   beforeunload(event: any) {
