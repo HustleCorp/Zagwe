@@ -15,7 +15,7 @@
     "build": "npm-run-all build-css build-js && rm build/static/js/*.map && mv build/index.html build/app.html",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy:firebase": "npm run build && firebase deploy",
+    "deploy:firebase": "npm run build && firebase deploy"
   },
   "author": "Beakal",
   "license": "MIT",
