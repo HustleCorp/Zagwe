@@ -16,7 +16,6 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "deploy:firebase": "npm run build && firebase deploy",
-    "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
   "author": "Beakal",
@@ -92,7 +91,6 @@
     "reflect-metadata": "^0.1.12",
     "save": "^2.3.3",
     "simple-react-notifications": "^1.2.13",
-    "snyk": "^1.217.1",
     "source-map-explorer": "^2.0.1",
     "uuid": "^3.3.2"
   },

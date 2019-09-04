@@ -101,7 +101,6 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
      }
     }
     
-    let other
     const post: Map<string, any> = state.getIn(['post', 'userPosts', ownerPostUserId, postId])
     const score = Number(post.get('score', 0)) + 1
      const votedPost = post
