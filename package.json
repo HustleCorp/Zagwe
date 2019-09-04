@@ -16,7 +16,6 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "deploy:firebase": "npm run build && firebase deploy",
-    "prepare": "npm run snyk-protect"
   },
   "author": "Beakal",
   "license": "MIT",
