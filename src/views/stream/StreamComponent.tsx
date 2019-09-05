@@ -155,6 +155,10 @@ export class StreamComponent extends Component<IStreamComponentProps, IStreamCom
   componentWillMount() {
     const { loadInitial } = this.props
     this.setState({postList: this.props.posts})
+    const { loadComponentWillMount } = this.props
+    if (loadComponentWillMount) {
+      loadComponentWillMount!()
+     }
     if (loadInitial) {
         this.props.loadStream!()
      }

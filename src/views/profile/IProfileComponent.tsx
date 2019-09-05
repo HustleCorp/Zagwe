@@ -127,6 +127,8 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
   }
   
   componentDidMount () {
+    // const {loadUserLikePosts} = this.props
+    // loadUserLikePosts!()
     window.scrollTo(0,0)
   }
 
