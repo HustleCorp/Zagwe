@@ -42,6 +42,8 @@ export interface IStreamComponentProps {
    */
   setHomeTitle?: () => void
 
+  loadComponentWillMount?: any
+
   /**
    * User full name
    *
