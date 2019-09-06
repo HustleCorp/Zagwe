@@ -77,10 +77,12 @@ export const dbAddImagePost = (newPost: Post, callBack: Function) => {
     dispatch(globalActions.showTopLoading())
     const state: Map<string, any> = getState()
     let uid: string = state.getIn(['authorize', 'uid'])
+    const level: number = state.getIn(['user', 'info', uid, 'level'], 0)
     let post: Post = {
       postTypeId: newPost.postTypeId,
       creationDate: moment().unix(),
       deleteDate: 0,
+      postLevel: level,
       score: 0,
       viewCount: 0,
       title: newPost.title,
@@ -125,13 +127,17 @@ export const dbAddImagePost = (newPost: Post, callBack: Function) => {
  */
 export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) => {
   return (dispatch: any, getState: Function) => {
-
+    const state: Map<string, any> = getState()
+    let uid: string = state.getIn(['authorize', 'uid'])
+    const level: number = state.getIn(['user', 'info', uid, 'level'], 0)
+   
     dispatch(globalActions.showTopLoading())
     let newPost = updatedPost.toJS() as Post
     let post: Post = {
       postTypeId: newPost.postTypeId,
       creationDate: newPost.creationDate,
       deleteDate: newPost.deleteDate,
+      postLevel: level,
       score: newPost.score,
       viewCount: newPost.viewCount,
       title: newPost.title,

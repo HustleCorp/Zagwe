@@ -35,6 +35,7 @@ export const dbGetUserInfo = () => {
         dispatch(addUserInfo(uid, {
           avatar: userProfile.avatar || '',
           avatarPath: userProfile.avatarPath || '',
+          level: userProfile.level || 0,
           email: userProfile.email,
           fullName: userProfile.fullName,
           tagLine: userProfile.tagLine || '',
@@ -106,6 +107,7 @@ export const dbGetUserInfoByUserId = (uid: string, callerKey: string) => {
         dispatch(addUserInfo(uid, {
           avatar: userProfile.avatar || '',
           avatarPath: userProfile.avatarPath || '',
+          level: userProfile.level || 0,
           email: userProfile.email,
           fullName: userProfile.fullName || '',
           tagLine: userProfile.tagLine || '',
@@ -175,6 +177,7 @@ export const dbUpdateUserInfo = (newProfile: Profile) => {
       country: newProfile.country || profile.country ||  '',
       twitterId: newProfile.twitterId || profile.twitterId ||  '',
       creationDate: profile.creationDate,
+      level: profile.level,
       followersCount: profile.followersCount || 0,
       followingCount: profile.followingCount || 0,
     }

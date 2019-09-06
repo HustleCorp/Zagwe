@@ -239,7 +239,7 @@ export class AuthorizeService implements IAuthorizeService {
         {
           id: userId,
           state: 'active',
-          email: email,
+          level: 0,
           webUrl: '',
           tagLine: '',
           followersCount: 0,
