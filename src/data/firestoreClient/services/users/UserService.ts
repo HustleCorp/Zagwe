@@ -49,7 +49,7 @@ export class UserService implements IUserService {
                 reject(reject(new SocialError(`firestore/providerdata`, 'firestore/getUserProfile : Provider data or email of provider data is empty!')))
               }
               const {avatar,fullName, email} = providerData
-              const userProfile = new Profile(avatar, fullName && fullName !== '' ? fullName : email, '', moment().unix(), email, '', '',  -1, '', '', '', '', 0, 0)
+              const userProfile = new Profile(avatar, fullName && fullName !== '' ? fullName : 'Anonymous', '', moment().unix(), 0, '', '', '',  -1, '', '', '', '', 0, 0)
               resolve(userProfile)
               this.updateUserProfile(userId, userProfile)
             })

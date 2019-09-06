@@ -6,7 +6,8 @@ import FollowBox from 'components/FollowButton'
 
 // - Material UI
 import { withStyles } from '@material-ui/core/styles'
-import PersonAdd from '@material-ui/icons/PersonAdd'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
 
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import Button from '@material-ui/core/Button'
@@ -37,7 +38,15 @@ const styles = (theme: any) => ({
      paddingLeft: '24px',
      paddingBottom: '16px',
     },
-
+    chip: {
+      margin: '1px'
+    },
+    chipDiv: {
+      marginLeft: '10px'
+    },
+    rankingSys: {
+      display: 'flex'
+    },
    avatar: {
         [theme.breakpoints.up('sm')]: {
             width: '30%',
@@ -285,6 +294,8 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
                                         <h4 className={classes.name}>
                                           {this.props.fullName}
                                         </h4>
+
+                                      <div className={classes.rankingSys}>
                                         <div className={classes.flixbox}>
           
                                         {isAuthedUser ? (<div>
@@ -297,8 +308,17 @@ export class ProfileHeaderComponent extends Component<IProfileHeaderComponentPro
                                             //  </Button>
                                             <FollowBox authed={authed} userId={userId!} userInfo={userInfo!} />
                                             }
-                                        
+            
                                        </div>
+                                       <div className={classes.chipDiv} >
+                                       <Chip
+                                          variant='outlined'
+                                          avatar={<Avatar>{this.props.level}</Avatar>}
+                                          label="Level"
+                                          className={classes.chip}
+                                        />
+                                       </div>
+                                    </div>
                                   </div>
                                    
                                 </div>

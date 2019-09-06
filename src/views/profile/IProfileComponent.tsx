@@ -164,7 +164,7 @@ export class ProfileComponent extends Component<IProfileComponentProps,IProfileC
       <div style={styles.profile}>
         <div style={styles.header}>
           <AsyncHeader tagLine={this.props.tagLine} avatar={this.props.avatar} isAuthedUser={this.props.isAuthedEdit!}
-              city={this.props.city}     country={this.props.country}
+              city={this.props.city}     country={this.props.country} level={this.props.level}
               banner={this.props.banner} fullName={this.props.name} 
               company={this.props.company} twitterId={this.props.twitterId}
               userId={this.props.userId}  website={this.props.website}
@@ -267,6 +267,7 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IProfileComponentPro
     followingCount: userProfile.followingCount,
     followersCount: userProfile.followersCount,
     userProfile: userProfile,
+    level: userProfile.level,
     likes: otherProfile.likes || [],
     likeCount: otherProfile.likeCount || 0,
     userId,

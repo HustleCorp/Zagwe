@@ -44,6 +44,8 @@ export interface IProfileComponentProps {
    * @memberof IProfileComponentProps
    */
   website?: string
+
+  level?: string
   /**
    * User's avatar address
    *

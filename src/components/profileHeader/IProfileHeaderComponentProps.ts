@@ -20,6 +20,8 @@ export interface IProfileHeaderComponentProps {
 
   twitterId: string,
 
+  level: string,
+
   /**
    * Image cover address
    *

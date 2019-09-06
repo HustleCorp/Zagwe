@@ -10,6 +10,8 @@ export class Post extends BaseDomain {
      */
   public id?: string | null
 
+  public postLevel?: number
+
     /**
      * The identifier of post type
      *
