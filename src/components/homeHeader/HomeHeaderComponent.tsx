@@ -313,7 +313,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
    */
   handleNotifyTouchTap = (event: any) => {
     // This prevents ghost click.
-    event.preventDefault()
+    // event.preventDefault()
 
     this.setState({
       openNotifyMenu: true,
@@ -399,6 +399,7 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
   render () {
     const { classes , translate, theme, authed} = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
+    console.log('is notify open', this.state.openNotifyMenu)
     return (
 
       <AppBar position='fixed' className={classes.appBar}>

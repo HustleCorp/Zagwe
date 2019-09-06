@@ -250,7 +250,7 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
        if ( authed ) {
           loadOtherData!()
         }
-        console.log('************\n          *\n         * \n        *  \n       *   \n      *    \n     *     \n    *      \n   *      \n  *     \n *     \n*********** \n Well Hello There! Before you continue with your hacking away, I would like to tell you I am looking for developers to join Zagwe in developing cool projects. If you are interested, contact me at bktotient@gmail.com')
+     
   }
 
   /**
