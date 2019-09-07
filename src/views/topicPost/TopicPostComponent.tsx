@@ -92,67 +92,82 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
           case `${Tags.topic1}`: 
             return (
                     <TopicIntro title={`${TopicsFUll.topic1}`} 
+                    bio={'Latest posts coming your way'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Flatest.jpg?alt=media&token=499e843b-0fde-4eea-bd24-81b6cd1a6fa4'}
+                              />
+                  )
+          case `${Tags.topic2}`: 
+            return (
+                    <TopicIntro title={`${TopicsFUll.topic2}`} 
                     bio={'Posts from people you follow'} 
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ffollowmin.jpg?alt=media&token=f5ea1b0b-f9d2-411f-a113-a8d09ce88ae8'}
                               />
                    )
           
-          case `${Tags.topic2}`: 
+          case `${Tags.topic3}`: 
             return (
-              <TopicIntro title={`${TopicsFUll.topic2}`}
+              <TopicIntro title={`${TopicsFUll.topic3}`}
                 bio={'Art, Religion, Traditions and Much More ...'} 
                 url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2F455929966_455636.jpg?alt=media&token=2346f4a3-a60d-4030-b08e-6dc7f9e3d43d'}
                 />
                 )
-          case `${Tags.topic3}`:
+          case `${Tags.topic4}`:
               return (
-                <TopicIntro title={`${TopicsFUll.topic3}`}
+                <TopicIntro title={`${TopicsFUll.topic4}`}
                   bio={'Covering the latest important events and movements from around the world.'} 
                   url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoliticsnew.jpg?alt=media&token=af895289-f5a8-451b-96bc-23a8e8a9ac22'}
                   />
                   )
-          case `${Tags.topic4}`: 
+          case `${Tags.topic5}`: 
             return (
-              <TopicIntro title={`${TopicsFUll.topic4}`}
+              <TopicIntro title={`${TopicsFUll.topic5}`}
                 bio={'Your daily dose of reality'} 
                 url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fgetemegn.jpg?alt=media&token=bb94927b-ae33-4055-af1b-984a10e82fa2'}
                 />
                 )
 
-          case `${Tags.topic5}`: 
+          case `${Tags.topic6}`: 
               return (
-                <TopicIntro title={`${TopicsFUll.topic5}`}
+                <TopicIntro title={`${TopicsFUll.topic6}`}
                   bio={"Insight into Ethiopia's world of work and Entrepreneurship"} 
                   url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fbusiness.jpg?alt=media&token=bfaa65bb-aa78-46bd-a3d8-cd6f7dfd1b27'}
                   />
                   )
-          case `${Tags.topic6}`: 
-            return (
-                  <TopicIntro title={`${TopicsFUll.topic6}`}
-                    bio={'Newest tech developments in Ethiopia and the rest of the world'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ftech.jpg?alt=media&token=7ddbaf66-f8d6-4161-8778-edddfd7e8399'}
-                    />
-                    )
-            break
           case `${Tags.topic7}`: 
             return (
                   <TopicIntro title={`${TopicsFUll.topic7}`}
-                    bio={'Amharic and English poems for your soul'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'}
+                    bio={'Newest tech developments in Ethiopia and the rest of the world'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ftech.jpg?alt=media&token=7ddbaf66-f8d6-4161-8778-edddfd7e8399'}
                     />
                     )
             break
           case `${Tags.topic8}`: 
             return (
                   <TopicIntro title={`${TopicsFUll.topic8}`}
+                    bio={'Healthy Lifestyle and better living'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ffoodcomp.jpg?alt=media&token=d76c63c3-6777-4e9d-b68a-b0563c8dfbef'}
+                    />
+                    )
+            break
+          case `${Tags.topic9}`: 
+            return (
+                  <TopicIntro title={`${TopicsFUll.topic9}`}
+                    bio={'Amharic and English poems for your soul'} 
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'}
+                    />
+                    )
+            break
+          case `${Tags.topic10}`: 
+            return (
+                  <TopicIntro title={`${TopicsFUll.topic10}`}
                     bio={'Where observation meet imagination'} 
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fteret.jpg?alt=media&token=26bc5e62-14c4-4cb3-8bd6-d1f1077ca110'}
                     />
                     )
             break
-            case `${Tags.topic9}`: 
+            case `${Tags.topic11}`: 
             return (
-                  <TopicIntro title={`${TopicsFUll.topic9}`}
+                  <TopicIntro title={`${TopicsFUll.topic11}`}
                     bio={'Be original'} 
                     url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Frandommin.jpg?alt=media&token=c56ee5c6-ae2a-4e3c-b90d-5fdff730bd9c'}
                     />
