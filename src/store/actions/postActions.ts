@@ -137,7 +137,7 @@ export const dbUpdatePost = (updatedPost: Map<string, any>, callBack: Function) 
       postTypeId: newPost.postTypeId,
       creationDate: newPost.creationDate,
       deleteDate: newPost.deleteDate,
-      postLevel: level,
+      postLevel: newPost.postLevel,
       score: newPost.score,
       viewCount: newPost.viewCount,
       title: newPost.title,
