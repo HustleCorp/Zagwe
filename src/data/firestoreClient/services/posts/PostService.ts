@@ -107,13 +107,19 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
  Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}> = (header, lastPostId, page = 0, limit = 5) => {
      return new Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}>((resolve, reject) => {
           let parsedData: { [postId: string]: Post }[] = []
+
+          let query: any
+          if (header ===  'latest') {
+             query = db.collection('posts').orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
+          } else {
+             query = db.collection('posts').where('postTopic', '==', header).orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
+          } 
          
-          let query = db.collection('posts').where('postTopic', '==', header).orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
           // .orderBy('creationDate', 'desc').startAfter(lastPostId)
-          query.get().then((posts) => {
+          query.get().then((posts: any) => {
            let newLastPostId = posts.size > 0 ? posts.docs[posts.docs.length - 1] : ''
 
-           posts.forEach((postResult) => {
+           posts.forEach((postResult: any) => {
              const post = postResult.data() as Post
              parsedData = [
                ...parsedData,
@@ -135,7 +141,8 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
       Promise<{posts: { [postId: string]: Post}[], newLastPostId: string}> = (lastPostId, page = 0, limit = 5) => {
           return new Promise<{posts: { [postId: string]: Post}[], newLastPostId: any}>((resolve, reject) => {
                let parsedData: { [postId: string]: Post }[] = []
-               let query = db.collection('posts').orderBy('creationDate', 'desc').startAfter(lastPostId).limit(limit)
+               const lastpost = lastPostId === '' ? 0 : lastPostId
+               let query = db.collection('posts').where('postLevel', '>', 1).orderBy('postLevel').orderBy('creationDate', 'desc').startAfter(lastpost).limit(limit)
                query.get().then((posts) => {
                 let newLastPostId = posts.size > 0 ? posts.docs[posts.docs.length - 1] : ''
                 posts.forEach((postResult) => {
