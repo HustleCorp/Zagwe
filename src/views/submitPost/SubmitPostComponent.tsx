@@ -147,7 +147,6 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       const { EditPost } = props
       
       this.catagories = [
-        TopicsFUll.topic2,
         TopicsFUll.topic3,
         TopicsFUll.topic4,
         TopicsFUll.topic5,
@@ -155,6 +154,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         TopicsFUll.topic7,
         TopicsFUll.topic8,
         TopicsFUll.topic9,
+        TopicsFUll.topic10,
+        TopicsFUll.topic11,
       ]
       // Default state
       this.state = {

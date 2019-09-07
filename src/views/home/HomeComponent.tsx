@@ -283,15 +283,17 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
                     textColor='primary'
                     >
                       <Tab label={`${TagLabel.home}`} />
-                      <Tab style={{display: isGuest ? 'none' : ''}} label={`${TagLabel.topic1}`} /> : ''}
-                      <Tab label={`${TagLabel.topic2}`} />
+                      <Tab label={`${TagLabel.topic1}`} />
+                      <Tab style={{display: isGuest ? 'none' : ''}} label={`${TagLabel.topic2}`} /> : ''}
                       <Tab label={`${TagLabel.topic3}`} />
+                      <Tab label={`${TagLabel.topic4}`} />
                       <Tab className={classes.amharic} label={`ገጠመኝ`} />
-                      <Tab label={`${TagLabel.topic5}`} />
                       <Tab label={`${TagLabel.topic6}`} />
                       <Tab label={`${TagLabel.topic7}`} />
-                      <Tab className={classes.amharic} label={`ተረት ተረት`} />
+                      <Tab label={`${TagLabel.topic8}`} />
                       <Tab label={`${TagLabel.topic9}`} />
+                      <Tab className={classes.amharic} label={`ተረት ተረት`} />
+                      <Tab label={`${TagLabel.topic11}`} />
                     </Tabs>
         
           </div>

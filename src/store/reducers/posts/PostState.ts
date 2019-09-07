@@ -52,6 +52,8 @@ export class PostState {
     featureloaded: boolean = false
 
     likedPosts = Map({ })
+
+    latest = Map({})
     
     following = Map({ })
 
@@ -67,6 +69,8 @@ export class PostState {
 
     technology = Map({ })
     
+    health = Map({})
+    
     poetry = Map({ })
 
     other = Map({})
@@ -78,11 +82,13 @@ export class PostState {
    stream?: Map<string, Map<string, any>> = Map({
                                     userPosts : Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     likePosts: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
+                                    latest: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     following: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     politics: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     business: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     culture: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     getemegn: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
+                                    health: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     teret: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     technology: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
                                     poetry: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
