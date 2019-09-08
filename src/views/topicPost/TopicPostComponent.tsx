@@ -93,7 +93,7 @@ export class TopicPostComponent extends Component<ITopicPostComponentProps,ITopi
             return (
                     <TopicIntro title={`${TopicsFUll.topic1}`} 
                     bio={'Latest posts coming your way'} 
-                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Flatest.jpg?alt=media&token=499e843b-0fde-4eea-bd24-81b6cd1a6fa4'}
+                    url={'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2FlatestCOm.jpg?alt=media&token=a078d196-48bc-42b6-a9b8-260086e49c15'}
                               />
                   )
           case `${Tags.topic2}`: 

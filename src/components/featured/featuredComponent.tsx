@@ -5,6 +5,7 @@ import { Map, List as ImuList } from 'immutable'
 import moment from 'moment'
 
 import * as postActions from 'store/actions/postActions'
+import * as PostAPI from 'src/api/PostAPI'
 
 // material-ui components
 import withStyles from "@material-ui/core/styles/withStyles"
@@ -93,8 +94,9 @@ export class FeaturedComponent extends Component<IfeaturedComponentProps,Ifeatur
               parsedPosts = parsedPosts.push(post)
             } 
           }) 
+          const sortedPosts = PostAPI.sortImuObjectsDate(parsedPosts)
           let index = 0
-          parsedPosts.forEach((post) => {
+           sortedPosts.forEach((post) => {
               index++
               let newPost: any = (
                   <div key={`${index}-featured-div`}>
