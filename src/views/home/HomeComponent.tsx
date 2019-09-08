@@ -220,6 +220,12 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
       case 9:
             goTo!(`/t/${Tags.topic9}`)
             break
+      case 10:
+            goTo!(`/t/${Tags.topic10}`)
+            break
+      case 11:
+            goTo!(`/t/${Tags.topic11}`)
+            break
    
       default:
         break
