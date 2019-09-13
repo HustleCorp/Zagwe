@@ -68,6 +68,8 @@ export interface IPostPageComponentProps {
    */
   postId?: string
 
+  authorized?: string
+
   /**
    * Post Map
    * 

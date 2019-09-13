@@ -100,7 +100,6 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
          likeCount: likeCount + 1
      }
     }
-    
     const post: Map<string, any> = state.getIn(['post', 'userPosts', ownerPostUserId, postId])
     const score = Number(post.get('score', 0)) + 1
      const votedPost = post
@@ -185,7 +184,6 @@ export const dbDeleteVote = (postId: string, ownerPostUserId: string) => {
          likeCount: 0
       }
     }
-
     const score = post.get('score', 0) - 1
     const votedPost = post
      .set('score', score)

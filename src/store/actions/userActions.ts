@@ -61,6 +61,7 @@ export const dbGetUserOther = () => {
        const state: Map<string, any> = getState()
        let uid: string = state.getIn(['authorize', 'uid'])
        if (uid) {
+        
           return userService.getUserOther(uid).then((otherUserProfile: OtherProfile) => {
                dispatch(addUserOther(uid, {
                  likes: otherUserProfile.likes,

@@ -125,11 +125,16 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
   }
  
   handleVote = () => {
+  if (this.props.authorized) {
     if (this.props.currentUserVote) {
       this.props.unvote!()
     } else {
       this.props.vote!()
     }
+  } else {
+      this.props.goTo!('/login')
+  }
+
   }
   /**
    * Show copy link
@@ -365,6 +370,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: IPostPageComponentProps) =>
    */
 const mapStateToProps = (state: Map<string, any>, ownProps: IPostPageComponentProps) => {
   const uid = state.getIn(['authorize', 'uid'])
+  const authorized = state.getIn(['authorize', 'authed'], false)
   const isAdmin = state.getIn(['authorize', 'isAdmin'])
   const {userId, postId} = ownProps.match.params
   const userInfo = state.getIn(['user', 'info', userId])
@@ -377,6 +383,7 @@ const mapStateToProps = (state: Map<string, any>, ownProps: IPostPageComponentPr
 
   return {
     translate: getTranslate(state.get('locale')),
+    authorized: authorized,
     avatar:  userInfo ? userInfo.avatar : '',
     name:  userInfo ? userInfo.fullName : '',
     tagline: userInfo ? userInfo.tagLine : '',
