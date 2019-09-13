@@ -210,7 +210,6 @@ export class AuthorizeService implements IAuthorizeService {
         }
 
         this.storeUserProviderData(uid, email!, displayName!, photoURL!, providerId, 'No Access token provided!')
-        // this.storeUserInformation(uid, email!, displayName!, photoURL!)
         resolve(new LoginUser(user.uid, true, userInfo ? userInfo.isAdmin : false,  providerId, displayName!, email!, photoURL!))
 
       }).catch(function (error: any) {
@@ -291,13 +290,7 @@ export class AuthorizeService implements IAuthorizeService {
             accessToken
           }
         )
-        db.doc(`otherUserInfo/${userId}`).set(
-          {
-            likes: [],
-            likeCount: 0
-            
-          }
-       )
+
         .then(() => {
           resolve(new RegisterUserResult(userId))
         })

@@ -26,9 +26,14 @@ export class UserService implements IUserService {
           let userOtherProfileref = db.doc(`otherUserInfo/${userId}`)
           userOtherProfileref.get().then((result) => {
               if (!result.exists) {
+                  const userOther = new OtherProfile([], 0)
+                  resolve(userOther)
+                  this.updateUserOtherProfile(userId, userOther )
               } else {
+                  
                   resolve(result.data() as OtherProfile)
               }
+
           })
         .catch((error: any) => reject(new SocialError(error.code, 'firestore/getUserOther :' + error.message)))
      })
@@ -42,6 +47,7 @@ export class UserService implements IUserService {
 
       return new Promise<Profile>((resolve, reject) => {
         let userProfileRef = db.doc(`userInfo/${userId}`)
+        let userOtherProfile
         userProfileRef.get().then((result) => {
           if (!result.exists) {
               this.getUserProviderData(userId).then((providerData: UserProvider) => {
