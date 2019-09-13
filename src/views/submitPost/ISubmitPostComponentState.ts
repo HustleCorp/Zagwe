@@ -13,6 +13,8 @@ export interface ISubmitPostComponentState {
 
     postTopic: string
 
+    tags: any []
+
     currentImage: any
 
     /**

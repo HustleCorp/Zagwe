@@ -421,7 +421,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
               >
               <Paper>
                 <MenuList role='menu'>
-                  <MenuItem className={classes.rightIconMenuItem}>{translate!('comment.replyButton')}</MenuItem>
+                  {/* <MenuItem className={classes.rightIconMenuItem}>{translate!('comment.replyButton')}</MenuItem> */}
                   {this.props.isCommentOwner ? (<MenuItem className={classes.rightIconMenuItem} onClick={this.handleEditComment}>{translate!('comment.editButton')}</MenuItem>) : ''}
                   {(this.props.isCommentOwner || this.props.isPostOwner) ? (<MenuItem className={classes.rightIconMenuItem} onClick={(evt: any) => this.handleDelete(evt, comment.id, comment.postId)}>{translate!('comment.deleteButton')}</MenuItem>) : ''}
                 </MenuList>

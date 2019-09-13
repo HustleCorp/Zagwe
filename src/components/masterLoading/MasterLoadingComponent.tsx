@@ -21,6 +21,7 @@ export default class MasterLoadingComponent extends Component<IMasterLoadingComp
   loadProgress() {
     const { error, timedOut, pastDelay } = this.props
     if (error) {
+      console.log(error)
       return (
         <Grid container>
           <Grid item>

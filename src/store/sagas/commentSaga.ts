@@ -22,6 +22,7 @@ const commentService: ICommentService = provider.get<ICommentService>(SocialProv
  * Creating channel event and subscribing get comments service
  */
 function fetchCommentsChannel(postId: string) {  
+    debugger
     return eventChannel<Map<string, Map<string, any>>>((emmiter) => {
         const unsubscribe = commentService.getComments(postId, (comments: Map<string, Map<string, any>>) => { 
              emmiter(comments)
@@ -39,6 +40,7 @@ function* setComments(ownerId: string, postId: string, comments: Map<string, Map
         /**
          * Workout getting the number of post's comment and getting three last comments
          */
+        debugger
         yield put(commentActions.addCommentList(comments))
         let commentsCount: number
         const post: Map<string, any> = yield select(postSelector.getPost, ownerId, postId)
