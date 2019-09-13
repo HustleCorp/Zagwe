@@ -237,9 +237,9 @@ export class CommentGroupComponent extends Component<ICommentGroupComponentProps
             >
             </CardHeader>
                 <CardActions className={classes.postButton} >
-          <Button color='primary' disabled={this.state.postDisable} onClick={this.handlePostComment}>
-        {translate!('comment.postButton')}
-        </Button>
+              <Button color='primary' disabled={this.state.postDisable} onClick={this.handlePostComment}>
+            {translate!('comment.postButton')}
+            </Button>
                   </CardActions>
           </Card>
         </Paper>

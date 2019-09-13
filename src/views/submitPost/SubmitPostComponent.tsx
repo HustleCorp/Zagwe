@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {getTranslate, getOptions} from 'react-localize-redux'
 import { push } from 'connected-react-router'
 import {Prompt} from 'react-router-dom'
-
+import TagsInput from 'react-tagsinput'
+ 
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { withRouter} from 'react-router-dom'
@@ -23,6 +24,8 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 // StyledComponents list
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
+import Question from '@material-ui/icons/ContactSupportOutlined'
+import Tooltip from '@material-ui/core/Tooltip'
 import { container, defaultFont } from 'assets/jss/material-kit-react.jsx'
 
 // Import actions
@@ -40,6 +43,7 @@ import { Tags, TopicsFUll, TopicsMap, TagsMap }  from 'constants/postType'
 
 // Style Component
 import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.jsx'
+import { IconButton } from '@material-ui/core'
 
 const styles = (theme: Theme) => ({
   container,
@@ -125,6 +129,13 @@ const styles = (theme: Theme) => ({
   }
 })
 
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+}
+ 
+const delimiters = [KeyCodes.comma, KeyCodes.enter]
+
 export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPostComponentState> {
   
   quillRef: any
@@ -164,10 +175,13 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          * Post Body HTML
          */
         postBodyHTML: this.props.edit && EditPost ? EditPost.get('body', '') : '',
+
         /**
          * PostBodyText
          */
         postBodyText: this.props.edit && EditPost ? EditPost.get('bodyText', '') : '', 
+
+        tags: this.props.edit && EditPost ? EditPost.get('tags', '') : [],
         /**
          * Post Title
          */
@@ -196,7 +210,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
         currentImage: {}
 
      }
-  
+
+      this.handleChange = this.handleChange.bind(this)
       this.handleOnBodyChange = this.handleOnBodyChange.bind(this)
       this.handleOnTitleChange = this.handleOnTitleChange.bind(this)
       this.imageHandler = this.imageHandler.bind(this)
@@ -209,7 +224,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       this.handleOpenReq = this.handleOpenReq.bind(this)
       this.handleCloseReq = this.handleCloseReq.bind(this)
       this.beforeunload = this.beforeunload.bind(this)
-   // Modifired Quilljs Modules
+   // Modified Quilljs Modules
      this.modules = {
           toolbar: {
              container: [
@@ -248,6 +263,10 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       
       postBodyHTML: content, 
       postBodyText: this.quillRef ? this.quillRef.getText() : '', })
+  }
+
+  handleChange(tags: any) {
+    this.setState({tags})
   }
 
   handleOnTopicChange(event: any) {
@@ -353,6 +372,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       postBodyHTML,
       imagefullPath,
       postBodyText,
+      tags,
       postTopic,
       postTitle,
     } = this.state
@@ -365,13 +385,13 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       goTo
     }  = this.props
 
-    if (postTitle.length < 5 ) {
+    if (postTitle.length < 5 || postTitle.length > 80 ) {
        this.setState({postTitleError: 'Title must be more than 5 characters long'})
        error = true
     } else if (!this.catagories.includes(postTopic)) {
        this.setState({postCatagoryError: 'Invalid Catagory'})
        error = true
-    } else if (postBodyText.length < 300) {
+    } else if (postBodyText.length < 300 && postTopic !== 'Poetry') {
       this.setState({postBodyError: 'Post is too short, please add more content'})
       error = true
     }
@@ -385,6 +405,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                 post!({
                    ownerDisplayName: ownerDisplayName,
                    ownerAvatar: ownerAvatar,
+                   tags: tags,
                    image: image,
                    thumbImage: url,
                    imageFullPath: imagefullPath,
@@ -401,6 +422,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                 post!({
                     ownerDisplayName: ownerDisplayName,
                     ownerAvatar: ownerAvatar,
+                    tags: tags,
                     image: image,
                     thumbImage: '',
                     imageFullPath: imagefullPath,
@@ -419,6 +441,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                 ownerDisplayName: ownerDisplayName,
                 ownerAvatar: ownerAvatar,
                 body: postBodyHTML,
+                tags: tags,
                 bodyText: postBodyText.substring(0, 300),
                 image: '',
                 thumbImage: '',
@@ -437,6 +460,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          if (url) {
           const updatedPost = EditPost!.set('body', postBodyHTML)
           .set('bodyText', postBodyText)
+          .set('tags', tags)
           .set('title', postTitle)
           .set('image', image)
           .set('thumbImage', url)
@@ -450,6 +474,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     
             const updatedPost = EditPost!.set('body', postBodyHTML)
             .set('bodyText', postBodyText)
+            .set('tags', tags)
             .set('title', postTitle)
             .set('image', '')
             .set('imageFullPath', imagefullPath)
@@ -464,6 +489,29 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     }
     
   }
+
+    handleDelete(i: number) {
+    const { tags } = this.state
+    this.setState({
+         tags: tags.filter((tag, index) => index !== i),
+         })
+      }
+
+      handleAddition(tag: any) {
+          const ad = this.state.tags
+          this.setState({ tags: [...this.state.tags, tag] })
+      }
+
+      // handleDrag(tag, currPos, newPos) {
+      //     const tags = [...this.state.tags];
+      //     const newTags = tags.slice();
+
+      //     newTags.splice(currPos, 1);
+      //     newTags.splice(newPos, 0, tag);
+
+      //     // re-render
+      //     this.setState({ tags: newTags });
+      // }
 
   /**
    * Attach to the Quill component
@@ -563,7 +611,16 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                       </Select>
                     </FormControl>
                   </div>
-
+                  <div style={{paddingBottom: '10px', display: 'flex'}}>
+                     <TagsInput disabled={true} value={this.state.tags} onChange={this.handleChange} />
+                     <div >
+                      <Tooltip title={'Tags help make your posts more discoverable and show up in searchs more frequently'}>
+                        <IconButton>
+                            <Question/>
+                        </IconButton>
+                      </Tooltip>
+                     </div>
+                  </div>
                   <div>
                    <div style={{color: 'red'}}>
                        {this.state.postBodyError.trim() !== '' ? 'Post is too short, please add more content' : ''}
