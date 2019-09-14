@@ -47,6 +47,7 @@ export interface ISubmitPostComponentProps {
    */
   post?: (post: Post, callback: Function) => any
 
+
   /**
    * Post Model object
    */

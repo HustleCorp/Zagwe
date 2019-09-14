@@ -484,7 +484,7 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
     })
 
     let inputComponent = renderInput({
-      ref: r => { this.input = r },
+      ref: (r: any) => { this.input = r },
       value: this._tag(),
       onPaste: this.handlePaste,
       onKeyDown: this.handleKeyDown,

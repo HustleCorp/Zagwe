@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 import {getTranslate, getOptions} from 'react-localize-redux'
 import { push } from 'connected-react-router'
 import {Prompt} from 'react-router-dom'
-import TagsInput from 'react-tagsinput'
+
 import AutosizeInput from 'react-input-autosize'
  
 import ReactQuill, { Quill } from 'react-quill'
+import TagsInput from 'components/tagsComponent'
 import 'react-quill/dist/quill.snow.css'
 import { withRouter} from 'react-router-dom'
 import {Map, List as ImuList} from 'immutable'
@@ -552,13 +553,14 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
   }
   renderTag = (props: any) => {
     const { isTagFocus } = this.state
-    const { tag, key, diasbled, onRemove, classNameRemove, getTagDisplayValue, ...other } = props
+    const { tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other } = props
+
     return (
     <span key={key} {...other} onBlur={() => { this.setState({ isTagFocus: false }) }}>
       { <span onClick={() => { this.setState({ isTagFocus: true }) }}>
           {getTagDisplayValue(tag)}
         </span>}
-        {!diasbled && <a className={classNameRemove} onClick={(e) => { onRemove(key) }}></a>}
+        {!disabled && <a className={classNameRemove} onClick={(e) => { onRemove(key) }}></a>}
     </span>)
   }
 
