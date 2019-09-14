@@ -4,11 +4,13 @@ import {getTranslate, getOptions} from 'react-localize-redux'
 import { push } from 'connected-react-router'
 import {Prompt} from 'react-router-dom'
 import TagsInput from 'react-tagsinput'
+import AutosizeInput from 'react-input-autosize'
  
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { withRouter} from 'react-router-dom'
 import {Map, List as ImuList} from 'immutable'
+import 'react-tagsinput/react-tagsinput.css'
 // @material-ui/core components
 import { withStyles, Theme } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -125,7 +127,6 @@ const styles = (theme: Theme) => ({
   guide: {
     color: '#999',
     textDecoration: 'underline',
-    paddingLeft: '10px'
   }
 })
 
@@ -181,7 +182,11 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          */
         postBodyText: this.props.edit && EditPost ? EditPost.get('bodyText', '') : '', 
 
-        tags: this.props.edit && EditPost ? EditPost.get('tags', '') : [],
+        tags: this.props.EditPost && EditPost ? EditPost.get('tags', []) : [],
+
+        isTagFocus: false,
+
+        tagEditIndex: 0,
         /**
          * Post Title
          */
@@ -266,7 +271,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
   }
 
   handleChange(tags: any) {
-    this.setState({tags})
+    this.setState({tags: tags})
   }
 
   handleOnTopicChange(event: any) {
@@ -545,6 +550,17 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
       event.returnValue = true
     }
   }
+  renderTag = (props: any) => {
+    const { isTagFocus } = this.state
+    const { tag, key, diasbled, onRemove, classNameRemove, getTagDisplayValue, ...other } = props
+    return (
+    <span key={key} {...other} onBlur={() => { this.setState({ isTagFocus: false }) }}>
+      { <span onClick={() => { this.setState({ isTagFocus: true }) }}>
+          {getTagDisplayValue(tag)}
+        </span>}
+        {!diasbled && <a className={classNameRemove} onClick={(e) => { onRemove(key) }}></a>}
+    </span>)
+  }
 
   render() {
 
@@ -611,16 +627,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                       </Select>
                     </FormControl>
                   </div>
-                  <div style={{paddingBottom: '10px', display: 'flex'}}>
-                     <TagsInput disabled={true} value={this.state.tags} onChange={this.handleChange} />
-                     <div >
-                      <Tooltip title={'Tags help make your posts more discoverable and show up in searchs more frequently'}>
-                        <IconButton>
-                            <Question/>
-                        </IconButton>
-                      </Tooltip>
-                     </div>
-                  </div>
+
                   <div>
                    <div style={{color: 'red'}}>
                        {this.state.postBodyError.trim() !== '' ? 'Post is too short, please add more content' : ''}
@@ -637,6 +644,16 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
 
                   <div className={classes.guideLines}>
                   <a>
+                  <div style={{paddingTop: '10px', display: 'flex'}}>
+                     <TagsInput  renderTag={this.renderTag} value={this.state.tags} onChange={this.handleChange} />
+                     <div >
+                      <Tooltip title={'Tags help make your posts more discoverable and show up in searchs more frequently'}>
+                        <IconButton>
+                            <Question/>
+                        </IconButton>
+                      </Tooltip>
+                     </div>
+                  </div>
                    <div className={classes.guide} onClick={this.handleOpenGuide}>
                        {'Post submission FAQ and tips'}
                    </div>
