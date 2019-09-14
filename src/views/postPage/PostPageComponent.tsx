@@ -12,6 +12,7 @@ import MasterLoadingComponent from 'components/masterLoading/MasterLoadingCompon
 
 import postPage from 'src/assets/jss/material-kit-react/components/postPage'
 import {Menu, MenuItem, ListItemIcon} from '@material-ui/core'
+import Chip from '@material-ui/core/Chip'
 import SvgLink from '@material-ui/icons/Link'
 
 // - Import actions
@@ -101,6 +102,7 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
     this.handleCopyLink = this.handleCopyLink.bind(this)
     this.openPostMenu = this.openPostMenu.bind(this)
     this.closePostMenu = this.closePostMenu.bind(this)
+    this.handleShowTags = this.handleShowTags.bind(this)
 
   }
 
@@ -167,6 +169,26 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
     window.scrollTo(0,0)
   }
 
+  handleShowTags =  () => {
+    const {post} = this.props
+    let tagCrumbs: any [] = []
+    
+    if (post === undefined || !(post.keySeq().count() > 0)) {
+  
+      return  []
+
+    } else {
+    const tagsList = post.get('tags') as string []
+
+    tagsList.forEach((tag: string) => {
+        let newTag = <div style={{padding: '4px'}}><Chip label={tag}  variant="outlined" /> </div>
+        tagCrumbs.push(newTag)
+         
+    })
+    return tagCrumbs
+  }
+  }
+
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
@@ -184,6 +206,8 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
     }
  
     const { postMenuAnchorEl, isPostMenuOpen,} = this.state
+   
+    const tagCrumbs = this.handleShowTags ()
 
     const rightIconMenu = (
       <div>
@@ -232,6 +256,9 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
                <div>
                 <div style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: post.get('body') }} /> 
               </div>
+              </div>
+              <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                {tagCrumbs}
               </div>
               <div className={classes.social}>
                 <div className={classes.socialInside}>

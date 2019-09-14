@@ -13,9 +13,13 @@ export interface ISubmitPostComponentState {
 
     postTopic: string
 
-    tags: any []
+    tags: string []
 
     currentImage: any
+
+    isTagFocus: boolean
+
+    tagEditIndex: number
 
     /**
      * Post Title
