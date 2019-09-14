@@ -1,49 +1,48 @@
-export interface tagsComponentProps {
-    tagDisplayProp: any
+export interface TagsComponentProps {
+    tagDisplayProp?: any
     
     value: string []
 
     onChange: any
 
-    onChangeInput: any
+    onChangeInput?: any
 
-    inputValue: any
+    inputValue?: any
 
-    validationRegex: any
+    validationRegex?: any
 
-    onValidationReject: any
+    onValidationReject?: any
 
-    onlyUnique: any
+    onlyUnique?: any
 
-    maxTags: any
+    maxTags?: any
 
-    preventSubmit: any
+    preventSubmit?: any
 
-    addOnPaste: any
+    addOnPaste?: any
 
-    pasteSplit: any
+    pasteSplit?: any
 
-    removeKeys: any
+    removeKeys?: any
 
-    addKeys: any
+    addKeys?: any
 
-    inputProps: any
+    inputProps?: any
 
-    addOnBlur: any
+    addOnBlur?: any
 
-    disabled: boolean
+    disabled?: boolean
 
-    tagProps: any
+    tagProps?: any
     
-    renderLayout: any
+    renderLayout?: any
 
-    renderTag: any
+    renderTag?: any
 
-    renderInput: any
+    renderInput?: any
 
-    className: any
+    className?: any
 
-    focusedClassName: any
+    focusedClassName?: any
     
-
 }

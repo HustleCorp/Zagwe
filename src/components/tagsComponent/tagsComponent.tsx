@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import  {tagsComponentProps} from './tagsComponentProps'
-import {tagsComponentState} from './tagsComponentState'
+import  {TagsComponentProps} from './tagsComponentProps'
+import {TagsComponentState} from './tagsComponentState'
 
 function uniq (arr: []) {
   let out: [] = []
@@ -29,7 +29,6 @@ function getClipboardData (e: any) {
   return ''
 }
 
-
 function defaultRenderTag (props: any) {
   let {tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other} = props
   return (
@@ -42,7 +41,6 @@ function defaultRenderTag (props: any) {
   )
 }
 
-
 defaultRenderTag.propTypes = {
   key: PropTypes.number,
   tag: PropTypes.string,
@@ -52,7 +50,7 @@ defaultRenderTag.propTypes = {
   addTag: PropTypes.func
 }
 
-function defaultRenderInput ({...props}) {
+function defaultRenderInput ({...props}: any) {
   let {onChange, value, ...other} = props
   return (
     <input type='text' onChange={onChange} value={value} {...other} />
@@ -83,69 +81,70 @@ const defaultInputProps = {
   placeholder: 'Add a tag'
 }
 
-class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
-  /* istanbul ignore next */
+class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> {
+  static propTypes = {
+        focusedClassName: PropTypes.string,
+        addKeys: PropTypes.arrayOf(PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string
+        ])),
+        addOnBlur: PropTypes.bool,
+        addOnPaste: PropTypes.bool,
+        currentValue: PropTypes.string,
+        inputValue: PropTypes.string,
+        inputProps: PropTypes.object,
+        onChange: PropTypes.func.isRequired,
+        onChangeInput: PropTypes.func,
+        removeKeys: PropTypes.arrayOf(PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string
+        ])),
+        renderInput: PropTypes.func,
+        renderTag: PropTypes.func,
+        renderLayout: PropTypes.func,
+        pasteSplit: PropTypes.func,
+        tagProps: PropTypes.object,
+        onlyUnique: PropTypes.bool,
+        value: PropTypes.array.isRequired,
+        maxTags: PropTypes.number,
+        validationRegex: PropTypes.instanceOf(RegExp),
+        disabled: PropTypes.bool,
+        tagDisplayProp: PropTypes.string,
+        preventSubmit: PropTypes.bool
+      }
+      static defaultProps = {
+        className: 'react-tagsinput',
+        focusedClassName: 'react-tagsinput--focused',
+        addKeys: [9, 13],
+        addOnBlur: false,
+        addOnPaste: false,
+        inputProps: {},
+        removeKeys: [8],
+        renderInput: defaultRenderInput,
+        renderTag: defaultRenderTag,
+        renderLayout: defaultRenderLayout,
+        pasteSplit: defaultPasteSplit,
+        tagProps: {className: 'react-tagsinput-tag', classNameRemove: 'react-tagsinput-remove'},
+        onlyUnique: false,
+        maxTags: -1,
+        validationRegex: /.*/,
+        disabled: false,
+        tagDisplayProp: null,
+        preventSubmit: true
+      }
 
   div: any
   input: any
 
-  constructor (props: tagsComponentProps) {
+  constructor (props: TagsComponentProps) {
     super(props)
     this.state = {tag: '', isFocused: false}
     this.focus = this.focus
     this.blur = this.blur
-  }
-
-  static propTypes = {
-    focusedClassName: PropTypes.string,
-    addKeys: PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ])),
-    addOnBlur: PropTypes.bool,
-    addOnPaste: PropTypes.bool,
-    currentValue: PropTypes.string,
-    inputValue: PropTypes.string,
-    inputProps: PropTypes.object,
-    onChange: PropTypes.func.isRequired,
-    onChangeInput: PropTypes.func,
-    removeKeys: PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ])),
-    renderInput: PropTypes.func,
-    renderTag: PropTypes.func,
-    renderLayout: PropTypes.func,
-    pasteSplit: PropTypes.func,
-    tagProps: PropTypes.object,
-    onlyUnique: PropTypes.bool,
-    value: PropTypes.array.isRequired,
-    maxTags: PropTypes.number,
-    validationRegex: PropTypes.instanceOf(RegExp),
-    disabled: PropTypes.bool,
-    tagDisplayProp: PropTypes.string,
-    preventSubmit: PropTypes.bool
-  }
-
-  static defaultProps = {
-    className: 'react-tagsinput',
-    focusedClassName: 'react-tagsinput--focused',
-    addKeys: [9, 13],
-    addOnBlur: false,
-    addOnPaste: false,
-    inputProps: {},
-    removeKeys: [8],
-    renderInput: defaultRenderInput,
-    renderTag: defaultRenderTag,
-    renderLayout: defaultRenderLayout,
-    pasteSplit: defaultPasteSplit,
-    tagProps: {className: 'react-tagsinput-tag', classNameRemove: 'react-tagsinput-remove'},
-    onlyUnique: false,
-    maxTags: -1,
-    validationRegex: /.*/,
-    disabled: false,
-    tagDisplayProp: null,
-    preventSubmit: true
+    this.div = null
+    this.input = null
+    this.handleClick = this.handleClick.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   _getTagDisplayValue (tag: any) {
@@ -260,15 +259,14 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
       this.input.focus()
     }
 
-    this.handleOnFocus
+    // this.handleOnFocus
   }
 
   blur () {
     if (this.input && typeof this.input.blur === 'function') {
       this.input.blur()
     }
-
-    this.handleOnBlur
+    // this.handleOnBlur
   }
 
   accept () {
@@ -290,7 +288,7 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
     this._clearInput()
   }
 
-  handlePaste (e:any) {
+  handlePaste (e: any) {
     let {addOnPaste, pasteSplit} = this.props
 
     if (!addOnPaste) {
@@ -332,6 +330,8 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
   }
 
   handleClick (e: any) {
+    debugger
+    console.log(this.div)
     if (e.target === this.div) {
       this.focus()
     }
@@ -422,7 +422,7 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
     })
   }
 
-  componentWillReceiveProps (nextProps: tagsComponentProps) {
+  componentWillReceiveProps (nextProps: TagsComponentProps) {
     /* istanbul ignore next */
     if (this.hasControlledInput()) {
       return
@@ -489,7 +489,6 @@ class TagsInput extends React.Component<tagsComponentProps, tagsComponentState>{
       onPaste: this.handlePaste,
       onKeyDown: this.handleKeyDown,
       onChange: this.handleChange,
-      onFocus: this.handleOnFocus,
       onBlur: this.handleOnBlur,
       addTag: this.addTag,
       ...this.inputProps()

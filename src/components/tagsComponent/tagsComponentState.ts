@@ -1,4 +1,4 @@
-export interface tagsComponentState {
+export interface TagsComponentState {
     isFocused: any  
 
     tag: any
