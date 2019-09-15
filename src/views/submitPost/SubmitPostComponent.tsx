@@ -8,9 +8,10 @@ import AutosizeInput from 'react-input-autosize'
  
 import ReactQuill, { Quill } from 'react-quill'
 import TagsInput from 'components/tagsComponent'
-import 'react-quill/dist/quill.snow.css'
+import 'react-quill/dist/quill.bubble.css'
+// import 'react-qull/dist/quill.bubble.css'
 import { withRouter} from 'react-router-dom'
-import {Map, List as ImuList} from 'immutable'
+import {Map, List as ImuList, List} from 'immutable'
 import 'react-tagsinput/react-tagsinput.css'
 // @material-ui/core components
 import { withStyles, Theme } from '@material-ui/core/styles'
@@ -235,7 +236,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
      this.modules = {
           toolbar: {
              container: [
-              [{ 'header': [1, 2, false] }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
               ['bold', 'italic', 'underline', 'blockquote'],
               [{'list': 'ordered'}, {'list': 'bullet'}, 
                  {'indent': '-1'}, {'indent': '+1'}], 
@@ -631,24 +632,22 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                     </FormControl>
                   </div>
 
-                  <div>
                    <div style={{color: 'red'}}>
                        {this.state.postBodyError.trim() !== '' ? 'Post is too short, please add more content' : ''}
                    </div>
                      <ReactQuill
                        ref={(el) => {this.reactQuillRef = el}}
-                       theme='snow'
+                       theme='bubble'
                        placeholder="Write here"
                        value={this.state.postBodyHTML}
                        formats={this.formats}
                        modules={this.modules}
                        onChange={this.handleOnBodyChange}/>
-                  </div>
-
+                  
                   <div className={classes.guideLines}>
                   <a>
                   <div style={{paddingTop: '10px', display: 'flex'}}>
-                     <TagsInput value={this.state.tags} maxTags={10} onChange={this.handleChange} />
+                     <TagsInput value={this.state.tags} maxTags={10} onChange={this.handleChange} initval={this.props.edit && this.props.EditPost ? this.props.EditPost.get('tags', '') : List([])} />
                      <div >
                       <Tooltip title={'Tags help make your posts more discoverable and show up in searchs more frequently'}>
                         <IconButton>
@@ -663,14 +662,15 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                    </a>
                    
                     <div className={classes.button} >
-                    <a>
+                    {/* <a>
                       <div className={classes.guide} onClick={this.handleOpenReq}>
                         {'Submission Guidelines'}
                       </div>
-                      </a>
+                      </a> */}
                       <Button
                          variant="outlined"
                          color="primary"
+                         style={{marginTop: '10px'}}
                          onClick={this.submitPost} >
                            Submit
                       </Button>

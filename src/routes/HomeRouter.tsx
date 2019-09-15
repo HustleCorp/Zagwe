@@ -92,9 +92,7 @@ export class HomeRouter extends Component<IRouterProps, any> {
             <Route path='/people/:tab?' component={AsyncPeople} />
             <Route path='/t/:tag' key={this.props.location.pathname}  component={AsyncTopic}/>
             <PrivateRoute path='/submit/:userId?/:postId?'  component={
-              (<div>
-                       <Sub edit={false}/>
-              </div>)} />
+              (<Sub edit={false}/>)} />
           
             <PrivateRoute path='/tag/:tag' component={(
             <div> 

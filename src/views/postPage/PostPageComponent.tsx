@@ -291,7 +291,7 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
                         <FacebookShareButton
                           url={`${location.origin}/posts/${post.get('ownerUserId')}/${post.get('id')}`}
                           quote={post.get('body')}
-                          hashtag={post.get('tags', List<string>([])).count() > 0 ?  `#${post.getIn(['tags', 0], 'hashtag') }` : null}
+                          hashtag={`#${post.getIn(['tags', 0], 'hashtag') }`}
                           >
                           <MenuItem className={classes.menuItem}>
                             <ListItemIcon>

@@ -49,8 +49,8 @@ class Notifications extends Component<IfcmNotificationProps, IfcmNotificationSta
 
     renderSubscriptionOptions ( ) {
         if (!('serviceWorker' in navigator) && !('PushManager' in window)) {
-            return(<div> {'Notification feature is supported only in chrome Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile'}</div>
-            )
+           console.log('Notification feature is supported only in chrome Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile')
+            return ''
        } 
     }
 

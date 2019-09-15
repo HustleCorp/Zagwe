@@ -37,8 +37,36 @@ html * {
     margin-top: 10px;
     margin-bottom: 10px; }
   
+  // h1 {
+  //   font-size: 2.52rem;
+  //   line-height: 1.15em; }
+  
+  // h2 {
+  //   font-size: 2.52rem;
+  //   line-height: 1.5em; }
+  
+  // h3 {
+  //   font-size: 1.5625rem;
+  //   line-height: 1.4em;
+  //   font-weight: 700;
+  //   font-family: 'Roboto Slab', 'Times New Roman', 'serif'}
+  
+  // h4 {
+  //   font-size: 1.125rem;
+  //   line-height: 1.5em;
+  //   font-weight: 400 }
+  
+  // h5 {
+  //   font-size: 1.0625rem;
+  //   line-height: 1.55em;
+  //    }
+  
+  // h6 {
+  //   font-size: 0.75rem;
+  //   text-transform: uppercase;
+  //   font-weight: 500; }
   h1 {
-    font-size: 3.3125rem;
+    font-size: 3.3125rem !important;
     line-height: 1.15em; }
   
   h2 {
@@ -46,29 +74,31 @@ html * {
     line-height: 1.5em; }
   
   h3 {
-    font-size: 1.5625rem;
-    line-height: 1.4em;
-    font-weight: 700;
-    font-family: 'Roboto Slab', 'Times New Roman', 'serif'}
+    font-size: 1.5625rem !important;
+    line-height: 1.4em; }
   
   h4 {
-    font-size: 1.125rem;
-    line-height: 1.5em;
-    font-weight: 400 }
+    font-size: 1.125rem !important;
+    line-height: 1.5em; }
   
   h5 {
-    font-size: 1.0625rem;
-    line-height: 1.55em;
-     }
+    font-size: 1.0625rem !important;
+    line-height: 1.55em; }
   
   h6 {
-    font-size: 0.75rem;
+    font-size: 0.75rem !important;
     text-transform: uppercase;
     font-weight: 500; }
-  
   p {
-    font-size: 1.0126rem;
-    margin: 0 0 10px;
+    font-size: 1.0526rem;
+    margin: 0 0 1px;
+    line-height: 1.85rem;
+    font-family: 'Montserrat', sans-serif, 'Droid Sans Ethiopic';
+  }
+  
+  li {
+    font-size: 1.0526rem;
+    margin: 0 0 1px;
     line-height: 1.85rem;
     font-family: 'Montserrat', sans-serif, 'Droid Sans Ethiopic';
   }
@@ -371,6 +401,31 @@ g__input-underline {
 
 .ql-editor {
   min-height: 18em;
+}
+.ql-bubble .ql-editor h1 {
+  font-size: 3.3125rem !important;
+  line-height: 1.15em;
+}
+.ql-bubble .ql-editor h2 {
+  font-size: 2.25rem !important;
+  line-height: 1.5em; 
+}
+.ql-bubble .ql-editor h3 {
+  font-size: 1.5625rem !important;
+  line-height: 1.4em;
+}
+.ql-bubble .ql-editor h4 {
+  font-size: 1.125rem !important;
+  line-height: 1.5em;
+}
+.ql-bubble .ql-editor h5 {
+  font-size: 1.0625rem !important;
+  line-height: 1.55em;
+}
+.ql-bubble .ql-editor h6 {
+  font-size: 0.75rem !important;
+  text-transform: uppercase;
+  font-weight: 500; 
 }
 
 /* Bubble Theme */
