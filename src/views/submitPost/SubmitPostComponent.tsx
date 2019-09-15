@@ -647,7 +647,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                   <div className={classes.guideLines}>
                   <a>
                   <div style={{paddingTop: '10px', display: 'flex'}}>
-                     <TagsInput  renderTag={this.renderTag} value={this.state.tags} onChange={this.handleChange} />
+                     <TagsInput value={this.state.tags} maxTags={10} onChange={this.handleChange} />
                      <div >
                       <Tooltip title={'Tags help make your posts more discoverable and show up in searchs more frequently'}>
                         <IconButton>
