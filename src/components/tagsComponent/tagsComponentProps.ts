@@ -44,5 +44,7 @@ export interface TagsComponentProps {
     className?: any
 
     focusedClassName?: any
+
+    initval?: any
     
 }

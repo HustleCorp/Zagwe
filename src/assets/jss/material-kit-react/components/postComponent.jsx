@@ -47,6 +47,7 @@ const PostPreview = (theme) => ({
         position: "relative",
         marginTop: "16px",
         minHeight: "32px",
+        fontWeight: "bold",
         textDecoration: "none"
       },
     header: {

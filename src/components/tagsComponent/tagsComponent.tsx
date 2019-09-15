@@ -424,23 +424,28 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
       return
     } 
 
-    const values = ['dsfsd', 'sfd', 'sdfsdf']
-    for ( let i = 0; i < values.length; i++) {
-      if (values[i] !== '') {
-       console.log(values[i])
-       await this.setState({tag: values[i]})
-       await this.accept()
-       console.log(this.state)
-      }
-    }
+   if (this.props.initval) {
 
+       const object = this.props.initval!
+       const values: any = Array.isArray(object) ? object : object.toArray()
+              
+       for ( let i = 0; i < values.length; i++) {
+      
+           if (values[i] !== '') {
+            await this.setState({tag: values[i]})
+            await this.accept()
+        
+           }
+       }
+  }
+ 
     // this.setState({
     //   tag: this.inputValue(this.props)
     // })
   }
 
   componentWillReceiveProps (nextProps: TagsComponentProps) {
-    /* istanbul ignore next */
+
     if (this.hasControlledInput()) {
       return
     }

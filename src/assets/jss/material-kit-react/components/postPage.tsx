@@ -109,6 +109,7 @@ const postPage = (theme: any) =>  ({
     textAlign: 'center',
     paddingLeft: '10px',
     display: "inline-block",
+    fontWeight: "bold",
     position: "relative",
     marginTop: "30px",
     minHeight: "32px",
