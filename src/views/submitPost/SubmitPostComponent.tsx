@@ -137,6 +137,7 @@ const KeyCodes = {
 }
  
 const delimiters = [KeyCodes.comma, KeyCodes.enter]
+// this.props.EditPost && EditPost ? EditPost.get('tags', []) 
 
 export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPostComponentState> {
   
@@ -183,7 +184,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
          */
         postBodyText: this.props.edit && EditPost ? EditPost.get('bodyText', '') : '', 
 
-        tags: this.props.EditPost && EditPost ? EditPost.get('tags', []) : [],
+        tags:  [],
 
         isTagFocus: false,
 

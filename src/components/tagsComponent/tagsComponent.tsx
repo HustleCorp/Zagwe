@@ -424,7 +424,7 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
       return
     } 
 
-    const values = this.props.value
+    const values = ['dsfsd', 'sfd', 'sdfsdf']
     for ( let i = 0; i < values.length; i++) {
       if (values[i] !== '') {
        console.log(values[i])
