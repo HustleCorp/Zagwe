@@ -30,7 +30,7 @@ function getClipboardData (e: any) {
 }
 
 function defaultRenderTag (props: any) {
-  let {tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other} = props
+  let {tag, key, disabled, addTag, makeTag, onRemove, classNameRemove, getTagDisplayValue, ...other} = props
   return (
     <span key={key} {...other}>
       {getTagDisplayValue(tag)}
@@ -47,7 +47,8 @@ defaultRenderTag.propTypes = {
   onRemove: PropTypes.func,
   classNameRemove: PropTypes.string,
   getTagDisplayValue: PropTypes.func,
-  addTag: PropTypes.func
+  addTag: PropTypes.func,
+  makeTag: PropTypes.func,
 }
 
 function defaultRenderInput ({...props}: any) {
@@ -60,7 +61,8 @@ function defaultRenderInput ({...props}: any) {
 defaultRenderInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
-  addTag: PropTypes.func
+  addTag: PropTypes.func,
+
 }
 
 function defaultRenderLayout (tagComponents: any, inputComponent: any) {
@@ -78,7 +80,7 @@ function defaultPasteSplit (data: any) {
 
 const defaultInputProps = {
   className: 'react-tagsinput-input',
-  placeholder: 'Add a tag'
+  placeholder: 'Add tags'
 }
 
 class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> {
@@ -145,6 +147,13 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
     this.input = null
     this.handleClick = this.handleClick.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this._getTagDisplayValue = this._getTagDisplayValue.bind(this)
+    this.handleOnBlur = this.handleOnBlur.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this._makeTag = this._makeTag.bind(this)
+    this.addTag = this.addTag.bind(this)
+    
   }
 
   _getTagDisplayValue (tag: any) {
@@ -330,8 +339,6 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
   }
 
   handleClick (e: any) {
-    debugger
-    console.log(this.div)
     if (e.target === this.div) {
       this.focus()
     }
@@ -412,14 +419,24 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
     return typeof onChangeInput === 'function' && typeof inputValue === 'string'
   }
 
-  componentDidMount () {
+ async componentDidMount () {
     if (this.hasControlledInput()) {
       return
+    } 
+
+    const values = this.props.value
+    for ( let i = 0; i < values.length; i++) {
+      if (values[i] !== '') {
+       console.log(values[i])
+       await this.setState({tag: values[i]})
+       await this.accept()
+       console.log(this.state)
+      }
     }
 
-    this.setState({
-      tag: this.inputValue(this.props)
-    })
+    // this.setState({
+    //   tag: this.inputValue(this.props)
+    // })
   }
 
   componentWillReceiveProps (nextProps: TagsComponentProps) {
@@ -478,6 +495,7 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
         onRemove: this.handleRemove,
         disabled,
         getTagDisplayValue: this._getTagDisplayValue,
+        makeTag: this._makeTag,
         addTag: this.addTag,
         ...tagProps
       })
@@ -493,7 +511,7 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
       addTag: this.addTag,
       ...this.inputProps()
     })
-
+    // console.log(this.state)
     return (
       <div ref={r => { this.div = r }} onClick={this.handleClick} className={className}>
         {renderLayout(tagComponents, inputComponent)}
