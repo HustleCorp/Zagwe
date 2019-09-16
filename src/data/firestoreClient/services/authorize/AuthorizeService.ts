@@ -238,7 +238,7 @@ export class AuthorizeService implements IAuthorizeService {
         {
           id: userId,
           state: 'active',
-          level: 0,
+          level: 1,
           webUrl: '',
           tagLine: '',
           followersCount: 0,
