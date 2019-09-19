@@ -91,7 +91,6 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
       } = this.props
       if (user) {
         login(user.uid, isVerifide, isAdmin)
-        debugger
         ReactGA.set({userId: user.uid})
         hideMasterLoading!()
         this.setState({
