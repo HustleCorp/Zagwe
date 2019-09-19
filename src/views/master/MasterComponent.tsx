@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { ReactGA } from 'data/firestoreClient'
 import { push } from 'connected-react-router'
 import Snackbar from '@material-ui/core/Snackbar'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -90,6 +91,8 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
       } = this.props
       if (user) {
         login(user.uid, isVerifide, isAdmin)
+        debugger
+        ReactGA.set({userId: user.uid})
         hideMasterLoading!()
         this.setState({
           loading: false,

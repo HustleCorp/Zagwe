@@ -108,9 +108,11 @@ const styles = (theme: any) => ({
     width: '0.6em',
     height: '0.6em'
   },
-
   IconButton: {
     padding: '12px 0 12px 12px'
+  },
+  TextField: {
+    paddingTop: '10px'
   }
 })
 
@@ -284,6 +286,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     this.setState({
       initialText: this.state.text
     })
+    this.props.closeEditor!()
 
   }
 
@@ -452,6 +455,7 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
     const commentBody = (
       <div style={{ outline: 'none', flex: 'auto', flexGrow: 1, marginTop: '-14px' }}>
       { editorStatus ? <TextField
+                
                 placeholder={translate!('comment.updateCommentPlaceholder')}
                 multiline
                 autoFocus
@@ -463,9 +467,10 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
                 }}
                 value={this.state.text}
                 onChange={this.handleOnChange}
-                className={classes.textField}
+                className={classes.TextField}
                 fullWidth={true}
               /> :
+
                <div className={classNames('animate2-top10', )}>
               <h4 className={classes.comment}>
                 {this.state.text}
