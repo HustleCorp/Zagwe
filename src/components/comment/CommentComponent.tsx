@@ -472,9 +472,9 @@ export class CommentComponent extends Component<ICommentComponentProps, IComment
               /> :
 
                <div className={classNames('animate2-top10', )}>
-              <h4 className={classes.comment}>
+              <h6 className={classes.comment}>
                 {this.state.text}
-              </h4>
+              </h6>
               </div>}
 
         <div style={{ display: (editorStatus ? 'flex' : 'none'), flexDirection: 'row-reverse' }}>
