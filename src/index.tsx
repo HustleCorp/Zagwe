@@ -1,6 +1,7 @@
 // Import external components refrence
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { ReactGA } from 'src/data/firestoreClient'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import 'reflect-metadata'
@@ -20,6 +21,10 @@ import Master from 'views/master'
 
 // App css
 import './styles/app.css'
+
+// Initialize google analytics
+const trackingId = "UA-144370201-1"
+ReactGA.initialize(trackingId)
 
 const disableReactDevTools = (): void => {
 	const noop = (): void => undefined
@@ -77,6 +82,13 @@ const theme = createMuiTheme({
 })
 
 const supportsHistory = 'pushState' in window.history
+
+const history = configureStore.history
+
+history.listen(location => {
+	 ReactGA.set({page: location.pathname})
+	 ReactGA.pageview(location.pathname)
+})
 
 ReactDOM.render(
 	<Provider store={configureStore.store}>

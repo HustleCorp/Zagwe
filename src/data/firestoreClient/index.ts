@@ -4,6 +4,7 @@ import 'firebase/storage'
 import 'firebase/auth'
 import 'firebase/messaging'
 import 'firebase/functions'
+import ReactGA from 'react-ga'
 
 import config from 'src/config'
 try {
@@ -88,3 +89,8 @@ export let firebaseAuth = firebase.auth
 
 // - Firebase default
 export default firebase
+
+const trackingId = "UA-144370201-1"
+ReactGA.initialize(trackingId)
+
+export { ReactGA }
