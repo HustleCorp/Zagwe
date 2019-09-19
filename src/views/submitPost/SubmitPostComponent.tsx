@@ -3,12 +3,10 @@ import {connect} from 'react-redux'
 import {getTranslate, getOptions} from 'react-localize-redux'
 import { push } from 'connected-react-router'
 import {Prompt} from 'react-router-dom'
-
-import AutosizeInput from 'react-input-autosize'
  
 import ReactQuill, { Quill } from 'react-quill'
 import TagsInput from 'components/tagsComponent'
-import 'react-quill/dist/quill.bubble.css'
+import 'react-quill/dist/quill.snow.css'
 // import 'react-qull/dist/quill.bubble.css'
 import { withRouter} from 'react-router-dom'
 import {Map, List as ImuList, List} from 'immutable'
@@ -637,7 +635,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
                    </div>
                      <ReactQuill
                        ref={(el) => {this.reactQuillRef = el}}
-                       theme='bubble'
+                       theme='snow'
                        placeholder="Write here"
                        value={this.state.postBodyHTML}
                        formats={this.formats}
