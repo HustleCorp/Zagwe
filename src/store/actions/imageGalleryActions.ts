@@ -118,9 +118,10 @@ export const dbUploadImage = (image: any, imageName: string, callBack: Function)
            
            let  res = await FileAPI.getThumbUrl(result.fileFullPath) 
            let count = 0
-            while (!res && count < 30) {
+            while (!res && count < 500) {
                 count ++
                 res = await FileAPI.getThumbUrl(result.fileFullPath) 
+                console.log(res)
               }
             dispatch(dbSaveImage(res!, result.fileFullPath))
             dispatch(globalActions.hideTopLoading())
