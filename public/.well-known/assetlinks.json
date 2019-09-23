@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.zagwe.publishing",
+      "sha256_cert_fingerprints":
+      ["A0:0B:1E:59:FA:0A:18:75:16:30:F1:A8:36:ED:43:59:A0:49:56:D1:1C:F1:D0:1D:3C:49:11:79:B4:86:1F:01"]
+    }
+  }]

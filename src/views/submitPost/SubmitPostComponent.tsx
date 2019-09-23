@@ -324,8 +324,8 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     input.setAttribute('accept', 'image/*')
     input.click()
     input.onclick = (e: any ) => {  e.stopPropagation() }
-    input.onchange = async ( ) => {
-    
+    input.onchange = async (e: any) => {
+      e.stopPropagation()
       const extension: any = FileAPI.getExtension(input.files[0].name)
       let fileName = (`${uuid()}.${extension}`)
       FileAPI.constraintImage(input.files[0], fileName).then(async (result) => {   
