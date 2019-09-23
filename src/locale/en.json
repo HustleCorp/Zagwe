@@ -157,8 +157,8 @@
         "description": "A verificiation email has been already sent to you. Please check your inbox. If you can't see the email, please resend email verification."
     },
     "common": {
-        "sentRequestMessage": "Request has been sent.",
-        "successfulRequestMessage": "Request was successfully completed."
+        "sentRequestMessage": "Login Requeest has been sent.",
+        "successfulRequestMessage": "Logged in Successfully "
     }
     
 }

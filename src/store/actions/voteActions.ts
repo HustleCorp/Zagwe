@@ -110,6 +110,7 @@ export const dbAddVote = (postId: string,ownerPostUserId: string) => {
     
     return voteService.addVote(vote).then((voteKey: string) => {
       if (uid !== ownerPostUserId) {
+        debugger
         dispatch(notifyActions.dbAddNotification(
           {
             description: 'Liked your post.',
