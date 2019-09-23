@@ -323,7 +323,7 @@ export class SubmitPost extends Component<ISubmitPostComponentProps, ISubmitPost
     input.setAttribute('type', 'file')
     input.setAttribute('accept', 'image/*')
     input.click()
-
+    input.onclick = (e: any ) => {  e.stopPropagation() }
     input.onchange = async ( ) => {
     
       const extension: any = FileAPI.getExtension(input.files[0].name)
