@@ -61,7 +61,6 @@ function defaultRenderInput ({...props}: any) {
 defaultRenderInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
-  addTag: PropTypes.func,
 
 }
 
@@ -513,7 +512,6 @@ class TagsInput extends React.Component<TagsComponentProps, TagsComponentState> 
       onKeyDown: this.handleKeyDown,
       onChange: this.handleChange,
       onBlur: this.handleOnBlur,
-      addTag: this.addTag,
       ...this.inputProps()
     })
     // console.log(this.state)
