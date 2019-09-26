@@ -70,7 +70,7 @@ export let storageRef = firebase.storage().ref()
 
 // Initialize Cloud Firestore through Firebase
 const db = firebase.firestore()
-db.enablePersistence()
+db.enablePersistence({experimentalTabSynchronization: true})
   .catch((err: any) => {
       if (err.code === 'failed-precondition') {
           console.log('could not enable persistence')
