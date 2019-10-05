@@ -134,6 +134,7 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
       this.props.vote!()
     }
   } else {
+      console.log('inside login')
       this.props.goTo!('/login')
   }
 
