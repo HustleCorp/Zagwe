@@ -251,7 +251,7 @@ export class PostPageComponent extends Component<IPostPageComponentProps,IPostPa
                
                    <h3 className={classes.title}>{post.get('title')}</h3>
                     <div className={classes.ownerDisplayName}> 
-                     {`Written by ${post.get('ownerDisplayName')}`}</div>
+                     {`Written by ${post.get('ownerDisplayName') ? post.get('ownerDisplayName') : '' }`}</div>
 
                <div>
                 <div style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: post.get('body') }} /> 
