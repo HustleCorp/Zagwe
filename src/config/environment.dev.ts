@@ -7,7 +7,8 @@ export const environment = {
     databaseURL: 'https://publishing-3965e.firebaseio.com/',
     projectId: 'publishing-3965e',
     storageBucket: 'publishing-3965e.appspot.com',
-    messagingSenderId: '99571061006'
+    messagingSenderId: '99571061006',
+    measurementId: "G-6BL9DBX1Z8"
   },
   settings: {
     enabledOAuthLogin: true,

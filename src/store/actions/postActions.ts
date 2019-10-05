@@ -230,8 +230,8 @@ export const dbGetFeaturedPosts = ( ) => {
             const postId = Object.keys(post)[0]
             const postData = post[postId]
             parsedData = parsedData.setIn([postId], fromJS(postData))
+            dispatch(addFeaturedPosts(parsedData))
         })
-        dispatch(addFeaturedPosts(parsedData))
     }).catch((error: SocialError) => {
       dispatch(globalActions.showMessage(error.message))
     })

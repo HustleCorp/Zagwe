@@ -73,7 +73,7 @@ export class PostService implements IPostService {
           })
       })
     }
-
+// This needs to be optimized
 public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = () => {
        return new Promise<{posts: { [postId: string]: Post}[]}>((resolve, reject) => {
             let parsedData: { [postId: string]: Post}[] = []
