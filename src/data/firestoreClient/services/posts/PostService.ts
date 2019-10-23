@@ -80,10 +80,10 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
             
             let query = db.collection('featuredPosts')
 
-            query.get().then( async (posts) => {
-               for (let index = 0; index < posts.size; index++) {
-                         const postId = posts.docs[index].id
-                         await this.getPostById(postId).then((result) => {
+            query.get().then((posts) => {
+                posts.forEach((result) => {
+                          debugger
+                          const postId = result.id
                           parsedData = [
                             ...parsedData,
                             {
@@ -93,11 +93,9 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
                               }
                             }
                           ]
-        
-                        })
-               }
+  
+               })
                resolve({ posts: parsedData})
-
             })
            
        })

@@ -184,7 +184,7 @@ export class HomeComponent extends Component<IHomeComponentProps, IHomeComponent
   }
 
   /**
-   * Hamdle on tab change
+   * Handle on tab change
    */
   handleChangeTab = (event: any, value: any) => {
     const { goTo } = this.props

@@ -76,7 +76,7 @@ export class MasterComponent extends Component<IMasterComponentProps, IMasterCom
 
   componentDidMount () {
     ReactGA.set({page: window.location.pathname})
-    console.log('************\n          *\n         * \n        *  \n       *   \n      *    \n     *     \n    *      \n   *      \n  *     \n *     \n*********** \n Well Hello There! Before you continue with your hacking away, I would like to tell you I am looking for developers to join Zagwe in developing cool projects. If you are interested, contact me at bktotient@gmail.com')
+    console.log('************\n          *\n         * \n        *  \n       *   \n      *    \n     *     \n    *      \n   *      \n  *     \n *     \n*********** \n Well Hello There!, I would like to let you know that we am looking for developers to join Zagwe in developing cool projects. If you are interested, contact me at bktotient@gmail.com')
     this._authourizeService.onAuthStateChanged((isVerifide: boolean, user: any, isAdmin: boolean) => {
       const {
         global,

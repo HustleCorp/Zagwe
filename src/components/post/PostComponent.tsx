@@ -227,9 +227,6 @@ export class PostComponent extends Component<IPostComponentProps, IPostComponent
    
   }
 
-  /**
-   * Reneder component DOM
-   */
   render () {
     
     const { post, isAdmin, tag, isPostOwner, classes , translate, loaded} = this.props

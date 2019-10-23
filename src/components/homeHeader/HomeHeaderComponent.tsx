@@ -399,7 +399,6 @@ export class HomeHeaderComponent extends Component<IHomeHeaderComponentProps, IH
   render () {
     const { classes , translate, theme, authed} = this.props
     const anchor = theme.direction === 'rtl' ? 'right' : 'left'
-    console.log('is notify open', this.state.openNotifyMenu)
     return (
 
       <AppBar position='fixed' className={classes.appBar}>
