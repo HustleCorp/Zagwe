@@ -83,13 +83,14 @@ public getFeaturedPosts: () => Promise<{posts: { [postId: string]: Post} []}> = 
             query.get().then((posts) => {
                 posts.forEach((result) => {
                           debugger
+                          const post = result.data() as Post
                           const postId = result.id
                           parsedData = [
                             ...parsedData,
                             {
                               [postId]: {
                                 id: postId,
-                                ...result
+                                ...post
                               }
                             }
                           ]
