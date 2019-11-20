@@ -1,2 +1,2 @@
-import MasterLoadingComponent from './MasterLoadingComponent'
-export default MasterLoadingComponent
+import MasterLoadingComponent from './MasterLoadingComponent';
+export default MasterLoadingComponent;

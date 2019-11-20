@@ -1,54 +1,49 @@
 // - Import react components
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { grey } from '@material-ui/core/colors'
-import SvgClose from '@material-ui/icons/Close'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
-import { IAppInputComponentProps } from './IAppInputComponentProps'
-import { IAppInputComponentState } from './IAppInputComponentState'
-import { TextField } from '@material-ui/core'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {grey} from '@material-ui/core/colors';
+import SvgClose from '@material-ui/icons/Close';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import {IAppInputComponentProps} from './IAppInputComponentProps';
+import {IAppInputComponentState} from './IAppInputComponentState';
+import {TextField} from '@material-ui/core';
 
 /**
  * Create component class
  */
-export default class AppInputComponent extends Component<IAppInputComponentProps, IAppInputComponentState> {
-
+export default class AppInputComponent extends Component<
+  IAppInputComponentProps,
+  IAppInputComponentState
+> {
   /**
    * Fields
    */
-  input: any
+  input: any;
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
   constructor(props: IAppInputComponentProps) {
-    super(props)
+    super(props);
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {};
 
     // Binding functions to `this`
-
   }
   focus = () => {
-    this.input.focus()
-  }
+    this.input.focus();
+  };
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-
     return (
-      <TextField
-        inputRef={el => (this.input = el)}
-        fullWidth
-        {...this.props}
-      />
-    )
+      <TextField inputRef={el => (this.input = el)} fullWidth {...this.props} />
+    );
   }
 }

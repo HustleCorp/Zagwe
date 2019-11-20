@@ -1,2 +1,2 @@
-import FollowBoxComponent from './UserBoxComponent'
-export default FollowBoxComponent
+import FollowBoxComponent from './UserBoxComponent';
+export default FollowBoxComponent;

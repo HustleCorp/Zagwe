@@ -1,30 +1,29 @@
 // - Import external components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
-import { push } from 'connected-react-router'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import RaisedButton from '@material-ui/core/Button'
-import Button from '@material-ui/core/Button'
-import config from 'src/config'
-import { withStyles } from '@material-ui/core/styles'
-import { getTranslate, getActiveLanguage } from 'react-localize-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {NavLink, withRouter} from 'react-router-dom';
+import {push} from 'connected-react-router';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import RaisedButton from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
+import config from 'src/config';
+import {withStyles} from '@material-ui/core/styles';
+import {getTranslate, getActiveLanguage} from 'react-localize-redux';
 
 // - Import actions
-import * as authorizeActions from 'src/store/actions/authorizeActions'
-import { IEmailVerificationComponentProps } from './IEmailVerificationComponentProps'
-import { IEmailVerificationComponentState } from './IEmailVerificationComponentState'
-import { Grid } from '@material-ui/core'
+import * as authorizeActions from 'src/store/actions/authorizeActions';
+import {IEmailVerificationComponentProps} from './IEmailVerificationComponentProps';
+import {IEmailVerificationComponentState} from './IEmailVerificationComponentState';
+import {Grid} from '@material-ui/core';
 
 const styles = (theme: any) => ({
   textField: {
     minWidth: 280,
-    marginTop: 20
-
+    marginTop: 20,
   },
   contain: {
-    margin: '0 auto'
+    margin: '0 auto',
   },
   paper: {
     minHeight: 370,
@@ -32,9 +31,9 @@ const styles = (theme: any) => ({
     minWidth: 337,
     textAlign: 'center',
     display: 'block',
-    margin: 'auto'
-  }
-})
+    margin: 'auto',
+  },
+});
 
 /**
  * Create component class
@@ -43,20 +42,22 @@ const styles = (theme: any) => ({
  * @class EmailVerificationComponent
  * @extends {Component}
  */
-export class EmailVerificationComponent extends Component<IEmailVerificationComponentProps, IEmailVerificationComponentState> {
-
+export class EmailVerificationComponent extends Component<
+  IEmailVerificationComponentProps,
+  IEmailVerificationComponentState
+> {
   styles = {
     message: {
-      fontWeight: 400
+      fontWeight: 400,
     },
     buttons: {
-      marginTop: 60
+      marginTop: 60,
     },
     homeButton: {
-      marginRight: 10
+      marginRight: 10,
     },
     contain: {
-      margin: '0 auto'
+      margin: '0 auto',
     },
     paper: {
       minHeight: 370,
@@ -64,20 +65,18 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
       minWidth: 337,
       textAlign: 'center',
       display: 'block',
-      margin: 'auto'
-    }
-
-  }
+      margin: 'auto',
+    },
+  };
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
   constructor(props: IEmailVerificationComponentProps) {
-    super(props)
+    super(props);
 
     // Binding function to `this`
-
   }
 
   /**
@@ -85,41 +84,62 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
    * @return {react element} return the DOM which rendered by component
    */
   render() {
-    const { translate, classes } = this.props
+    const {translate, classes} = this.props;
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.contain}>
-
-          <div className='web_app'>
-           <img  style={{width: 'auto'}} src='/Zagwe.jpeg' alt="Smiley face" height="35" width="35Y"></img>
+          <div className="web_app">
+            <img
+              style={{width: 'auto'}}
+              src="/Zagwe.jpeg"
+              alt="Smiley face"
+              height="35"
+              width="35Y"
+            ></img>
           </div>
 
-          <div className='animate-bottom'>
-            <Paper className={classes.paper} elevation={1} >
-              <div style={{ padding: '48px 40px 36px' }}>
-                <div style={{
-                  paddingLeft: '40px',
-                  paddingRight: '40px'
-                }}>
-
-                  <h2 className='zoomOutLCorner animated g__paper-title'>{translate!('emailVerification.title')}</h2>
+          <div className="animate-bottom">
+            <Paper className={classes.paper} elevation={1}>
+              <div style={{padding: '48px 40px 36px'}}>
+                <div
+                  style={{
+                    paddingLeft: '40px',
+                    paddingRight: '40px',
+                  }}
+                >
+                  <h2 className="zoomOutLCorner animated g__paper-title">
+                    {translate!('emailVerification.title')}
+                  </h2>
                 </div>
                 <p style={this.styles.message as any}>
                   {translate!('emailVerification.description')}
                 </p>
                 <div style={this.styles.buttons}>
-                  <Button variant='contained' style={this.styles.homeButton} color='primary' onClick={() => this.props.homePage()}> {translate!('emailVerification.homeButton')} </Button>
-                  <Button variant='contained' color='primary' onClick={() => this.props.sendEmailVerification()}> {translate!('emailVerification.sendButton')} </Button>
+                  <Button
+                    variant="contained"
+                    style={this.styles.homeButton}
+                    color="primary"
+                    onClick={() => this.props.homePage()}
+                  >
+                    {' '}
+                    {translate!('emailVerification.homeButton')}{' '}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => this.props.sendEmailVerification()}
+                  >
+                    {' '}
+                    {translate!('emailVerification.sendButton')}{' '}
+                  </Button>
                 </div>
-                <div>
-                </div>
-
+                <div></div>
               </div>
             </Paper>
           </div>
         </Grid>
       </Grid>
-    )
+    );
   }
 }
 
@@ -129,14 +149,18 @@ export class EmailVerificationComponent extends Component<IEmailVerificationComp
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IEmailVerificationComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IEmailVerificationComponentProps,
+) => {
   return {
     homePage: () => {
-      dispatch(push('/login'))
+      dispatch(push('/login'));
     },
-    sendEmailVerification: () => dispatch(authorizeActions.dbSendEmailVerfication())
-  }
-}
+    sendEmailVerification: () =>
+      dispatch(authorizeActions.dbSendEmailVerfication()),
+  };
+};
 
 /**
  * Map state to props
@@ -144,11 +168,19 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IEmailVerificationComp
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: any, ownProps: IEmailVerificationComponentProps) => {
+const mapStateToProps = (
+  state: any,
+  ownProps: IEmailVerificationComponentProps,
+) => {
   return {
-    translate: getTranslate(state.get('locale'))
-  }
-}
+    translate: getTranslate(state.get('locale')),
+  };
+};
 
 // - Connect component to redux store
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(EmailVerificationComponent as any) as any)) as typeof EmailVerificationComponent
+export default withRouter<any>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(withStyles(styles as any)(EmailVerificationComponent as any) as any),
+) as typeof EmailVerificationComponent;

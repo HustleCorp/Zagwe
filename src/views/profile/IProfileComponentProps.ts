@@ -1,15 +1,14 @@
-import { Post } from 'src/core/domain/posts'
-import { Profile } from 'src/core/domain/users/profile'
+import {Post} from 'src/core/domain/posts';
+import {Profile} from 'src/core/domain/users/profile';
 
 export interface IProfileComponentProps {
-
   /**
    * Router match
    *
    * @type {*}
    * @memberof IProfileComponentProps
    */
-  match: any
+  match: any;
 
   /**
    * User's post
@@ -17,9 +16,9 @@ export interface IProfileComponentProps {
    * @type {{[postId: string]: Post}}
    * @memberof IProfileComponentProps
    */
-  posts: {[postId: string]: Post}
+  posts: {[postId: string]: Post};
 
-  likedPosts: {[postId: string]: Post} 
+  likedPosts: {[postId: string]: Post};
 
   /**
    * String user full name
@@ -27,7 +26,7 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  name: string
+  name: string;
 
   /**
    * User tag line
@@ -35,26 +34,26 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  tagLine: string
+  tagLine: string;
 
   /**
    * User email
-   * 
+   *
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  website?: string
+  website?: string;
 
-  level?: string
+  level?: string;
   /**
    * User's avatar address
    *
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  avatar: string
+  avatar: string;
 
-  isAuthedEdit?: boolean
+  isAuthedEdit?: boolean;
 
   /**
    * It's current user profile {true} or not {false}
@@ -62,7 +61,7 @@ export interface IProfileComponentProps {
    * @type {boolean}
    * @memberof IProfileComponentProps
    */
-  authed: boolean
+  authed: boolean;
 
   /**
    * User's banner
@@ -70,7 +69,7 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  banner: string
+  banner: string;
 
   /**
    * User identifier
@@ -78,66 +77,65 @@ export interface IProfileComponentProps {
    * @type {string}
    * @memberof IProfileComponentProps
    */
-  userId: string
+  userId: string;
 
-  userProfile?: Profile
+  userProfile?: Profile;
 
   /**
    * Load user's post
    *
    * @memberof IProfileComponentProps
    */
-  loadPosts: () => any
+  loadPosts: () => any;
 
   /**
    * Load user's profile
    *
    * @memberof IProfileComponentProps
    */
-  loadUserInfo: () => any
-  
+  loadUserInfo: () => any;
+
   /**
    * Load secondary information
-   * 
+   *
    * @memberof IProfileComponentProps
    */
-  loadUserOther: () => any
+  loadUserOther: () => any;
 
   /**
    * Load liked posts
-   * 
+   *
    * @memberof IProfileComponentProps
    */
-  loadUserLikePosts: ( ) => any
+  loadUserLikePosts: () => any;
 
   /**
    * If there is more posts to show in profile
    */
-  hasMorePosts: boolean
+  hasMorePosts: boolean;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any, params?: {}) => any
+  translate?: (state: any, params?: {}) => any;
 
-  classes: any
+  classes: any;
 
-  tab?: any
+  tab?: any;
 
-  followingCount?: number
+  followingCount?: number;
 
-  followersCount?: number
+  followersCount?: number;
 
-  likeCount?: number
+  likeCount?: number;
 
-  likes: string []
-   
-  city?: string
+  likes: string[];
 
-  country?: string
+  city?: string;
 
-  twitterId?: string
+  country?: string;
 
-  company?: string
+  twitterId?: string;
 
+  company?: string;
 }

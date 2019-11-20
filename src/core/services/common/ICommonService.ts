@@ -1,5 +1,5 @@
-import { User } from 'core/domain/users'
-import { Feed } from 'core/domain/common'
+import {User} from 'core/domain/users';
+import {Feed} from 'core/domain/common';
 
 /**
  * Common service interface
@@ -8,9 +8,8 @@ import { Feed } from 'core/domain/common'
  * @interface ICommonService
  */
 export interface ICommonService {
-
   /**
    * Post feedback
    */
-  addFeed: (feed: Feed) => Promise<string>
+  addFeed: (feed: Feed) => Promise<string>;
 }

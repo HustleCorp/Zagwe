@@ -1,7 +1,4 @@
-import { postReducer } from './postReducer'
-import { postSelector } from './postSelector'
+import {postReducer} from './postReducer';
+import {postSelector} from './postSelector';
 
-export {
-    postReducer,
-    postSelector
-}
+export {postReducer, postSelector};

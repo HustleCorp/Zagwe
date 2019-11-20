@@ -1,4 +1,1 @@
-
-export interface IImageGalleryComponentState {
-
-}
+export interface IImageGalleryComponentState {}

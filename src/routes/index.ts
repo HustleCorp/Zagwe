@@ -1,7 +1,4 @@
-import MasterRouter from './MasterRouter'
-import HomeRouter from './HomeRouter'
+import MasterRouter from './MasterRouter';
+import HomeRouter from './HomeRouter';
 
-export {
-    MasterRouter,
-     HomeRouter
-}
+export {MasterRouter, HomeRouter};

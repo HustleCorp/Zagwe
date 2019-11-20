@@ -1,5 +1,3 @@
-import { CommonService } from './CommonService'
+import {CommonService} from './CommonService';
 
-export {
-    CommonService
-}
+export {CommonService};

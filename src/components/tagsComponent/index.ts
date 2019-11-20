@@ -1,3 +1,3 @@
-import tagComponent from './tagsComponent'
+import tagComponent from './tagsComponent';
 
-export default tagComponent
+export default tagComponent;

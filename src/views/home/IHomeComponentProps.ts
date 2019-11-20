@@ -1,14 +1,13 @@
-import { Post } from 'src/core/domain/posts'
+import {Post} from 'src/core/domain/posts';
 
 export interface IHomeComponentProps {
-
   /**
    * Router match
    *
    * @type {*}
    * @memberof IHomeComponentProps
    */
-  match: any
+  match: any;
 
   /**
    * Current user is authenticated {true} or not {false}
@@ -16,7 +15,7 @@ export interface IHomeComponentProps {
    * @type {boolean}
    * @memberof IHomeComponentProps
    */
-  authed?: boolean
+  authed?: boolean;
 
   /**
    * If user email is verifide {true} or not {false}
@@ -24,7 +23,7 @@ export interface IHomeComponentProps {
    * @type {boolean}
    * @memberof IHomeComponentProps
    */
-  isVerifide?: boolean
+  isVerifide?: boolean;
 
   /**
    * User identifier
@@ -32,7 +31,7 @@ export interface IHomeComponentProps {
    * @type {string}
    * @memberof IHomeComponentProps
    */
-  uid?: string
+  uid?: string;
 
   /**
    * Merged all users posts to show in stream
@@ -40,12 +39,12 @@ export interface IHomeComponentProps {
    * @type {{[postId: string]: Post}}
    * @memberof IHomeComponentProps
    */
-  mergedPosts?: {[postId: string]: Post}
+  mergedPosts?: {[postId: string]: Post};
 
   /**
    * Load the data for stream
    */
-  loadDataStream?: (lastPostId: string, page: number, limit: number) => any
+  loadDataStream?: (lastPostId: string, page: number, limit: number) => any;
 
   /**
    * Global state
@@ -53,7 +52,7 @@ export interface IHomeComponentProps {
    * @type {*}
    * @memberof IMasterProps
    */
-  global?: any
+  global?: any;
 
   /**
    * Clear user date from store
@@ -61,44 +60,44 @@ export interface IHomeComponentProps {
    * @type {Function}
    * @memberof IMasterProps
    */
-  clearData?: Function
+  clearData?: Function;
 
-    /**
-     * Set flag {true} which all user data has loaded
-     *
-     * @type {Function}
-     * @memberof IMasterProps
-     */
-  defaultDataEnable?: Function
-    /**
-     * Load user data into store
-     *
-     * @type {Function}
-     * @memberof IMasterProps
-     */
-  loadData?: Function
+  /**
+   * Set flag {true} which all user data has loaded
+   *
+   * @type {Function}
+   * @memberof IMasterProps
+   */
+  defaultDataEnable?: Function;
+  /**
+   * Load user data into store
+   *
+   * @type {Function}
+   * @memberof IMasterProps
+   */
+  loadData?: Function;
 
-  loadOtherData?: Function
+  loadOtherData?: Function;
 
-    /**
-     * Set flag {false} which user data has not loaded
-     *
-     * @type {Function}
-     * @memberof IMasterProps
-     */
-  defaultDataDisable?: Function
+  /**
+   * Set flag {false} which user data has not loaded
+   *
+   * @type {Function}
+   * @memberof IMasterProps
+   */
+  defaultDataDisable?: Function;
 
   /**
    * Redirect to [url]
    *
    * @memberof IHomeComponentProps
    */
-  goTo?: (url: string) => any
+  goTo?: (url: string) => any;
 
   /**
    * If there is more post {true} or not {false}
    */
-  hasMorePosts?: boolean
+  hasMorePosts?: boolean;
 
   /**
    * If all requierment data loaded {true} or not {false}
@@ -106,37 +105,37 @@ export interface IHomeComponentProps {
    * @type {boolean}
    * @memberof IHomeComponentProps
    */
-  loaded?: boolean
+  loaded?: boolean;
 
   /**
    * Show send feedback form
    */
-  showSendFeedback?: () => any
+  showSendFeedback?: () => any;
 
   /**
    * Hide send feedback form
    */
-  hideSendFeedback?: () => any
+  hideSendFeedback?: () => any;
 
   /**
    * Translate locale to string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 
   /**
    * Styles
    */
-  classes?: any
-  
+  classes?: any;
+
   /**
    * Theme
    */
-  theme?: any
+  theme?: any;
 
   /**
    * is User Guest
    */
-  isGuest?: boolean
+  isGuest?: boolean;
 
-  url?: string
+  url?: string;
 }

@@ -1,34 +1,30 @@
-import { BaseDomain } from 'core/domain/common'
-import { FeedType } from './feedType'
-import { User } from 'core/domain/users'
+import {BaseDomain} from 'core/domain/common';
+import {FeedType} from './feedType';
+import {User} from 'core/domain/users';
 
 export class Feed {
-
   /**
    * Constructor
    */
-  constructor (
+  constructor(
     /**
      * Feed identifier
      */
-  public id?: string,
+    public id?: string,
 
-  /**
-   * Feed text
-   */
-  public text?: string,
+    /**
+     * Feed text
+     */
+    public text?: string,
 
-  /**
-   * Feed type
-   */
-  public feedType?: FeedType,
+    /**
+     * Feed type
+     */
+    public feedType?: FeedType,
 
-  /**
-   * The user who send the feedback
-   */
-  public user?: User
-
-    ) {
-  }
-
+    /**
+     * The user who send the feedback
+     */
+    public user?: User,
+  ) {}
 }

@@ -1,8 +1,5 @@
-
 export interface IfeaturedComponentState {
+  scrollPosition: number;
 
-   scrollPosition: number
-
-   featuredWidth: number
-
+  featuredWidth: number;
 }

@@ -1,2 +1,2 @@
-import IconButtonElementComponent from './IconButtonElementComponent'
-export default IconButtonElementComponent
+import IconButtonElementComponent from './IconButtonElementComponent';
+export default IconButtonElementComponent;

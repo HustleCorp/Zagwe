@@ -1,2 +1,2 @@
-import PeopleComponent from './PeopleComponent'
-export default PeopleComponent
+import PeopleComponent from './PeopleComponent';
+export default PeopleComponent;

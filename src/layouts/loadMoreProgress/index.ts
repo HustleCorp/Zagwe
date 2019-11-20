@@ -1,2 +1,2 @@
-import LoadMoreProgressComponent from './LoadMoreProgressComponent'
-export default LoadMoreProgressComponent
+import LoadMoreProgressComponent from './LoadMoreProgressComponent';
+export default LoadMoreProgressComponent;

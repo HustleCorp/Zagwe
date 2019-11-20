@@ -3,5 +3,5 @@
  * We use symbols as identifiers but you can also use classes and or string literals.
  */
 export const FirestoreClientTypes = {
-  GraphService: Symbol('GraphService')
-}
+  GraphService: Symbol('GraphService'),
+};

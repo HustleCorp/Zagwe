@@ -1,5 +1,3 @@
-import { CircleService } from './CircleService'
+import {CircleService} from './CircleService';
 
-export {
-    CircleService
-}
+export {CircleService};

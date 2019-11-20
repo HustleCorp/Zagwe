@@ -15,7 +15,8 @@
     "build": "npm-run-all build-css build-js && rm build/static/js/*.map && mv build/index.html build/app.html",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy:firebase": "npm run build && firebase deploy"
+    "deploy:firebase": "npm run build && firebase deploy",
+    "prettier": "prettier --config ./prettierrc.json --write \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "author": "Beakal",
   "license": "MIT",
@@ -133,6 +134,7 @@
     "redux-mock-store": "^1.5.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.2.1"
   },

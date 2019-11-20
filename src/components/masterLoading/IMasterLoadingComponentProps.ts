@@ -1,5 +1,5 @@
 export interface IMasterLoadingComponentProps {
-    error?: boolean
-    timedOut?: boolean
-    pastDelay?: boolean
+  error?: boolean;
+  timedOut?: boolean;
+  pastDelay?: boolean;
 }

@@ -1,31 +1,30 @@
-import { BaseDomain } from 'core/domain/common'
+import {BaseDomain} from 'core/domain/common';
 
 export class Comment extends BaseDomain {
-
-    /**
-     * Comment identifier
-     */
-  public id?: string | null
+  /**
+   * Comment identifier
+   */
+  public id?: string | null;
 
   /**
    * Post identifier that comment belong to
    */
-  public postId: string
+  public postId: string;
 
   /**
    * Comment text
    */
-  public text?: string | null
+  public text?: string | null;
 
   /**
    * Comment upvote
    */
-  public upvote?: number | null
- 
+  public upvote?: number | null;
+
   /**
    *  Comment downvote
    */
-  public downvote?: number | null
+  public downvote?: number | null;
 
   /**
    * List of upvoter identifier
@@ -33,7 +32,7 @@ export class Comment extends BaseDomain {
    * @type {{[voterId: string]: boolean}}
    * @memberof Comment
    */
-  upvoted?: {[voterId: string]: boolean}
+  upvoted?: {[voterId: string]: boolean};
 
   /**
    * List of downvote identifier
@@ -41,26 +40,25 @@ export class Comment extends BaseDomain {
    * @type {{[voterId: string]: boolean}}
    * @memberof Comment
    */
-  downvoted?: {[voterId: string]: boolean}
+  downvoted?: {[voterId: string]: boolean};
 
   /**
    * Comment creation date
    */
-  public creationDate?: number
+  public creationDate?: number;
 
   /**
    * Comment owner full name
    */
-  public userDisplayName?: string
+  public userDisplayName?: string;
 
   /**
    * Comment owner avater address
    */
-  public userAvatar?: string
+  public userAvatar?: string;
 
   /**
    * Comment owner identifier
    */
-  public userId?: string
-
+  public userId?: string;
 }

@@ -1,5 +1,5 @@
 export interface TagsComponentState {
-    isFocused: any  
+  isFocused: any;
 
-    tag: any
+  tag: any;
 }

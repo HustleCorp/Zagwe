@@ -1,2 +1,2 @@
-import StreamComponent from './StreamComponent'
-export default StreamComponent
+import StreamComponent from './StreamComponent';
+export default StreamComponent;

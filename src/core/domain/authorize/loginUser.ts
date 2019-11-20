@@ -1,42 +1,40 @@
-import { BaseDomain } from 'core/domain/common'
+import {BaseDomain} from 'core/domain/common';
 
 export class LoginUser extends BaseDomain {
-
-  constructor (
-     private _uid: string,
-     private _emailVerified: boolean,
-     private _isAdmin: boolean,
-     private _providerId: string = '',
-     private _displayName: string = '',
-     private _email: string = '',
-     private _avatarURL: string = ''
-
-    ) {
-    super()
+  constructor(
+    private _uid: string,
+    private _emailVerified: boolean,
+    private _isAdmin: boolean,
+    private _providerId: string = '',
+    private _displayName: string = '',
+    private _email: string = '',
+    private _avatarURL: string = '',
+  ) {
+    super();
   }
 
-    /**
-     * User identifier
-     *
-     * @type {string}
-     * @memberof LoginUser
-     */
-  public get uid (): string {
-    return this._uid
+  /**
+   * User identifier
+   *
+   * @type {string}
+   * @memberof LoginUser
+   */
+  public get uid(): string {
+    return this._uid;
   }
-  
+
   /**
    * Get if User is an admin
-   * 
+   *
    * @readonly
-   * 
+   *
    * @type {boolean}
    * @memberof LoginUser
    */
-  public get isAdmin (): boolean {
-    return this._isAdmin
+  public get isAdmin(): boolean {
+    return this._isAdmin;
   }
-   
+
   /**
    * If user's email is verifide {true} or not {false}
    *
@@ -44,24 +42,23 @@ export class LoginUser extends BaseDomain {
    * @type {boolean}
    * @memberof LoginUser
    */
-  public get emailVerified (): boolean {
-    return this._emailVerified
+  public get emailVerified(): boolean {
+    return this._emailVerified;
   }
 
-  public get providerId (): string {
-    return this._providerId
+  public get providerId(): string {
+    return this._providerId;
   }
 
-  public get displayName (): string {
-    return this._displayName
+  public get displayName(): string {
+    return this._displayName;
   }
 
-  public get email (): string {
-    return this.email
+  public get email(): string {
+    return this.email;
   }
 
-  public get avatarURL (): string {
-    return this._avatarURL
+  public get avatarURL(): string {
+    return this._avatarURL;
   }
-
 }

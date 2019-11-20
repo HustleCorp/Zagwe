@@ -1,50 +1,48 @@
-
 export interface ISignupComponentState {
-
-  [key: string]: any
+  [key: string]: any;
 
   /**
    * Full name input value
    */
-  fullNameInput: string
+  fullNameInput: string;
 
   /**
    * Full name input error text
    */
-  fullNameInputError: string
+  fullNameInputError: string;
 
   /**
    * Email input value
    */
-  emailInput: string
+  emailInput: string;
 
   /**
    * Email input error text
    */
-  emailInputError: string
+  emailInputError: string;
 
   /**
    * Password input value
    */
-  passwordInput: string
+  passwordInput: string;
 
   /**
    * Passwor input error text
    */
-  passwordInputError: string
+  passwordInputError: string;
 
   /**
    * Confirm input value
    */
-  confirmInput: string
+  confirmInput: string;
 
   /**
    * Confirm input error text
    */
-  confirmInputError: string
+  confirmInputError: string;
 
   /**
    * Checkbox input error text
    */
-  checkInputError?: string
+  checkInputError?: string;
 }

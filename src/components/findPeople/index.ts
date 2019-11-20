@@ -1,2 +1,2 @@
-import FindPeopleComponent from './FindPeopleComponent'
-export default FindPeopleComponent
+import FindPeopleComponent from './FindPeopleComponent';
+export default FindPeopleComponent;

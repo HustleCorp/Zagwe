@@ -1,26 +1,25 @@
 export interface IResetPasswordComponentProps {
-
   /**
    * Reset password
    *
    * @memberof IResetPasswordComponentProps
    */
-  resetPassword?: (email: string) => any
+  resetPassword?: (email: string) => any;
 
   /**
    * Redirect to login page
    *
    * @memberof IResetPasswordComponentProps
    */
-  loginPage?: () => void
+  loginPage?: () => void;
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any, param?: {}) => any
+  translate?: (state: any, param?: {}) => any;
 }

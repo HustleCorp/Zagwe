@@ -1,1 +1,1 @@
-declare module 'react-parallax'
+declare module 'react-parallax';

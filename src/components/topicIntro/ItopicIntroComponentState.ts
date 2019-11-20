@@ -1,3 +1,1 @@
-export interface ItopicIntroComponentState {
-    
-}
+export interface ItopicIntroComponentState {}

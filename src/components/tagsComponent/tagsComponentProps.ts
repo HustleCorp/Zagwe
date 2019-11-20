@@ -1,50 +1,49 @@
 export interface TagsComponentProps {
-    tagDisplayProp?: any
-    
-    value: string []
+  tagDisplayProp?: any;
 
-    onChange: any
+  value: string[];
 
-    onChangeInput?: any
+  onChange: any;
 
-    inputValue?: any
+  onChangeInput?: any;
 
-    validationRegex?: any
+  inputValue?: any;
 
-    onValidationReject?: any
+  validationRegex?: any;
 
-    onlyUnique?: any
+  onValidationReject?: any;
 
-    maxTags?: any
+  onlyUnique?: any;
 
-    preventSubmit?: any
+  maxTags?: any;
 
-    addOnPaste?: any
+  preventSubmit?: any;
 
-    pasteSplit?: any
+  addOnPaste?: any;
 
-    removeKeys?: any
+  pasteSplit?: any;
 
-    addKeys?: any
+  removeKeys?: any;
 
-    inputProps?: any
+  addKeys?: any;
 
-    addOnBlur?: any
+  inputProps?: any;
 
-    disabled?: boolean
+  addOnBlur?: any;
 
-    tagProps?: any
-    
-    renderLayout?: any
+  disabled?: boolean;
 
-    renderTag?: any
+  tagProps?: any;
 
-    renderInput?: any
+  renderLayout?: any;
 
-    className?: any
+  renderTag?: any;
 
-    focusedClassName?: any
+  renderInput?: any;
 
-    initval?: any
-    
+  className?: any;
+
+  focusedClassName?: any;
+
+  initval?: any;
 }

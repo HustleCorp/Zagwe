@@ -12,8 +12,8 @@ const messaging = firebase.messaging()
 messaging.setBackgroundMessageHandler(function(payload) {
   const promiseChain = clients
     .matchAll({
-      type: "window",
-      includeUncontrolled: true
+      includeUncontrolled: true,
+      type: "window"
     })
     .then(windowClients => {
       for (let i = 0; i < windowClients.length; i++) {

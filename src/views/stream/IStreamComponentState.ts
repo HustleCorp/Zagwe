@@ -1,14 +1,13 @@
-import { Post } from 'src/core/domain/posts'
+import {Post} from 'src/core/domain/posts';
 
 export interface IStreamComponentState {
-
   /**
    * Comment on a post is disables {true} or not {false}
    *
    * @type {boolean}
    * @memberof IStreamComponentState
    */
-  disableComments: boolean
+  disableComments: boolean;
 
   /**
    * Sharing post is disabled {true} or not {false}
@@ -16,7 +15,7 @@ export interface IStreamComponentState {
    * @type {boolean}
    * @memberof IStreamComponentState
    */
-  disableSharing: boolean
+  disableSharing: boolean;
 
   /**
    * Post should be in two columns {true} or not false
@@ -24,7 +23,7 @@ export interface IStreamComponentState {
    * @type {boolean}
    * @memberof IStreamComponentState
    */
-  divided: boolean
+  divided: boolean;
 
   /**
    * If there is more post to show
@@ -32,10 +31,9 @@ export interface IStreamComponentState {
    * @type {boolean}
    * @memberof IStreamComponentState
    */
-  hasMorePosts: boolean
+  hasMorePosts: boolean;
 
-  count: number
+  count: number;
 
-  postList: any
-
+  postList: any;
 }

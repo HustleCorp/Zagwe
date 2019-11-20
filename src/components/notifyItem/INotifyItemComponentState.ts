@@ -1,4 +1,1 @@
-
-export interface INotifyItemComponentState {
-
-}
+export interface INotifyItemComponentState {}

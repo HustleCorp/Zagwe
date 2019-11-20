@@ -1,9 +1,9 @@
 // - Import react components
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Avatar from '@material-ui/core/Avatar'
-import { Map } from 'immutable'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import Avatar from '@material-ui/core/Avatar';
+import {Map} from 'immutable';
 
 // - Import app components
 
@@ -11,19 +11,20 @@ import { Map } from 'immutable'
 
 // - Import actions
 
-import { IUserAvatarComponentProps } from './IUserAvatarComponentProps'
-import { IUserAvatarComponentState } from './IUserAvatarComponentState'
+import {IUserAvatarComponentProps} from './IUserAvatarComponentProps';
+import {IUserAvatarComponentState} from './IUserAvatarComponentState';
 
-import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.jsx'
-import withStyles from '@material-ui/core/styles/withStyles'
+import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.jsx';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 /**
  * Create component class
  */
-export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUserAvatarComponentState> {
-
+export class UserAvatarComponent extends Component<
+  IUserAvatarComponentProps,
+  IUserAvatarComponentState
+> {
   static propTypes = {
-
     /**
      * Use for getting url address from server
      */
@@ -43,39 +44,44 @@ export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUs
     /**
      * Trigger on touch tap
      */
-    onClick: PropTypes.func
-    
-  }
+    onClick: PropTypes.func,
+  };
 
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: IUserAvatarComponentProps) {
-    super(props)
+  constructor(props: IUserAvatarComponentProps) {
+    super(props);
 
     // Defaul state
-    this.state = {
-    }
+    this.state = {};
 
     // Binding functions to `this`
-
   }
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-    let { fileName, fullName, style, size, onClick} = this.props
+  render() {
+    let {fileName, fullName, style, size, onClick} = this.props;
 
     return (
       <div style={{display: 'inherit'}}>
-       {(fileName && fileName !== '' && fileName !== 'noImage' )
-       ? ( <Avatar src={fileName ? fileName : ' '} style={{...style, backgroundColor: '#ffffff'}} onClick={onClick} />)
-        : (<Avatar style={{...style, }} onClick={onClick}>{fullName ? fullName.slice(0, 1) : ''}</Avatar>) }
+        {fileName && fileName !== '' && fileName !== 'noImage' ? (
+          <Avatar
+            src={fileName ? fileName : ' '}
+            style={{...style, backgroundColor: '#ffffff'}}
+            onClick={onClick}
+          />
+        ) : (
+          <Avatar style={{...style}} onClick={onClick}>
+            {fullName ? fullName.slice(0, 1) : ''}
+          </Avatar>
+        )}
       </div>
-    )
+    );
   }
 }
 
@@ -85,10 +91,12 @@ export class UserAvatarComponent extends Component<IUserAvatarComponentProps,IUs
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IUserAvatarComponentProps) => {
-  return {
-  }
-}
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IUserAvatarComponentProps,
+) => {
+  return {};
+};
 
 /**
  * Map state to props
@@ -99,10 +107,12 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IUserAvatarComponentPr
 const mapStateToProps = (state: any, ownProps: IUserAvatarComponentProps) => {
   return {
     avatarURL: state.getIn(['imageGallery', 'imageURLList']),
-    imageRequests: state.getIn(['imageGallery', 'imageRequests'])
-
-  }
-}
+    imageRequests: state.getIn(['imageGallery', 'imageRequests']),
+  };
+};
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(imagesStyle as any)(UserAvatarComponent as any) as any)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(imagesStyle as any)(UserAvatarComponent as any) as any);

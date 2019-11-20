@@ -1,25 +1,23 @@
-
 export interface ISettingComponentState {
-
-  [key: string]: any
+  [key: string]: any;
 
   /**
    * Password input value
    */
-  passwordInput: string
+  passwordInput: string;
 
   /**
    * Password input error text
    */
-  passwordInputError: string
+  passwordInputError: string;
 
   /**
    * Confirm input value
    */
-  confirmInput: string
+  confirmInput: string;
 
   /**
    * Confirm input error
    */
-  confirmInputError: string
+  confirmInputError: string;
 }

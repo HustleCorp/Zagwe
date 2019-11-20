@@ -1,1 +1,1 @@
-export { FileResult } from './fileResult'
+export {FileResult} from './fileResult';

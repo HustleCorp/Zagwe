@@ -1,3 +1,3 @@
-import SubmitPostComponent from './SubmitPostComponent'
+import SubmitPostComponent from './SubmitPostComponent';
 
-export default SubmitPostComponent
+export default SubmitPostComponent;

@@ -1,39 +1,39 @@
 // - Import react components
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import classNames from 'classnames'
-import {Map} from 'immutable'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import classNames from 'classnames';
+import {Map} from 'immutable';
 
 // - Material UI
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import IconButton from '@material-ui/core/IconButton'
-import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
-import SvgClose from '@material-ui/icons/Clear'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Tooltip from '@material-ui/core/Tooltip'
-import { getTranslate, getActiveLanguage } from 'react-localize-redux'
-import { withStyles } from '@material-ui/core/styles'
+import SvgClose from '@material-ui/icons/Clear';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Tooltip from '@material-ui/core/Tooltip';
+import {getTranslate, getActiveLanguage} from 'react-localize-redux';
+import {withStyles} from '@material-ui/core/styles';
 
 // - Import app components
 
 // - Import API
 
 // - Import actions
-import { globalActions } from 'store/actions'
+import {globalActions} from 'store/actions';
 
-import { Feed } from 'core/domain/common'
-import { ISendFeedbackComponentProps } from './ISendFeedbackComponentProps'
-import { ISendFeedbackComponentState } from './ISendFeedbackComponentState'
-import { FeedType } from 'core/domain/common/feedType'
-import { ServerRequestModel } from 'models/server'
-import { Profile } from 'core/domain/users'
-import StringAPI from 'api/StringAPI'
-import { ServerRequestType } from 'constants/serverRequestType'
-import { User } from 'core/domain/users'
-import { ServerRequestStatusType } from 'store/actions/serverRequestStatusType'
+import {Feed} from 'core/domain/common';
+import {ISendFeedbackComponentProps} from './ISendFeedbackComponentProps';
+import {ISendFeedbackComponentState} from './ISendFeedbackComponentState';
+import {FeedType} from 'core/domain/common/feedType';
+import {ServerRequestModel} from 'models/server';
+import {Profile} from 'core/domain/users';
+import StringAPI from 'api/StringAPI';
+import {ServerRequestType} from 'constants/serverRequestType';
+import {User} from 'core/domain/users';
+import {ServerRequestStatusType} from 'store/actions/serverRequestStatusType';
 
 const styles = (theme: any) => ({
   fullPageXs: {
@@ -41,58 +41,65 @@ const styles = (theme: any) => ({
       width: '100%',
       height: '100%',
       margin: 0,
-      overflowY: 'auto'
-    }
-  }
-})
+      overflowY: 'auto',
+    },
+  },
+});
 
 /**
  * Create component class
  */
-export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps, ISendFeedbackComponentState> {
-
+export class SendFeedbackComponent extends Component<
+  ISendFeedbackComponentProps,
+  ISendFeedbackComponentState
+> {
   /**
    * Component constructor
    * @param  {object} props is an object properties of component
    */
-  constructor (props: ISendFeedbackComponentProps) {
-    super(props)
+  constructor(props: ISendFeedbackComponentProps) {
+    super(props);
 
     // Defaul state
     this.state = {
-      feedText: ''
-    }
+      feedText: '',
+    };
 
     // Binding functions to `this`
-    this.handleFeedText = this.handleFeedText.bind(this)
-    this.getFeedbackForm = this.getFeedbackForm.bind(this)
-    this.mainForm = this.mainForm.bind(this)
-    this.successForm = this.successForm.bind(this)
-    this.errorForm = this.errorForm.bind(this)
+    this.handleFeedText = this.handleFeedText.bind(this);
+    this.getFeedbackForm = this.getFeedbackForm.bind(this);
+    this.mainForm = this.mainForm.bind(this);
+    this.successForm = this.successForm.bind(this);
+    this.errorForm = this.errorForm.bind(this);
   }
 
   handleFeedText = (event: any) => {
-    const target = event ? event.target : {}
-    const value = target ? target.value : ''
+    const target = event ? event.target : {};
+    const value = target ? target.value : '';
     if (value) {
       this.setState({
-        feedText: value
-      })
-
+        feedText: value,
+      });
     }
-  }
+  };
 
   handleSendFeed = (feedType: FeedType) => {
-    const { sendFeed, currentUser } = this.props
-    const { feedText } = this.state
-    sendFeed!(new Feed('', feedText, feedType, currentUser))
-  }
+    const {sendFeed, currentUser} = this.props;
+    const {feedText} = this.state;
+    sendFeed!(new Feed('', feedText, feedType, currentUser));
+  };
 
   mainForm = () => {
-    const { sendFeedbackStatus, hideFeedback, sendFeed, sendFeedbackRequestType, translate } = this.props
-    const { feedText } = this.state
+    const {
+      sendFeedbackStatus,
+      hideFeedback,
+      sendFeed,
+      sendFeedbackRequestType,
+      translate,
+    } = this.props;
+    const {feedText} = this.state;
     return (
-      <div className='main-box'>
+      <div className="main-box">
         <TextField
           placeholder={'Send us Feedback'}
           multiline
@@ -103,8 +110,11 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
           fullWidth
         />
         <br />
-        <Button  onClick={() => this.handleSendFeed(FeedType.Acceptable)} color="primary">
-              Send
+        <Button
+          onClick={() => this.handleSendFeed(FeedType.Acceptable)}
+          color="primary"
+        >
+          Send
         </Button>
         {/* <div className='buttons'>
 
@@ -138,67 +148,84 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
           </IconButton>
           </Tooltip>
         </div> */}
-      </div >)
-  }
+      </div>
+    );
+  };
 
   successForm = () => {
-    const {translate} = this.props
-    return (<div className='success'>{translate!('feedback.appreciateMessage')}</div>)
-  }
+    const {translate} = this.props;
+    return (
+      <div className="success">{translate!('feedback.appreciateMessage')}</div>
+    );
+  };
 
   errorForm = () => {
-    const {translate} = this.props
-    return (<div className='error'>{translate!('feedback.errorMessage')}</div>)
-  }
+    const {translate} = this.props;
+    return <div className="error">{translate!('feedback.errorMessage')}</div>;
+  };
 
   getFeedbackForm = () => {
-    const { sendFeedbackStatus, hideFeedback, sendFeed, sendFeedbackRequestType } = this.props
-    const { feedText } = this.state
+    const {
+      sendFeedbackStatus,
+      hideFeedback,
+      sendFeed,
+      sendFeedbackRequestType,
+    } = this.props;
+    const {feedText} = this.state;
 
     if (sendFeedbackRequestType) {
       switch (sendFeedbackRequestType) {
         case ServerRequestStatusType.Sent:
-          return ''
+          return '';
 
         case ServerRequestStatusType.OK:
-          return this.successForm()
+          return this.successForm();
 
         case ServerRequestStatusType.Error:
-          return this.errorForm()
+          return this.errorForm();
 
         default:
-          return this.mainForm()
+          return this.mainForm();
       }
     } else {
-      return this.mainForm()
+      return this.mainForm();
     }
-  }
+  };
 
   /**
    * Reneder component DOM
    * @return {react element} return the DOM which rendered by component
    */
-  render () {
-    const { sendFeedbackStatus, hideFeedback, sendFeed, sendFeedbackRequestType, classes } = this.props
-    const { feedText } = this.state
+  render() {
+    const {
+      sendFeedbackStatus,
+      hideFeedback,
+      sendFeed,
+      sendFeedbackRequestType,
+      classes,
+    } = this.props;
+    const {feedText} = this.state;
 
     return (
-      <div className={classNames('sendFeedback__content', 'animate__up',classes.fullPageXs)}>
-        <Paper className='paper' >
-          <div className='close'>
-          <Tooltip title='Cancel' placement='bottom-start'>
-            <IconButton
-              onClick={() => hideFeedback!()}
-            >
-              <SvgClose />
-            </IconButton>
-            </Tooltip >
+      <div
+        className={classNames(
+          'sendFeedback__content',
+          'animate__up',
+          classes.fullPageXs,
+        )}
+      >
+        <Paper className="paper">
+          <div className="close">
+            <Tooltip title="Cancel" placement="bottom-start">
+              <IconButton onClick={() => hideFeedback!()}>
+                <SvgClose />
+              </IconButton>
+            </Tooltip>
           </div>
           {this.getFeedbackForm()}
-
         </Paper>
       </div>
-    )
+    );
   }
 }
 
@@ -208,12 +235,15 @@ export class SendFeedbackComponent extends Component<ISendFeedbackComponentProps
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: ISendFeedbackComponentProps) => {
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: ISendFeedbackComponentProps,
+) => {
   return {
-    sendFeed: (feed: Feed) => (dispatch(globalActions.dbSendFeed(feed))),
-    hideFeedback: () => dispatch(globalActions.hideSendFeedback())
-  }
-}
+    sendFeed: (feed: Feed) => dispatch(globalActions.dbSendFeed(feed)),
+    hideFeedback: () => dispatch(globalActions.hideSendFeedback()),
+  };
+};
 
 /**
  * Map state to props
@@ -221,22 +251,35 @@ const mapDispatchToProps = (dispatch: Function, ownProps: ISendFeedbackComponent
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapStateToProps = (state: Map<string, any>, ownProps: ISendFeedbackComponentProps) => {
-
-  const request = state.getIn(['server', 'request'])
-  const uid = state.getIn(['authorize', 'uid'])
-  const requestId = StringAPI.createServerRequestId(ServerRequestType.CommonSendFeedback, uid)
-  const currentUser: User =  { ...state.getIn(['user', 'info', uid], {}), userId: uid }
-  const sendFeedbackStatus = state.getIn(['global', 'sendFeedbackStatus'])
-  const sendFeedbackRequestType = state.getIn(['server', 'request', requestId])
+const mapStateToProps = (
+  state: Map<string, any>,
+  ownProps: ISendFeedbackComponentProps,
+) => {
+  const request = state.getIn(['server', 'request']);
+  const uid = state.getIn(['authorize', 'uid']);
+  const requestId = StringAPI.createServerRequestId(
+    ServerRequestType.CommonSendFeedback,
+    uid,
+  );
+  const currentUser: User = {
+    ...state.getIn(['user', 'info', uid], {}),
+    userId: uid,
+  };
+  const sendFeedbackStatus = state.getIn(['global', 'sendFeedbackStatus']);
+  const sendFeedbackRequestType = state.getIn(['server', 'request', requestId]);
 
   return {
     translate: getTranslate(state.get('locale')),
     sendFeedbackStatus,
-    sendFeedbackRequestType: sendFeedbackRequestType ? sendFeedbackRequestType.status : ServerRequestStatusType.NoAction,
-    currentUser
-  }
-}
+    sendFeedbackRequestType: sendFeedbackRequestType
+      ? sendFeedbackRequestType.status
+      : ServerRequestStatusType.NoAction,
+    currentUser,
+  };
+};
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles as any)(SendFeedbackComponent as any)) as any)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles as any)(SendFeedbackComponent as any) as any);

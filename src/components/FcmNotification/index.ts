@@ -1,2 +1,2 @@
-import Notifications from './notification'
-export default Notifications
+import Notifications from './notification';
+export default Notifications;

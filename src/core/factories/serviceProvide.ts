@@ -1,7 +1,7 @@
 //#region Interfaces
 
-import { IServiceProvider } from 'core/factories'
-import { injectable } from 'inversify'
+import {IServiceProvider} from 'core/factories';
+import {injectable} from 'inversify';
 import {
   IAuthorizeService,
   ICircleService,
@@ -12,8 +12,8 @@ import {
   IPostService,
   IUserService,
   IVoteService,
-  IStorageService
-} from 'core/services'
+  IStorageService,
+} from 'core/services';
 
 //#endregion
 
@@ -30,21 +30,20 @@ import {
   PostService,
   UserService,
   VoteService,
-  StorageService
-} from 'data/firestoreClient/services'
+  StorageService,
+} from 'data/firestoreClient/services';
 
 //#endregion
 @injectable()
 export class ServiceProvide implements IServiceProvider {
-
   /**
    * Create instant for Authorize Service
    *
    * @memberof ServiceProvide
    */
   createAuthorizeService: () => IAuthorizeService = () => {
-    return new AuthorizeService()
-  }
+    return new AuthorizeService();
+  };
 
   /**
    * Create instant for Circle Service
@@ -52,8 +51,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createCircleService: () => ICircleService = () => {
-    return new CircleService()
-  }
+    return new CircleService();
+  };
 
   /**
    * Create instant for Comment Service
@@ -61,8 +60,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createCommentService: () => ICommentService = () => {
-    return new CommentService()
-  }
+    return new CommentService();
+  };
 
   /**
    * Create instant for Common Service
@@ -70,8 +69,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createCommonService: () => ICommonService = () => {
-    return new CommonService()
-  }
+    return new CommonService();
+  };
 
   /**
    * Create instant for ImageGallery Service
@@ -79,8 +78,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createImageGalleryService: () => IImageGalleryService = () => {
-    return new ImageGalleryService()
-  }
+    return new ImageGalleryService();
+  };
 
   /**
    * Create instant for Notification Service
@@ -88,8 +87,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createNotificationService: () => INotificationService = () => {
-    return new NotificationService()
-  }
+    return new NotificationService();
+  };
 
   /**
    * Create instant for Post Service
@@ -97,8 +96,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createPostService: () => IPostService = () => {
-    return new PostService()
-  }
+    return new PostService();
+  };
 
   /**
    * Create instant for User Service
@@ -106,8 +105,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createUserService: () => IUserService = () => {
-    return new UserService()
-  }
+    return new UserService();
+  };
 
   /**
    * Create instant for Vote Service
@@ -115,8 +114,8 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createVoteService: () => IVoteService = () => {
-    return new VoteService()
-  }
+    return new VoteService();
+  };
 
   /**
    * Create instant for Vote Service
@@ -124,7 +123,6 @@ export class ServiceProvide implements IServiceProvider {
    * @memberof ServiceProvide
    */
   createStorageService: () => IStorageService = () => {
-    return new StorageService()
-  }
-
+    return new StorageService();
+  };
 }

@@ -1,2 +1,2 @@
-import FollowingComponent from './FollowingComponent'
-export default FollowingComponent
+import FollowingComponent from './FollowingComponent';
+export default FollowingComponent;

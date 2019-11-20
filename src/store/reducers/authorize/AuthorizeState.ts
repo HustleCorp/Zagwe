@@ -5,22 +5,21 @@
  * @class AuthorizeState
  */
 export class AuthorizeState {
+  /**
+   * Authorized user identifier
+   *
+   * @type {number}
+   * @memberof AuthorizeState
+   */
+  uid: number = 0;
 
-    /**
-     * Authorized user identifier
-     *
-     * @type {number}
-     * @memberof AuthorizeState
-     */
-  uid: number = 0
-
-    /**
-     * If user is authed {true} or not {false}
-     *
-     * @type {Boolean}
-     * @memberof AuthorizeState
-     */
-  authed: Boolean = false
+  /**
+   * If user is authed {true} or not {false}
+   *
+   * @type {Boolean}
+   * @memberof AuthorizeState
+   */
+  authed: Boolean = false;
 
   /**
    * If user is verifide {true} or not {false}
@@ -28,29 +27,29 @@ export class AuthorizeState {
    * @type {Boolean}
    * @memberof AuthorizeState
    */
-  isVerifide: Boolean = false
+  isVerifide: Boolean = false;
 
-    /**
-     * If user password is updated {true} or not {false}
-     *
-     * @type {Boolean}
-     * @memberof AuthorizeState
-     */
-  updatePassword: Boolean = false
+  /**
+   * If user password is updated {true} or not {false}
+   *
+   * @type {Boolean}
+   * @memberof AuthorizeState
+   */
+  updatePassword: Boolean = false;
 
-    /**
-     * If the user is guest {true} or not {false}
-     *
-     * @type {Boolean}
-     * @memberof AuthorizeState
-     */
-  guest: Boolean = false
+  /**
+   * If the user is guest {true} or not {false}
+   *
+   * @type {Boolean}
+   * @memberof AuthorizeState
+   */
+  guest: Boolean = false;
 
   /**
    * Check if the user is an admin
-   * 
+   *
    * @type {Boolen}
    * @memberof AuthorizeState
    */
-  isAdmin: Boolean 
+  isAdmin: Boolean;
 }

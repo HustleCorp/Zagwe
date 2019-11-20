@@ -1,43 +1,40 @@
-
 export interface IPostWriteComponentState {
-
   /**
    * Post text
    */
-  postText: string
+  postText: string;
   /**
    * The URL image of the post
    */
-  image?: string
+  image?: string;
   /**
    * The path identifier of image on the server
    */
-  imageFullPath: string
+  imageFullPath: string;
   /**
    * If it's true gallery will be open
    */
-  galleryOpen: boolean
+  galleryOpen: boolean;
   /**
    * If it's true post button will be disabled
    */
-  disabledPost: boolean
+  disabledPost: boolean;
   /**
    * If it's true comment will be disabled on post
    */
-  disableComments: boolean
+  disableComments: boolean;
   /**
    * If it's true share will be disabled on post
    */
-  disableSharing: boolean,
+  disableSharing: boolean;
 
   /**
    * Whether menu is open
    */
-  menuOpen: boolean
+  menuOpen: boolean;
 
   /**
    * Menu anchor element
    */
-  menuAnchorEl: any
-
+  menuAnchorEl: any;
 }

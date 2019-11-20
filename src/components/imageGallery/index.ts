@@ -1,2 +1,2 @@
-import ImageGalleryComponent from './ImageGalleryComponent'
-export default ImageGalleryComponent
+import ImageGalleryComponent from './ImageGalleryComponent';
+export default ImageGalleryComponent;

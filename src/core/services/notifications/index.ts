@@ -1,5 +1,3 @@
-import { INotificationService } from './INotificationService'
+import {INotificationService} from './INotificationService';
 
-export {
-    INotificationService
-}
+export {INotificationService};

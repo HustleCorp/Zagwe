@@ -1,2 +1,2 @@
-import HomeHeaderComponent from './HomeHeaderComponent'
-export default HomeHeaderComponent
+import HomeHeaderComponent from './HomeHeaderComponent';
+export default HomeHeaderComponent;

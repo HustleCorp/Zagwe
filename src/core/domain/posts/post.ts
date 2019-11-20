@@ -1,48 +1,47 @@
-import { BaseDomain } from 'core/domain/common'
-import { Comment } from 'core/domain/comments'
+import {BaseDomain} from 'core/domain/common';
+import {Comment} from 'core/domain/comments';
 export class Post extends BaseDomain {
+  /**
+   * Post identifier
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public id?: string | null;
 
-    /**
-     * Post identifier
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public id?: string | null
+  public postLevel?: number;
 
-  public postLevel?: number
+  /**
+   * The identifier of post type
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public postTypeId?: number;
 
-    /**
-     * The identifier of post type
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public postTypeId?: number
+  /**
+   * The post creation date
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public creationDate?: number;
 
-    /**
-     * The post creation date
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public creationDate?: number
+  /**
+   * The post delete date
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public deleteDate?: number;
 
-    /**
-     * The post delete date
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public deleteDate?: number
-
-    /**
-     * The score of post
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public score?: number
+  /**
+   * The score of post
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public score?: number;
 
   /**
    * List of voter identifier
@@ -50,15 +49,15 @@ export class Post extends BaseDomain {
    * @type {{[voterId: string]: boolean}}
    * @memberof Post
    */
-  votes?: {[voterId: string]: boolean}
+  votes?: {[voterId: string]: boolean};
 
-    /**
-     * Post view count
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public viewCount?: number
+  /**
+   * Post view count
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public viewCount?: number;
 
   /**
    * Store three last comments to show in slide preview comment
@@ -66,138 +65,137 @@ export class Post extends BaseDomain {
    * @type {{[commentId: string]: Comment}}
    * @memberof Post
    */
-  comments?: {[commentId: string]: Comment}
+  comments?: {[commentId: string]: Comment};
 
   /**
    * Title of the post
-   * 
+   *
    * @type {string}
    * @memberof Post
    */
-  title?: string
+  title?: string;
 
-    /**
-     * The text of post
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public body?: string
+  /**
+   * The text of post
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public body?: string;
 
   /**
    * The text of the post without html
-   * 
+   *
    *  @type {string}
    *  @memberof Post
    */
-  public bodyText?: string 
+  public bodyText?: string;
 
   /**
    * Post Catagory
-   * 
+   *
    * @type {string}
    * @memberof Post
    */
-  public postTopic?: string
+  public postTopic?: string;
 
-    /**
-     * The identifier of post owner
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public ownerUserId?: string
+  /**
+   * The identifier of post owner
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public ownerUserId?: string;
 
-    /**
-     * Full name of post owner
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public ownerDisplayName?: string
+  /**
+   * Full name of post owner
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public ownerDisplayName?: string;
 
-    /**
-     * Avatar address of post owner
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public ownerAvatar?: string
+  /**
+   * Avatar address of post owner
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public ownerAvatar?: string;
 
-    /**
-     * Last post edit date
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public lastEditDate?: number
+  /**
+   * Last post edit date
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public lastEditDate?: number;
 
-    /**
-     * Post tags
-     *
-     * @type {string[]}
-     * @memberof Post
-     */
-  public tags?: string[]
+  /**
+   * Post tags
+   *
+   * @type {string[]}
+   * @memberof Post
+   */
+  public tags?: string[];
 
-    /**
-     * Numeber of comment on the post
-     *
-     * @type {number}
-     * @memberof Post
-     */
-  public commentCounter?: number
+  /**
+   * Numeber of comment on the post
+   *
+   * @type {number}
+   * @memberof Post
+   */
+  public commentCounter?: number;
 
-    /**
-     * The address of image on the post
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public image?: string
+  /**
+   * The address of image on the post
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public image?: string;
 
-    /**
-     * Post image full path
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public imageFullPath?: string
+  /**
+   * Post image full path
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public imageFullPath?: string;
 
-  public thumbImage?: string
+  public thumbImage?: string;
 
-    /**
-     * The adress of video on the post
-     *
-     * @type {string}
-     * @memberof Post
-     */
-  public video?: string
+  /**
+   * The adress of video on the post
+   *
+   * @type {string}
+   * @memberof Post
+   */
+  public video?: string;
 
-    /**
-     * If writing comment is disabled {true} or not {false}
-     *
-     * @type {Boolean}
-     * @memberof Post
-     */
-  public disableComments?: boolean
+  /**
+   * If writing comment is disabled {true} or not {false}
+   *
+   * @type {Boolean}
+   * @memberof Post
+   */
+  public disableComments?: boolean;
 
-    /**
-     * If sharing post is disabled {true} or not {false}
-     *
-     * @type {Boolean}
-     * @memberof Post
-     */
-  public disableSharing?: boolean
+  /**
+   * If sharing post is disabled {true} or not {false}
+   *
+   * @type {Boolean}
+   * @memberof Post
+   */
+  public disableSharing?: boolean;
 
-    /**
-     * If the post is deleted {true} or not false
-     *
-     * @type {Boolean}
-     * @memberof Post
-     */
-  public deleted?: boolean
+  /**
+   * If the post is deleted {true} or not false
+   *
+   * @type {Boolean}
+   * @memberof Post
+   */
+  public deleted?: boolean;
 
-  public filter?: any
-
+  public filter?: any;
 }

@@ -1,22 +1,20 @@
-
 export interface IEditProfileComponentState {
-
-  [key: string]: any
+  [key: string]: any;
 
   /**
    * Full name input value
    */
-  fullNameInput: string
+  fullNameInput: string;
 
   /**
    * Full name input error message
    */
-  fullNameInputError: string
+  fullNameInputError: string;
 
   /**
    * Tag line input value
    */
-  tagLineInput: string
+  tagLineInput: string;
 
   /**
    * Edit profile page is small size {true} or big {false}
@@ -24,16 +22,16 @@ export interface IEditProfileComponentState {
    * @type {boolean}
    * @memberof IEditProfileComponentState
    */
-  isSmall: boolean
+  isSmall: boolean;
 
-  cityInput: string,
+  cityInput: string;
 
-  countryInput: string,
-  
+  countryInput: string;
+
   /**
    * User's avatar URL address
    */
-  avatar: string
+  avatar: string;
 
   /**
    * Image gallery dialog is open for choosing avatar image {true} or not {false}
@@ -41,31 +39,30 @@ export interface IEditProfileComponentState {
    * @type {boolean}
    * @memberof IEditProfileComponentState
    */
-  openAvatar: boolean
+  openAvatar: boolean;
 
   /**
    * Default birth day
    */
-  defaultBirthday: any
+  defaultBirthday: any;
 
   /**
    * Seleted birth day
    */
-  selectedBirthday: number
+  selectedBirthday: number;
 
   /**
    * Web URL
    */
-  webUrl: string
+  webUrl: string;
 
   /**
    * User company name
    */
-  companyName: string
+  companyName: string;
 
   /**
    * User twitter id
    */
-  twitterId: string
-
+  twitterId: string;
 }

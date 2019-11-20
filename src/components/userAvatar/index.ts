@@ -1,2 +1,2 @@
-import UserAvatarComponent from './UserAvatarComponent'
-export default UserAvatarComponent
+import UserAvatarComponent from './UserAvatarComponent';
+export default UserAvatarComponent;

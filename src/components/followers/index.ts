@@ -1,2 +1,2 @@
-import FollowersComponent from './FollowersComponent'
-export default FollowersComponent
+import FollowersComponent from './FollowersComponent';
+export default FollowersComponent;

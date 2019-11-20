@@ -1,2 +1,2 @@
-import DialogTitleComponent from './DialogTitleComponent'
-export default DialogTitleComponent
+import DialogTitleComponent from './DialogTitleComponent';
+export default DialogTitleComponent;

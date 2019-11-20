@@ -8,79 +8,77 @@ import {
   IPostService,
   IUserService,
   IVoteService,
-  IStorageService
-} from 'core/services'
+  IStorageService,
+} from 'core/services';
 
 export interface IServiceProvider {
-
-   /**
-    * Create authorize service
-    *
-    * @memberof IServiceProvider
-    */
-  createAuthorizeService: () => IAuthorizeService
+  /**
+   * Create authorize service
+   *
+   * @memberof IServiceProvider
+   */
+  createAuthorizeService: () => IAuthorizeService;
 
   /**
    * Create instant for Circle Service
    *
    * @memberof ServiceProvide
    */
-  createCircleService: () => ICircleService
+  createCircleService: () => ICircleService;
 
   /**
    * Create instant for Comment Service
    *
    * @memberof ServiceProvide
    */
-  createCommentService: () => ICommentService
+  createCommentService: () => ICommentService;
 
   /**
    * Create instant for Common Service
    *
    * @memberof ServiceProvide
    */
-  createCommonService: () => ICommonService
+  createCommonService: () => ICommonService;
 
   /**
    * Create instant for ImageGallery Service
    *
    * @memberof ServiceProvide
    */
-  createImageGalleryService: () => IImageGalleryService
+  createImageGalleryService: () => IImageGalleryService;
 
   /**
    * Create instant for Notification Service
    *
    * @memberof ServiceProvide
    */
-  createNotificationService: () => INotificationService
+  createNotificationService: () => INotificationService;
 
   /**
    * Create instant for Post Service
    *
    * @memberof ServiceProvide
    */
-  createPostService: () => IPostService
+  createPostService: () => IPostService;
 
   /**
    * Create instant for User Service
    *
    * @memberof ServiceProvide
    */
-  createUserService: () => IUserService
+  createUserService: () => IUserService;
 
   /**
    * Create instant for Vote Service
    *
    * @memberof ServiceProvide
    */
-  createVoteService: () => IVoteService
+  createVoteService: () => IVoteService;
 
   /**
    * Create instant for Vote Service
    *
    * @memberof ServiceProvide
    */
-  createStorageService: () => IStorageService
-
+  createStorageService: () => IStorageService;
 }

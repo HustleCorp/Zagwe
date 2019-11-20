@@ -1,5 +1,3 @@
-import { IStorageService } from './IStorageService'
+import {IStorageService} from './IStorageService';
 
-export {
-    IStorageService
-}
+export {IStorageService};

@@ -1,12 +1,11 @@
-import { UserTie } from 'core/domain/circles'
-import {Map} from 'immutable'
+import {UserTie} from 'core/domain/circles';
+import {Map} from 'immutable';
 
 export interface IFollowingComponentProps {
-
-  followingUsers?: Map<string, UserTie>
+  followingUsers?: Map<string, UserTie>;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 }

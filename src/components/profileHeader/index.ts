@@ -1,2 +1,2 @@
-import ProfileHeaderComponent from './ProfileHeaderComponent'
-export default ProfileHeaderComponent
+import ProfileHeaderComponent from './ProfileHeaderComponent';
+export default ProfileHeaderComponent;

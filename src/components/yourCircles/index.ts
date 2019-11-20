@@ -1,2 +1,2 @@
-import YourCirclesComponent from './YourCirclesComponent'
-export default YourCirclesComponent
+import YourCirclesComponent from './YourCirclesComponent';
+export default YourCirclesComponent;

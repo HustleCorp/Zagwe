@@ -1,2 +1,2 @@
-import UserBoxComponent from './UserBoxComponent'
-export default UserBoxComponent
+import UserBoxComponent from './UserBoxComponent';
+export default UserBoxComponent;

@@ -1,2 +1,2 @@
-import UserBoxListComponent from './UserBoxListComponent'
-export default UserBoxListComponent
+import UserBoxListComponent from './UserBoxListComponent';
+export default UserBoxListComponent;
