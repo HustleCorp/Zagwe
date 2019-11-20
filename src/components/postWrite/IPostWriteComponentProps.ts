@@ -1,34 +1,33 @@
-import { Post } from 'core/domain/posts'
-import {Map} from 'immutable'
+import { Post } from "core/domain/posts"
+import { Map } from "immutable"
 export interface IPostWriteComponentProps {
-
-    /**
-     * If it's true post writing page will be open
-     */
+  /**
+   * If it's true post writing page will be open
+   */
   open: boolean
-    /**
-     * Recieve request close function
-     */
+  /**
+   * Recieve request close function
+   */
   onRequestClose: () => void
-    /**
-     * Post write style
-     */
+  /**
+   * Post write style
+   */
   style?: {}
-    /**
-     * If it's true, post will be in edit view
-     */
+  /**
+   * If it's true, post will be in edit view
+   */
   edit?: boolean
-    /**
-     * The text of post in editing state
-     */
+  /**
+   * The text of post in editing state
+   */
   text?: string
-    /**
-     * The image of post in editing state
-     */
+  /**
+   * The image of post in editing state
+   */
   image?: string
-    /**
-     * If post state is editing this id sould be filled with post identifier
-     */
+  /**
+   * If post state is editing this id sould be filled with post identifier
+   */
   id?: string
 
   /**

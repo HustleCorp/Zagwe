@@ -1,7 +1,7 @@
 {
 
     "compilerOptions": {
-        "types": ["reflect-metadata"], 
+        "types": ["reflect-metadata", "jest"],
         "allowSyntheticDefaultImports": true, // see below
         "baseUrl": "./src/", // enables you to import relative to this folder
         "paths": {
@@ -32,7 +32,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "noUnusedLocals": false,
         "experimentalDecorators": true,
-        
+
 
     },
     "include": [
@@ -48,4 +48,4 @@
         "src/setupTests.ts",
         "src/StyledComponents"
     ]
-  }
+}

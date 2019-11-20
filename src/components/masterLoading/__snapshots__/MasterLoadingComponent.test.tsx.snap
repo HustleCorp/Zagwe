@@ -1,0 +1,434 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MasterLoadingComponent renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <MasterLoadingComponent
+    timedOut={true}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div>
+        <WithStyles(Grid)
+                container={true}
+        >
+                <WithStyles(Grid)
+                        item={true}
+                >
+                        <WithStyles(CircularProgress)
+                                color="primary"
+                                size={50}
+                        />
+                </WithStyles(Grid)>
+                <WithStyles(Grid)
+                        item={true}
+                        style={
+                                Object {
+                                        "zIndex": 1,
+                                      }
+                        }
+                >
+                        <WithStyles(Typography)
+                                color="primary"
+                                style={
+                                        Object {
+                                                "marginLeft": "-9px",
+                                              }
+                                }
+                                variant="h6"
+                        >
+                                Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+                        </WithStyles(Typography)>
+                </WithStyles(Grid)>
+        </WithStyles(Grid)>
+</div>,
+      "className": "mLoading__loading",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <WithStyles(Grid)
+          container={true}
+>
+          <WithStyles(Grid)
+                    item={true}
+          >
+                    <WithStyles(CircularProgress)
+                              color="primary"
+                              size={50}
+                    />
+          </WithStyles(Grid)>
+          <WithStyles(Grid)
+                    item={true}
+                    style={
+                              Object {
+                                        "zIndex": 1,
+                                      }
+                    }
+          >
+                    <WithStyles(Typography)
+                              color="primary"
+                              style={
+                                        Object {
+                                                  "marginLeft": "-9px",
+                                                }
+                              }
+                              variant="h6"
+                    >
+                              Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+                    </WithStyles(Typography)>
+          </WithStyles(Grid)>
+</WithStyles(Grid)>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <WithStyles(Grid)
+              item={true}
+>
+              <WithStyles(CircularProgress)
+                            color="primary"
+                            size={50}
+              />
+</WithStyles(Grid)>,
+            <WithStyles(Grid)
+              item={true}
+              style={
+                            Object {
+                                          "zIndex": 1,
+                                        }
+              }
+>
+              <WithStyles(Typography)
+                            color="primary"
+                            style={
+                                          Object {
+                                                        "marginLeft": "-9px",
+                                                      }
+                            }
+                            variant="h6"
+              >
+                            Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+              </WithStyles(Typography)>
+</WithStyles(Grid)>,
+          ],
+          "container": true,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <WithStyles(CircularProgress)
+                color="primary"
+                size={50}
+/>,
+              "item": true,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "color": "primary",
+                "size": 50,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <WithStyles(Typography)
+                color="primary"
+                style={
+                                Object {
+                                                "marginLeft": "-9px",
+                                              }
+                }
+                variant="h6"
+>
+                Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+</WithStyles(Typography)>,
+              "item": true,
+              "style": Object {
+                "zIndex": 1,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Hmmm, Loading seems to take a long time. Aboo Tele yasbelal",
+                "color": "primary",
+                "style": Object {
+                  "marginLeft": "-9px",
+                },
+                "variant": "h6",
+              },
+              "ref": null,
+              "rendered": "Hmmm, Loading seems to take a long time. Aboo Tele yasbelal",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div>
+          <WithStyles(Grid)
+                    container={true}
+          >
+                    <WithStyles(Grid)
+                              item={true}
+                    >
+                              <WithStyles(CircularProgress)
+                                        color="primary"
+                                        size={50}
+                              />
+                    </WithStyles(Grid)>
+                    <WithStyles(Grid)
+                              item={true}
+                              style={
+                                        Object {
+                                                  "zIndex": 1,
+                                                }
+                              }
+                    >
+                              <WithStyles(Typography)
+                                        color="primary"
+                                        style={
+                                                  Object {
+                                                            "marginLeft": "-9px",
+                                                          }
+                                        }
+                                        variant="h6"
+                              >
+                                        Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+                              </WithStyles(Typography)>
+                    </WithStyles(Grid)>
+          </WithStyles(Grid)>
+</div>,
+        "className": "mLoading__loading",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <WithStyles(Grid)
+            container={true}
+>
+            <WithStyles(Grid)
+                        item={true}
+            >
+                        <WithStyles(CircularProgress)
+                                    color="primary"
+                                    size={50}
+                        />
+            </WithStyles(Grid)>
+            <WithStyles(Grid)
+                        item={true}
+                        style={
+                                    Object {
+                                                "zIndex": 1,
+                                              }
+                        }
+            >
+                        <WithStyles(Typography)
+                                    color="primary"
+                                    style={
+                                                Object {
+                                                            "marginLeft": "-9px",
+                                                          }
+                                    }
+                                    variant="h6"
+                        >
+                                    Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+                        </WithStyles(Typography)>
+            </WithStyles(Grid)>
+</WithStyles(Grid)>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Grid)
+                item={true}
+>
+                <WithStyles(CircularProgress)
+                                color="primary"
+                                size={50}
+                />
+</WithStyles(Grid)>,
+              <WithStyles(Grid)
+                item={true}
+                style={
+                                Object {
+                                                "zIndex": 1,
+                                              }
+                }
+>
+                <WithStyles(Typography)
+                                color="primary"
+                                style={
+                                                Object {
+                                                                "marginLeft": "-9px",
+                                                              }
+                                }
+                                variant="h6"
+                >
+                                Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+                </WithStyles(Typography)>
+</WithStyles(Grid)>,
+            ],
+            "container": true,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <WithStyles(CircularProgress)
+                  color="primary"
+                  size={50}
+/>,
+                "item": true,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "color": "primary",
+                  "size": 50,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <WithStyles(Typography)
+                  color="primary"
+                  style={
+                                    Object {
+                                                      "marginLeft": "-9px",
+                                                    }
+                  }
+                  variant="h6"
+>
+                  Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
+</WithStyles(Typography)>,
+                "item": true,
+                "style": Object {
+                  "zIndex": 1,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Hmmm, Loading seems to take a long time. Aboo Tele yasbelal",
+                  "color": "primary",
+                  "style": Object {
+                    "marginLeft": "-9px",
+                  },
+                  "variant": "h6",
+                },
+                "ref": null,
+                "rendered": "Hmmm, Loading seems to take a long time. Aboo Tele yasbelal",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
