@@ -1,5 +1,3 @@
-import { IUserService } from './IUserService'
+import {IUserService} from './IUserService';
 
-export {
-    IUserService
-}
+export {IUserService};

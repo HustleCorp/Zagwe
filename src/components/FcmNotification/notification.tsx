@@ -1,66 +1,72 @@
-import React, { Fragment, Component } from 'react'
-import { withStyles, Theme, Card, CardContent, Typography, Switch, FormControlLabel } from '@material-ui/core'
-import { messaging } from 'data/firestoreClient'
+import React, {Fragment, Component} from 'react';
+import {
+  withStyles,
+  Theme,
+  Card,
+  CardContent,
+  Typography,
+  Switch,
+  FormControlLabel,
+} from '@material-ui/core';
+import {messaging} from 'data/firestoreClient';
 
-import {IfcmNotificationProps} from './fcmNotificationProps'
-import {IfcmNotificationState} from './fcmNotificationState'
+import {IfcmNotificationProps} from './fcmNotificationProps';
+import {IfcmNotificationState} from './fcmNotificationState';
 
 // Import Actions
-import * as notificationActions from 'src/store/actions/notifyActions'
+import * as notificationActions from 'src/store/actions/notifyActions';
 
-const styles = (theme: Theme) => ({
-  
-})
+const styles = (theme: Theme) => ({});
 
-class Notifications extends Component<IfcmNotificationProps, IfcmNotificationState> {
-    constructor(props: IfcmNotificationProps) {
-        super(props)
-         this.state = {
-             info: ''
-         }
+class Notifications extends Component<
+  IfcmNotificationProps,
+  IfcmNotificationState
+> {
+  constructor(props: IfcmNotificationProps) {
+    super(props);
+    this.state = {
+      info: '',
+    };
 
-         this.renderSubscriptionOptions = this.renderSubscriptionOptions.bind(this)
+    this.renderSubscriptionOptions = this.renderSubscriptionOptions.bind(this);
+  }
+
+  async notificationPermission() {
+    let permisstionGranted = false;
+    const {userId} = this.props;
+    try {
+      if (Notification.permission !== 'granted') {
+        await messaging.requestPermission();
+      }
+      if (localStorage.getItem('INSTANCE_TOKEN') !== null) {
+        permisstionGranted = true;
+      } else {
+        const token = await messaging.getToken();
+
+        notificationActions.sendTokenTodb(userId, token);
+        localStorage.setItem('INSTANCE_TOKEN', token);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async notificationPermission() {
-        let permisstionGranted = false
-        const {userId} = this.props
-        try {
-            if (Notification.permission !== 'granted') {
-                await messaging.requestPermission()
-            }
-            if (localStorage.getItem('INSTANCE_TOKEN') !== null) {
-                permisstionGranted = true
-            } else {
-                const token = await messaging.getToken() 
-            
-                notificationActions.sendTokenTodb(userId, token)
-                localStorage.setItem('INSTANCE_TOKEN', token)
+  componentWillMount() {
+    this.notificationPermission();
+  }
 
-            }
-        } catch (error) {
-             console.log(error)
-        }
+  renderSubscriptionOptions() {
+    if (!('serviceWorker' in navigator) && !('PushManager' in window)) {
+      console.log(
+        'Notification feature is supported only in chrome Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile',
+      );
+      return '';
     }
+  }
 
-    componentWillMount () {
-        this.notificationPermission()
-    }
-
-    renderSubscriptionOptions ( ) {
-        if (!('serviceWorker' in navigator) && !('PushManager' in window)) {
-           console.log('Notification feature is supported only in chrome Desktop and  Mobile (version 50+) Firefox Desktop and Mobile Opera on Mobile')
-            return ''
-       } 
-    }
-
-    render() {
-        return (
-           <div>
-              {this.renderSubscriptionOptions()}
-         </div>
-        )
-    }
+  render() {
+    return <div>{this.renderSubscriptionOptions()}</div>;
+  }
 }
 
-export default withStyles(styles as any)(Notifications)
+export default withStyles(styles as any)(Notifications);

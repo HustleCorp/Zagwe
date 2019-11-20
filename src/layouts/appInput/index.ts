@@ -1,2 +1,2 @@
-import AppInputComponent from './AppInputComponent'
-export default AppInputComponent
+import AppInputComponent from './AppInputComponent';
+export default AppInputComponent;

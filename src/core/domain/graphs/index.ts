@@ -1,5 +1,3 @@
-import {Graph} from './graph'
+import {Graph} from './graph';
 
-export {
-    Graph
-}
+export {Graph};

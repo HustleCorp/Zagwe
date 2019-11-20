@@ -1,3 +1,3 @@
-import TopicPostComponent from './TopicPostComponent'
+import TopicPostComponent from './TopicPostComponent';
 
-export default TopicPostComponent
+export default TopicPostComponent;

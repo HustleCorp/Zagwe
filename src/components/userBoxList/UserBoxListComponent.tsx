@@ -1,15 +1,15 @@
 // - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import {Map} from 'immutable'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {Map} from 'immutable';
 
 // - Import app components
-import UserBox from 'components/userBox'
+import UserBox from 'components/userBox';
 
-import { IUserBoxListComponentProps } from './IUserBoxListComponentProps'
-import { IUserBoxListComponentState } from './IUserBoxListComponentState'
-import { UserTie } from 'core/domain/circles/userTie'
+import {IUserBoxListComponentProps} from './IUserBoxListComponentProps';
+import {IUserBoxListComponentState} from './IUserBoxListComponentState';
+import {UserTie} from 'core/domain/circles/userTie';
 
 // - Import API
 
@@ -18,61 +18,53 @@ import { UserTie } from 'core/domain/circles/userTie'
 /**
  * Create component class
  */
-export class UserBoxListComponent extends Component<IUserBoxListComponentProps,IUserBoxListComponentState> {
-
+export class UserBoxListComponent extends Component<
+  IUserBoxListComponentProps,
+  IUserBoxListComponentState
+> {
   static propTypes = {
-        /**
-         * List of users
-         */
-    users: PropTypes.object
-  }
-
     /**
-     * Component constructor
-     * @param  {object} props is an object properties of component
+     * List of users
      */
-  constructor (props: IUserBoxListComponentProps) {
-    super(props)
+    users: PropTypes.object,
+  };
 
-        // Defaul state
-    this.state = {
+  /**
+   * Component constructor
+   * @param  {object} props is an object properties of component
+   */
+  constructor(props: IUserBoxListComponentProps) {
+    super(props);
 
-    }
+    // Defaul state
+    this.state = {};
 
-        // Binding functions to `this`
-
+    // Binding functions to `this`
   }
 
   userList = () => {
-    let { uid } = this.props
-    const users = this.props.users
-    const userBoxList: any[] = []
+    let {uid} = this.props;
+    const users = this.props.users;
+    const userBoxList: any[] = [];
     if (users) {
-       users.forEach((user: UserTie, key: string) => {
+      users.forEach((user: UserTie, key: string) => {
         if (uid !== key) {
-          userBoxList.push(<UserBox key={key} userId={key} user={user}/>)
+          userBoxList.push(<UserBox key={key} userId={key} user={user} />);
         }
-      })
+      });
     }
-    return userBoxList
-  }
+    return userBoxList;
+  };
 
-    /**
-     * Reneder component DOM
-     * @return {react element} return the DOM which rendered by component
-     */
-  render () {
-
-    const styles = {
-
-    }
+  /**
+   * Reneder component DOM
+   * @return {react element} return the DOM which rendered by component
+   */
+  render() {
+    const styles = {};
     return (
-        
-                <div className='grid grid__1of4 grid__center'>
-                  {this.userList()}
-                </div>
-
-    )
+      <div className="grid grid__1of4 grid__center">{this.userList()}</div>
+    );
   }
 }
 
@@ -82,11 +74,12 @@ export class UserBoxListComponent extends Component<IUserBoxListComponentProps,I
  * @param  {object} ownProps is the props belong to component
  * @return {object}          props of component
  */
-const mapDispatchToProps = (dispatch: Function, ownProps: IUserBoxListComponentProps) => {
-  return {
-
-  }
-}
+const mapDispatchToProps = (
+  dispatch: Function,
+  ownProps: IUserBoxListComponentProps,
+) => {
+  return {};
+};
 
 /**
  * Map state to props
@@ -95,11 +88,14 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IUserBoxListComponentP
  * @return {object}          props of component
  */
 const mapStateToProps = (state: any, ownProps: IUserBoxListComponentProps) => {
-  const uid = state.getIn(['authorize', 'uid'], 0)
+  const uid = state.getIn(['authorize', 'uid'], 0);
   return {
-    uid
-  }
-}
+    uid,
+  };
+};
 
 // - Connect component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(UserBoxListComponent as any)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserBoxListComponent as any);

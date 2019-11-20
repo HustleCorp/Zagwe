@@ -1,5 +1,3 @@
-import { CommentService } from './CommentService'
+import {CommentService} from './CommentService';
 
-export {
-    CommentService
-}
+export {CommentService};

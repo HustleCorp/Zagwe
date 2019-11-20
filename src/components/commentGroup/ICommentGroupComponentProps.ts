@@ -1,22 +1,21 @@
-import { Profile } from 'core/domain/users'
-import { Comment } from 'core/domain/comments'
-import { ServerRequestModel } from 'models/server'
-import { ServerRequestStatusType } from 'store/actions/serverRequestStatusType'
-import {Map} from 'immutable'
+import {Profile} from 'core/domain/users';
+import {Comment} from 'core/domain/comments';
+import {ServerRequestModel} from 'models/server';
+import {ServerRequestStatusType} from 'store/actions/serverRequestStatusType';
+import {Map} from 'immutable';
 export interface ICommentGroupComponentProps {
-
   /**
    * Commnets
    *
    * @type {{[commentId: string]: Comment}}
    * @memberof ICommentGroupComponentProps
    */
-  comments?: Map<string, Comment>
+  comments?: Map<string, Comment>;
 
   /**
    * Commnets show on slide preview
    */
-  commentSlides?: Map<string, Comment>
+  commentSlides?: Map<string, Comment>;
 
   /**
    * The post identifier which comment belong to
@@ -24,7 +23,7 @@ export interface ICommentGroupComponentProps {
    * @type {string}
    * @memberof ICommentGroupComponentProps
    */
-  postId: string
+  postId: string;
 
   /**
    * Users` profile
@@ -32,7 +31,7 @@ export interface ICommentGroupComponentProps {
    * @type {{[userId: string]: Profile}}
    * @memberof ICommentGroupComponentProps
    */
-  userInfo?: Map<string, Profile>
+  userInfo?: Map<string, Profile>;
 
   /**
    * Comment group is open {true} or not {false}
@@ -40,7 +39,7 @@ export interface ICommentGroupComponentProps {
    * @type {boolean}
    * @memberof ICommentGroupComponentProps
    */
-  open: boolean
+  open: boolean;
 
   /**
    * Comment is disabled {true} or not {false}
@@ -48,7 +47,7 @@ export interface ICommentGroupComponentProps {
    * @type {boolean}
    * @memberof ICommentGroupComponentProps
    */
-  disableComments: boolean
+  disableComments: boolean;
 
   /**
    * Current user is the post owner {true} or not {false}
@@ -56,7 +55,7 @@ export interface ICommentGroupComponentProps {
    * @type {boolean}
    * @memberof ICommentGroupComponentProps
    */
-  isPostOwner: boolean
+  isPostOwner: boolean;
 
   /**
    * User full name
@@ -64,7 +63,7 @@ export interface ICommentGroupComponentProps {
    * @type {string}
    * @memberof ICommentGroupComponentProps
    */
-  fullName?: string
+  fullName?: string;
 
   /**
    * Avatar URL address
@@ -72,7 +71,7 @@ export interface ICommentGroupComponentProps {
    * @type {string}
    * @memberof ICommentGroupComponentProps
    */
-  avatar?: string
+  avatar?: string;
 
   /**
    * The identifier of post owner
@@ -80,7 +79,7 @@ export interface ICommentGroupComponentProps {
    * @type {string}
    * @memberof ICommentGroupComponentProps
    */
-  ownerPostUserId: string
+  ownerPostUserId: string;
 
   /**
    * Send comment
@@ -88,26 +87,29 @@ export interface ICommentGroupComponentProps {
    * @type {(commentText: string, postId: string, clearCommentWrite: Function)}
    * @memberof ICommentGroupComponentProps
    */
-  send?: (commentText: string, postId: string, clearCommentWrite: () => void) => any
+  send?: (
+    commentText: string,
+    postId: string,
+    clearCommentWrite: () => void,
+  ) => any;
 
   /**
    * Get post comments request payload
    */
-  commentsRequestStatus?: ServerRequestStatusType
+  commentsRequestStatus?: ServerRequestStatusType;
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any, param?: {}) => any
+  translate?: (state: any, param?: {}) => any;
 
   /**
    * Is User authorized
    */
-  isauthed?: boolean
-
+  isauthed?: boolean;
 }

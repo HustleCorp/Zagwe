@@ -1,2 +1,2 @@
-import ImgCoverComponent from './ImgCoverComponent'
-export default ImgCoverComponent
+import ImgCoverComponent from './ImgCoverComponent';
+export default ImgCoverComponent;

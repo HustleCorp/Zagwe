@@ -1,3 +1,3 @@
 export const environment = {
-  appName : 'Getemegn'
-}
+  appName: 'Getemegn',
+};

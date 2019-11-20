@@ -1,3 +1,1 @@
-export interface IfcmNotificationState {
-
-}
+export interface IfcmNotificationState {}

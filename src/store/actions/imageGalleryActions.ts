@@ -1,28 +1,30 @@
 // - Import react componetns
-import moment from 'moment/moment'
-import { Map } from 'immutable'
+import moment from 'moment/moment';
+import {Map} from 'immutable';
 
 // - Import domain
-import { Image } from 'src/core/domain/imageGallery'
-import { SocialError } from 'src/core/domain/common'
+import {Image} from 'src/core/domain/imageGallery';
+import {SocialError} from 'src/core/domain/common';
 
 // - Import action types
-import { ImageGalleryActionType } from 'constants/imageGalleryActionType'
+import {ImageGalleryActionType} from 'constants/imageGalleryActionType';
 
 // - Import actions
-import * as globalActions from 'store/actions/globalActions'
+import * as globalActions from 'store/actions/globalActions';
 
-import { IImageGalleryService } from 'src/core/services/imageGallery'
-import { FileResult } from 'src/models/files/fileResult'
-import { SocialProviderTypes } from 'src/core/socialProviderTypes'
-import { provider } from 'src/socialEngine'
+import {IImageGalleryService} from 'src/core/services/imageGallery';
+import {FileResult} from 'src/models/files/fileResult';
+import {SocialProviderTypes} from 'src/core/socialProviderTypes';
+import {provider} from 'src/socialEngine';
 
-import FileAPI from 'api/FileAPI'
+import FileAPI from 'api/FileAPI';
 
 /**
  * Get service providers
  */
-const imageGalleryService: IImageGalleryService = provider.get<IImageGalleryService>(SocialProviderTypes.ImageGalleryService)
+const imageGalleryService: IImageGalleryService = provider.get<
+  IImageGalleryService
+>(SocialProviderTypes.ImageGalleryService);
 
 /* _____________ UI Actions _____________ */
 
@@ -31,32 +33,30 @@ const imageGalleryService: IImageGalleryService = provider.get<IImageGalleryServ
  */
 export const dbGetImageGallery = () => {
   return (dispatch: any, getState: Function) => {
-    const state: Map<string, any>  = getState()
-    let uid: string = state.getIn(['authorize', 'uid'])
+    const state: Map<string, any> = getState();
+    let uid: string = state.getIn(['authorize', 'uid']);
     if (uid) {
-
-      return imageGalleryService.getImageGallery(uid)
+      return imageGalleryService
+        .getImageGallery(uid)
         .then((images: Image[]) => {
-          dispatch(addImageList(images))
+          dispatch(addImageList(images));
         })
         .catch((error: SocialError) => {
-          dispatch(globalActions.showMessage(error.message))
-        })
+          dispatch(globalActions.showMessage(error.message));
+        });
     }
-  }
-
-}
+  };
+};
 
 /* _____________ CRUD Database_____________ */
 
 /**
  * Save image URL in the server
  */
-export const dbSaveImage = (imageURL: string,imageFullPath: string) => {
+export const dbSaveImage = (imageURL: string, imageFullPath: string) => {
   return (dispatch: any, getState: Function) => {
-
-    const state: Map<string, any>  = getState()
-    let uid: string = state.getIn(['authorize', 'uid'])
+    const state: Map<string, any> = getState();
+    let uid: string = state.getIn(['authorize', 'uid']);
     let image: Image = {
       creationDate: moment().unix(),
       deleteDate: '',
@@ -64,20 +64,23 @@ export const dbSaveImage = (imageURL: string,imageFullPath: string) => {
       fullPath: imageFullPath,
       ownerUserId: uid,
       lastEditDate: 0,
-      deleted: false
-    }
-    return imageGalleryService.saveImage(uid,image)
+      deleted: false,
+    };
+    return imageGalleryService
+      .saveImage(uid, image)
       .then((imageKey: string) => {
-        dispatch(addImage({
-          ...image,
-          id: imageKey
-        }))
+        dispatch(
+          addImage({
+            ...image,
+            id: imageKey,
+          }),
+        );
       })
       .catch((error: SocialError) => {
-        dispatch(globalActions.showMessage(error.message))
-      })
-  }
-}
+        dispatch(globalActions.showMessage(error.message));
+      });
+  };
+};
 
 /**
  * Delete an image from database
@@ -85,115 +88,115 @@ export const dbSaveImage = (imageURL: string,imageFullPath: string) => {
  */
 export const dbDeleteImage = (id: string) => {
   return (dispatch: any, getState: Function) => {
-
     // Get current user id
-    const state: Map<string, any>  = getState()
-    let uid: string = state.getIn(['authorize', 'uid'])
+    const state: Map<string, any> = getState();
+    let uid: string = state.getIn(['authorize', 'uid']);
 
-    return imageGalleryService.deleteImage(uid,id)
+    return imageGalleryService
+      .deleteImage(uid, id)
       .then(() => {
-        dispatch(deleteImage(id))
+        dispatch(deleteImage(id));
       })
       .catch((error: SocialError) => {
-        dispatch(globalActions.showMessage(error.message))
-      })
-  }
-
-}
+        dispatch(globalActions.showMessage(error.message));
+      });
+  };
+};
 
 /**
  * Upload image on the server
  */
-export const dbUploadImage = (image: any, imageName: string, callBack: Function) => {
-
-      return (dispatch: any, getState: Function) => {
-        return new Promise<any> ((resolve, reject) => {
-          dispatch(globalActions.showTopLoading())
-          imageGalleryService
-          .uploadImage(image, 'avatar', imageName, (percentage: number) => {
-            dispatch(globalActions.progressChange(percentage, true))
-          })
-          .then( async (result: FileResult) => {
-            dispatch(globalActions.progressChange(100, false))
-           
-           let  res = await FileAPI.getThumbUrl(result.fileFullPath) 
-           let count = 0
-            while (!res && count < 500) {
-                count ++
-                res = await FileAPI.getThumbUrl(result.fileFullPath) 
-                console.log(res)
-              }
-            dispatch(dbSaveImage(res!, result.fileFullPath))
-            dispatch(globalActions.hideTopLoading())
-            const data = {url: res!, fullPath: result.fileFullPath}
-            
-            callBack(data.url, data.fullPath)    
-          })
-          .catch((error: SocialError) => {
-            dispatch(globalActions.showMessage(error.code))
-            dispatch(globalActions.hideTopLoading())
-          })
+export const dbUploadImage = (
+  image: any,
+  imageName: string,
+  callBack: Function,
+) => {
+  return (dispatch: any, getState: Function) => {
+    return new Promise<any>((resolve, reject) => {
+      dispatch(globalActions.showTopLoading());
+      imageGalleryService
+        .uploadImage(image, 'avatar', imageName, (percentage: number) => {
+          dispatch(globalActions.progressChange(percentage, true));
         })
- 
-     }
-}
+        .then(async (result: FileResult) => {
+          dispatch(globalActions.progressChange(100, false));
+
+          let res = await FileAPI.getThumbUrl(result.fileFullPath);
+          let count = 0;
+          while (!res && count < 500) {
+            count++;
+            res = await FileAPI.getThumbUrl(result.fileFullPath);
+            console.log(res);
+          }
+          dispatch(dbSaveImage(res!, result.fileFullPath));
+          dispatch(globalActions.hideTopLoading());
+          const data = {url: res!, fullPath: result.fileFullPath};
+
+          callBack(data.url, data.fullPath);
+        })
+        .catch((error: SocialError) => {
+          dispatch(globalActions.showMessage(error.code));
+          dispatch(globalActions.hideTopLoading());
+        });
+    });
+  };
+};
 
 /**
  * Upload image for post
- * @param image 
- * @param imageName 
+ * @param image
+ * @param imageName
  */
 export const dbUploadImagePost = (image: any, imageName: string) => {
-  
   return (dispatch: any, getState: Function) => {
-
-   return imageGalleryService
-   .uploadImage(image,'images', imageName, (percentage: number) => {
-     dispatch(globalActions.progressChange(percentage, true))
-   })
-   .then((result: FileResult) => {
-     dispatch(globalActions.progressChange(100, false))
-     dispatch(globalActions.hideTopLoading())
-     return result
-     
-   })
-   .catch((error: SocialError) => {
-     dispatch(globalActions.showMessage(error.code, 'error'))
-     dispatch(globalActions.hideTopLoading())
-   })
- }
-
-}
+    return imageGalleryService
+      .uploadImage(image, 'images', imageName, (percentage: number) => {
+        dispatch(globalActions.progressChange(percentage, true));
+      })
+      .then((result: FileResult) => {
+        dispatch(globalActions.progressChange(100, false));
+        dispatch(globalActions.hideTopLoading());
+        return result;
+      })
+      .catch((error: SocialError) => {
+        dispatch(globalActions.showMessage(error.code, 'error'));
+        dispatch(globalActions.hideTopLoading());
+      });
+  };
+};
 /**
  * Download image from server
  * @param {string} fileName
  */
 export const dbDownloadImage = (fileName: string) => {
-
   return (dispatch: any, getState: Function) => {
     if (fileName === 'noImage') {
-      return {}
+      return {};
     }
     if (getState().imageGallery.imageURLList[fileName] && fileName !== '') {
-      return undefined
+      return undefined;
     }
     if (getState().imageGallery.imageRequests.indexOf(fileName) > -1) {
-      return undefined
+      return undefined;
     }
-    dispatch(sendImageRequest(fileName))
+    dispatch(sendImageRequest(fileName));
 
-    return imageGalleryService.downloadImage(fileName)
+    return imageGalleryService
+      .downloadImage(fileName)
       .then((url: string) => {
-      // Insert url into an <img> tag to 'download'
-        if (!getState().imageGallery.imageURLList[fileName] || fileName === '') {
-          dispatch(setImageURL(fileName, url))
+        // Insert url into an <img> tag to 'download'
+        if (
+          !getState().imageGallery.imageURLList[fileName] ||
+          fileName === ''
+        ) {
+          dispatch(setImageURL(fileName, url));
         }
       })
-    .catch((error: SocialError) => {
-      dispatch(globalActions.showMessage(error.message))
-    })
-  }
-}
+      .catch((error: SocialError) => {
+        dispatch(globalActions.showMessage(error.message));
+      });
+  };
+};
 
 /* _____________ CRUD State _____________ */
 
@@ -202,25 +205,24 @@ export const dbDownloadImage = (fileName: string) => {
  * @param {Image[]} images is an array of images
  */
 export const addImageList = (images: Image[]) => {
-  return { type: ImageGalleryActionType.ADD_IMAGE_LIST_GALLERY,payload: images }
-}
+  return {type: ImageGalleryActionType.ADD_IMAGE_LIST_GALLERY, payload: images};
+};
 
 /**
  * Add image to image gallery
  * @param {Image} image
  */
 export const addImage = (image: Image) => {
-  return { type: ImageGalleryActionType.ADD_IMAGE_GALLERY, payload: image }
-}
+  return {type: ImageGalleryActionType.ADD_IMAGE_GALLERY, payload: image};
+};
 
 /**
  * Delete an image
  * @param  {string} id is an image identifier
  */
 export const deleteImage = (id: string) => {
-  return { type: ImageGalleryActionType.DELETE_IMAGE, payload: id }
-
-}
+  return {type: ImageGalleryActionType.DELETE_IMAGE, payload: id};
+};
 
 /**
  * Delete an image
@@ -228,19 +230,18 @@ export const deleteImage = (id: string) => {
 export const setImageURL = (name: string, url: string) => {
   return {
     type: ImageGalleryActionType.SET_IMAGE_URL,
-    payload: { name, url }
-  }
-
-}
+    payload: {name, url},
+  };
+};
 
 /**
  * Clear all data in image gallery store
  */
 export const clearAllData = () => {
   return {
-    type: ImageGalleryActionType.CLEAT_ALL_DATA_IMAGE_GALLERY
-  }
-}
+    type: ImageGalleryActionType.CLEAT_ALL_DATA_IMAGE_GALLERY,
+  };
+};
 
 /**
  * Send image request
@@ -248,7 +249,6 @@ export const clearAllData = () => {
 export const sendImageRequest = (name: string) => {
   return {
     type: ImageGalleryActionType.SEND_IMAGE_REQUEST,
-    payload: name
-  }
-
-}
+    payload: name,
+  };
+};

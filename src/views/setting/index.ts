@@ -1,2 +1,2 @@
-import SettingComponent from './SettingComponent'
-export default SettingComponent
+import SettingComponent from './SettingComponent';
+export default SettingComponent;

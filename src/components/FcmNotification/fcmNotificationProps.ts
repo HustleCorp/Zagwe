@@ -1,6 +1,4 @@
 export interface IfcmNotificationProps {
-
-    userId: any,
-    classes?: any
-
+  userId: any;
+  classes?: any;
 }

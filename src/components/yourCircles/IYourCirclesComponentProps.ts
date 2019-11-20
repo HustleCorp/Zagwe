@@ -1,14 +1,13 @@
-import { Circle } from 'core/domain/circles'
-import {Map} from 'immutable'
+import {Circle} from 'core/domain/circles';
+import {Map} from 'immutable';
 export interface IYourCirclesComponentProps {
-
   /**
    * Circles
    */
-  circles?: Map<string, Map<string, any>>
+  circles?: Map<string, Map<string, any>>;
 
   /**
    * User identifier
    */
-  uid?: string
+  uid?: string;
 }

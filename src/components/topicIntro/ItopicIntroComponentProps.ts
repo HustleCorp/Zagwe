@@ -1,10 +1,9 @@
 export interface ItopicIntroComponentProps {
+  title?: string;
 
-    title?: string
+  bio?: string;
 
-    bio?: string
+  url?: string;
 
-    url?: string
-    
-    classes?: any
+  classes?: any;
 }

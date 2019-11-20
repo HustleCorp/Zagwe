@@ -1,2 +1,2 @@
-import SignupComponent from './SignupComponent'
-export default SignupComponent
+import SignupComponent from './SignupComponent';
+export default SignupComponent;

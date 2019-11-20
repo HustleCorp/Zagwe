@@ -1,2 +1,2 @@
-import NotifyItemComponent from './NotifyItemComponent'
-export default NotifyItemComponent
+import NotifyItemComponent from './NotifyItemComponent';
+export default NotifyItemComponent;

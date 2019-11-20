@@ -1,2 +1,2 @@
-import featuredComponent from './featuredComponent'
-export default featuredComponent
+import featuredComponent from './featuredComponent';
+export default featuredComponent;

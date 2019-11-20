@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import {Component} from 'react';
 
 /**
  * Route interface
@@ -7,14 +7,13 @@ import { Component } from 'react'
  * @interface IRoute
  */
 export interface IRoute {
-
   /**
    * React component that would be rendered in routing
    *
    * @type {Component}
    * @memberof IRoute
    */
-  component: any
+  component: any;
 
   /**
    * Route path
@@ -22,7 +21,7 @@ export interface IRoute {
    * @type {string}
    * @memberof IRoute
    */
-  path: string
+  path: string;
 
   /**
    * If user is authorized {true} or not {false}
@@ -30,8 +29,7 @@ export interface IRoute {
    * @type {boolean}
    * @memberof IRoute
    */
-  authed?: boolean
+  authed?: boolean;
 
-  onUpdate?: any
-
+  onUpdate?: any;
 }

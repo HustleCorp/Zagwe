@@ -1,19 +1,18 @@
-import { Comment } from 'core/domain/comments'
-import { Profile } from 'core/domain/users'
+import {Comment} from 'core/domain/comments';
+import {Profile} from 'core/domain/users';
 
 export interface ICommentComponentProps {
-
   /**
    * Comment
    *
    * @type {Comment}
    * @memberof ICommentComponentProps
    */
-  comment: Comment
+  comment: Comment;
   /**
    * Comment owner
    */
-  commentOwner?: Profile
+  commentOwner?: Profile;
 
   /**
    * Open profile editor
@@ -21,7 +20,7 @@ export interface ICommentComponentProps {
    * @type {Function}
    * @memberof ICommentComponentProps
    */
-  openEditor?: Function
+  openEditor?: Function;
 
   /**
    * Close comment editor
@@ -29,31 +28,31 @@ export interface ICommentComponentProps {
    * @type {Function}
    * @memberof ICommentComponentProps
    */
-  closeEditor?: () => any
-  
+  closeEditor?: () => any;
+
   /**
    * Has current user upvoted
-   * 
+   *
    * @type {boolean}
    * @memberof ICommentComponentProps
    */
-  currentUserUpvoted?: boolean
-  
+  currentUserUpvoted?: boolean;
+
   /**
    * Has current user downvoted
-   * 
+   *
    * @type {boolean}
    * @memberof ICommentComponentProps
    */
-  currentUserDownVoted?: boolean
-  
+  currentUserDownVoted?: boolean;
+
   /**
    * Current user is comment owner {true} or not {false}
    *
    * @type {boolean}
    * @memberof ICommentComponentProps
    */
-  isCommentOwner?: boolean
+  isCommentOwner?: boolean;
 
   /**
    * Current user is post owner {true} or not {false}
@@ -61,46 +60,46 @@ export interface ICommentComponentProps {
    * @type {boolean}
    * @memberof ICommentComponentProps
    */
-  isPostOwner: boolean
+  isPostOwner: boolean;
 
-  isAuthed?: boolean
+  isAuthed?: boolean;
 
   /**
    * Update comment
    *
    * @memberof ICommentComponentProps
    */
-  update?: (comment: Comment) => any
+  update?: (comment: Comment) => any;
 
   /**
    * Delete comment
    *
    * @memberof ICommentComponentProps
    */
-  delete?: (id?: string | null, postId?: string) => any
-  
+  delete?: (id?: string | null, postId?: string) => any;
+
   /**
    * Upvote Comment
-   * 
+   *
    * @type {function}
    * @memberof ICommentComponentProps
    */
-  upvoteComment?: (reverse: boolean) => void
+  upvoteComment?: (reverse: boolean) => void;
 
   /**
    * DownVote Comment
-   * 
+   *
    * @type {function}
    * @memberof ICommentComponentProps
    */
-  downVoteComment?: (reverse: boolean) => void
+  downVoteComment?: (reverse: boolean) => void;
 
   /**
    * Get user profile
    *
    * @memberof ICommentComponentProps
    */
-  getUserInfo?: () => void
+  getUserInfo?: () => void;
 
   /**
    * User full name
@@ -108,7 +107,7 @@ export interface ICommentComponentProps {
    * @type {string}
    * @memberof ICommentComponentProps
    */
-  fullName?: string
+  fullName?: string;
 
   /**
    * User avatar address
@@ -116,7 +115,7 @@ export interface ICommentComponentProps {
    * @type {string}
    * @memberof Comment
    */
-  avatar?: string
+  avatar?: string;
 
   /**
    * Writing comment on the post is disabled {true} or not false
@@ -124,21 +123,20 @@ export interface ICommentComponentProps {
    * @type {boolean}
    * @memberof ICommentComponentProps
    */
-  disableComments?: boolean
+  disableComments?: boolean;
 
   /**
    * Whether comment edit is open
    */
-  editorStatus: boolean
+  editorStatus: boolean;
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
-
+  translate?: (state: any) => any;
 }

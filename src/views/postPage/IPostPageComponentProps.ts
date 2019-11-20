@@ -1,38 +1,37 @@
-import { Post } from 'src/core/domain/posts'
-import { Comment } from 'core/domain/comments'
-import {Map} from 'immutable'
+import {Post} from 'src/core/domain/posts';
+import {Comment} from 'core/domain/comments';
+import {Map} from 'immutable';
 
 export interface IPostPageComponentProps {
-
   /**
    * Load the post
    *
    * @memberof IPostPageComponentProps
    */
-  loadPost?: () => any
+  loadPost?: () => any;
 
-  loadBodyPost?: () => any
+  loadBodyPost?: () => any;
 
   /**
    * Load user profile
    *
    * @memberof IPostPageComponentProps
    */
-  loadUserInfo?: () => any
+  loadUserInfo?: () => any;
 
   /**
    * Delete a post
    *
    * @memberof IPostComponentProps
    */
-  delete?: (id: string) => any
+  delete?: (id: string) => any;
 
   /**
    * Toggle comment disable/enable
    *
    * @memberof IPostComponentProps
    */
-  toggleDisableComments?: (status: boolean, post: Map<string, any>) => any
+  toggleDisableComments?: (status: boolean, post: Map<string, any>) => any;
 
   /**
    * Route match
@@ -40,75 +39,75 @@ export interface IPostPageComponentProps {
    * @type {*}
    * @memberof IPostPageComponentProps
    */
-  match?: any
+  match?: any;
 
-  translate?: any
-  
+  translate?: any;
+
   /**
    * Class object
-   * 
+   *
    * @type{object}
    * @memberof IP
    */
-  classes?: any
+  classes?: any;
 
-  userInfo?: any
+  userInfo?: any;
 
   /**
    * UserId od the post writer
    * @type{string}
    * @memeberof IPostPageComponenetProps
    */
-  userId?: string
+  userId?: string;
   /**
    * Post Identification
-   * 
+   *
    * @type{string}
    * @memberof IPostPageComponentProps
    */
-  postId?: string
+  postId?: string;
 
-  authorized?: string
+  authorized?: string;
 
   /**
    * Post Map
-   * 
+   *
    * @type{any}
    * @memberof IPostPageComponentProps
    */
-  post: any
+  post: any;
 
-  authed?: boolean
+  authed?: boolean;
   /**
    * Get the comments of a post
    *
    * @memberof IPostComponentProps
    */
-  getPostComments?: () => any
+  getPostComments?: () => any;
 
-  goTo?: (url: string) => any
-
-  /**
-   * Vote of a post
-   * 
-   * @memberof IPostComponentProps
-   */
-   vote?: () => any
+  goTo?: (url: string) => any;
 
   /**
    * Vote of a post
-   * 
+   *
    * @memberof IPostComponentProps
    */
-   unvote?: () => any
+  vote?: () => any;
+
+  /**
+   * Vote of a post
+   *
+   * @memberof IPostComponentProps
+   */
+  unvote?: () => any;
 
   /**
    * Author Bio
-   * 
+   *
    * @type{string}
    * @memberof IPostPageComponentProps
    */
-  tagline: string
+  tagline: string;
 
   /**
    * Commnets
@@ -116,30 +115,30 @@ export interface IPostPageComponentProps {
    * @type {{[commentId: string]: Comment}}
    * @memberof IPostPageComponenetProps
    */
-  commentList?: Map<string, Comment>
+  commentList?: Map<string, Comment>;
 
   /**
    * Is ownerog the post
-   * 
+   *
    * @type {boolean}
    * @memberof IPostPageComponenetPropsss
    */
-  isPostOwner: boolean
+  isPostOwner: boolean;
 
   /**
    * Has current used voted on Post
-   * 
+   *
    * @type {boolean}
    * @memberof IPostPageComponenetProps
    */
-  currentUserVote: boolean
+  currentUserVote: boolean;
 
   /**
    * Number of votes
-   * 
+   *
    * @type {Number}
    * @memberof IPostPageComponenetProps
-   * 
+   *
    */
-  voteCount: Number
+  voteCount: Number;
 }

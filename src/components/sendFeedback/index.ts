@@ -1,2 +1,2 @@
-import SendFeedbackComponent from './SendFeedbackComponent'
-export default SendFeedbackComponent
+import SendFeedbackComponent from './SendFeedbackComponent';
+export default SendFeedbackComponent;

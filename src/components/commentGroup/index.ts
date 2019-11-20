@@ -1,2 +1,2 @@
-import CommentGroupComponent from './CommentGroupComponent'
-export default CommentGroupComponent
+import CommentGroupComponent from './CommentGroupComponent';
+export default CommentGroupComponent;

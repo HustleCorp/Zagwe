@@ -1,5 +1,3 @@
-import { IImageGalleryService } from './IImageGalleryService'
+import {IImageGalleryService} from './IImageGalleryService';
 
-export {
-    IImageGalleryService
-}
+export {IImageGalleryService};

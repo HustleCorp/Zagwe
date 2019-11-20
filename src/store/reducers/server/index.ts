@@ -1,3 +1,3 @@
-import { serverReducer } from './serverReducer'
+import {serverReducer} from './serverReducer';
 
-export {serverReducer}
+export {serverReducer};

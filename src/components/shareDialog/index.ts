@@ -1,2 +1,2 @@
-import ShareDialogComponent from './ShareDialogComponent'
-export default ShareDialogComponent
+import ShareDialogComponent from './ShareDialogComponent';
+export default ShareDialogComponent;

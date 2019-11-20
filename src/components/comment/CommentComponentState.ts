@@ -1,13 +1,11 @@
-
 export interface ICommentComponentState {
-
   /**
    * Initial text comment
    *
    * @type {string}
    * @memberof ICommentComponentProps
    */
-  initialText?: string
+  initialText?: string;
 
   /**
    * Initialt text comment
@@ -15,7 +13,7 @@ export interface ICommentComponentState {
    * @type {string}
    * @memberof ICommentComponentProps
    */
-  text: string
+  text: string;
 
   /**
    * Comment is in edit state {true} or not {false}
@@ -23,7 +21,7 @@ export interface ICommentComponentState {
    * @type {boolean}
    * @memberof ICommentComponentState
    */
-  editDisabled: boolean
+  editDisabled: boolean;
 
   /**
    * Current user is the post owner {true} or not falses
@@ -31,7 +29,7 @@ export interface ICommentComponentState {
    * @type {boolean}
    * @memberof ICommentComponentState
    */
-  isPostOwner: boolean
+  isPostOwner: boolean;
 
   /**
    * Display comment {true} or not {false}
@@ -39,15 +37,15 @@ export interface ICommentComponentState {
    * @type {boolean}
    * @memberof ICommentComponentState
    */
-  display?: boolean
+  display?: boolean;
 
   /**
    * Wheter comment menu is open
    */
-  openMenu?: boolean
+  openMenu?: boolean;
 
   /**
    * Anchor element
    */
-  anchorEl: any
+  anchorEl: any;
 }

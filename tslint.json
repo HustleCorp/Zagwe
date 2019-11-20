@@ -1,11 +1,13 @@
 {
      
-    
-    "extends": ["tslint-react"],
+    "extends": [
+        "tslint-react",
+        "tslint-config-prettier"
+      ],
     "linterOptions": {
         "exclude": [
             "node_modules/firebase/firestore/index.ts",
-            "src/StyledComponents/"
+            "src/StyledComponents/**"
         ]
     },
 
@@ -73,7 +75,6 @@
         ],
         "quotemark": [false, "single", "avoid-escape", "jsx-single"],
         "radix": true,
-        "semicolon": [true, "never"],
         "switch-default": true,
 
         "trailing-comma": [false],

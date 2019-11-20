@@ -1,13 +1,11 @@
 export interface IfeaturedBoxComponentState {
-    
   /**
    * Post menu anchor element
    */
-  postMenuAnchorEl?: any
+  postMenuAnchorEl?: any;
 
   /**
    * Whether post menu open
    */
-  isPostMenuOpen?: boolean
-
+  isPostMenuOpen?: boolean;
 }

@@ -1,12 +1,11 @@
 export interface IImgComponentProps {
-
   /**
    * Image file name
    *
    * @type {string}
    * @memberof IImgComponentProps
    */
-  fileName: string
+  fileName: string;
 
   /**
    * Image style sheet
@@ -14,25 +13,25 @@ export interface IImgComponentProps {
    * @type {{}}
    * @memberof IImgComponentProps
    */
-  style?: {}
+  style?: {};
 
-  outerStyle?: {}
+  outerStyle?: {};
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
-  
-  height?: any
+  translate?: (state: any) => any;
 
-  className?: any
-   
-  loadedClassName?: any
+  height?: any;
 
-  loadingClassName?: any
+  className?: any;
+
+  loadedClassName?: any;
+
+  loadingClassName?: any;
 }

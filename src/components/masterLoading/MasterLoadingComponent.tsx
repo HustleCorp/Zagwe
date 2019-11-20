@@ -1,82 +1,87 @@
 // - Import react components
-import React, { Component } from 'react'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import { IMasterLoadingComponentProps } from './IMasterLoadingComponentProps'
-import { IMasterLoadingComponentState } from './IMasterLoadingComponentState'
-import Grid from '@material-ui/core/Grid/Grid'
-import { Typography } from '@material-ui/core'
+import React, {Component} from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {IMasterLoadingComponentProps} from './IMasterLoadingComponentProps';
+import {IMasterLoadingComponentState} from './IMasterLoadingComponentState';
+import Grid from '@material-ui/core/Grid/Grid';
+import {Typography} from '@material-ui/core';
 
 // - Import app components
 
 // - Create MasterLoading component class
-export default class MasterLoadingComponent extends Component<IMasterLoadingComponentProps, IMasterLoadingComponentState> {
-
+export default class MasterLoadingComponent extends Component<
+  IMasterLoadingComponentProps,
+  IMasterLoadingComponentState
+> {
   // Constructor
   constructor(props: IMasterLoadingComponentProps) {
-    super(props)
+    super(props);
     // Binding functions to `this`
-
   }
 
   loadProgress() {
-    const { error, timedOut, pastDelay } = this.props
+    const {error, timedOut, pastDelay} = this.props;
     if (error) {
-      console.log(error)
+      console.log(error);
       return (
         <Grid container>
           <Grid item>
-            <CircularProgress color='primary' size={50} />
+            <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='h6' color='primary' style={{ marginLeft: '-9px' }} >
-               Oops something went wrong, please reload the page
-          </Typography>
+          <Grid item style={{zIndex: 1}}>
+            <Typography
+              variant="h6"
+              color="primary"
+              style={{marginLeft: '-9px'}}
+            >
+              Oops something went wrong, please reload the page
+            </Typography>
           </Grid>
         </Grid>
-      )
+      );
     } else if (timedOut) {
       return (
         <Grid container>
           <Grid item>
-            <CircularProgress color='primary' size={50} />
+            <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='h6' color='primary' style={{ marginLeft: '-9px' }} >
+          <Grid item style={{zIndex: 1}}>
+            <Typography
+              variant="h6"
+              color="primary"
+              style={{marginLeft: '-9px'}}
+            >
               Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
-      )
+      );
     } else if (pastDelay) {
       return (
         <Grid container>
           <Grid item>
-            <CircularProgress color='primary' size={50} />
+            <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{ zIndex: 1 }}>
-            <Typography variant='h6' color='primary' style={{ marginLeft: '-9px' }} >
+          <Grid item style={{zIndex: 1}}>
+            <Typography
+              variant="h6"
+              color="primary"
+              style={{marginLeft: '-9px'}}
+            >
               Loading...
-          </Typography>
+            </Typography>
           </Grid>
         </Grid>
-      )
-    } 
-    
+      );
+    }
   }
 
   // Render app DOM component
   render() {
     return (
-
-      <div className='mLoading__loading'>
-        <div>
-        {
-          this.loadProgress()
-        }
-        </div>
+      <div className="mLoading__loading">
+        <div>{this.loadProgress()}</div>
       </div>
-
-    )
+    );
   }
-
 }

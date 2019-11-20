@@ -1,5 +1,3 @@
-import {rootReducer} from './rootReducer'
+import {rootReducer} from './rootReducer';
 
-export {
-    rootReducer
-}
+export {rootReducer};

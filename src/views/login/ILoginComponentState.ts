@@ -1,30 +1,28 @@
-
 export interface ILoginComponentState {
-
-  [key: string]: any
+  [key: string]: any;
 
   /**
    * Email input value
    */
-  emailInput: string
+  emailInput: string;
 
   /**
    * Email input error text
    */
-  emailInputError: string
+  emailInputError: string;
 
   /**
    * Password input value
    */
-  passwordInput: string
+  passwordInput: string;
 
   /**
    * Password input error text
    */
-  passwordInputError: string
+  passwordInputError: string;
 
   /**
    * Confirm input error text
    */
-  confirmInputError: string
+  confirmInputError: string;
 }

@@ -1,2 +1,2 @@
-import PostPageComponent from './PostPageComponent'
-export default PostPageComponent
+import PostPageComponent from './PostPageComponent';
+export default PostPageComponent;

@@ -1,5 +1,3 @@
-import { NotificationService } from './notificationService'
+import {NotificationService} from './notificationService';
 
-export {
-    NotificationService
-}
+export {NotificationService};

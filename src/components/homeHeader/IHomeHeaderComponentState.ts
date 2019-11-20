@@ -1,13 +1,11 @@
-
 export interface IHomeHeaderComponentState {
-
   /**
    * Popover menu on avatar is open {true} or not {false}
    *
    * @type {boolean}
    * @memberof IHomeHeaderComponentState
    */
-  openAvatarMenu: boolean
+  openAvatarMenu: boolean;
 
   /**
    * Show top bar title {true} or not {false}
@@ -15,7 +13,7 @@ export interface IHomeHeaderComponentState {
    * @type {boolean}
    * @memberof IHomeHeaderComponentState
    */
-  showTitle: boolean
+  showTitle: boolean;
 
   /**
    * Notification menu is open {true} or not {false}
@@ -23,7 +21,7 @@ export interface IHomeHeaderComponentState {
    * @type {boolean}
    * @memberof IHomeHeaderComponentState
    */
-  openNotifyMenu: boolean
+  openNotifyMenu: boolean;
 
   /**
    * This is the DOM element that will be used to set the position of the popover.
@@ -31,11 +29,11 @@ export interface IHomeHeaderComponentState {
    * @type {*}
    * @memberof IHomeHeaderComponentState
    */
-  anchorEl?: HTMLElement | null
+  anchorEl?: HTMLElement | null;
 
-  searchOpen: boolean
+  searchOpen: boolean;
 
-  tabIndex: number
+  tabIndex: number;
 
-  searchText: string
+  searchText: string;
 }

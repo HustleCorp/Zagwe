@@ -1,23 +1,22 @@
-import { Post } from 'core/domain/posts'
+import {Post} from 'core/domain/posts';
 export interface ITopicPostComponentProps {
-
   /**
    * Router match
    *
    * @type {*}
    * @memberof ITopicPostComponentProps
    */
-  match?: any
-  
+  match?: any;
+
   /**
    * User identifier
    *
    * @type {string}
    * @memberof ITopicPostComponentProps
    */
-  userId: string
-  
-  tag?: string
+  userId: string;
+
+  tag?: string;
 
   /**
    * User's post
@@ -25,20 +24,19 @@ export interface ITopicPostComponentProps {
    * @type {{[postId: string]: Post}}
    * @memberof ITopicPostComponentProps
    */
-  posts?: {[postId: string]: Post}
+  posts?: {[postId: string]: Post};
 
-  loadFollowData: any
+  loadFollowData: any;
 
-  loadTopicData: any
+  loadTopicData: any;
 
-  loadDataStream?: () => void
-  
-  resetPostTopic?: () => void
+  loadDataStream?: () => void;
 
-  hasMorePosts: boolean
+  resetPostTopic?: () => void;
 
-  mergedPosts: any
+  hasMorePosts: boolean;
 
-  classes: any
+  mergedPosts: any;
 
+  classes: any;
 }

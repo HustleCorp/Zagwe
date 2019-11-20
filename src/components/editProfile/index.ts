@@ -1,2 +1,2 @@
-import EditProfileComponent from './EditProfileComponent'
-export default EditProfileComponent
+import EditProfileComponent from './EditProfileComponent';
+export default EditProfileComponent;

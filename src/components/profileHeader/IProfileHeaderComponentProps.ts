@@ -1,26 +1,25 @@
-import { Profile } from 'src/core/domain/users/profile'
+import {Profile} from 'src/core/domain/users/profile';
 
 export interface IProfileHeaderComponentProps {
+  /**
+   * Profile for current user {true} or not {false}
+   *
+   * @type {boolean}
+   * @memberof IProfileHeaderComponentProps
+   */
+  isAuthedUser: boolean;
 
-    /**
-     * Profile for current user {true} or not {false}
-     *
-     * @type {boolean}
-     * @memberof IProfileHeaderComponentProps
-     */
-  isAuthedUser: boolean
+  authed: boolean;
 
-  authed: boolean
+  city: boolean;
 
-  city: boolean
+  country: boolean;
 
-  country: boolean
+  company: string;
 
-  company: string,
+  twitterId: string;
 
-  twitterId: string,
-
-  level: string,
+  level: string;
 
   /**
    * Image cover address
@@ -28,7 +27,7 @@ export interface IProfileHeaderComponentProps {
    * @type {string}
    * @memberof IProfileHeaderComponentProps
    */
-  banner: string
+  banner: string;
 
   /**
    * User full name
@@ -36,7 +35,7 @@ export interface IProfileHeaderComponentProps {
    * @type {string}
    * @memberof IProfileHeaderComponentProps
    */
-  fullName: string
+  fullName: string;
 
   /**
    * User tag line
@@ -44,7 +43,7 @@ export interface IProfileHeaderComponentProps {
    * @type {string}
    * @memberof IProfileHeaderComponentProps
    */
-  tagLine: string
+  tagLine: string;
 
   /**
    * User's avatar address
@@ -52,14 +51,14 @@ export interface IProfileHeaderComponentProps {
    * @type {string}
    * @memberof IProfileHeaderComponentProps
    */
-  avatar: string
+  avatar: string;
 
   /**
    * Open edit profile dialog
    *
    * @memberof IProfileHeaderComponentProps
    */
-  openEditor?: () => void
+  openEditor?: () => void;
 
   /**
    * Number of user followers
@@ -67,17 +66,17 @@ export interface IProfileHeaderComponentProps {
    * @type {number}
    * @memberof IProfileHeaderComponentProps
    */
-  followersCount?: number
+  followersCount?: number;
 
   /**
    * Number of followings
-   * 
-   * @type {number} 
+   *
+   * @type {number}
    * @memberof IProfileHeaderComponentProps
    */
-  followingCount?: number
+  followingCount?: number;
 
-  website?: string | null | undefined
+  website?: string | null | undefined;
 
   /**
    * User identifier
@@ -85,19 +84,19 @@ export interface IProfileHeaderComponentProps {
    * @type {string}
    * @memberof IProfileHeaderComponentProps
    */
-  userId: string
+  userId: string;
 
-  userInfo: Profile
+  userInfo: Profile;
 
   /**
    * Whether edit profile is open
    */
-  editProfileOpen?: boolean
+  editProfileOpen?: boolean;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 
-  classes?: any
+  classes?: any;
 }

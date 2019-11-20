@@ -1,14 +1,13 @@
-import { Profile } from 'core/domain/users'
+import {Profile} from 'core/domain/users';
 
 export interface IEditProfileComponentProps {
-
   /**
    * User profile
    *
    * @type {Profile}
    * @memberof IEditProfileComponentProps
    */
-  info?: Profile
+  info?: Profile;
 
   /**
    * User avatar address
@@ -16,9 +15,9 @@ export interface IEditProfileComponentProps {
    * @type {string}
    * @memberof IEditProfileComponentProps
    */
-  avatar: string
+  avatar: string;
 
-  avatarPath?: string
+  avatarPath?: string;
 
   /**
    * User full name
@@ -26,7 +25,7 @@ export interface IEditProfileComponentProps {
    * @type {string}
    * @memberof IEditProfileComponentProps
    */
-  fullName: string
+  fullName: string;
 
   /**
    * Edit profile dialog is open {true} or not {false}
@@ -34,35 +33,34 @@ export interface IEditProfileComponentProps {
    * @type {boolean}
    * @memberof IEditProfileComponentProps
    */
-  open?: boolean
+  open?: boolean;
 
   /**
    * Update user profile
    *
    * @memberof IEditProfileComponentProps
    */
-  update?: (profile: Profile) => void
+  update?: (profile: Profile) => void;
 
   /**
    * On edit profile dialog close event
    *
    * @memberof IEditProfileComponentProps
    */
-  onRequestClose?: () => void
+  onRequestClose?: () => void;
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 
   /**
    * Current locale language
    */
-  currentLanguage?: string
-  
+  currentLanguage?: string;
 }

@@ -1,34 +1,34 @@
-import { Post } from "core/domain/posts"
-import { Map } from "immutable"
+import {Post} from 'core/domain/posts';
+import {Map} from 'immutable';
 export interface IPostWriteComponentProps {
   /**
    * If it's true post writing page will be open
    */
-  open: boolean
+  open: boolean;
   /**
    * Recieve request close function
    */
-  onRequestClose: () => void
+  onRequestClose: () => void;
   /**
    * Post write style
    */
-  style?: {}
+  style?: {};
   /**
    * If it's true, post will be in edit view
    */
-  edit?: boolean
+  edit?: boolean;
   /**
    * The text of post in editing state
    */
-  text?: string
+  text?: string;
   /**
    * The image of post in editing state
    */
-  image?: string
+  image?: string;
   /**
    * If post state is editing this id sould be filled with post identifier
    */
-  id?: string
+  id?: string;
 
   /**
    * The post has image {true} or not {false}
@@ -36,7 +36,7 @@ export interface IPostWriteComponentProps {
    * @type {boolean}
    * @memberof IPostWriteComponentProps
    */
-  postImageState?: boolean
+  postImageState?: boolean;
 
   /**
    * User avatar address
@@ -44,39 +44,39 @@ export interface IPostWriteComponentProps {
    * @type {string}
    * @memberof IPostWriteComponentProps
    */
-  ownerAvatar?: string
+  ownerAvatar?: string;
 
   /**
    * The post owner name
    */
-  ownerDisplayName?: string
+  ownerDisplayName?: string;
 
   /**
    * Post model
    */
-  postModel?: Map<string, any>
+  postModel?: Map<string, any>;
 
   /**
    * Save a post
    *
    * @memberof IPostWriteComponentProps
    */
-  post?: (post: Post, callback: Function) => any
+  post?: (post: Post, callback: Function) => any;
 
   /**
    * Update a post
    *
    * @memberof IPostWriteComponentProps
    */
-  update?: (post: Map<string, any>, callback: Function) => any
+  update?: (post: Map<string, any>, callback: Function) => any;
 
   /**
    * Styles
    */
-  classes?: any
+  classes?: any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 }

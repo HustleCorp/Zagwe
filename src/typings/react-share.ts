@@ -1,1 +1,1 @@
-declare module 'react-share'
+declare module 'react-share';

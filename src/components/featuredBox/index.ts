@@ -1,2 +1,2 @@
-import featuredBoxComponent from './featuredBoxComponent'
-export default featuredBoxComponent
+import featuredBoxComponent from './featuredBoxComponent';
+export default featuredBoxComponent;

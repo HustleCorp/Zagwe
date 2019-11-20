@@ -1,16 +1,16 @@
-import { Profile } from 'core/domain/users'
+import {Profile} from 'core/domain/users';
 
 // - Import react components
-import { firebaseAuth, db } from 'data/firestoreClient'
+import {firebaseAuth, db} from 'data/firestoreClient';
 
-import { IAuthorizeService } from 'core/services/authorize'
-import { User, UserProvider } from 'core/domain/users'
-import { LoginUser, RegisterUserResult } from 'core/domain/authorize'
-import { SocialError } from 'core/domain/common'
+import {IAuthorizeService} from 'core/services/authorize';
+import {User, UserProvider} from 'core/domain/users';
+import {LoginUser, RegisterUserResult} from 'core/domain/authorize';
+import {SocialError} from 'core/domain/common';
 
-import { OAuthType } from 'core/domain/authorize/oauthType'
-import moment from 'moment/moment'
-import { injectable } from 'inversify'
+import {OAuthType} from 'core/domain/authorize/oauthType';
+import moment from 'moment/moment';
+import {injectable} from 'inversify';
 /**
  * Firbase authorize service
  *
@@ -20,32 +20,43 @@ import { injectable } from 'inversify'
  */
 @injectable()
 export class AuthorizeService implements IAuthorizeService {
-
   /**
    * Login the user
    */
   public async login(email: string, password: string) {
     try {
-      const result = await firebaseAuth()
-        .signInWithEmailAndPassword(email, password)
-        const {user} = result
+      const result = await firebaseAuth().signInWithEmailAndPassword(
+        email,
+        password,
+      );
+      const {user} = result;
 
-       /**
-        * Check if admin
-        */
-       let userInfo: any
-        if (user) {
-           userInfo = await db.collection('users').doc(user.uid).get().then((results) => {
-            return results.exists ? results.data() : null}) 
-            
-          return new LoginUser(user.uid, user.emailVerified, userInfo ? userInfo.isAdmin : false)
-          
-        } else {
-          throw new SocialError('AuthorizeService/login', 'User object is empty!')
-        }
+      /**
+       * Check if admin
+       */
+      let userInfo: any;
+      if (user) {
+        userInfo = await db
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .then(results => {
+            return results.exists ? results.data() : null;
+          });
 
+        return new LoginUser(
+          user.uid,
+          user.emailVerified,
+          userInfo ? userInfo.isAdmin : false,
+        );
+      } else {
+        throw new SocialError(
+          'AuthorizeService/login',
+          'User object is empty!',
+        );
+      }
     } catch (error) {
-      throw new SocialError(error.code, error.message)
+      throw new SocialError(error.code, error.message);
     }
   }
 
@@ -59,36 +70,43 @@ export class AuthorizeService implements IAuthorizeService {
     return new Promise<void>((resolve, reject) => {
       firebaseAuth()
         .signOut()
-        .then((result) => {
-          resolve()
+        .then(result => {
+          resolve();
         })
         .catch((error: any) => {
-
-          reject(new SocialError(error.code, error.message))
-        })
-    })
-  }
+          reject(new SocialError(error.code, error.message));
+        });
+    });
+  };
 
   /**
    * Register a user
    */
   public async registerUser(registerUser: User) {
     try {
-     const result = await firebaseAuth()
-      .createUserWithEmailAndPassword(registerUser.email as string, registerUser.password as string)
-      const {user} = result
+      const result = await firebaseAuth().createUserWithEmailAndPassword(
+        registerUser.email as string,
+        registerUser.password as string,
+      );
+      const {user} = result;
       if (user) {
-        const { uid, email } = user
-        const registerResult =  await this.storeUserInformation(uid, email!, registerUser.fullName, '')
-        return registerResult
-        
+        const {uid, email} = user;
+        const registerResult = await this.storeUserInformation(
+          uid,
+          email!,
+          registerUser.fullName,
+          '',
+        );
+        return registerResult;
       } else {
-        throw new SocialError('AuthorizeService/login', 'User object is empty!')
+        throw new SocialError(
+          'AuthorizeService/login',
+          'User object is empty!',
+        );
       }
     } catch (error) {
-      throw new SocialError(error.code, error.message)
+      throw new SocialError(error.code, error.message);
     }
-  
   }
 
   /**
@@ -97,64 +115,78 @@ export class AuthorizeService implements IAuthorizeService {
    * @returns {Promise<void>}
    * @memberof IAuthorizeService
    */
-  public updatePassword: (newPassword: string) => Promise<void> = (newPassword) => {
-
+  public updatePassword: (
+    newPassword: string,
+  ) => Promise<void> = newPassword => {
     return new Promise<void>((resolve, reject) => {
-      let user = firebaseAuth().currentUser
+      let user = firebaseAuth().currentUser;
       if (user) {
-        user.updatePassword(newPassword).then(() => {
-          // Update successful.
-          resolve()
-        }).catch((error: any) => {
-          // An error happened.
-          reject(new SocialError(error.code, error.message))
-        })
+        user
+          .updatePassword(newPassword)
+          .then(() => {
+            // Update successful.
+            resolve();
+          })
+          .catch((error: any) => {
+            // An error happened.
+            reject(new SocialError(error.code, error.message));
+          });
       }
-
-    })
-  }
+    });
+  };
 
   /**
    * On user authorization changed event
    *
    * @memberof IAuthorizeService
    */
-  public onAuthStateChanged: (callBack: (isVerifide: boolean, user: User, isAdmin: boolean) => void) => any = (callBack) => {
-    firebaseAuth().onAuthStateChanged( async  (user: any) => {
-
-      let userInfo: any
-      let isVerifide = false
+  public onAuthStateChanged: (
+    callBack: (isVerifide: boolean, user: User, isAdmin: boolean) => void,
+  ) => any = callBack => {
+    firebaseAuth().onAuthStateChanged(async (user: any) => {
+      let userInfo: any;
+      let isVerifide = false;
       if (user) {
-          userInfo =  await db.collection('users').doc(user.uid).get().then((results) => {
-           return results.exists ? results.data() : null 
-          }) 
-        if (user.emailVerified || user.providerData[0].providerId.trim() !== 'password') {
-          isVerifide = true
+        userInfo = await db
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .then(results => {
+            return results.exists ? results.data() : null;
+          });
+        if (
+          user.emailVerified ||
+          user.providerData[0].providerId.trim() !== 'password'
+        ) {
+          isVerifide = true;
         } else {
-          isVerifide = false
+          isVerifide = false;
         }
       }
-      callBack(isVerifide, user, userInfo ? userInfo.isAdmin : false)
-    })
-  }
+      callBack(isVerifide, user, userInfo ? userInfo.isAdmin : false);
+    });
+  };
 
   /**
    * Reset user password
    *
    * @memberof AuthorizeService
    */
-  public resetPassword: (email: string) => Promise<void> = (email) => {
+  public resetPassword: (email: string) => Promise<void> = email => {
     return new Promise<void>((resolve, reject) => {
-      let auth = firebaseAuth()
+      let auth = firebaseAuth();
 
-      auth.sendPasswordResetEmail(email).then(function () {
-        resolve()
-      }).catch((error: any) => {
-        // An error happened.
-        reject(new SocialError(error.code, error.message))
-      })
-    })
-  }
+      auth
+        .sendPasswordResetEmail(email)
+        .then(function() {
+          resolve();
+        })
+        .catch((error: any) => {
+          // An error happened.
+          reject(new SocialError(error.code, error.message));
+        });
+    });
+  };
 
   /**
    * Send verfication email to user email
@@ -163,68 +195,95 @@ export class AuthorizeService implements IAuthorizeService {
    */
   public sendEmailVerification: () => Promise<void> = () => {
     return new Promise<void>((resolve, reject) => {
-      let auth = firebaseAuth()
-      const user = auth.currentUser
+      let auth = firebaseAuth();
+      const user = auth.currentUser;
 
       if (user) {
-        user.sendEmailVerification().then(() => {
-          resolve()
-        }).catch((error: any) => {
-          // An error happened.
-          reject(new SocialError(error.code, error.message))
-        })
+        user
+          .sendEmailVerification()
+          .then(() => {
+            resolve();
+          })
+          .catch((error: any) => {
+            // An error happened.
+            reject(new SocialError(error.code, error.message));
+          });
       } else {
-        reject(new SocialError('authorizeService/nullException', 'User was null!'))
+        reject(
+          new SocialError('authorizeService/nullException', 'User was null!'),
+        );
       }
+    });
+  };
 
-    })
-  }
-
-  public loginWithOAuth: (type: OAuthType) => Promise<LoginUser> = (type) => {
+  public loginWithOAuth: (type: OAuthType) => Promise<LoginUser> = type => {
     return new Promise<LoginUser>((resolve, reject) => {
-
-      let provider: any
+      let provider: any;
 
       switch (type) {
         case OAuthType.FACEBOOK:
-          provider = new firebaseAuth.FacebookAuthProvider()
-          break
+          provider = new firebaseAuth.FacebookAuthProvider();
+          break;
         case OAuthType.GOOGLE:
-          provider = new firebaseAuth.GoogleAuthProvider()
-          break
+          provider = new firebaseAuth.GoogleAuthProvider();
+          break;
         default:
-          throw new SocialError('authorizeService/loginWithOAuth', 'None of OAuth type is matched!')
+          throw new SocialError(
+            'authorizeService/loginWithOAuth',
+            'None of OAuth type is matched!',
+          );
       }
-      firebaseAuth().signInWithPopup(provider).then(async (result) => {
- 
-        // The signed-in user info.
-        const user = result.user!
-        const { credential } = result
-        const { uid, displayName, email, photoURL } = user
-        const { providerId } = credential!
+      firebaseAuth()
+        .signInWithPopup(provider)
+        .then(async result => {
+          // The signed-in user info.
+          const user = result.user!;
+          const {credential} = result;
+          const {uid, displayName, email, photoURL} = user;
+          const {providerId} = credential!;
 
-        let userInfo: any
-        if (user) {
-             userInfo = await db.collection('users').doc(user.uid).get().then((results) => {
-                  return results.exists ? results.data() : null}) 
-        }
+          let userInfo: any;
+          if (user) {
+            userInfo = await db
+              .collection('users')
+              .doc(user.uid)
+              .get()
+              .then(results => {
+                return results.exists ? results.data() : null;
+              });
+          }
 
-        this.storeUserProviderData(uid, email!, displayName!, photoURL!, providerId, 'No Access token provided!')
-        resolve(new LoginUser(user.uid, true, userInfo ? userInfo.isAdmin : false,  providerId, displayName!, email!, photoURL!))
-
-      }).catch(function (error: any) {
-        // Handle Errors here.
-        let errorCode = error.code
-        let errorMessage = error.message
-        // The email of the user's account used.
-        let email = error.email
-        // The firebase.auth.AuthCredential type that was used.
-        let credential = error.credential
-
-      })
-
-    })
-  }
+          this.storeUserProviderData(
+            uid,
+            email!,
+            displayName!,
+            photoURL!,
+            providerId,
+            'No Access token provided!',
+          );
+          resolve(
+            new LoginUser(
+              user.uid,
+              true,
+              userInfo ? userInfo.isAdmin : false,
+              providerId,
+              displayName!,
+              email!,
+              photoURL!,
+            ),
+          );
+        })
+        .catch(function(error: any) {
+          // Handle Errors here.
+          let errorCode = error.code;
+          let errorMessage = error.message;
+          // The email of the user's account used.
+          let email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          let credential = error.credential;
+        });
+    });
+  };
 
   /**
    * Store user information
@@ -232,37 +291,45 @@ export class AuthorizeService implements IAuthorizeService {
    * @private
    * @memberof AuthorizeService
    */
-  private storeUserInformation = (userId: string, email: string, fullName: string, avatar: string) => {
+  private storeUserInformation = (
+    userId: string,
+    email: string,
+    fullName: string,
+    avatar: string,
+  ) => {
     return new Promise<RegisterUserResult>((resolve, reject) => {
-      db.doc(`userInfo/${userId}`).set(
-        {
-          id: userId,
-          state: 'active',
-          level: 1,
-          webUrl: '',
-          tagLine: '',
-          followersCount: 0,
-          followingCount: 0,
-          city: '',
-          country: '',
-          avatar,
-          fullName,
-          creationDate: moment().unix(),
-        
+      db.doc(`userInfo/${userId}`).set({
+        id: userId,
+        state: 'active',
+        level: 1,
+        webUrl: '',
+        tagLine: '',
+        followersCount: 0,
+        followingCount: 0,
+        city: '',
+        country: '',
+        avatar,
+        fullName,
+        creationDate: moment().unix(),
+      });
+      db.doc(`otherUserInfo/${userId}`)
+        .set({
+          likes: [],
+          likesCount: 0,
         })
-        db.doc(`otherUserInfo/${userId}`).set(
-          {
-            likes: [],
-            likesCount: 0
-            
-          }
-       )
         .then(() => {
-          resolve(new RegisterUserResult(userId))
+          resolve(new RegisterUserResult(userId));
         })
-        .catch((error: any) => reject(new SocialError(error.name, 'firestore/storeUserInformation : ' + error.message)))
-    })
-  }
+        .catch((error: any) =>
+          reject(
+            new SocialError(
+              error.name,
+              'firestore/storeUserInformation : ' + error.message,
+            ),
+          ),
+        );
+    });
+  };
 
   /**
    * Store user provider information
@@ -276,25 +343,25 @@ export class AuthorizeService implements IAuthorizeService {
     fullName: string,
     avatar: string,
     providerId: string,
-    accessToken: string
+    accessToken: string,
   ) => {
     return new Promise<RegisterUserResult>((resolve, reject) => {
       db.doc(`userProviderInfo/${userId}`)
-        .set(
-          {
-            userId,
-            email,
-            fullName,
-            avatar,
-            providerId,
-            accessToken
-          }
-        )
+        .set({
+          userId,
+          email,
+          fullName,
+          avatar,
+          providerId,
+          accessToken,
+        })
 
         .then(() => {
-          resolve(new RegisterUserResult(userId))
+          resolve(new RegisterUserResult(userId));
         })
-        .catch((error: any) => reject(new SocialError(error.name, error.message)))
-    })
-  }
+        .catch((error: any) =>
+          reject(new SocialError(error.name, error.message)),
+        );
+    });
+  };
 }

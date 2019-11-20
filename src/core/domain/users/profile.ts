@@ -1,7 +1,7 @@
-import { BaseDomain } from 'core/domain/common'
+import {BaseDomain} from 'core/domain/common';
 
 export class Profile extends BaseDomain {
-  constructor (
+  constructor(
     public avatar: string,
     public fullName: string,
     public tagLine: string,
@@ -16,10 +16,8 @@ export class Profile extends BaseDomain {
     public companyName?: string,
     public twitterId?: string,
     public followingCount?: number,
-    public followersCount?: number, 
+    public followersCount?: number,
   ) {
-    super()
-
+    super();
   }
-
 }

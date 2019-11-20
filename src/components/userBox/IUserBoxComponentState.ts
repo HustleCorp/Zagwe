@@ -1,13 +1,11 @@
-
 export interface IUserBoxComponentState {
-
   /**
    * Create new circle button is disabled {true} or not {false}
    *
    * @type {boolean}
    * @memberof IUserBoxComponentState
    */
-  disabledCreateCircle: boolean
+  disabledCreateCircle: boolean;
 
   /**
    * The button of add user in a circle is disabled {true} or not {false}
@@ -15,7 +13,7 @@ export interface IUserBoxComponentState {
    * @type {boolean}
    * @memberof IUserBoxComponentState
    */
-  disabledAddToCircle: boolean
+  disabledAddToCircle: boolean;
 
   /**
    * Circle name
@@ -23,7 +21,7 @@ export interface IUserBoxComponentState {
    * @type {string}
    * @memberof IUserBoxComponentState
    */
-  circleName: string
+  circleName: string;
 
   /**
    * Keep element
@@ -31,12 +29,11 @@ export interface IUserBoxComponentState {
    * @type {*}
    * @memberof IUserBoxComponentState
    */
-  anchorEl?: any
+  anchorEl?: any;
 
   /**
    * Whether current user changed the selected circles for referer user
    *
    */
-  disabledDoneCircles: boolean
-
+  disabledDoneCircles: boolean;
 }

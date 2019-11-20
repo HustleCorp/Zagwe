@@ -1,5 +1,3 @@
-import { ICommentService } from './ICommentService'
+import {ICommentService} from './ICommentService';
 
-export {
-    ICommentService
-}
+export {ICommentService};

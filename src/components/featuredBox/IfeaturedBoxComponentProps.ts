@@ -1,16 +1,15 @@
-import {Map} from 'immutable'
+import {Map} from 'immutable';
 export interface IfeaturedBoxComponentProps {
+  /**
+   * in-line style component
+   */
+  classes?: any;
 
- /**
-  * in-line style component
-  */
-  classes?: any
-  
-  post: Map<string, any>
+  post: Map<string, any>;
 
-  loaded: boolean
+  loaded: boolean;
 
-  tag?: string
+  tag?: string;
 
   /**
    * Owner's post avatar
@@ -18,7 +17,7 @@ export interface IfeaturedBoxComponentProps {
    * @type {string}
    * @memberof IPostComponentProps
    */
-  avatar?: string
+  avatar?: string;
 
   /**
    * User full name
@@ -26,7 +25,7 @@ export interface IfeaturedBoxComponentProps {
    * @type {string}
    * @memberof IPostComponentProps
    */
-  fullName?: string
+  fullName?: string;
 
   /**
    * Number of vote on a post
@@ -34,7 +33,7 @@ export interface IfeaturedBoxComponentProps {
    * @type {number}
    * @memberof IPostComponentProps
    */
-  voteCount?: number
+  voteCount?: number;
 
   /**
    * Current user is the owner of the post {true} or not {false}
@@ -42,59 +41,58 @@ export interface IfeaturedBoxComponentProps {
    * @type {boolean}
    * @memberof IPostComponentProps
    */
-  isPostOwner?: boolean
+  isPostOwner?: boolean;
 
   /**
    * Vote a post
    *
    * @memberof IPostComponentProps
    */
-  vote?: () => any
+  vote?: () => any;
 
   /**
    * Delete a vote on the post
    *
    * @memberof IPostComponentProps
    */
-  unvote?: () => any
+  unvote?: () => any;
 
   /**
    * Delete a post
    *
    * @memberof IPostComponentProps
    */
-  delete?: (id: string) => any
+  delete?: (id: string) => any;
 
   /**
    * Toggle comment disable/enable
    *
    * @memberof IPostComponentProps
    */
-  toggleDisableComments?: (status: boolean) => any
+  toggleDisableComments?: (status: boolean) => any;
 
   /**
    * Toggle sharing disable/enable
    *
    * @memberof IPostComponentProps
    */
-  toggleSharingComments?: (status: boolean) => any
+  toggleSharingComments?: (status: boolean) => any;
 
   /**
    * Redirect to {url} route
    *
    * @memberof IPostComponentProps
    */
-  goTo?: (url: string) => any
+  goTo?: (url: string) => any;
 
   /**
    * Translate to locale string
    */
-  translate?: (state: any) => any
+  translate?: (state: any) => any;
 
-  thumbPath?: any
+  thumbPath?: any;
 
-  authed?: boolean
+  authed?: boolean;
 
-  isAdmin?: boolean
-
+  isAdmin?: boolean;
 }
