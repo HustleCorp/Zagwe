@@ -73,6 +73,7 @@ Give an example
 * [Material-UI](https://material-ui.com/) - React Material UI framework
 * [Dependency Injection](http://inversify.io/) - Inversion Control
 * [Firebase](https://firebase.google.com/) - Serverless Backend
+* [Algolia](https://www.algolia.com/) - Managed Search Indexing
 * [Sass](https://sass-lang.com/) - Css Prerocessor
 * [React Router](https://reacttraining.com/react-router/ ) -  For routing website location
 
