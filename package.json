@@ -17,7 +17,7 @@
     "eject": "react-scripts-ts eject",
     "deploy:firebase": "npm run build && firebase deploy",
     "prettier-all": "prettier --config ./prettierrc.js --write \"**/*.{ts,tsx,js}\"",
-    "prettier": "node scripts/prettier.js"
+    "prettier": "node scripts/prettier/index.js"
   },
   "author": "Beakal",
   "license": "MIT",

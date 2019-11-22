@@ -2,8 +2,8 @@ const chalk = require('chalk');
 const glob = require('glob');
 const prettier = require('prettier');
 const fs = require('fs');
-const listChangedFiles = require('./shared/listChangedFiles');
-const prettierConfigPath = require.resolve('../prettierrc');
+const listChangedFiles = require('../shared/listChangedFiles');
+const prettierConfigPath = require.resolve('../../prettierrc');
 
 const mode = process.argv[2];
 const shouldWrite = mode === 'write' || mode === 'write-changed';
@@ -11,7 +11,7 @@ const onlyChanged = mode === 'check-changed' || mode === 'write-changed';
 const changedFiles = listChangedFiles();
 let didError = false;
 const files = glob
-  .sync('**/*.{ts,tsx}', {ignore: '**/node_modules/**'})
+  .sync('**/*.{ts,tsx, js}', {ignore: '**/node_modules/**'})
   .filter(f => changedFiles.has(f));
 
 if (!files.length) {
@@ -19,13 +19,12 @@ if (!files.length) {
 }
 
 files.forEach( async file => {
-  // const options = prettier.resolveConfig.sync(file, {
-  //   config: prettierConfigPath,
-  //   parser: 'babel'
-  // });
+  const options = prettier.resolveConfig.sync(file, {
+     config: prettierConfigPath,
+  });
   try {
-    const input = await fs.readFileSync(file, 'utf8');
-    const output = await prettier.format(input)
+    const input = fs.readFileSync(file, 'utf8');
+    const output = pretttier.format(file, options)
     
     if (output != input) {
         fs.writeFileSync(file, output, 'utf8');
