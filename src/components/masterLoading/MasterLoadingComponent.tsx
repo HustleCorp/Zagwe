@@ -1,10 +1,10 @@
 // - Import react components
-import React, {Component} from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import {IMasterLoadingComponentProps} from './IMasterLoadingComponentProps';
-import {IMasterLoadingComponentState} from './IMasterLoadingComponentState';
-import Grid from '@material-ui/core/Grid/Grid';
-import {Typography} from '@material-ui/core';
+import React, { Component } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { IMasterLoadingComponentProps } from "./IMasterLoadingComponentProps";
+import { IMasterLoadingComponentState } from "./IMasterLoadingComponentState";
+import Grid from "@material-ui/core/Grid/Grid";
+import { Typography } from "@material-ui/core";
 
 // - Import app components
 
@@ -20,7 +20,7 @@ export default class MasterLoadingComponent extends Component<
   }
 
   loadProgress() {
-    const {error, timedOut, pastDelay} = this.props;
+    const { error, timedOut, pastDelay } = this.props;
     if (error) {
       console.log(error);
       return (
@@ -28,11 +28,11 @@ export default class MasterLoadingComponent extends Component<
           <Grid item>
             <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{zIndex: 1}}>
+          <Grid item style={{ zIndex: 1 }}>
             <Typography
               variant="h6"
               color="primary"
-              style={{marginLeft: '-9px'}}
+              style={{ marginLeft: "-9px" }}
             >
               Oops something went wrong, please reload the page
             </Typography>
@@ -45,11 +45,11 @@ export default class MasterLoadingComponent extends Component<
           <Grid item>
             <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{zIndex: 1}}>
+          <Grid item style={{ zIndex: 1 }}>
             <Typography
               variant="h6"
               color="primary"
-              style={{marginLeft: '-9px'}}
+              style={{ marginLeft: "-9px" }}
             >
               Hmmm, Loading seems to take a long time. Aboo Tele yasbelal
             </Typography>
@@ -62,11 +62,11 @@ export default class MasterLoadingComponent extends Component<
           <Grid item>
             <CircularProgress color="primary" size={50} />
           </Grid>
-          <Grid item style={{zIndex: 1}}>
+          <Grid item style={{ zIndex: 1 }}>
             <Typography
               variant="h6"
               color="primary"
-              style={{marginLeft: '-9px'}}
+              style={{ marginLeft: "-9px" }}
             >
               Loading...
             </Typography>
@@ -79,9 +79,13 @@ export default class MasterLoadingComponent extends Component<
   // Render app DOM component
   render() {
     return (
-      <div className="mLoading__loading">
-        <div>{this.loadProgress()}</div>
-      </div>
+      <>
+        <div className="mLoading__loading">
+          <div>{this.loadProgress()}</div>
+        </div>
+
+        <div>i Know what you di</div>
+      </>
     );
   }
 }
