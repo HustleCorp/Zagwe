@@ -53,6 +53,7 @@ Give an example
 ```
 
 ### And coding style tests
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Explain what these tests test and why
 
@@ -73,6 +74,7 @@ Give an example
 * [Material-UI](https://material-ui.com/) - React Material UI framework
 * [Dependency Injection](http://inversify.io/) - Inversion Control
 * [Firebase](https://firebase.google.com/) - Serverless Backend
+* [Algolia](https://www.algolia.com/) - Managed Search Indexing
 * [Sass](https://sass-lang.com/) - Css Prerocessor
 * [React Router](https://reacttraining.com/react-router/ ) -  For routing website location
 
