@@ -323,13 +323,13 @@ export class HomeComponent extends Component<
               : ''}
               <Tab label={`${TagLabel.topic3}`} />
               <Tab label={`${TagLabel.topic4}`} />
-              <Tab className={classes.amharic} label={`ገጠመኝ`} />
+              <Tab label={'ENTERTAINMENT'} />
               <Tab label={`${TagLabel.topic6}`} />
               <Tab label={`${TagLabel.topic7}`} />
               <Tab label={`${TagLabel.topic8}`} />
               <Tab label={`${TagLabel.topic9}`} />
-              <Tab className={classes.amharic} label={`ተረት ተረት`} />
-              <Tab label={`${TagLabel.topic11}`} />
+              <Tab label={`COMEDY`} />
+              <Tab label={`SPORTS`} />
             </Tabs>
           </div>
 

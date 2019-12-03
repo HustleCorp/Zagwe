@@ -132,7 +132,7 @@ export class TopicPostComponent extends Component<
           return (
             <TopicIntro
               title={`${TopicsFUll.topic5}`}
-              bio={'Your daily dose of reality'}
+              bio={'Your daily dose of Entertainment'}
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fgetemegn.jpg?alt=media&token=bb94927b-ae33-4055-af1b-984a10e82fa2'
               }
@@ -143,7 +143,7 @@ export class TopicPostComponent extends Component<
           return (
             <TopicIntro
               title={`${TopicsFUll.topic6}`}
-              bio={"Insight into Ethiopia's world of work and Entrepreneurship"}
+              bio={"Insight into world of work and Entrepreneurship"}
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fbusiness.jpg?alt=media&token=bfaa65bb-aa78-46bd-a3d8-cd6f7dfd1b27'
               }
@@ -154,7 +154,7 @@ export class TopicPostComponent extends Component<
             <TopicIntro
               title={`${TopicsFUll.topic7}`}
               bio={
-                'Newest tech developments in Ethiopia and the rest of the world'
+                'Newest Science & tech developments aroud the world'
               }
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Ftech.jpg?alt=media&token=7ddbaf66-f8d6-4161-8778-edddfd7e8399'
@@ -177,7 +177,7 @@ export class TopicPostComponent extends Component<
           return (
             <TopicIntro
               title={`${TopicsFUll.topic9}`}
-              bio={'Amharic and English poems for your soul'}
+              bio={'English poems for your soul'}
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fpoem2.jpg?alt=media&token=7ff1ee2d-e894-409c-bac4-bf1512897d01'
               }
@@ -188,7 +188,7 @@ export class TopicPostComponent extends Component<
           return (
             <TopicIntro
               title={`${TopicsFUll.topic10}`}
-              bio={'Where observation meet imagination'}
+              bio={'Fun observations and commentary'}
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Fteret.jpg?alt=media&token=26bc5e62-14c4-4cb3-8bd6-d1f1077ca110'
               }
@@ -198,8 +198,8 @@ export class TopicPostComponent extends Component<
         case `${Tags.topic11}`:
           return (
             <TopicIntro
-              title={`${TopicsFUll.topic11}`}
-              bio={'Be original'}
+              title={`SPORTS`}
+              bio={'Original Stuff'}
               url={
                 'https://firebasestorage.googleapis.com/v0/b/publishing-3965e.appspot.com/o/topics%2Frandommin.jpg?alt=media&token=c56ee5c6-ae2a-4e3c-b90d-5fdff730bd9c'
               }

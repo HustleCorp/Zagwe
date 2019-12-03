@@ -6,17 +6,17 @@ import MasterLoadingComponent from "./MasterLoadingComponent";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-configure({
-  adapter: new Adapter(),
-});
+// configure({
+//   adapter: new Adapter(),
+// });
 
-describe('MasterLoadingComponent', () => {
-  it('Load without crashing', () => {
-    shallow(<MasterLoadingComponent error={true} />);
-  });
+// describe('MasterLoadingComponent', () => {
+//   it('Load without crashing', () => {
+//     shallow(<MasterLoadingComponent error={true} />);
+//   });
 
-  it('Mathcs SnapShot', () => {
-    const component = shallow(<MasterLoadingComponent timedOut={true} />);
-    expect(component).toMatchSnapshot();
-  });
-});
+//   it('Mathcs SnapShot', () => {
+//     const component = shallow(<MasterLoadingComponent timedOut={true} />);
+//     expect(component).toMatchSnapshot();
+//   });
+// });

@@ -64,7 +64,7 @@ export class PostState {
 
   culture = Map({});
 
-  teret = Map({});
+  comedy = Map({});
 
   technology = Map({});
 
@@ -96,7 +96,7 @@ export class PostState {
     culture: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
     getemegn: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
     health: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
-    teret: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
+    comedy: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
     technology: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
     poetry: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
     other: Map({hasMoreData: true, lastPageRequest: -1, lastPostId: ''}),
