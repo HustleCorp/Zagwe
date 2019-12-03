@@ -11,7 +11,7 @@ export enum Tags {
   topic7 = 'technology',
   topic8 = 'health',
   topic9 = 'poetry',
-  topic10 = 'teret',
+  topic10 = 'comedy',
   topic11 = 'other',
 }
 
@@ -24,7 +24,7 @@ export enum TagsMap {
   technology = 'topic7',
   health = 'topic8',
   poetry = 'topic9',
-  teret = 'topic10',
+  comedy = 'topic10',
   other = 'topic11',
 }
 
@@ -39,7 +39,7 @@ export enum TagLabel {
   topic7 = 'Technology',
   topic8 = 'Health',
   topic9 = 'Poetry',
-  topic10 = 'teret',
+  topic10 = 'comedy',
   topic11 = 'Others',
 }
 
@@ -53,7 +53,7 @@ export enum TopicsFUll {
   topic7 = 'Technology',
   topic8 = 'Health & Lifestyle',
   topic9 = 'Poetry',
-  topic10 = 'ተረት ተረት',
+  topic10 = 'Comedy',
   topic11 = 'Other',
 }
 
@@ -67,6 +67,6 @@ export const TopicsMap: Map<string, any> = Map({
   Technology: 'topic7',
   'Health & Lifestyle': 'topic8',
   Poetry: 'topic9',
-  'ተረት ተረት': 'topic10',
+  'Comedy': 'topic10',
   Other: 'topic11',
 });
